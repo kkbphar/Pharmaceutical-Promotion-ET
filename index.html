@@ -3,205 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pharmaceutical Promotion ET</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  font-family:Arial,sans-serif;
-  background:#f5f7fa;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7f9;
   color:#222;
 }
+
 header{
-  background:#075e54;
+  background:#087f5b;
   color:white;
   padding:18px;
+  text-align:center;
 }
-.header{
-  max-width:1200px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
+
+header h1{
+  margin:0;
+  font-size:25px;
 }
-.logo{
-  font-size:23px;
-  font-weight:bold;
+
+header p{
+  margin:6px 0 0;
 }
+
+nav{
+  background:#075e45;
+  padding:10px;
+  text-align:center;
+}
+
 nav button{
-  background:white;
-  color:#075e54;
+  background:none;
   border:0;
-  padding:9px 13px;
-  margin:3px;
+  color:white;
+  margin:4px;
+  padding:10px 13px;
+  cursor:pointer;
+  font-weight:bold;
   border-radius:6px;
+}
+
+nav button:hover{
+  background:#087f5b;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  margin:15px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:18px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  margin:7px 0 14px;
+  border:1px solid #ccc;
+  border-radius:7px;
+}
+
+textarea{
+  min-height:90px;
+}
+
+.btn{
+  background:#087f5b;
+  color:white;
+  border:0;
+  padding:12px 18px;
+  border-radius:7px;
   cursor:pointer;
   font-weight:bold;
 }
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:25px 15px;
+
+.btn:hover{
+  background:#056747;
 }
+
+.btn-danger{
+  background:#c92a2a;
+}
+
+.btn-blue{
+  background:#1971c2;
+}
+
+.btn-orange{
+  background:#e67700;
+}
+
 .hero{
-  background:white;
-  padding:35px 20px;
-  border-radius:12px;
+  background:linear-gradient(135deg,#087f5b,#0ca678);
+  color:white;
+  padding:45px 20px;
   text-align:center;
-  margin-bottom:25px;
+  border-radius:14px;
 }
-.hero h1{color:#075e54}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:18px;
+
+.hero h2{
+  font-size:32px;
 }
-.card{
+
+.stat{
+  text-align:center;
+  padding:25px;
   background:white;
-  border-radius:10px;
-  padding:16px;
-  box-shadow:0 2px 8px #0001;
+  border-radius:12px;
 }
-.card img{
+
+.stat strong{
+  display:block;
+  font-size:30px;
+  color:#087f5b;
+}
+
+.product{
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.product img{
   width:100%;
-  height:190px;
+  height:180px;
   object-fit:cover;
-  border-radius:8px;
   background:#eee;
 }
-.card h3{margin-bottom:8px}
+
+.product-body{
+  padding:15px;
+}
+
 .price{
+  color:#087f5b;
   font-size:20px;
   font-weight:bold;
-  color:#075e54;
 }
-.old-price{
-  text-decoration:line-through;
-  color:#888;
-  margin-right:8px;
-}
+
 .promo{
-  background:#fff3cd;
-  color:#856404;
+  color:#c92a2a;
+  font-weight:bold;
+}
+
+.featured{
+  background:#fff3bf;
   padding:5px 8px;
   border-radius:5px;
   display:inline-block;
-  margin:5px 0;
+  margin-bottom:8px;
 }
-button.primary{
-  background:#075e54;
-  color:white;
-  border:0;
-  padding:10px 15px;
-  border-radius:6px;
-  cursor:pointer;
-}
-button.danger{
-  background:#c62828;
-  color:white;
-  border:0;
-  padding:8px 12px;
-  border-radius:5px;
-  cursor:pointer;
-}
-button.secondary{
-  background:#607d8b;
-  color:white;
-  border:0;
-  padding:8px 12px;
-  border-radius:5px;
-  cursor:pointer;
-}
-input,select,textarea{
-  width:100%;
+
+.status{
   padding:10px;
-  margin:6px 0 12px;
-  border:1px solid #ccc;
-  border-radius:6px;
+  border-radius:7px;
+  margin:10px 0;
 }
-textarea{min-height:90px}
-.form-card{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  margin-bottom:20px;
+
+.pending{
+  background:#fff3bf;
+  color:#7f6000;
 }
-.hidden{display:none}
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:12px;
-  margin-bottom:20px;
+
+.approved{
+  background:#d3f9d8;
+  color:#176b2c;
 }
-.stat{
-  background:white;
-  padding:18px;
-  border-radius:9px;
-  text-align:center;
-  box-shadow:0 2px 7px #0001;
+
+.error{
+  background:#ffe3e3;
+  color:#a61e1e;
 }
-.stat strong{
-  display:block;
-  font-size:28px;
-  color:#075e54;
+
+.success{
+  background:#d3f9d8;
+  color:#176b2c;
 }
-.admin-nav{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  margin-bottom:20px;
+
+.small{
+  font-size:13px;
+  color:#666;
 }
-.admin-nav button{
-  padding:9px 12px;
-  border:0;
-  border-radius:5px;
-  cursor:pointer;
-}
+
 table{
   width:100%;
   border-collapse:collapse;
   background:white;
 }
+
 th,td{
-  padding:9px;
-  border-bottom:1px solid #ddd;
+  padding:10px;
+  border:1px solid #ddd;
   text-align:left;
 }
-th{background:#075e54;color:white}
-.table-wrap{overflow-x:auto}
-.message{
-  padding:12px;
-  border-radius:6px;
-  margin:10px 0;
-  background:#e8f5e9;
+
+th{
+  background:#087f5b;
+  color:white;
 }
-.error{
-  background:#ffebee;
-  color:#b71c1c;
-}
+
 footer{
   margin-top:40px;
-  padding:25px;
-  background:#075e54;
+  background:#075e45;
   color:white;
   text-align:center;
-}
-.badge{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:4px;
-  background:#eee;
-  font-size:12px;
-}
-@media(max-width:600px){
-  .header{display:block}
-  nav{margin-top:10px}
-  nav button{width:100%;margin:3px 0}
+  padding:25px;
 }
 </style>
 </head>
@@ -209,532 +246,543 @@ footer{
 <body>
 
 <header>
-<div class="header">
-<div class="logo">💊 Pharmaceutical Promotion ET</div>
-
-<nav>
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('products')">Products</button>
-<button onclick="showPage('cosmetics')">💄 Cosmetics</button>
-<button onclick="showPage('order')">🛒 Order</button>
-<button onclick="showPage('track')">🔎 Track Order</button>
-<button onclick="showPage('adminLogin')">🔐 Admin</button>
-</nav>
-</div>
+  <h1>💊 Pharmaceutical Promotion ET</h1>
+  <p>Connecting Suppliers with Buyers</p>
 </header>
 
-<main class="container">
+<nav>
+  <button onclick="showPage('home')">🏠 Home</button>
+  <button onclick="showPage('products')">💊 Products</button>
+  <button onclick="showPage('cosmetics')">💄 Cosmetics</button>
+  <button onclick="showPage('order')">🛒 Place Order</button>
+  <button onclick="showPage('register')">👤 Create Account</button>
+  <button onclick="showPage('login')">🔐 Login</button>
+  <button onclick="showPage('adminLogin')">👑 Admin</button>
+  <button id="logoutBtn" onclick="logout()" style="display:none;">🚪 Logout</button>
+</nav>
+
+<div class="container">
 
 <!-- HOME -->
-<section id="home" class="page">
+<section id="home" class="page active">
+
 <div class="hero">
-<h1>Pharmaceutical Promotion ET</h1>
-<p>Connecting suppliers with pharmacies, drug stores and buyers.</p>
-<button class="primary" onclick="showPage('products')">View Products</button>
-<button class="primary" onclick="showPage('cosmetics')">💄 View Cosmetics</button>
+  <h2>Pharmaceutical Promotion ET</h2>
+  <p>
+    A digital platform connecting pharmaceutical suppliers,
+    pharmacies, drug stores and buyers.
+  </p>
+
+  <button class="btn" onclick="showPage('register')">
+    Create Account
+  </button>
 </div>
 
-<h2>📢 Featured Cosmetics</h2>
-<div id="homeCosmetics" class="grid"></div>
-</section>
+<div class="grid">
 
-
-<!-- PRODUCTS -->
-<section id="products" class="page hidden">
-<h2>💊 Pharmaceutical Products</h2>
-<div id="productsList" class="grid"></div>
-</section>
-
-
-<!-- COSMETICS -->
-<section id="cosmetics" class="page hidden">
-<h2>💄 Cosmetics Promotion</h2>
-<p>Discover our featured cosmetics, personal-care and beauty products.</p>
-
-<div id="cosmeticsList" class="grid"></div>
-</section>
-
-
-<!-- ORDER -->
-<section id="order" class="page hidden">
-<h2>🛒 Place an Order</h2>
-
-<div class="form-card">
-<form id="orderForm">
-
-<label>Customer Name</label>
-<input id="customerName" required>
-
-<label>Email</label>
-<input id="customerEmail" type="email">
-
-<label>Phone</label>
-<input id="customerPhone" required>
-
-<label>Address</label>
-<textarea id="customerAddress"></textarea>
-
-<label>Product</label>
-<select id="orderProduct" required>
-<option value="">Select product</option>
-</select>
-
-<label>Quantity</label>
-<input id="orderQuantity" type="number" min="1" value="1" required>
-
-<label>Notes</label>
-<textarea id="orderNotes"></textarea>
-
-<button class="primary" type="submit">Submit Order</button>
-
-</form>
-
-<div id="orderMessage"></div>
-</div>
-</section>
-
-
-<!-- TRACK -->
-<section id="track" class="page hidden">
-<h2>🔎 Track Order</h2>
-
-<div class="form-card">
-<label>Order Number</label>
-<input id="trackingNumber" placeholder="Example: PPE-20260905-0001">
-
-<button class="primary" onclick="trackOrder()">Track Order</button>
-
-<div id="trackingResult"></div>
-</div>
-</section>
-
-
-<!-- ADMIN LOGIN -->
-<section id="adminLogin" class="page hidden">
-<h2>🔐 Admin Login</h2>
-
-<div class="form-card">
-
-<label>Email</label>
-<input id="loginEmail" type="email">
-
-<label>Password</label>
-<input id="loginPassword" type="password">
-
-<button class="primary" onclick="adminLogin()">Login</button>
-
-<div id="loginMessage"></div>
-
-</div>
-</section>
-
-
-<!-- ADMIN -->
-<section id="admin" class="page hidden">
-
-<h2>⚙️ Admin Dashboard</h2>
-
-<div id="adminUser"></div>
-
-<div class="stats">
 <div class="stat">
-<strong id="statProducts">0</strong>
-Products
+<strong>💊</strong>
+Pharmaceutical Products
 </div>
 
 <div class="stat">
-<strong id="statCosmetics">0</strong>
+<strong>💄</strong>
 Cosmetics
 </div>
 
 <div class="stat">
-<strong id="statSuppliers">0</strong>
+<strong>🏭</strong>
 Suppliers
 </div>
 
 <div class="stat">
-<strong id="statUsers">0</strong>
+<strong>🏪</strong>
+Buyers
+</div>
+
+</div>
+
+<div class="card">
+<h2>Our Platform</h2>
+
+<p>
+Pharmaceutical Promotion ET helps suppliers promote their
+products and helps pharmacies, drug stores and other buyers
+find pharmaceutical and cosmetic products.
+</p>
+
+<h3>For Suppliers</h3>
+<ul>
+<li>Create a supplier account</li>
+<li>Submit company information</li>
+<li>Promote products</li>
+<li>Connect with buyers</li>
+</ul>
+
+<h3>For Buyers</h3>
+<ul>
+<li>Create a buyer account</li>
+<li>Browse pharmaceutical products</li>
+<li>Browse cosmetics</li>
+<li>Submit orders</li>
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+<section id="products" class="page">
+
+<h2>💊 Pharmaceutical Products</h2>
+
+<div id="productsList" class="grid">
+<p>Loading products...</p>
+</div>
+
+</section>
+
+
+<!-- COSMETICS -->
+<section id="cosmetics" class="page">
+
+<h2>💄 Cosmetics</h2>
+
+<div id="cosmeticsList" class="grid">
+<p>Loading cosmetics...</p>
+</div>
+
+</section>
+
+
+<!-- REGISTER -->
+<section id="register" class="page">
+
+<div class="card">
+
+<h2>👤 Create Account</h2>
+
+<p>
+Create a Supplier or Buyer account.
+</p>
+
+<div id="registerMessage"></div>
+
+<label>Account Type</label>
+
+<select id="registerRole">
+<option value="buyer">🏪 Buyer</option>
+<option value="supplier">🏭 Supplier</option>
+</select>
+
+<label>Full Name</label>
+<input id="regFullName" type="text" placeholder="Your full name">
+
+<label>Email</label>
+<input id="regEmail" type="email" placeholder="Your email">
+
+<label>Password</label>
+<input id="regPassword" type="password" placeholder="Create password">
+
+<label>Phone</label>
+<input id="regPhone" type="text" placeholder="Phone number">
+
+<label>Business / Company Name</label>
+<input id="regBusinessName" type="text" placeholder="Business or company name">
+
+<label>Business Type</label>
+
+<select id="regBusinessType">
+
+<option value="">Select business type</option>
+
+<option value="Pharmacy">Pharmacy</option>
+
+<option value="Drug Store">Drug Store</option>
+
+<option value="Hospital">Hospital</option>
+
+<option value="Distributor">Distributor</option>
+
+<option value="Importer">Importer</option>
+
+<option value="Wholesaler">Wholesaler</option>
+
+<option value="Manufacturer">Manufacturer</option>
+
+<option value="Cosmetics Business">Cosmetics Business</option>
+
+<option value="Other">Other</option>
+
+</select>
+
+<label>Address</label>
+<input id="regAddress" type="text" placeholder="Business address">
+
+<label>License Number</label>
+<input id="regLicense" type="text" placeholder="License number">
+
+<button class="btn" onclick="registerUser()">
+Create Account
+</button>
+
+<p class="small">
+After registration, your account may require email verification
+and administrator approval.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login" class="page">
+
+<div class="card">
+
+<h2>🔐 Login</h2>
+
+<div id="loginMessage"></div>
+
+<label>Email</label>
+
+<input id="loginEmail" type="email" placeholder="Email">
+
+<label>Password</label>
+
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button class="btn" onclick="loginUser()">
+Login
+</button>
+
+<p>
+Don't have an account?
+<button class="btn btn-blue" onclick="showPage('register')">
+Create Account
+</button>
+</p>
+
+</div>
+
+</section>
+
+
+<!-- SUPPLIER DASHBOARD -->
+<section id="supplierDashboard" class="page">
+
+<h2>🏭 Supplier Dashboard</h2>
+
+<div id="supplierStatus"></div>
+
+<div class="card">
+
+<h3>Supplier Profile</h3>
+
+<div id="supplierProfile"></div>
+
+</div>
+
+<div class="card">
+
+<h3>📦 Supplier Services</h3>
+
+<p>
+Your supplier account allows you to connect with buyers
+and promote your pharmaceutical and cosmetic products.
+</p>
+
+<p class="small">
+Product management and supplier promotion tools will be
+connected to this dashboard.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- BUYER DASHBOARD -->
+<section id="buyerDashboard" class="page">
+
+<h2>🏪 Buyer Dashboard</h2>
+
+<div id="buyerStatus"></div>
+
+<div class="card">
+
+<h3>Buyer Profile</h3>
+
+<div id="buyerProfile"></div>
+
+</div>
+
+<div class="card">
+
+<h3>🛒 Buyer Services</h3>
+
+<button class="btn" onclick="showPage('products')">
+Browse Pharmaceutical Products
+</button>
+
+<button class="btn btn-orange" onclick="showPage('cosmetics')">
+Browse Cosmetics
+</button>
+
+<button class="btn btn-blue" onclick="showPage('order')">
+Place Order
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ORDER -->
+<section id="order" class="page">
+
+<h2>🛒 Place Order</h2>
+
+<div class="card">
+
+<div id="orderMessage"></div>
+
+<label>Customer / Business Name</label>
+<input id="orderName" type="text">
+
+<label>Email</label>
+<input id="orderEmail" type="email">
+
+<label>Phone</label>
+<input id="orderPhone" type="text">
+
+<label>Address</label>
+<input id="orderAddress" type="text">
+
+<label>Product</label>
+
+<select id="orderProduct">
+<option value="">Select product</option>
+</select>
+
+<label>Quantity</label>
+<input id="orderQuantity" type="number" min="1" value="1">
+
+<label>Notes</label>
+<textarea id="orderNotes"></textarea>
+
+<button class="btn" onclick="placeOrder()">
+Submit Order
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN LOGIN -->
+<section id="adminLogin" class="page">
+
+<div class="card">
+
+<h2>👑 Super Admin Login</h2>
+
+<div id="adminLoginMessage"></div>
+
+<label>Email</label>
+<input id="adminEmail" type="email">
+
+<label>Password</label>
+<input id="adminPassword" type="password">
+
+<button class="btn" onclick="adminLogin()">
+Login as Admin
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN DASHBOARD -->
+<section id="adminDashboard" class="page">
+
+<h2>👑 Super Admin Dashboard</h2>
+
+<div class="grid">
+
+<div class="stat">
+<strong id="adminProductCount">0</strong>
+Products
+</div>
+
+<div class="stat">
+<strong id="adminCosmeticCount">0</strong>
+Cosmetics
+</div>
+
+<div class="stat">
+<strong id="adminSupplierCount">0</strong>
+Suppliers
+</div>
+
+<div class="stat">
+<strong id="adminUserCount">0</strong>
 Users
 </div>
 
 <div class="stat">
-<strong id="statOrders">0</strong>
+<strong id="adminOrderCount">0</strong>
 Orders
 </div>
 
-<div class="stat">
-<strong id="statLowStock">0</strong>
-Low Stock
-</div>
-</div>
-
-<div class="admin-nav">
-<button onclick="adminSection('productsAdmin')">💊 Products</button>
-<button onclick="adminSection('cosmeticsAdmin')">💄 Cosmetics</button>
-<button onclick="adminSection('suppliersAdmin')">🏢 Suppliers</button>
-<button onclick="adminSection('usersAdmin')">👥 Users</button>
-<button onclick="adminSection('inventoryAdmin')">📦 Inventory</button>
-<button onclick="adminSection('ordersAdmin')">🛒 Orders</button>
-<button class="danger" onclick="logout()">Logout</button>
 </div>
 
 
 <!-- ADMIN PRODUCTS -->
-<div id="productsAdmin" class="adminSection">
 
-<h3>💊 Pharmaceutical Products</h3>
+<div class="card">
 
-<div class="form-card">
+<h2>💊 Manage Products</h2>
 
-<input type="hidden" id="productId">
+<input id="pName" placeholder="Product name">
+<input id="pGeneric" placeholder="Generic name">
+<input id="pCategory" placeholder="Category">
+<input id="pStrength" placeholder="Strength">
+<input id="pDosage" placeholder="Dosage form">
+<input id="pManufacturer" placeholder="Manufacturer">
+<input id="pSupplier" placeholder="Supplier">
+<input id="pPrice" type="number" step="0.01" placeholder="Price">
+<input id="pStock" type="number" placeholder="Stock">
+<input id="pImage" placeholder="Image URL">
 
-<label>Name</label>
-<input id="productName">
+<textarea id="pDescription" placeholder="Description"></textarea>
 
-<label>Generic Name</label>
-<input id="genericName">
-
-<label>Category</label>
-<input id="productCategory">
-
-<label>Strength</label>
-<input id="productStrength">
-
-<label>Dosage Form</label>
-<input id="dosageForm">
-
-<label>Manufacturer</label>
-<input id="manufacturer">
-
-<label>Supplier</label>
-<input id="productSupplier">
-
-<label>Price</label>
-<input id="productPrice" type="number" step="0.01">
-
-<label>Stock</label>
-<input id="productStock" type="number">
-
-<label>Image URL</label>
-<input id="productImage">
-
-<label>Description</label>
-<textarea id="productDescription"></textarea>
-
-<button class="primary" onclick="saveProduct()">Save Product</button>
-<button class="secondary" onclick="clearProductForm()">Clear</button>
+<button class="btn" onclick="addProduct()">
+Add Product
+</button>
 
 </div>
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Category</th>
-<th>Price</th>
-<th>Stock</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="adminProductsTable"></tbody>
-</table>
-</div>
+
+<div class="card">
+
+<h3>Current Products</h3>
+
+<div id="adminProducts"></div>
 
 </div>
 
 
 <!-- ADMIN COSMETICS -->
-<div id="cosmeticsAdmin" class="adminSection hidden">
 
-<h3>💄 Cosmetics Promotion & Management</h3>
+<div class="card">
 
-<div class="form-card">
+<h2>💄 Manage Cosmetics</h2>
 
-<input type="hidden" id="cosmeticId">
+<input id="cName" placeholder="Cosmetic name">
 
-<label>Product Name</label>
-<input id="cosmeticName">
+<input id="cBrand" placeholder="Brand">
 
-<label>Brand</label>
-<input id="cosmeticBrand">
+<input id="cCategory" placeholder="Category">
 
-<label>Category</label>
-<select id="cosmeticCategory">
-<option value="Skin Care">Skin Care</option>
-<option value="Hair Care">Hair Care</option>
-<option value="Fragrance">Fragrance</option>
-<option value="Makeup">Makeup</option>
-<option value="Personal Care">Personal Care</option>
-<option value="Sunscreen">Sunscreen</option>
-<option value="Body Care">Body Care</option>
-<option value="Other">Other</option>
-</select>
+<textarea id="cDescription" placeholder="Description"></textarea>
 
-<label>Description</label>
-<textarea id="cosmeticDescription"></textarea>
+<input id="cPrice" type="number" step="0.01" placeholder="Price">
 
-<label>Normal Price</label>
-<input id="cosmeticPrice" type="number" step="0.01">
+<input id="cPromoPrice" type="number" step="0.01" placeholder="Promotional price">
 
-<label>Promotional Price</label>
-<input id="cosmeticPromoPrice" type="number" step="0.01">
+<input id="cStock" type="number" placeholder="Stock">
 
-<label>Stock</label>
-<input id="cosmeticStock" type="number">
+<input id="cSupplier" placeholder="Supplier">
 
-<label>Supplier</label>
-<input id="cosmeticSupplier">
-
-<label>Image URL</label>
-<input id="cosmeticImage">
+<input id="cImage" placeholder="Image URL">
 
 <label>Promotion Start</label>
-<input id="promotionStart" type="date">
+<input id="cStart" type="date">
 
 <label>Promotion End</label>
-<input id="promotionEnd" type="date">
+<input id="cEnd" type="date">
 
 <label>
-<input id="cosmeticFeatured" type="checkbox" style="width:auto">
- ⭐ Featured Product
+<input id="cFeatured" type="checkbox">
+ Featured
 </label>
 
 <br>
 
 <label>
-<input id="cosmeticActive" type="checkbox" checked style="width:auto">
- 👁️ Active / Visible
+<input id="cActive" type="checkbox" checked>
+ Active
 </label>
 
 <br><br>
 
-<button class="primary" onclick="saveCosmetic()">Save Cosmetic</button>
-<button class="secondary" onclick="clearCosmeticForm()">Clear</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Product</th>
-<th>Category</th>
-<th>Price</th>
-<th>Promotion</th>
-<th>Stock</th>
-<th>Actions</th>
-</tr>
-</thead>
-
-<tbody id="adminCosmeticsTable"></tbody>
-</table>
-</div>
+<button class="btn" onclick="addCosmetic()">
+Add Cosmetic
+</button>
 
 </div>
 
 
-<!-- SUPPLIERS -->
-<div id="suppliersAdmin" class="adminSection hidden">
+<div class="card">
 
-<h3>🏢 Suppliers</h3>
+<h3>Current Cosmetics</h3>
 
-<div class="form-card">
-
-<input type="hidden" id="supplierId">
-
-<label>Company Name</label>
-<input id="supplierCompany">
-
-<label>Contact Person</label>
-<input id="supplierContact">
-
-<label>Phone</label>
-<input id="supplierPhone">
-
-<label>Email</label>
-<input id="supplierEmail">
-
-<label>Address</label>
-<input id="supplierAddress">
-
-<label>License Number</label>
-<input id="supplierLicense">
-
-<label>Description</label>
-<textarea id="supplierDescription"></textarea>
-
-<button class="primary" onclick="saveSupplier()">Save Supplier</button>
-<button class="secondary" onclick="clearSupplierForm()">Clear</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Company</th>
-<th>Contact</th>
-<th>Phone</th>
-<th>Email</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="suppliersTable"></tbody>
-</table>
-</div>
+<div id="adminCosmetics"></div>
 
 </div>
 
 
-<!-- USERS -->
-<div id="usersAdmin" class="adminSection hidden">
+<!-- ADMIN SUPPLIERS -->
 
-<h3>👥 Users</h3>
+<div class="card">
 
-<div class="form-card">
+<h2>🏭 Suppliers</h2>
 
-<input type="hidden" id="userId">
-
-<label>Full Name</label>
-<input id="userFullName">
-
-<label>Email</label>
-<input id="userEmail">
-
-<label>Role</label>
-<select id="userRole">
-<option value="user">User</option>
-<option value="supplier">Supplier</option>
-<option value="buyer">Buyer</option>
-<option value="admin">Admin</option>
-</select>
-
-<label>Status</label>
-<select id="userStatus">
-<option value="active">Active</option>
-<option value="inactive">Inactive</option>
-</select>
-
-<button class="primary" onclick="saveUser()">Save User</button>
-<button class="secondary" onclick="clearUserForm()">Clear</button>
-
-</div>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Role</th>
-<th>Status</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="usersTable"></tbody>
-</table>
-</div>
+<div id="adminSuppliers"></div>
 
 </div>
 
 
-<!-- INVENTORY -->
-<div id="inventoryAdmin" class="adminSection hidden">
+<!-- ADMIN USERS -->
 
-<h3>📦 Inventory Management</h3>
+<div class="card">
 
-<div class="form-card">
+<h2>👥 Users</h2>
 
-<label>Product</label>
-<select id="inventoryProduct"></select>
-
-<label>Transaction Type</label>
-<select id="transactionType">
-<option value="IN">Stock In</option>
-<option value="OUT">Stock Out</option>
-</select>
-
-<label>Quantity</label>
-<input id="inventoryQuantity" type="number" min="1">
-
-<label>Reference Number</label>
-<input id="inventoryReference">
-
-<label>Notes</label>
-<textarea id="inventoryNotes"></textarea>
-
-<button class="primary" onclick="saveInventory()">Save Transaction</button>
-
-</div>
-
-<h3>Current Inventory</h3>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Product</th>
-<th>Stock</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="inventoryTable"></tbody>
-</table>
-</div>
-
-<h3>Inventory History</h3>
-
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Product</th>
-<th>Type</th>
-<th>Quantity</th>
-<th>Reference</th>
-<th>Date</th>
-</tr>
-</thead>
-<tbody id="inventoryHistoryTable"></tbody>
-</table>
-</div>
+<div id="adminUsers"></div>
 
 </div>
 
 
-<!-- ORDERS -->
-<div id="ordersAdmin" class="adminSection hidden">
+<!-- ADMIN ORDERS -->
 
-<h3>🛒 Orders</h3>
+<div class="card">
 
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Order No.</th>
-<th>Customer</th>
-<th>Product</th>
-<th>Qty</th>
-<th>Total</th>
-<th>Status</th>
-<th>Date</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="ordersTable"></tbody>
-</table>
-</div>
+<h2>🛒 Orders</h2>
+
+<div id="adminOrders"></div>
 
 </div>
 
 </section>
 
-</main>
+</div>
 
 
 <footer>
+
+<p>
 © 2026 Pharmaceutical Promotion ET
+</p>
+
+<p>
+Connecting Suppliers • Pharmacies • Drug Stores • Buyers
+</p>
+
 </footer>
 
 
@@ -753,1525 +801,1698 @@ SUPABASE_PUBLISHABLE_KEY
 );
 
 
-let currentUser=null;
-let products=[];
-let cosmetics=[];
-let suppliers=[];
-let users=[];
-let orders=[];
+let currentUser = null;
+let currentProfile = null;
 
 
-function escapeHTML(value){
-return String(value ?? "")
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
-}
-
+/* =========================
+PAGE NAVIGATION
+========================= */
 
 function showPage(page){
 
 document.querySelectorAll(".page")
-.forEach(x=>x.classList.add("hidden"));
+.forEach(p => p.classList.remove("active"));
 
-document.getElementById(page)
-.classList.remove("hidden");
+const selected =
+document.getElementById(page);
 
-if(page==="products") loadPublicProducts();
-if(page==="cosmetics") loadPublicCosmetics();
-if(page==="home") loadFeaturedCosmetics();
+if(selected){
+selected.classList.add("active");
+}
+
+window.scrollTo(0,0);
 
 }
 
 
-function adminSection(section){
+/* =========================
+REGISTER
+========================= */
 
-document.querySelectorAll(".adminSection")
-.forEach(x=>x.classList.add("hidden"));
+async function registerUser(){
 
-document.getElementById(section)
-.classList.remove("hidden");
+const role =
+document.getElementById("registerRole").value;
 
-if(section==="productsAdmin") loadAdminProducts();
-if(section==="cosmeticsAdmin") loadAdminCosmetics();
-if(section==="suppliersAdmin") loadSuppliers();
-if(section==="usersAdmin") loadUsers();
-if(section==="inventoryAdmin"){
-loadInventory();
-loadInventoryHistory();
-loadInventoryProducts();
+const fullName =
+document.getElementById("regFullName").value.trim();
+
+const email =
+document.getElementById("regEmail").value.trim();
+
+const password =
+document.getElementById("regPassword").value;
+
+const phone =
+document.getElementById("regPhone").value.trim();
+
+const businessName =
+document.getElementById("regBusinessName").value.trim();
+
+const businessType =
+document.getElementById("regBusinessType").value;
+
+const address =
+document.getElementById("regAddress").value.trim();
+
+const license =
+document.getElementById("regLicense").value.trim();
+
+const message =
+document.getElementById("registerMessage");
+
+
+if(!fullName || !email || !password){
+
+message.innerHTML =
+'<div class="status error">Please enter your full name, email and password.</div>';
+
+return;
+
 }
-if(section==="ordersAdmin") loadOrders();
+
+
+if(password.length < 6){
+
+message.innerHTML =
+'<div class="status error">Password must be at least 6 characters.</div>';
+
+return;
 
 }
 
+
+message.innerHTML =
+'<div class="status pending">Creating account...</div>';
+
+
+const {data,error} =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+role:role,
+full_name:fullName,
+phone:phone,
+business_name:businessName,
+business_type:businessType,
+address:address,
+license_number:license
+}
+}
+
+});
+
+
+if(error){
+
+message.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
+return;
+
+}
+
+
+message.innerHTML =
+'<div class="status success">'+
+'Account created successfully! '+
+'Please check your email if email verification is required. '+
+'Your account may also require administrator approval.'+
+'</div>';
+
+
+document.getElementById("regPassword").value="";
+
+}
+
+
+/* =========================
+LOGIN
+========================= */
+
+async function loginUser(){
+
+const email =
+document.getElementById("loginEmail").value.trim();
+
+const password =
+document.getElementById("loginPassword").value;
+
+const message =
+document.getElementById("loginMessage");
+
+
+if(!email || !password){
+
+message.innerHTML =
+'<div class="status error">Enter your email and password.</div>';
+
+return;
+
+}
+
+
+message.innerHTML =
+'<div class="status pending">Logging in...</div>';
+
+
+const {data,error} =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+message.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
+return;
+
+}
+
+
+await loadCurrentUser();
+
+}
+
+
+/* =========================
+ADMIN LOGIN
+========================= */
 
 async function adminLogin(){
 
-const email=document.getElementById("loginEmail").value;
-const password=document.getElementById("loginPassword").value;
-const msg=document.getElementById("loginMessage");
+const email =
+document.getElementById("adminEmail").value.trim();
 
-msg.innerHTML="Logging in...";
+const password =
+document.getElementById("adminPassword").value;
 
-const {data,error}=await supabaseClient.auth.signInWithPassword({
-email,
-password
-});
+const message =
+document.getElementById("adminLoginMessage");
 
-if(error){
-msg.innerHTML=
-`<div class="message error">${escapeHTML(error.message)}</div>`;
+
+if(!email || !password){
+
+message.innerHTML =
+'<div class="status error">Enter your email and password.</div>';
+
 return;
+
 }
 
-currentUser=data.user;
 
-const {data:profile,error:profileError}
-=await supabaseClient
+const {data,error} =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+message.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
+return;
+
+}
+
+
+await loadCurrentUser();
+
+}
+
+
+/* =========================
+LOAD CURRENT USER
+========================= */
+
+async function loadCurrentUser(){
+
+const {data,error} =
+await supabaseClient.auth.getUser();
+
+if(error || !data.user){
+
+return;
+
+}
+
+currentUser =
+data.user;
+
+
+const {data:profile,error:profileError} =
+await supabaseClient
 .from("profiles")
-.select("id,email,role")
+.select("*")
 .eq("id",currentUser.id)
 .single();
 
-if(profileError || !profile || profile.role!=="super_admin"){
 
-await supabaseClient.auth.signOut();
+if(profileError || !profile){
 
-msg.innerHTML=
-`<div class="message error">
-Access denied. Super admin account required.
-</div>`;
+alert(
+"Your account profile was not found. Please contact the administrator."
+);
 
 return;
-}
-
-document.getElementById("adminUser").innerHTML=
-`Logged in as <b>${escapeHTML(profile.email)}</b>`;
-
-showPage("admin");
-
-loadDashboard();
 
 }
 
+
+currentProfile =
+profile;
+
+
+document.getElementById("logoutBtn")
+.style.display="inline-block";
+
+
+if(profile.role === "super_admin"){
+
+showPage("adminDashboard");
+
+await loadAdminDashboard();
+
+}
+
+else if(profile.role === "supplier"){
+
+showPage("supplierDashboard");
+
+await loadSupplierDashboard();
+
+}
+
+else if(profile.role === "buyer"){
+
+showPage("buyerDashboard");
+
+await loadBuyerDashboard();
+
+}
+
+else{
+
+alert(
+"Your account role is not configured."
+);
+
+}
+
+}
+
+
+/* =========================
+SUPPLIER DASHBOARD
+========================= */
+
+async function loadSupplierDashboard(){
+
+const box =
+document.getElementById("supplierStatus");
+
+const profileBox =
+document.getElementById("supplierProfile");
+
+
+const {data,error} =
+await supabaseClient
+.from("supplier_profiles")
+.select("*")
+.eq("user_id",currentUser.id)
+.single();
+
+
+if(error || !data){
+
+box.innerHTML =
+'<div class="status pending">'+
+'Your supplier profile is waiting for setup or administrator review.'+
+'</div>';
+
+profileBox.innerHTML =
+"<p>Email: "+escapeHtml(currentUser.email)+"</p>";
+
+return;
+
+}
+
+
+if(data.approved){
+
+box.innerHTML =
+'<div class="status approved">✅ Your supplier account is approved.</div>';
+
+}else{
+
+box.innerHTML =
+'<div class="status pending">⏳ Your supplier account is waiting for administrator approval.</div>';
+
+}
+
+
+profileBox.innerHTML = `
+
+<p><strong>Company:</strong>
+${escapeHtml(data.company_name || "")}</p>
+
+<p><strong>Contact:</strong>
+${escapeHtml(data.contact_person || "")}</p>
+
+<p><strong>Phone:</strong>
+${escapeHtml(data.phone || "")}</p>
+
+<p><strong>Email:</strong>
+${escapeHtml(data.email || "")}</p>
+
+<p><strong>Address:</strong>
+${escapeHtml(data.address || "")}</p>
+
+<p><strong>License:</strong>
+${escapeHtml(data.license_number || "")}</p>
+
+`;
+
+}
+
+
+/* =========================
+BUYER DASHBOARD
+========================= */
+
+async function loadBuyerDashboard(){
+
+const box =
+document.getElementById("buyerStatus");
+
+const profileBox =
+document.getElementById("buyerProfile");
+
+
+const {data,error} =
+await supabaseClient
+.from("buyer_profiles")
+.select("*")
+.eq("user_id",currentUser.id)
+.single();
+
+
+if(error || !data){
+
+box.innerHTML =
+'<div class="status pending">'+
+'Your buyer profile is waiting for setup or administrator review.'+
+'</div>';
+
+profileBox.innerHTML =
+"<p>Email: "+escapeHtml(currentUser.email)+"</p>";
+
+return;
+
+}
+
+
+if(data.approved){
+
+box.innerHTML =
+'<div class="status approved">✅ Your buyer account is approved.</div>';
+
+}else{
+
+box.innerHTML =
+'<div class="status pending">⏳ Your buyer account is waiting for administrator approval.</div>';
+
+}
+
+
+profileBox.innerHTML = `
+
+<p><strong>Business:</strong>
+${escapeHtml(data.business_name || "")}</p>
+
+<p><strong>Business Type:</strong>
+${escapeHtml(data.business_type || "")}</p>
+
+<p><strong>Contact:</strong>
+${escapeHtml(data.contact_person || "")}</p>
+
+<p><strong>Phone:</strong>
+${escapeHtml(data.phone || "")}</p>
+
+<p><strong>Email:</strong>
+${escapeHtml(data.email || "")}</p>
+
+<p><strong>Address:</strong>
+${escapeHtml(data.address || "")}</p>
+
+<p><strong>License:</strong>
+${escapeHtml(data.license_number || "")}</p>
+
+`;
+
+}
+
+
+/* =========================
+LOGOUT
+========================= */
 
 async function logout(){
 
 await supabaseClient.auth.signOut();
 
 currentUser=null;
+currentProfile=null;
+
+document.getElementById("logoutBtn")
+.style.display="none";
 
 showPage("home");
 
 }
 
 
-async function loadDashboard(){
+/* =========================
+LOAD PRODUCTS
+========================= */
 
-const p=await supabaseClient
+async function loadProducts(){
+
+const box =
+document.getElementById("productsList");
+
+const select =
+document.getElementById("orderProduct");
+
+
+const {data,error} =
+await supabaseClient
 .from("products")
-.select("id,stock");
-
-const c=await supabaseClient
-.from("cosmetics")
-.select("id");
-
-const s=await supabaseClient
-.from("suppliers")
-.select("id");
-
-const u=await supabaseClient
-.from("user_accounts")
-.select("id");
-
-const o=await supabaseClient
-.from("orders")
-.select("id");
-
-document.getElementById("statProducts").textContent=
-p.data?.length||0;
-
-document.getElementById("statCosmetics").textContent=
-c.data?.length||0;
-
-document.getElementById("statSuppliers").textContent=
-s.data?.length||0;
-
-document.getElementById("statUsers").textContent=
-u.data?.length||0;
-
-document.getElementById("statOrders").textContent=
-o.data?.length||0;
-
-document.getElementById("statLowStock").textContent=
-(p.data||[]).filter(x=>(x.stock||0)<=10).length;
-
-}
-
-
-/* PRODUCTS */
-
-async function loadPublicProducts(){
-
-const {data,error}=await supabaseClient
-.from("products")
-.select("id,name,generic_name,category,strength,dosage_form,manufacturer,price,stock,image_url,description")
+.select("*")
 .order("created_at",{ascending:false});
 
-products=data||[];
-
-const box=document.getElementById("productsList");
 
 if(error){
-box.innerHTML="Unable to load products.";
+
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
 return;
+
 }
 
-box.innerHTML=products.map(p=>`
 
-<div class="card">
+if(!data || data.length===0){
 
-${p.image_url?
-`<img src="${escapeHTML(p.image_url)}">`
-:""}
+box.innerHTML =
+"<p>No pharmaceutical products available yet.</p>";
 
-<h3>${escapeHTML(p.name)}</h3>
+select.innerHTML =
+'<option value="">No products available</option>';
 
-<p>${escapeHTML(p.generic_name||"")}</p>
+return;
+
+}
+
+
+box.innerHTML =
+data.map(product => `
+
+<div class="product">
+
+<img src="${safeImage(product.image_url)}"
+onerror="this.style.display='none'">
+
+<div class="product-body">
+
+<h3>${escapeHtml(product.name)}</h3>
 
 <p>
-${escapeHTML(p.category||"")}
-${p.strength?" • "+escapeHTML(p.strength):""}
+<strong>Generic:</strong>
+${escapeHtml(product.generic_name || "-")}
+</p>
+
+<p>
+<strong>Strength:</strong>
+${escapeHtml(product.strength || "-")}
+</p>
+
+<p>
+<strong>Form:</strong>
+${escapeHtml(product.dosage_form || "-")}
+</p>
+
+<p>
+${escapeHtml(product.description || "")}
 </p>
 
 <div class="price">
-${p.price!=null?p.price+" ETB":"Contact us"}
+${product.price != null ?
+Number(product.price).toFixed(2)+" ETB":
+"Price on request"}
 </div>
 
-<p>Stock: ${p.stock??0}</p>
-
-<button class="primary"
-onclick="selectOrderProduct(${p.id})">
+<button class="btn"
+onclick="prepareOrder(${product.id})">
 Order
 </button>
 
 </div>
 
+</div>
+
+`).join("");
+
+
+select.innerHTML =
+'<option value="">Select product</option>'+
+
+data.map(product => `
+
+<option value="${product.id}">
+
+${escapeHtml(product.name)}
+${product.price != null ?
+" - "+Number(product.price).toFixed(2)+" ETB":
+""}
+
+</option>
+
 `).join("");
 
 }
 
 
+/* =========================
+LOAD COSMETICS
+========================= */
+
+async function loadCosmetics(){
+
+const box =
+document.getElementById("cosmeticsList");
+
+
+const {data,error} =
+await supabaseClient
+.from("cosmetics")
+.select("*")
+.eq("is_active",true)
+.order("created_at",{ascending:false});
+
+
+if(error){
+
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
+return;
+
+}
+
+
+if(!data || data.length===0){
+
+box.innerHTML =
+"<p>No cosmetics available yet.</p>";
+
+return;
+
+}
+
+
+box.innerHTML =
+data.map(item => `
+
+<div class="product">
+
+<img src="${safeImage(item.image_url)}"
+onerror="this.style.display='none'">
+
+<div class="product-body">
+
+${item.is_featured ?
+'<span class="featured">⭐ Featured</span>':
+""}
+
+<h3>${escapeHtml(item.name)}</h3>
+
+<p>
+<strong>Brand:</strong>
+${escapeHtml(item.brand || "-")}
+</p>
+
+<p>
+${escapeHtml(item.description || "")}
+</p>
+
+${
+item.promotional_price != null &&
+item.promotional_price < item.price
+?
+
+`
+
+<p class="promo">
+
+Promotion:
+${Number(item.promotional_price).toFixed(2)}
+ETB
+
+</p>
+
+<p>
+<del>
+${Number(item.price).toFixed(2)} ETB
+</del>
+</p>
+
+`
+
+:
+
+`
+
+<p class="price">
+
+${item.price != null ?
+Number(item.price).toFixed(2)+" ETB":
+"Price on request"}
+
+</p>
+
+`
+
+}
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+/* =========================
+PREPARE ORDER
+========================= */
+
+function prepareOrder(productId){
+
+document.getElementById("orderProduct")
+.value=productId;
+
+showPage("order");
+
+}
+
+
+/* =========================
+PLACE ORDER
+========================= */
+
+async function placeOrder(){
+
+const name =
+document.getElementById("orderName").value.trim();
+
+const email =
+document.getElementById("orderEmail").value.trim();
+
+const phone =
+document.getElementById("orderPhone").value.trim();
+
+const address =
+document.getElementById("orderAddress").value.trim();
+
+const productId =
+document.getElementById("orderProduct").value;
+
+const quantity =
+Number(document.getElementById("orderQuantity").value);
+
+const notes =
+document.getElementById("orderNotes").value.trim();
+
+const message =
+document.getElementById("orderMessage");
+
+
+if(!name || !productId || quantity < 1){
+
+message.innerHTML =
+'<div class="status error">Please enter your name, product and quantity.</div>';
+
+return;
+
+}
+
+
+message.innerHTML =
+'<div class="status pending">Submitting order...</div>';
+
+
+const {data:product,error:productError} =
+await supabaseClient
+.from("products")
+.select("*")
+.eq("id",productId)
+.single();
+
+
+if(productError || !product){
+
+message.innerHTML =
+'<div class="status error">Product could not be found.</div>';
+
+return;
+
+}
+
+
+const unitPrice =
+Number(product.price || 0);
+
+const totalPrice =
+unitPrice * quantity;
+
+
+const orderData={
+
+customer_name:name,
+
+customer_email:email || null,
+
+customer_phone:phone || null,
+
+customer_address:address || null,
+
+product_id:Number(productId),
+
+quantity:quantity,
+
+unit_price:unitPrice,
+
+total_price:totalPrice,
+
+notes:notes || null
+
+};
+
+
+if(currentUser){
+
+orderData.buyer_user_id =
+currentUser.id;
+
+}
+
+
+const {data,error} =
+await supabaseClient
+.from("orders")
+.insert(orderData)
+.select("order_number")
+.single();
+
+
+if(error){
+
+message.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
+return;
+
+}
+
+
+message.innerHTML =
+'<div class="status success">'+
+
+"Order submitted successfully!"+
+
+(
+data && data.order_number
+?
+"<br><strong>Order Number: "+
+escapeHtml(data.order_number)+
+"</strong>"
+:
+""
+)
+
++
+"</div>";
+
+document.getElementById("orderQuantity").value=1;
+
+}
+
+
+/* =========================
+ADMIN DASHBOARD
+========================= */
+
+async function loadAdminDashboard(){
+
+await loadAdminProducts();
+
+await loadAdminCosmetics();
+
+await loadAdminSuppliers();
+
+await loadAdminUsers();
+
+await loadAdminOrders();
+
+await loadAdminStats();
+
+}
+
+
+/* =========================
+ADMIN STATS
+========================= */
+
+async function loadAdminStats(){
+
+const tables=[
+"products",
+"cosmetics",
+"suppliers",
+"user_accounts",
+"orders"
+];
+
+for(const table of tables){
+
+const {count,error} =
+await supabaseClient
+.from(table)
+.select("*",{count:"exact",head:true});
+
+
+if(error) continue;
+
+
+if(table==="products")
+document.getElementById("adminProductCount").textContent=count||0;
+
+if(table==="cosmetics")
+document.getElementById("adminCosmeticCount").textContent=count||0;
+
+if(table==="suppliers")
+document.getElementById("adminSupplierCount").textContent=count||0;
+
+if(table==="user_accounts")
+document.getElementById("adminUserCount").textContent=count||0;
+
+if(table==="orders")
+document.getElementById("adminOrderCount").textContent=count||0;
+
+}
+
+}
+
+
+/* =========================
+ADD PRODUCT
+========================= */
+
+async function addProduct(){
+
+const product={
+
+name:document.getElementById("pName").value.trim(),
+
+generic_name:document.getElementById("pGeneric").value.trim() || null,
+
+category:document.getElementById("pCategory").value.trim() || null,
+
+strength:document.getElementById("pStrength").value.trim() || null,
+
+dosage_form:document.getElementById("pDosage").value.trim() || null,
+
+manufacturer:document.getElementById("pManufacturer").value.trim() || null,
+
+supplier:document.getElementById("pSupplier").value.trim() || null,
+
+price:Number(document.getElementById("pPrice").value)||0,
+
+stock:Number(document.getElementById("pStock").value)||0,
+
+image_url:document.getElementById("pImage").value.trim()||null,
+
+description:document.getElementById("pDescription").value.trim()||null
+
+};
+
+
+if(!product.name){
+
+alert("Product name is required.");
+
+return;
+
+}
+
+
+const {error} =
+await supabaseClient
+.from("products")
+.insert(product);
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+alert("Product added successfully.");
+
+document.getElementById("pName").value="";
+
+document.getElementById("pGeneric").value="";
+
+document.getElementById("pCategory").value="";
+
+document.getElementById("pStrength").value="";
+
+document.getElementById("pDosage").value="";
+
+document.getElementById("pManufacturer").value="";
+
+document.getElementById("pSupplier").value="";
+
+document.getElementById("pPrice").value="";
+
+document.getElementById("pStock").value="";
+
+document.getElementById("pImage").value="";
+
+document.getElementById("pDescription").value="";
+
+await loadAdminProducts();
+
+await loadProducts();
+
+}
+
+
+/* =========================
+ADMIN PRODUCTS
+========================= */
+
 async function loadAdminProducts(){
 
-const {data,error}=await supabaseClient
+const box =
+document.getElementById("adminProducts");
+
+
+const {data,error} =
+await supabaseClient
 .from("products")
 .select("*")
 .order("created_at",{ascending:false});
 
-products=data||[];
-
-const table=document.getElementById("adminProductsTable");
 
 if(error){
-table.innerHTML=
-`<tr><td colspan="5">${escapeHTML(error.message)}</td></tr>`;
+
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
 return;
+
 }
 
-table.innerHTML=products.map(p=>`
+
+if(!data || data.length===0){
+
+box.innerHTML="<p>No products.</p>";
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<table>
 
 <tr>
 
-<td>${escapeHTML(p.name)}</td>
+<th>Name</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Action</th>
 
-<td>${escapeHTML(p.category||"")}</td>
+</tr>
 
-<td>${p.price??""}</td>
+${
+data.map(p=>`
 
-<td>${p.stock??0}</td>
+<tr>
+
+<td>${escapeHtml(p.name)}</td>
+
+<td>
+${p.price != null ?
+Number(p.price).toFixed(2)+" ETB":
+"-"}
+</td>
+
+<td>${p.stock ?? 0}</td>
 
 <td>
 
-<button class="secondary"
-onclick="editProduct(${p.id})">Edit</button>
+<button class="btn btn-danger"
+onclick="deleteProduct(${p.id})">
 
-<button class="danger"
-onclick="deleteProduct(${p.id})">Delete</button>
+Delete
+
+</button>
 
 </td>
 
 </tr>
 
-`).join("");
-
+`).join("")
 }
 
+</table>
 
-async function saveProduct(){
-
-const id=document.getElementById("productId").value;
-
-const payload={
-
-name:document.getElementById("productName").value,
-generic_name:document.getElementById("genericName").value,
-category:document.getElementById("productCategory").value,
-strength:document.getElementById("productStrength").value,
-dosage_form:document.getElementById("dosageForm").value,
-manufacturer:document.getElementById("manufacturer").value,
-supplier:document.getElementById("productSupplier").value,
-price:Number(document.getElementById("productPrice").value)||0,
-stock:Number(document.getElementById("productStock").value)||0,
-image_url:document.getElementById("productImage").value,
-description:document.getElementById("productDescription").value
-
-};
-
-let result;
-
-if(id){
-
-result=await supabaseClient
-.from("products")
-.update(payload)
-.eq("id",id);
-
-}else{
-
-result=await supabaseClient
-.from("products")
-.insert(payload);
-
-}
-
-if(result.error){
-alert(result.error.message);
-return;
-}
-
-alert("Product saved successfully.");
-
-clearProductForm();
-loadAdminProducts();
-loadDashboard();
-
-}
-
-
-function editProduct(id){
-
-const p=products.find(x=>x.id===id);
-
-if(!p)return;
-
-document.getElementById("productId").value=p.id;
-document.getElementById("productName").value=p.name||"";
-document.getElementById("genericName").value=p.generic_name||"";
-document.getElementById("productCategory").value=p.category||"";
-document.getElementById("productStrength").value=p.strength||"";
-document.getElementById("dosageForm").value=p.dosage_form||"";
-document.getElementById("manufacturer").value=p.manufacturer||"";
-document.getElementById("productSupplier").value=p.supplier||"";
-document.getElementById("productPrice").value=p.price||"";
-document.getElementById("productStock").value=p.stock||0;
-document.getElementById("productImage").value=p.image_url||"";
-document.getElementById("productDescription").value=p.description||"";
+`;
 
 }
 
 
 async function deleteProduct(id){
 
-if(!confirm("Delete this product?"))return;
+if(!confirm("Delete this product?")) return;
 
-const {error}=await supabaseClient
+
+const {error} =
+await supabaseClient
 .from("products")
 .delete()
 .eq("id",id);
 
+
 if(error){
+
 alert(error.message);
-return;
-}
-
-loadAdminProducts();
-loadDashboard();
-
-}
-
-
-function clearProductForm(){
-
-[
-"productId",
-"productName",
-"genericName",
-"productCategory",
-"productStrength",
-"dosageForm",
-"manufacturer",
-"productSupplier",
-"productPrice",
-"productStock",
-"productImage",
-"productDescription"
-].forEach(id=>{
-document.getElementById(id).value="";
-});
-
-}
-
-
-/* COSMETICS */
-
-async function loadPublicCosmetics(){
-
-const {data,error}=await supabaseClient
-.from("cosmetics")
-.select("*")
-.eq("is_active",true)
-.order("created_at",{ascending:false});
-
-cosmetics=data||[];
-
-renderCosmetics("cosmeticsList",cosmetics);
-
-}
-
-
-async function loadFeaturedCosmetics(){
-
-const {data,error}=await supabaseClient
-.from("cosmetics")
-.select("*")
-.eq("is_active",true)
-.eq("is_featured",true)
-.order("created_at",{ascending:false})
-.limit(6);
-
-renderCosmetics("homeCosmetics",data||[]);
-
-}
-
-
-function renderCosmetics(elementId,list){
-
-const box=document.getElementById(elementId);
-
-if(!list.length){
-
-box.innerHTML=
-"<p>No cosmetics available at the moment.</p>";
 
 return;
+
 }
 
-box.innerHTML=list.map(c=>{
 
-const hasPromo=
-c.promotional_price!=null &&
-Number(c.promotional_price)>0 &&
-Number(c.promotional_price)<Number(c.price);
+await loadAdminProducts();
 
-return `
+await loadProducts();
 
-<div class="card">
+}
 
-${c.image_url?
-`<img src="${escapeHTML(c.image_url)}">`
-:""}
 
-<h3>${escapeHTML(c.name)}</h3>
+/* =========================
+ADD COSMETIC
+========================= */
 
-<p><b>Brand:</b> ${escapeHTML(c.brand||"")}</p>
+async function addCosmetic(){
 
-<p><b>Category:</b> ${escapeHTML(c.category||"")}</p>
+const item={
 
-${c.is_featured?
-`<span class="badge">⭐ Featured</span>`:""}
+name:document.getElementById("cName").value.trim(),
 
-${hasPromo?
-`<div class="promo">🔥 SPECIAL PROMOTION</div>`:""}
+brand:document.getElementById("cBrand").value.trim()||null,
 
-<p>${escapeHTML(c.description||"")}</p>
+category:document.getElementById("cCategory").value.trim()||null,
 
-<div>
+description:document.getElementById("cDescription").value.trim()||null,
 
-${hasPromo?
-`
-<span class="old-price">${c.price} ETB</span>
-<span class="price">${c.promotional_price} ETB</span>
-`
+price:Number(document.getElementById("cPrice").value)||0,
+
+promotional_price:
+document.getElementById("cPromoPrice").value
+?
+Number(document.getElementById("cPromoPrice").value)
 :
-`<span class="price">${c.price??"Contact us"} ETB</span>`
+null,
+
+stock:Number(document.getElementById("cStock").value)||0,
+
+supplier:document.getElementById("cSupplier").value.trim()||null,
+
+image_url:document.getElementById("cImage").value.trim()||null,
+
+promotion_start:
+document.getElementById("cStart").value||null,
+
+promotion_end:
+document.getElementById("cEnd").value||null,
+
+is_featured:
+document.getElementById("cFeatured").checked,
+
+is_active:
+document.getElementById("cActive").checked
+
+};
+
+
+if(!item.name){
+
+alert("Cosmetic name is required.");
+
+return;
+
 }
 
-</div>
 
-<p>Stock: ${c.stock??0}</p>
+const {error} =
+await supabaseClient
+.from("cosmetics")
+.insert(item);
 
-<button class="primary"
-onclick="orderCosmetic(${c.id})">
-🛒 Order
-</button>
 
-</div>
+if(error){
 
-`;
+alert(error.message);
 
-}).join("");
+return;
 
 }
 
+
+alert("Cosmetic added successfully.");
+
+await loadAdminCosmetics();
+
+await loadCosmetics();
+
+}
+
+
+/* =========================
+ADMIN COSMETICS
+========================= */
 
 async function loadAdminCosmetics(){
 
-const {data,error}=await supabaseClient
+const box =
+document.getElementById("adminCosmetics");
+
+
+const {data,error} =
+await supabaseClient
 .from("cosmetics")
 .select("*")
 .order("created_at",{ascending:false});
 
-cosmetics=data||[];
-
-const table=document.getElementById("adminCosmeticsTable");
 
 if(error){
 
-table.innerHTML=
-`<tr><td colspan="6">${escapeHTML(error.message)}</td></tr>`;
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
 
 return;
 
 }
 
-table.innerHTML=cosmetics.map(c=>`
+
+if(!data || data.length===0){
+
+box.innerHTML="<p>No cosmetics.</p>";
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<table>
 
 <tr>
 
-<td>${escapeHTML(c.name)}</td>
+<th>Name</th>
+<th>Brand</th>
+<th>Price</th>
+<th>Promo</th>
+<th>Stock</th>
+<th>Action</th>
 
-<td>${escapeHTML(c.category||"")}</td>
+</tr>
 
-<td>${c.price??""}</td>
+${
+data.map(c=>`
+
+<tr>
+
+<td>${escapeHtml(c.name)}</td>
+
+<td>${escapeHtml(c.brand||"-")}</td>
+
+<td>${c.price ?? "-"}</td>
+
+<td>${c.promotional_price ?? "-"}</td>
+
+<td>${c.stock ?? 0}</td>
 
 <td>
-${c.promotional_price?
-c.promotional_price:"—"}
-</td>
 
-<td>${c.stock??0}</td>
-
-<td>
-
-<button class="secondary"
-onclick="editCosmetic(${c.id})">
-Edit
-</button>
-
-<button class="danger"
+<button class="btn btn-danger"
 onclick="deleteCosmetic(${c.id})">
+
 Delete
+
 </button>
 
 </td>
 
 </tr>
 
-`).join("");
-
+`).join("")
 }
 
+</table>
 
-async function saveCosmetic(){
-
-const id=document.getElementById("cosmeticId").value;
-
-const payload={
-
-name:document.getElementById("cosmeticName").value,
-brand:document.getElementById("cosmeticBrand").value,
-category:document.getElementById("cosmeticCategory").value,
-description:document.getElementById("cosmeticDescription").value,
-
-price:
-Number(document.getElementById("cosmeticPrice").value)||0,
-
-promotional_price:
-Number(document.getElementById("cosmeticPromoPrice").value)||null,
-
-stock:
-Number(document.getElementById("cosmeticStock").value)||0,
-
-supplier:
-document.getElementById("cosmeticSupplier").value,
-
-image_url:
-document.getElementById("cosmeticImage").value,
-
-is_featured:
-document.getElementById("cosmeticFeatured").checked,
-
-is_active:
-document.getElementById("cosmeticActive").checked,
-
-promotion_start:
-document.getElementById("promotionStart").value||null,
-
-promotion_end:
-document.getElementById("promotionEnd").value||null
-
-};
-
-let result;
-
-if(id){
-
-result=await supabaseClient
-.from("cosmetics")
-.update(payload)
-.eq("id",id);
-
-}else{
-
-result=await supabaseClient
-.from("cosmetics")
-.insert(payload);
-
-}
-
-if(result.error){
-
-alert(result.error.message);
-return;
-
-}
-
-alert("Cosmetic saved successfully.");
-
-clearCosmeticForm();
-
-loadAdminCosmetics();
-loadFeaturedCosmetics();
-loadDashboard();
-
-}
-
-
-function editCosmetic(id){
-
-const c=cosmetics.find(x=>x.id===id);
-
-if(!c)return;
-
-document.getElementById("cosmeticId").value=c.id;
-document.getElementById("cosmeticName").value=c.name||"";
-document.getElementById("cosmeticBrand").value=c.brand||"";
-document.getElementById("cosmeticCategory").value=c.category||"";
-document.getElementById("cosmeticDescription").value=c.description||"";
-document.getElementById("cosmeticPrice").value=c.price||"";
-document.getElementById("cosmeticPromoPrice").value=c.promotional_price||"";
-document.getElementById("cosmeticStock").value=c.stock||0;
-document.getElementById("cosmeticSupplier").value=c.supplier||"";
-document.getElementById("cosmeticImage").value=c.image_url||"";
-document.getElementById("promotionStart").value=c.promotion_start||"";
-document.getElementById("promotionEnd").value=c.promotion_end||"";
-document.getElementById("cosmeticFeatured").checked=!!c.is_featured;
-document.getElementById("cosmeticActive").checked=!!c.is_active;
+`;
 
 }
 
 
 async function deleteCosmetic(id){
 
-if(!confirm("Delete this cosmetic?"))return;
+if(!confirm("Delete this cosmetic?")) return;
 
-const {error}=await supabaseClient
+
+const {error} =
+await supabaseClient
 .from("cosmetics")
 .delete()
 .eq("id",id);
 
+
 if(error){
 
 alert(error.message);
+
 return;
 
 }
 
-loadAdminCosmetics();
-loadFeaturedCosmetics();
-loadDashboard();
+
+await loadAdminCosmetics();
+
+await loadCosmetics();
 
 }
 
 
-function clearCosmeticForm(){
+/* =========================
+ADMIN SUPPLIERS
+========================= */
 
-document.getElementById("cosmeticId").value="";
-document.getElementById("cosmeticName").value="";
-document.getElementById("cosmeticBrand").value="";
-document.getElementById("cosmeticCategory").value="Skin Care";
-document.getElementById("cosmeticDescription").value="";
-document.getElementById("cosmeticPrice").value="";
-document.getElementById("cosmeticPromoPrice").value="";
-document.getElementById("cosmeticStock").value="";
-document.getElementById("cosmeticSupplier").value="";
-document.getElementById("cosmeticImage").value="";
-document.getElementById("promotionStart").value="";
-document.getElementById("promotionEnd").value="";
-document.getElementById("cosmeticFeatured").checked=false;
-document.getElementById("cosmeticActive").checked=true;
+async function loadAdminSuppliers(){
 
-}
+const box =
+document.getElementById("adminSuppliers");
 
 
-function orderCosmetic(id){
-
-const c=cosmetics.find(x=>x.id===id);
-
-if(!c)return;
-
-document.getElementById("orderProduct").innerHTML=
-`<option value="cosmetic-${c.id}">
-💄 ${escapeHTML(c.name)}
-</option>`;
-
-showPage("order");
-
-}
-
-
-/* SUPPLIERS */
-
-async function loadSuppliers(){
-
-const {data,error}=await supabaseClient
-.from("suppliers")
+const {data,error} =
+await supabaseClient
+.from("supplier_profiles")
 .select("*")
 .order("created_at",{ascending:false});
 
-suppliers=data||[];
 
-document.getElementById("suppliersTable").innerHTML=
-(suppliers||[]).map(s=>`
+if(error){
+
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
+
+return;
+
+}
+
+
+if(!data || data.length===0){
+
+box.innerHTML="<p>No supplier accounts yet.</p>";
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<table>
 
 <tr>
 
-<td>${escapeHTML(s.company_name)}</td>
-<td>${escapeHTML(s.contact_person||"")}</td>
-<td>${escapeHTML(s.phone||"")}</td>
-<td>${escapeHTML(s.email||"")}</td>
+<th>Company</th>
+<th>Contact</th>
+<th>Phone</th>
+<th>Approved</th>
+<th>Action</th>
+
+</tr>
+
+${
+data.map(s=>`
+
+<tr>
+
+<td>${escapeHtml(s.company_name)}</td>
+
+<td>${escapeHtml(s.contact_person||"-")}</td>
+
+<td>${escapeHtml(s.phone||"-")}</td>
+
+<td>
+${s.approved ? "✅ Approved":"⏳ Pending"}
+</td>
 
 <td>
 
-<button class="secondary"
-onclick="editSupplier(${s.id})">
-Edit
-</button>
+<button class="btn"
+onclick="toggleSupplierApproval(${s.id},${!s.approved})">
 
-<button class="danger"
-onclick="deleteSupplier(${s.id})">
-Delete
+${s.approved ? "Reject":"Approve"}
+
 </button>
 
 </td>
 
 </tr>
 
-`).join("");
+`).join("")
+}
+
+</table>
+
+`;
 
 }
 
 
-async function saveSupplier(){
+async function toggleSupplierApproval(id,value){
 
-const id=document.getElementById("supplierId").value;
-
-const payload={
-
-company_name:
-document.getElementById("supplierCompany").value,
-
-contact_person:
-document.getElementById("supplierContact").value,
-
-phone:
-document.getElementById("supplierPhone").value,
-
-email:
-document.getElementById("supplierEmail").value,
-
-address:
-document.getElementById("supplierAddress").value,
-
-license_number:
-document.getElementById("supplierLicense").value,
-
-description:
-document.getElementById("supplierDescription").value
-
-};
-
-let result;
-
-if(id){
-
-result=await supabaseClient
-.from("suppliers")
-.update(payload)
+const {error} =
+await supabaseClient
+.from("supplier_profiles")
+.update({approved:value})
 .eq("id",id);
 
-}else{
-
-result=await supabaseClient
-.from("suppliers")
-.insert(payload);
-
-}
-
-if(result.error){
-alert(result.error.message);
-return;
-}
-
-alert("Supplier saved.");
-clearSupplierForm();
-loadSuppliers();
-loadDashboard();
-
-}
-
-
-function editSupplier(id){
-
-const s=suppliers.find(x=>x.id===id);
-
-if(!s)return;
-
-document.getElementById("supplierId").value=s.id;
-document.getElementById("supplierCompany").value=s.company_name||"";
-document.getElementById("supplierContact").value=s.contact_person||"";
-document.getElementById("supplierPhone").value=s.phone||"";
-document.getElementById("supplierEmail").value=s.email||"";
-document.getElementById("supplierAddress").value=s.address||"";
-document.getElementById("supplierLicense").value=s.license_number||"";
-document.getElementById("supplierDescription").value=s.description||"";
-
-}
-
-
-async function deleteSupplier(id){
-
-if(!confirm("Delete supplier?"))return;
-
-const {error}=await supabaseClient
-.from("suppliers")
-.delete()
-.eq("id",id);
 
 if(error){
+
 alert(error.message);
+
 return;
-}
-
-loadSuppliers();
-loadDashboard();
 
 }
 
 
-function clearSupplierForm(){
-
-[
-"supplierId",
-"supplierCompany",
-"supplierContact",
-"supplierPhone",
-"supplierEmail",
-"supplierAddress",
-"supplierLicense",
-"supplierDescription"
-].forEach(id=>{
-document.getElementById(id).value="";
-});
+await loadAdminSuppliers();
 
 }
 
 
-/* USERS */
+/* =========================
+ADMIN USERS
+========================= */
 
-async function loadUsers(){
+async function loadAdminUsers(){
 
-const {data,error}=await supabaseClient
+const box =
+document.getElementById("adminUsers");
+
+
+const {data,error} =
+await supabaseClient
 .from("user_accounts")
 .select("*")
 .order("created_at",{ascending:false});
 
-users=data||[];
-
-document.getElementById("usersTable").innerHTML=
-users.map(u=>`
-
-<tr>
-
-<td>${escapeHTML(u.full_name||"")}</td>
-<td>${escapeHTML(u.email||"")}</td>
-<td>${escapeHTML(u.role||"")}</td>
-<td>${escapeHTML(u.status||"")}</td>
-
-<td>
-
-<button class="secondary"
-onclick="editUser(${u.id})">
-Edit
-</button>
-
-<button class="danger"
-onclick="deleteUser(${u.id})">
-Delete
-</button>
-
-</td>
-
-</tr>
-
-`).join("");
-
-}
-
-
-async function saveUser(){
-
-const id=document.getElementById("userId").value;
-
-const payload={
-
-full_name:
-document.getElementById("userFullName").value,
-
-email:
-document.getElementById("userEmail").value,
-
-role:
-document.getElementById("userRole").value,
-
-status:
-document.getElementById("userStatus").value
-
-};
-
-let result;
-
-if(id){
-
-result=await supabaseClient
-.from("user_accounts")
-.update(payload)
-.eq("id",id);
-
-}else{
-
-result=await supabaseClient
-.from("user_accounts")
-.insert(payload);
-
-}
-
-if(result.error){
-alert(result.error.message);
-return;
-}
-
-alert("User saved.");
-clearUserForm();
-loadUsers();
-loadDashboard();
-
-}
-
-
-function editUser(id){
-
-const u=users.find(x=>x.id===id);
-
-if(!u)return;
-
-document.getElementById("userId").value=u.id;
-document.getElementById("userFullName").value=u.full_name||"";
-document.getElementById("userEmail").value=u.email||"";
-document.getElementById("userRole").value=u.role||"user";
-document.getElementById("userStatus").value=u.status||"active";
-
-}
-
-
-async function deleteUser(id){
-
-if(!confirm("Delete user record?"))return;
-
-const {error}=await supabaseClient
-.from("user_accounts")
-.delete()
-.eq("id",id);
 
 if(error){
-alert(error.message);
-return;
-}
 
-loadUsers();
-loadDashboard();
-
-}
-
-
-function clearUserForm(){
-
-[
-"userId",
-"userFullName",
-"userEmail"
-].forEach(id=>{
-document.getElementById(id).value="";
-});
-
-document.getElementById("userRole").value="user";
-document.getElementById("userStatus").value="active";
-
-}
-
-
-/* INVENTORY */
-
-async function loadInventoryProducts(){
-
-const {data}=await supabaseClient
-.from("products")
-.select("id,name,stock")
-.order("name");
-
-const select=document.getElementById("inventoryProduct");
-
-select.innerHTML=
-`<option value="">Select product</option>`+
-(data||[]).map(p=>
-`<option value="${p.id}">
-${escapeHTML(p.name)}
-</option>`
-).join("");
-
-}
-
-
-async function saveInventory(){
-
-const productId=
-Number(document.getElementById("inventoryProduct").value);
-
-const type=
-document.getElementById("transactionType").value;
-
-const quantity=
-Number(document.getElementById("inventoryQuantity").value);
-
-const reference=
-document.getElementById("inventoryReference").value;
-
-const notes=
-document.getElementById("inventoryNotes").value;
-
-if(!productId || quantity<=0){
-
-alert("Select a product and enter a valid quantity.");
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
 
 return;
 
 }
 
-const {data:product,error:productError}
-=await supabaseClient
-.from("products")
-.select("stock")
-.eq("id",productId)
-.single();
 
-if(productError){
+if(!data || data.length===0){
 
-alert(productError.message);
+box.innerHTML="<p>No users.</p>";
+
 return;
 
 }
 
-let newStock;
 
-if(type==="IN"){
+box.innerHTML=`
 
-newStock=(product.stock||0)+quantity;
-
-}else{
-
-newStock=(product.stock||0)-quantity;
-
-if(newStock<0){
-
-alert("Insufficient stock.");
-return;
-
-}
-
-}
-
-const update=
-await supabaseClient
-.from("products")
-.update({stock:newStock})
-.eq("id",productId);
-
-if(update.error){
-
-alert(update.error.message);
-return;
-
-}
-
-const transaction=
-await supabaseClient
-.from("inventory_transactions")
-.insert({
-
-product_id:productId,
-transaction_type:type,
-quantity,
-reference_number:reference,
-notes,
-created_by:currentUser?.id||null
-
-});
-
-if(transaction.error){
-
-alert(transaction.error.message);
-return;
-
-}
-
-alert("Inventory updated.");
-
-loadInventory();
-loadInventoryHistory();
-loadDashboard();
-
-}
-
-
-async function loadInventory(){
-
-const {data}=await supabaseClient
-.from("products")
-.select("id,name,stock")
-.order("name");
-
-document.getElementById("inventoryTable").innerHTML=
-(data||[]).map(p=>`
+<table>
 
 <tr>
 
-<td>${escapeHTML(p.name)}</td>
-
-<td>${p.stock??0}</td>
-
-<td>
-${(p.stock??0)<=10?
-'<span class="badge">⚠️ Low Stock</span>':
-'<span class="badge">OK</span>'}
-</td>
+<th>Name</th>
+<th>Email</th>
+<th>Role</th>
+<th>Status</th>
+<th>Approved</th>
 
 </tr>
 
-`).join("");
-
-}
-
-
-async function loadInventoryHistory(){
-
-const {data}=await supabaseClient
-.from("inventory_transactions")
-.select("*,products(name)")
-.order("created_at",{ascending:false});
-
-document.getElementById("inventoryHistoryTable").innerHTML=
-(data||[]).map(x=>`
+${
+data.map(u=>`
 
 <tr>
 
-<td>${escapeHTML(x.products?.name||"")}</td>
-<td>${escapeHTML(x.transaction_type||"")}</td>
-<td>${x.quantity}</td>
-<td>${escapeHTML(x.reference_number||"")}</td>
-<td>${new Date(x.created_at).toLocaleString()}</td>
+<td>${escapeHtml(u.full_name||"-")}</td>
+
+<td>${escapeHtml(u.email||"-")}</td>
+
+<td>${escapeHtml(u.role||"-")}</td>
+
+<td>${escapeHtml(u.status||"-")}</td>
+
+<td>${u.approved ? "✅":"⏳"}</td>
 
 </tr>
 
-`).join("");
+`).join("")
+}
+
+</table>
+
+`;
 
 }
 
 
-/* ORDERS */
+/* =========================
+ADMIN ORDERS
+========================= */
 
-async function loadOrders(){
+async function loadAdminOrders(){
 
-const {data,error}=await supabaseClient
+const box =
+document.getElementById("adminOrders");
+
+
+const {data,error} =
+await supabaseClient
 .from("orders")
-.select("*,products(name)")
+.select(`
+*,
+products(name)
+`)
 .order("created_at",{ascending:false});
 
-orders=data||[];
-
-const table=document.getElementById("ordersTable");
 
 if(error){
 
-table.innerHTML=
-`<tr><td colspan="8">${escapeHTML(error.message)}</td></tr>`;
+box.innerHTML =
+'<div class="status error">'+
+escapeHtml(error.message)+
+'</div>';
 
 return;
 
 }
 
-table.innerHTML=orders.map(o=>`
+
+if(!data || data.length===0){
+
+box.innerHTML="<p>No orders.</p>";
+
+return;
+
+}
+
+
+box.innerHTML=`
+
+<table>
 
 <tr>
 
-<td>${escapeHTML(o.order_number||("PPE-"+o.id))}</td>
+<th>Order</th>
+<th>Customer</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Status</th>
 
-<td>
-${escapeHTML(o.customer_name)}
-<br>
-${escapeHTML(o.customer_phone||"")}
-</td>
+</tr>
 
-<td>${escapeHTML(o.products?.name||"")}</td>
+${
+data.map(o=>`
+
+<tr>
+
+<td>${escapeHtml(o.order_number||"-")}</td>
+
+<td>${escapeHtml(o.customer_name)}</td>
+
+<td>${escapeHtml(o.products?.name||"-")}</td>
 
 <td>${o.quantity}</td>
 
-<td>${o.total_price??0} ETB</td>
+<td>${o.total_price ?? "-"}</td>
 
-<td>
-
-<select onchange="updateOrderStatus(${o.id},this.value)">
-
-${["pending","processing","completed","cancelled"]
-.map(s=>
-`<option value="${s}"
-${o.status===s?"selected":""}>
-${s}
-</option>`
-).join("")}
-
-</select>
-
-</td>
-
-<td>${new Date(o.created_at).toLocaleString()}</td>
-
-<td>
-
-<button class="danger"
-onclick="deleteOrder(${o.id})">
-Delete
-</button>
-
-</td>
+<td>${escapeHtml(o.status||"pending")}</td>
 
 </tr>
 
-`).join("");
-
+`).join("")
 }
 
+</table>
 
-async function updateOrderStatus(id,status){
-
-const {error}=await supabaseClient
-.from("orders")
-.update({status})
-.eq("id",id);
-
-if(error)alert(error.message);
-
-}
-
-
-async function deleteOrder(id){
-
-if(!confirm("Delete this order?"))return;
-
-const {error}=await supabaseClient
-.from("orders")
-.delete()
-.eq("id",id);
-
-if(error){
-alert(error.message);
-return;
-}
-
-loadOrders();
-loadDashboard();
-
-}
-
-
-/* ORDER FORM */
-
-async function loadOrderProducts(){
-
-const {data}=await supabaseClient
-.from("products")
-.select("id,name,price,stock")
-.order("name");
-
-const select=document.getElementById("orderProduct");
-
-select.innerHTML=
-`<option value="">Select product</option>`+
-(data||[]).map(p=>
-`<option value="${p.id}">
-${escapeHTML(p.name)} — ${p.price??0} ETB
-</option>`
-).join("");
-
-}
-
-
-function selectOrderProduct(id){
-
-showPage("order");
-
-document.getElementById("orderProduct").value=id;
-
-}
-
-
-document.getElementById("orderForm")
-.addEventListener("submit",async function(e){
-
-e.preventDefault();
-
-const productValue=
-document.getElementById("orderProduct").value;
-
-if(productValue.startsWith("cosmetic-")){
-
-alert("Cosmetics ordering is prepared. We will connect it to the cosmetics order system in the next upgrade.");
-
-return;
-
-}
-
-const productId=Number(productValue);
-
-const quantity=
-Number(document.getElementById("orderQuantity").value);
-
-if(!productId || quantity<=0){
-
-alert("Select a product and valid quantity.");
-
-return;
-
-}
-
-const {data:product,error:productError}
-=await supabaseClient
-.from("products")
-.select("id,name,price,stock")
-.eq("id",productId)
-.single();
-
-if(productError){
-
-alert(productError.message);
-return;
-
-}
-
-if((product.stock||0)<quantity){
-
-alert("Not enough stock available.");
-
-return;
-
-}
-
-const total=
-Number(product.price||0)*quantity;
-
-const {data,error}=await supabaseClient
-.from("orders")
-.insert({
-
-customer_name:
-document.getElementById("customerName").value,
-
-customer_email:
-document.getElementById("customerEmail").value,
-
-customer_phone:
-document.getElementById("customerPhone").value,
-
-customer_address:
-document.getElementById("customerAddress").value,
-
-product_id:productId,
-
-quantity,
-
-unit_price:product.price||0,
-
-total_price:total,
-
-status:"pending",
-
-notes:
-document.getElementById("orderNotes").value
-
-})
-.select()
-.single();
-
-if(error){
-
-document.getElementById("orderMessage").innerHTML=
-`<div class="message error">
-${escapeHTML(error.message)}
-</div>`;
-
-return;
-
-}
-
-document.getElementById("orderMessage").innerHTML=
-`
-<div class="message">
-
-<h3>✅ Order Submitted Successfully</h3>
-
-<p><b>Order Number:</b>
-${escapeHTML(data.order_number||("PPE-"+data.id))}
-</p>
-
-<p><b>Customer:</b>
-${escapeHTML(data.customer_name)}
-</p>
-
-<p><b>Product:</b>
-${escapeHTML(product.name)}
-</p>
-
-<p><b>Quantity:</b>
-${data.quantity}
-</p>
-
-<p><b>Total:</b>
-${data.total_price} ETB
-</p>
-
-<p><b>Status:</b> Pending</p>
-
-<button class="primary"
-onclick="showPage('track')">
-Track This Order
-</button>
-
-</div>
-`;
-
-this.reset();
-
-});
-
-
-async function trackOrder(){
-
-const number=
-document.getElementById("trackingNumber")
-.value.trim();
-
-const result=
-document.getElementById("trackingResult");
-
-if(!number){
-
-result.innerHTML=
-`<div class="message error">
-Enter an order number.
-</div>`;
-
-return;
-
-}
-
-const {data,error}=await supabaseClient
-.from("orders")
-.select("order_number,customer_name,quantity,total_price,status,created_at")
-.eq("order_number",number)
-.single();
-
-if(error || !data){
-
-result.innerHTML=
-`<div class="message error">
-Order not found.
-</div>`;
-
-return;
-
-}
-
-result.innerHTML=
-`
-<div class="message">
-
-<h3>📦 Order Found</h3>
-
-<p><b>Order:</b> ${escapeHTML(data.order_number)}</p>
-
-<p><b>Customer:</b> ${escapeHTML(data.customer_name)}</p>
-
-<p><b>Quantity:</b> ${data.quantity}</p>
-
-<p><b>Total:</b> ${data.total_price??0} ETB</p>
-
-<p><b>Status:</b>
-<span class="badge">
-${escapeHTML(data.status)}
-</span>
-</p>
-
-<p><b>Date:</b>
-${new Date(data.created_at).toLocaleString()}
-</p>
-
-</div>
 `;
 
 }
 
 
-/* START */
+/* =========================
+HELPERS
+========================= */
 
-showPage("home");
+function escapeHtml(value){
 
-loadPublicProducts();
-loadPublicCosmetics();
-loadFeaturedCosmetics();
-loadOrderProducts();
+return String(value ?? "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function safeImage(url){
+
+if(!url) return "";
+
+try{
+
+const parsed =
+new URL(url);
+
+if(parsed.protocol !== "http:" &&
+parsed.protocol !== "https:"){
+
+return "";
+
+}
+
+return parsed.href;
+
+}catch(e){
+
+return "";
+
+}
+
+}
+
+
+/* =========================
+START WEBSITE
+========================= */
+
+async function startApp(){
+
+await loadProducts();
+
+await loadCosmetics();
+
+
+const {data} =
+await supabaseClient.auth.getUser();
+
+
+if(data && data.user){
+
+await loadCurrentUser();
+
+}
+
+}
+
+
+startApp();
 
 </script>
 
