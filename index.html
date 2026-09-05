@@ -3,237 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pharmaceutical Promotion ET</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f7fb;
-  color:#172033;
+* {
+  box-sizing: border-box;
 }
 
-header{
-  background:#075e54;
-  color:white;
-  padding:18px 25px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7f9;
+  color: #222;
 }
 
-header h1{
-  margin:0;
-  font-size:22px;
+header {
+  background: #087f5b;
+  color: white;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-button{
-  border:0;
-  border-radius:7px;
-  padding:10px 15px;
-  cursor:pointer;
-  font-weight:bold;
+header h1 {
+  margin: 0;
+  font-size: 21px;
 }
 
-.login-btn{
-  background:white;
-  color:#075e54;
+button {
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
-.logout-btn{
-  background:#dc3545;
-  color:white;
+.btn-primary {
+  background: #087f5b;
+  color: white;
 }
 
-.primary{
-  background:#075e54;
-  color:white;
+.btn-danger {
+  background: #dc3545;
+  color: white;
 }
 
-.secondary{
-  background:#6c757d;
-  color:white;
+.btn-secondary {
+  background: #6c757d;
+  color: white;
 }
 
-.danger{
-  background:#dc3545;
-  color:white;
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
 }
 
-.edit{
-  background:#f0ad4e;
-  color:white;
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
 }
 
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:25px;
+input, select, textarea {
+  width: 100%;
+  padding: 11px;
+  margin: 6px 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-.hero{
-  background:white;
-  padding:50px 25px;
-  text-align:center;
-  border-radius:12px;
-  margin-bottom:25px;
+textarea {
+  min-height: 90px;
 }
 
-.hero h2{
-  color:#075e54;
-  font-size:32px;
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
-.card-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:15px;
-  margin-bottom:25px;
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.card{
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 2px 8px #0001;
+.stat {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
 }
 
-.card h3{
-  margin-top:0;
-  color:#075e54;
+.stat h2 {
+  margin: 5px;
+  color: #087f5b;
 }
 
-.panel{
-  background:white;
-  padding:25px;
-  border-radius:12px;
-  margin-bottom:25px;
-  box-shadow:0 2px 8px #0001;
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:10px;
+.nav button {
+  background: #343a40;
+  color: white;
 }
 
-input,textarea,select{
-  width:100%;
-  padding:11px;
-  margin:7px 0 14px;
-  border:1px solid #ccd3dd;
-  border-radius:7px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background: white;
 }
 
-textarea{
-  min-height:90px;
+th, td {
+  border: 1px solid #ddd;
+  padding: 9px;
+  text-align: left;
 }
 
-.nav-buttons{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:20px;
+th {
+  background: #087f5b;
+  color: white;
 }
 
-.hidden{
-  display:none;
+.low-stock {
+  color: #dc3545;
+  font-weight: bold;
 }
 
-.message{
-  padding:12px;
-  margin:10px 0;
-  border-radius:7px;
-  display:none;
+.stock-ok {
+  color: #087f5b;
+  font-weight: bold;
 }
 
-.success{
-  background:#d4edda;
-  color:#155724;
+.hidden {
+  display: none;
 }
 
-.error{
-  background:#f8d7da;
-  color:#721c24;
+.message {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
 }
 
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:10px;
+.success {
+  background: #d4edda;
+  color: #155724;
 }
 
-.table-container{
-  overflow-x:auto;
+.error {
+  background: #f8d7da;
+  color: #721c24;
 }
 
-table{
-  width:100%;
-  border-collapse:collapse;
-  margin-top:20px;
-  min-width:700px;
-}
-
-th,td{
-  padding:10px;
-  border-bottom:1px solid #ddd;
-  text-align:left;
-}
-
-th{
-  background:#075e54;
-  color:white;
-}
-
-.small-btn{
-  padding:7px 10px;
-  margin:2px;
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 9px;
-  border-radius:15px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.active-badge{
-  background:#d4edda;
-  color:#155724;
-}
-
-.inactive-badge{
-  background:#f8d7da;
-  color:#721c24;
-}
-
-@media(max-width:600px){
-
-  header{
-    padding:15px;
+@media(max-width: 800px) {
+  .dashboard {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  header h1{
-    font-size:17px;
+  .form-grid {
+    grid-template-columns: 1fr;
   }
 
-  .container{
-    padding:12px;
+  table {
+    font-size: 12px;
   }
 
-  .hero{
-    padding:30px 15px;
-  }
-
-  .hero h2{
-    font-size:25px;
+  .container {
+    padding: 10px;
   }
 }
 </style>
@@ -242,666 +192,430 @@ th{
 <body>
 
 <header>
-
-  <h1>Pharmaceutical Promotion ET</h1>
-
-  <button
-    class="login-btn"
-    onclick="showLogin()">
-    Admin Login
-  </button>
-
+  <h1>💊 Pharmaceutical Promotion ET</h1>
+  <button onclick="showLogin()">Admin Login</button>
 </header>
 
+<div class="container">
 
-<!-- PUBLIC AREA -->
+<!-- PUBLIC HOME -->
+<div id="homeSection">
 
-<div id="publicArea" class="container">
-
-  <div class="hero">
-
-    <h2>Pharmaceutical Promotion ET</h2>
-
+  <div class="card">
+    <h2>Connecting Suppliers with Buyers</h2>
     <p>
-      Connecting pharmaceutical suppliers with pharmacies
-      and drug stores.
+      Pharmaceutical Promotion ET connects pharmaceutical suppliers
+      with pharmacies, drug stores and other buyers.
     </p>
 
-    <button
-      class="primary"
-      onclick="showLogin()">
-      Admin Login
+    <button class="btn-primary" onclick="showLogin()">
+      🔐 Admin Login
     </button>
-
   </div>
 
 </div>
 
 
 <!-- LOGIN -->
+<div id="loginSection" class="card hidden">
 
-<div id="loginArea" class="container">
+  <h2>🔐 Super Admin Login</h2>
 
-  <div class="panel">
+  <div id="loginMessage"></div>
 
-    <h2>Super Admin Login</h2>
+  <label>Email</label>
+  <input type="email" id="loginEmail" placeholder="Admin email">
 
-    <div
-      id="loginMessage"
-      class="message">
-    </div>
+  <label>Password</label>
+  <input type="password" id="loginPassword" placeholder="Password">
 
-    <label>Email</label>
+  <button class="btn-primary" onclick="loginAdmin()">
+    Login
+  </button>
 
-    <input
-      type="email"
-      id="email"
-      placeholder="Admin email">
-
-    <label>Password</label>
-
-    <input
-      type="password"
-      id="password"
-      placeholder="Password">
-
-    <button
-      class="primary"
-      onclick="login()">
-      Login
-    </button>
-
-    <button
-      class="secondary"
-      onclick="showPublic()">
-      Back
-    </button>
-
-  </div>
+  <button class="btn-secondary" onclick="showHome()">
+    Back
+  </button>
 
 </div>
 
 
-<!-- ADMIN AREA -->
+<!-- ADMIN -->
+<div id="adminSection" class="hidden">
 
-<div
-  id="adminArea"
-  class="container"
-  style="display:none">
+  <div class="card">
+    <h2>👑 Super Admin Dashboard</h2>
+    <p id="adminEmail"></p>
 
-  <div class="panel">
-
-    <div class="section-title">
-
-      <div>
-
-        <h2>Super Admin Dashboard</h2>
-
-        <p id="adminEmail"></p>
-
-      </div>
-
-      <button
-        class="logout-btn"
-        onclick="logout()">
-        Logout
-      </button>
-
-    </div>
-
+    <button class="btn-danger" onclick="logoutAdmin()">
+      Logout
+    </button>
   </div>
 
 
-  <!-- DASHBOARD CARDS -->
+  <!-- STATISTICS -->
+  <div class="dashboard">
 
-  <div class="card-grid">
-
-    <div class="card">
-
-      <h3>📦 Products</h3>
-
-      <strong id="productCount">
-        0
-      </strong>
-
+    <div class="stat">
+      <h2 id="productCount">0</h2>
+      <p>💊 Products</p>
     </div>
 
-
-    <div class="card">
-
-      <h3>🏢 Suppliers</h3>
-
-      <strong id="supplierCount">
-        0
-      </strong>
-
+    <div class="stat">
+      <h2 id="supplierCount">0</h2>
+      <p>🏢 Suppliers</p>
     </div>
 
-
-    <div class="card">
-
-      <h3>👥 Users</h3>
-
-      <strong id="userCount">
-        0
-      </strong>
-
+    <div class="stat">
+      <h2 id="userCount">0</h2>
+      <p>👥 Users</p>
     </div>
 
-
-    <div class="card">
-
-      <h3>📊 Inventory</h3>
-
-      <strong>
-        Coming Soon
-      </strong>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>🛒 Orders</h3>
-
-      <strong>
-        Coming Soon
-      </strong>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>📢 Promotions</h3>
-
-      <strong>
-        Coming Soon
-      </strong>
-
+    <div class="stat">
+      <h2 id="lowStockCount">0</h2>
+      <p>⚠️ Low Stock</p>
     </div>
 
   </div>
 
 
   <!-- NAVIGATION -->
+  <div class="nav">
 
-  <div class="nav-buttons">
-
-    <button
-      class="primary"
-      onclick="showPanel('productsPanel')">
-      📦 Products
+    <button onclick="showPanel('productsPanel')">
+      💊 Products
     </button>
 
-    <button
-      class="secondary"
-      onclick="showPanel('suppliersPanel')">
+    <button onclick="showPanel('suppliersPanel')">
       🏢 Suppliers
     </button>
 
-    <button
-      class="secondary"
-      onclick="showPanel('usersPanel')">
+    <button onclick="showPanel('usersPanel')">
       👥 Users
+    </button>
+
+    <button onclick="showPanel('inventoryPanel')">
+      📦 Inventory
     </button>
 
   </div>
 
 
   <!-- PRODUCTS -->
+  <div id="productsPanel" class="card hidden">
 
-  <div
-    id="productsPanel"
-    class="panel">
+    <h2>💊 Product Management</h2>
 
-    <div class="section-title">
-
-      <h2>
-        📦 Product Management
-      </h2>
-
-      <button
-        class="secondary"
-        onclick="clearProductForm()">
-        Clear
-      </button>
-
-    </div>
-
-    <div
-      id="productMessage"
-      class="message">
-    </div>
-
-    <input
-      type="hidden"
-      id="productId">
+    <input type="hidden" id="productId">
 
     <div class="form-grid">
 
       <div>
-
         <label>Product Name *</label>
-
-        <input
-          id="productName"
-          placeholder="e.g. Paracetamol">
-
+        <input id="productName">
       </div>
 
       <div>
-
         <label>Generic Name</label>
-
-        <input
-          id="genericName"
-          placeholder="Generic name">
-
+        <input id="genericName">
       </div>
 
       <div>
-
         <label>Category</label>
-
-        <input
-          id="category"
-          placeholder="Category">
-
+        <input id="category">
       </div>
 
       <div>
-
         <label>Strength</label>
-
-        <input
-          id="strength"
-          placeholder="e.g. 500 mg">
-
+        <input id="strength">
       </div>
 
       <div>
-
         <label>Dosage Form</label>
-
-        <input
-          id="dosageForm"
-          placeholder="Tablet / Capsule / Syrup">
-
+        <input id="dosageForm">
       </div>
 
       <div>
-
         <label>Manufacturer</label>
-
-        <input
-          id="manufacturer"
-          placeholder="Manufacturer">
-
+        <input id="manufacturer">
       </div>
 
       <div>
-
         <label>Supplier</label>
-
-        <input
-          id="supplier"
-          placeholder="Supplier">
-
+        <input id="productSupplier">
       </div>
 
       <div>
-
         <label>Price</label>
-
-        <input
-          type="number"
-          id="price"
-          step="0.01"
-          placeholder="0.00">
-
+        <input type="number" id="price">
       </div>
 
       <div>
-
-        <label>Stock</label>
-
-        <input
-          type="number"
-          id="stock"
-          placeholder="0">
-
+        <label>Opening Stock</label>
+        <input type="number" id="stock" value="0">
       </div>
 
     </div>
 
     <label>Description</label>
+    <textarea id="productDescription"></textarea>
 
-    <textarea
-      id="description"
-      placeholder="Product description">
-    </textarea>
-
-    <button
-      class="primary"
-      id="productSaveButton"
-      onclick="saveProduct()">
-      Add Product
+    <button class="btn-primary" onclick="saveProduct()">
+      Save Product
     </button>
 
+    <button class="btn-secondary" onclick="clearProductForm()">
+      Clear
+    </button>
 
-    <h3>Product List</h3>
+    <div id="productMessage"></div>
 
-    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Generic</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
 
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>Name</th>
-            <th>Generic</th>
-            <th>Strength</th>
-            <th>Manufacturer</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Actions</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody id="productList"></tbody>
-
-      </table>
-
-    </div>
+      <tbody id="productsTable"></tbody>
+    </table>
 
   </div>
 
 
   <!-- SUPPLIERS -->
+  <div id="suppliersPanel" class="card hidden">
 
-  <div
-    id="suppliersPanel"
-    class="panel hidden">
+    <h2>🏢 Supplier Management</h2>
 
-    <div class="section-title">
-
-      <h2>
-        🏢 Supplier Management
-      </h2>
-
-      <button
-        class="secondary"
-        onclick="clearSupplierForm()">
-        Clear
-      </button>
-
-    </div>
-
-    <div
-      id="supplierMessage"
-      class="message">
-    </div>
-
-    <input
-      type="hidden"
-      id="supplierId">
+    <input type="hidden" id="supplierId">
 
     <div class="form-grid">
 
       <div>
-
         <label>Company Name *</label>
-
-        <input
-          id="companyName"
-          placeholder="Supplier company">
-
+        <input id="companyName">
       </div>
 
       <div>
-
         <label>Contact Person</label>
-
-        <input
-          id="contactPerson"
-          placeholder="Contact person">
-
+        <input id="contactPerson">
       </div>
 
       <div>
-
         <label>Phone</label>
-
-        <input
-          id="supplierPhone"
-          placeholder="Phone number">
-
+        <input id="supplierPhone">
       </div>
 
       <div>
-
         <label>Email</label>
-
-        <input
-          type="email"
-          id="supplierEmail"
-          placeholder="Email">
-
+        <input type="email" id="supplierEmail">
       </div>
 
       <div>
-
         <label>Address</label>
-
-        <input
-          id="supplierAddress"
-          placeholder="Address">
-
+        <input id="supplierAddress">
       </div>
 
       <div>
-
         <label>License Number</label>
-
-        <input
-          id="licenseNumber"
-          placeholder="License number">
-
+        <input id="licenseNumber">
       </div>
 
     </div>
 
     <label>Description</label>
+    <textarea id="supplierDescription"></textarea>
 
-    <textarea
-      id="supplierDescription"
-      placeholder="Supplier information">
-    </textarea>
-
-    <button
-      class="primary"
-      id="supplierSaveButton"
-      onclick="saveSupplier()">
-      Add Supplier
+    <button class="btn-primary" onclick="saveSupplier()">
+      Save Supplier
     </button>
 
+    <button class="btn-secondary" onclick="clearSupplierForm()">
+      Clear
+    </button>
 
-    <h3>Supplier List</h3>
+    <div id="supplierMessage"></div>
 
-    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>License</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
 
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>License</th>
-            <th>Actions</th>
-
-          </tr>
-
-        </thead>
-
-        <tbody id="supplierList"></tbody>
-
-      </table>
-
-    </div>
+      <tbody id="suppliersTable"></tbody>
+    </table>
 
   </div>
 
 
   <!-- USERS -->
+  <div id="usersPanel" class="card hidden">
 
-  <div
-    id="usersPanel"
-    class="panel hidden">
+    <h2>👥 User Management</h2>
 
-    <div class="section-title">
-
-      <h2>
-        👥 User Management
-      </h2>
-
-      <button
-        class="secondary"
-        onclick="clearUserForm()">
-        Clear
-      </button>
-
-    </div>
-
-    <div
-      id="userMessage"
-      class="message">
-    </div>
-
-    <input
-      type="hidden"
-      id="userId">
+    <input type="hidden" id="userId">
 
     <div class="form-grid">
 
       <div>
-
-        <label>Full Name *</label>
-
-        <input
-          id="fullName"
-          placeholder="Full name">
-
+        <label>Full Name</label>
+        <input id="userFullName">
       </div>
 
       <div>
-
-        <label>Email *</label>
-
-        <input
-          type="email"
-          id="userEmail"
-          placeholder="Email">
-
+        <label>Email</label>
+        <input type="email" id="userEmail">
       </div>
 
       <div>
-
         <label>Role</label>
 
         <select id="userRole">
-
-          <option value="user">
-            User
-          </option>
-
-          <option value="supplier">
-            Supplier
-          </option>
-
-          <option value="buyer">
-            Buyer
-          </option>
-
-          <option value="admin">
-            Admin
-          </option>
-
+          <option value="user">User</option>
+          <option value="supplier">Supplier</option>
+          <option value="buyer">Buyer</option>
+          <option value="admin">Admin</option>
         </select>
 
       </div>
 
       <div>
-
         <label>Status</label>
 
         <select id="userStatus">
-
-          <option value="active">
-            Active
-          </option>
-
-          <option value="inactive">
-            Inactive
-          </option>
-
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
         </select>
 
       </div>
 
     </div>
 
-    <button
-      class="primary"
-      id="userSaveButton"
-      onclick="saveUser()">
-      Add User
+    <button class="btn-primary" onclick="saveUser()">
+      Save User
     </button>
 
+    <button class="btn-secondary" onclick="clearUserForm()">
+      Clear
+    </button>
 
-    <h3>User List</h3>
+    <div id="userMessage"></div>
 
-    <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
 
-      <table>
+      <tbody id="usersTable"></tbody>
+    </table>
 
-        <thead>
+  </div>
 
-          <tr>
 
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Actions</th>
+  <!-- INVENTORY -->
+  <div id="inventoryPanel" class="card hidden">
 
-          </tr>
+    <h2>📦 Inventory Management</h2>
 
-        </thead>
+    <div class="card">
 
-        <tbody id="userList"></tbody>
+      <h3>Record Stock Movement</h3>
 
-      </table>
+      <label>Product</label>
+
+      <select id="inventoryProduct">
+        <option value="">Select Product</option>
+      </select>
+
+      <label>Transaction Type</label>
+
+      <select id="transactionType">
+        <option value="stock_in">📥 Stock In</option>
+        <option value="stock_out">📤 Stock Out</option>
+      </select>
+
+      <label>Quantity</label>
+      <input type="number" id="transactionQuantity" min="1">
+
+      <label>Reference Number</label>
+      <input id="referenceNumber" placeholder="e.g. GRN-001 / SIV-001">
+
+      <label>Notes</label>
+      <textarea id="inventoryNotes"></textarea>
+
+      <button class="btn-primary" onclick="recordInventory()">
+        Record Transaction
+      </button>
+
+      <div id="inventoryMessage"></div>
 
     </div>
 
+
+    <h3>📊 Current Inventory</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Generic</th>
+          <th>Category</th>
+          <th>Current Stock</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="inventoryTable"></tbody>
+    </table>
+
+
+    <h3>📜 Inventory History</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Product</th>
+          <th>Type</th>
+          <th>Quantity</th>
+          <th>Reference</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+
+      <tbody id="inventoryHistoryTable"></tbody>
+    </table>
+
   </div>
+
+</div>
 
 </div>
 
 
 <script>
 
-/* =========================
+/* ============================
    SUPABASE CONNECTION
-========================= */
+============================ */
 
 const SUPABASE_URL =
 "https://wslresoojzwalyznskfi.supabase.co";
@@ -916,1272 +630,1283 @@ window.supabase.createClient(
 );
 
 
-/* =========================
-   PAGE CONTROL
-========================= */
+/* ============================
+   BASIC FUNCTIONS
+============================ */
 
-function showLogin(){
+function escapeHtml(value) {
 
-  document.getElementById("publicArea").style.display="none";
+  if (value === null || value === undefined)
+    return "";
 
-  document.getElementById("adminArea").style.display="none";
-
-  document.getElementById("loginArea").style.display="block";
-
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 
-function showPublic(){
+function showLogin() {
 
-  document.getElementById("publicArea").style.display="block";
-
-  document.getElementById("loginArea").style.display="none";
-
-  document.getElementById("adminArea").style.display="none";
-
-}
-
-
-function showAdmin(){
-
-  document.getElementById("publicArea").style.display="none";
-
-  document.getElementById("loginArea").style.display="none";
-
-  document.getElementById("adminArea").style.display="block";
-
-}
-
-
-function showPanel(panel){
-
-  document
-    .getElementById("productsPanel")
+  document.getElementById("homeSection")
     .classList.add("hidden");
 
-  document
-    .getElementById("suppliersPanel")
-    .classList.add("hidden");
-
-  document
-    .getElementById("usersPanel")
-    .classList.add("hidden");
-
-  document
-    .getElementById(panel)
+  document.getElementById("loginSection")
     .classList.remove("hidden");
 
+  document.getElementById("adminSection")
+    .classList.add("hidden");
 }
 
 
-/* =========================
-   MESSAGE
-========================= */
+function showHome() {
 
-function showMessage(
-  elementId,
-  message,
-  type
-){
+  document.getElementById("homeSection")
+    .classList.remove("hidden");
 
-  const element =
-    document.getElementById(elementId);
+  document.getElementById("loginSection")
+    .classList.add("hidden");
 
-  element.textContent=message;
-
-  element.className=
-    "message "+type;
-
-  element.style.display="block";
-
-  setTimeout(()=>{
-
-    element.style.display="none";
-
-  },4000);
-
+  document.getElementById("adminSection")
+    .classList.add("hidden");
 }
 
 
-/* =========================
+function showPanel(panelId) {
+
+  const panels = [
+    "productsPanel",
+    "suppliersPanel",
+    "usersPanel",
+    "inventoryPanel"
+  ];
+
+  panels.forEach(id => {
+    document.getElementById(id)
+      .classList.add("hidden");
+  });
+
+  document.getElementById(panelId)
+    .classList.remove("hidden");
+
+  if (panelId === "productsPanel")
+    loadProducts();
+
+  if (panelId === "suppliersPanel")
+    loadSuppliers();
+
+  if (panelId === "usersPanel")
+    loadUsers();
+
+  if (panelId === "inventoryPanel") {
+    loadInventoryProducts();
+    loadInventoryHistory();
+    loadInventoryTable();
+  }
+}
+
+
+/* ============================
    LOGIN
-========================= */
+============================ */
 
-async function login(){
+async function loginAdmin() {
 
   const email =
-    document
-      .getElementById("email")
-      .value
-      .trim();
+    document.getElementById("loginEmail").value.trim();
 
   const password =
-    document
-      .getElementById("password")
-      .value;
+    document.getElementById("loginPassword").value;
 
-  if(!email || !password){
+  const message =
+    document.getElementById("loginMessage");
 
-    showMessage(
-      "loginMessage",
-      "Please enter email and password.",
-      "error"
-    );
+  message.innerHTML = "";
+
+  if (!email || !password) {
+
+    message.innerHTML =
+      '<div class="message error">Enter email and password.</div>';
 
     return;
-
   }
 
-  const {data,error} =
+  const { data, error } =
     await supabaseClient.auth.signInWithPassword({
-
-      email:email,
-      password:password
-
+      email: email,
+      password: password
     });
 
-  if(error){
+  if (error) {
 
-    showMessage(
-      "loginMessage",
-      error.message,
-      "error"
-    );
-
-    return;
-
-  }
-
-  await checkAdmin();
-
-}
-
-
-/* =========================
-   ADMIN CHECK
-========================= */
-
-async function checkAdmin(){
-
-  const {data,error} =
-    await supabaseClient.auth.getUser();
-
-  if(error || !data.user){
-
-    showLogin();
+    message.innerHTML =
+      '<div class="message error">' +
+      escapeHtml(error.message) +
+      '</div>';
 
     return;
-
   }
 
-  const user=data.user;
+  const user = data.user;
 
-  const {
-    data:profile,
-    error:profileError
-  } =
+  const { data: profile, error: profileError } =
     await supabaseClient
       .from("profiles")
       .select("id,email,role")
-      .eq("id",user.id)
+      .eq("id", user.id)
       .single();
 
-  if(profileError){
+  if (profileError || !profile) {
 
     await supabaseClient.auth.signOut();
 
-    alert("Admin profile was not found.");
-
-    showLogin();
+    message.innerHTML =
+      '<div class="message error">Admin profile not found.</div>';
 
     return;
-
   }
 
-  if(profile.role !== "super_admin"){
+  if (profile.role !== "super_admin") {
 
     await supabaseClient.auth.signOut();
 
-    alert(
-      "Access denied. Super Admin only."
-    );
-
-    showLogin();
+    message.innerHTML =
+      '<div class="message error">Access denied. Super Admin only.</div>';
 
     return;
-
   }
 
-  document
-    .getElementById("adminEmail")
-    .textContent =
-      "Logged in as: "+profile.email;
+  document.getElementById("loginSection")
+    .classList.add("hidden");
 
-  showAdmin();
+  document.getElementById("homeSection")
+    .classList.add("hidden");
 
-  loadProducts();
-  loadSuppliers();
-  loadUsers();
+  document.getElementById("adminSection")
+    .classList.remove("hidden");
 
+  document.getElementById("adminEmail").innerText =
+    "Logged in as: " + profile.email;
+
+  await refreshDashboard();
+
+  showPanel("productsPanel");
 }
 
 
-/* =========================
-   LOGOUT
-========================= */
-
-async function logout(){
+async function logoutAdmin() {
 
   await supabaseClient.auth.signOut();
 
-  showPublic();
+  document.getElementById("adminSection")
+    .classList.add("hidden");
 
+  showHome();
 }
 
 
-/* =========================
-   PRODUCTS
-========================= */
+/* ============================
+   ADMIN CHECK
+============================ */
 
-async function saveProduct(){
+async function checkAdmin() {
+
+  const { data: sessionData } =
+    await supabaseClient.auth.getSession();
+
+  if (!sessionData.session)
+    return;
+
+  const user = sessionData.session.user;
+
+  const { data: profile } =
+    await supabaseClient
+      .from("profiles")
+      .select("id,email,role")
+      .eq("id", user.id)
+      .single();
+
+  if (!profile || profile.role !== "super_admin") {
+
+    await supabaseClient.auth.signOut();
+
+    return;
+  }
+
+  document.getElementById("homeSection")
+    .classList.add("hidden");
+
+  document.getElementById("loginSection")
+    .classList.add("hidden");
+
+  document.getElementById("adminSection")
+    .classList.remove("hidden");
+
+  document.getElementById("adminEmail").innerText =
+    "Logged in as: " + profile.email;
+
+  await refreshDashboard();
+
+  showPanel("productsPanel");
+}
+
+
+/* ============================
+   DASHBOARD
+============================ */
+
+async function refreshDashboard() {
+
+  const { count: products } =
+    await supabaseClient
+      .from("products")
+      .select("*", { count: "exact", head: true });
+
+  const { count: suppliers } =
+    await supabaseClient
+      .from("suppliers")
+      .select("*", { count: "exact", head: true });
+
+  const { count: users } =
+    await supabaseClient
+      .from("user_accounts")
+      .select("*", { count: "exact", head: true });
+
+  const { data: productData } =
+    await supabaseClient
+      .from("products")
+      .select("stock");
+
+  const lowStock =
+    (productData || [])
+      .filter(p => Number(p.stock || 0) <= 10)
+      .length;
+
+  document.getElementById("productCount").innerText =
+    products || 0;
+
+  document.getElementById("supplierCount").innerText =
+    suppliers || 0;
+
+  document.getElementById("userCount").innerText =
+    users || 0;
+
+  document.getElementById("lowStockCount").innerText =
+    lowStock;
+}
+
+
+/* ============================
+   PRODUCTS
+============================ */
+
+async function loadProducts() {
+
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order("id", { ascending: false });
+
+  if (error) {
+
+    showMessage(
+      "productMessage",
+      error.message,
+      false
+    );
+
+    return;
+  }
+
+  const table =
+    document.getElementById("productsTable");
+
+  table.innerHTML = "";
+
+  (data || []).forEach(product => {
+
+    table.innerHTML += `
+      <tr>
+
+        <td>${escapeHtml(product.name)}</td>
+
+        <td>${escapeHtml(product.generic_name)}</td>
+
+        <td>${escapeHtml(product.category)}</td>
+
+        <td>${product.price ?? ""}</td>
+
+        <td>${product.stock ?? 0}</td>
+
+        <td>
+
+          <button class="btn-secondary"
+            onclick='editProduct(${JSON.stringify(product)})'>
+            Edit
+          </button>
+
+          <button class="btn-danger"
+            onclick="deleteProduct(${product.id})">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+    `;
+  });
+
+  await refreshDashboard();
+}
+
+
+async function saveProduct() {
 
   const id =
-    document
-      .getElementById("productId")
-      .value;
+    document.getElementById("productId").value;
 
-  const product={
+  const product = {
 
     name:
-      document
-        .getElementById("productName")
-        .value.trim(),
+      document.getElementById("productName").value.trim(),
 
     generic_name:
-      document
-        .getElementById("genericName")
-        .value.trim(),
+      document.getElementById("genericName").value.trim(),
 
     category:
-      document
-        .getElementById("category")
-        .value.trim(),
+      document.getElementById("category").value.trim(),
 
     strength:
-      document
-        .getElementById("strength")
-        .value.trim(),
+      document.getElementById("strength").value.trim(),
 
     dosage_form:
-      document
-        .getElementById("dosageForm")
-        .value.trim(),
+      document.getElementById("dosageForm").value.trim(),
 
     manufacturer:
-      document
-        .getElementById("manufacturer")
-        .value.trim(),
+      document.getElementById("manufacturer").value.trim(),
 
     supplier:
-      document
-        .getElementById("supplier")
-        .value.trim(),
+      document.getElementById("productSupplier").value.trim(),
 
     price:
-      document
-        .getElementById("price")
-        .value
-        ? Number(
-            document
-              .getElementById("price")
-              .value
-          )
-        : null,
+      Number(document.getElementById("price").value) || 0,
 
     stock:
-      document
-        .getElementById("stock")
-        .value
-        ? Number(
-            document
-              .getElementById("stock")
-              .value
-          )
-        : 0,
+      Number(document.getElementById("stock").value) || 0,
 
     description:
-      document
-        .getElementById("description")
-        .value.trim()
-
+      document.getElementById("productDescription").value.trim()
   };
 
-
-  if(!product.name){
+  if (!product.name) {
 
     showMessage(
       "productMessage",
       "Product name is required.",
-      "error"
+      false
     );
 
     return;
-
   }
-
 
   let result;
 
-
-  if(id){
+  if (id) {
 
     result =
       await supabaseClient
         .from("products")
         .update(product)
-        .eq("id",id);
+        .eq("id", id);
 
-  }else{
+  } else {
 
     result =
       await supabaseClient
         .from("products")
-        .insert([product]);
-
+        .insert(product);
   }
 
-
-  if(result.error){
+  if (result.error) {
 
     showMessage(
       "productMessage",
       result.error.message,
-      "error"
+      false
     );
 
     return;
-
   }
-
 
   showMessage(
     "productMessage",
-    id
-      ? "Product updated successfully."
-      : "Product added successfully.",
-    "success"
+    id ? "Product updated successfully." :
+         "Product added successfully.",
+    true
   );
-
 
   clearProductForm();
 
   loadProducts();
-
 }
 
 
-async function loadProducts(){
+function editProduct(product) {
 
-  const {data,error} =
-    await supabaseClient
-      .from("products")
-      .select("*")
-      .order(
-        "created_at",
-        {ascending:false}
-      );
+  document.getElementById("productId").value =
+    product.id;
+
+  document.getElementById("productName").value =
+    product.name || "";
+
+  document.getElementById("genericName").value =
+    product.generic_name || "";
+
+  document.getElementById("category").value =
+    product.category || "";
+
+  document.getElementById("strength").value =
+    product.strength || "";
+
+  document.getElementById("dosageForm").value =
+    product.dosage_form || "";
+
+  document.getElementById("manufacturer").value =
+    product.manufacturer || "";
+
+  document.getElementById("productSupplier").value =
+    product.supplier || "";
+
+  document.getElementById("price").value =
+    product.price || 0;
+
+  document.getElementById("stock").value =
+    product.stock || 0;
+
+  document.getElementById("productDescription").value =
+    product.description || "";
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 
 
-  if(error){
+async function deleteProduct(id) {
 
-    console.error(error);
-
+  if (!confirm("Delete this product?"))
     return;
 
-  }
-
-
-  document
-    .getElementById("productCount")
-    .textContent=data.length;
-
-
-  const list =
-    document.getElementById(
-      "productList"
-    );
-
-  list.innerHTML="";
-
-
-  data.forEach(product=>{
-
-    const row =
-      document.createElement("tr");
-
-
-    row.innerHTML=`
-
-      <td>
-        ${escapeHtml(product.name)}
-      </td>
-
-      <td>
-        ${escapeHtml(product.generic_name || "")}
-      </td>
-
-      <td>
-        ${escapeHtml(product.strength || "")}
-      </td>
-
-      <td>
-        ${escapeHtml(product.manufacturer || "")}
-      </td>
-
-      <td>
-        ${product.price ?? ""}
-      </td>
-
-      <td>
-        ${product.stock ?? 0}
-      </td>
-
-      <td>
-
-        <button
-          class="edit small-btn"
-          onclick='editProduct(${JSON.stringify(product)})'>
-          Edit
-        </button>
-
-        <button
-          class="danger small-btn"
-          onclick="deleteProduct(${product.id})">
-          Delete
-        </button>
-
-      </td>
-
-    `;
-
-
-    list.appendChild(row);
-
-  });
-
-}
-
-
-function editProduct(product){
-
-  document
-    .getElementById("productId")
-    .value=product.id;
-
-  document
-    .getElementById("productName")
-    .value=product.name || "";
-
-  document
-    .getElementById("genericName")
-    .value=product.generic_name || "";
-
-  document
-    .getElementById("category")
-    .value=product.category || "";
-
-  document
-    .getElementById("strength")
-    .value=product.strength || "";
-
-  document
-    .getElementById("dosageForm")
-    .value=product.dosage_form || "";
-
-  document
-    .getElementById("manufacturer")
-    .value=product.manufacturer || "";
-
-  document
-    .getElementById("supplier")
-    .value=product.supplier || "";
-
-  document
-    .getElementById("price")
-    .value=product.price ?? "";
-
-  document
-    .getElementById("stock")
-    .value=product.stock ?? 0;
-
-  document
-    .getElementById("description")
-    .value=product.description || "";
-
-  document
-    .getElementById("productSaveButton")
-    .textContent="Update Product";
-
-}
-
-
-async function deleteProduct(id){
-
-  if(!confirm(
-    "Delete this product?"
-  )) return;
-
-
-  const {error} =
+  const { error } =
     await supabaseClient
       .from("products")
       .delete()
-      .eq("id",id);
+      .eq("id", id);
 
-
-  if(error){
+  if (error) {
 
     alert(error.message);
 
     return;
-
   }
 
-
   loadProducts();
-
 }
 
 
-function clearProductForm(){
+function clearProductForm() {
 
-  document
-    .getElementById("productId")
-    .value="";
+  document.getElementById("productId").value = "";
 
-  document
-    .getElementById("productName")
-    .value="";
+  document.getElementById("productName").value = "";
 
-  document
-    .getElementById("genericName")
-    .value="";
+  document.getElementById("genericName").value = "";
 
-  document
-    .getElementById("category")
-    .value="";
+  document.getElementById("category").value = "";
 
-  document
-    .getElementById("strength")
-    .value="";
+  document.getElementById("strength").value = "";
 
-  document
-    .getElementById("dosageForm")
-    .value="";
+  document.getElementById("dosageForm").value = "";
 
-  document
-    .getElementById("manufacturer")
-    .value="";
+  document.getElementById("manufacturer").value = "";
 
-  document
-    .getElementById("supplier")
-    .value="";
+  document.getElementById("productSupplier").value = "";
 
-  document
-    .getElementById("price")
-    .value="";
+  document.getElementById("price").value = "";
 
-  document
-    .getElementById("stock")
-    .value="";
+  document.getElementById("stock").value = "0";
 
-  document
-    .getElementById("description")
-    .value="";
-
-  document
-    .getElementById("productSaveButton")
-    .textContent="Add Product";
-
+  document.getElementById("productDescription").value = "";
 }
 
 
-/* =========================
+/* ============================
    SUPPLIERS
-========================= */
+============================ */
 
-async function saveSupplier(){
+async function loadSuppliers() {
+
+  const { data, error } =
+    await supabaseClient
+      .from("suppliers")
+      .select("*")
+      .order("id", { ascending: false });
+
+  if (error) {
+
+    showMessage(
+      "supplierMessage",
+      error.message,
+      false
+    );
+
+    return;
+  }
+
+  const table =
+    document.getElementById("suppliersTable");
+
+  table.innerHTML = "";
+
+  (data || []).forEach(supplier => {
+
+    table.innerHTML += `
+      <tr>
+
+        <td>${escapeHtml(supplier.company_name)}</td>
+
+        <td>${escapeHtml(supplier.contact_person)}</td>
+
+        <td>${escapeHtml(supplier.phone)}</td>
+
+        <td>${escapeHtml(supplier.email)}</td>
+
+        <td>${escapeHtml(supplier.license_number)}</td>
+
+        <td>
+
+          <button class="btn-secondary"
+            onclick='editSupplier(${JSON.stringify(supplier)})'>
+            Edit
+          </button>
+
+          <button class="btn-danger"
+            onclick="deleteSupplier(${supplier.id})">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+    `;
+  });
+}
+
+
+async function saveSupplier() {
 
   const id =
-    document
-      .getElementById("supplierId")
-      .value;
+    document.getElementById("supplierId").value;
 
-
-  const supplier={
+  const supplier = {
 
     company_name:
-      document
-        .getElementById("companyName")
-        .value.trim(),
+      document.getElementById("companyName").value.trim(),
 
     contact_person:
-      document
-        .getElementById("contactPerson")
-        .value.trim(),
+      document.getElementById("contactPerson").value.trim(),
 
     phone:
-      document
-        .getElementById("supplierPhone")
-        .value.trim(),
+      document.getElementById("supplierPhone").value.trim(),
 
     email:
-      document
-        .getElementById("supplierEmail")
-        .value.trim(),
+      document.getElementById("supplierEmail").value.trim(),
 
     address:
-      document
-        .getElementById("supplierAddress")
-        .value.trim(),
+      document.getElementById("supplierAddress").value.trim(),
 
     license_number:
-      document
-        .getElementById("licenseNumber")
-        .value.trim(),
+      document.getElementById("licenseNumber").value.trim(),
 
     description:
-      document
-        .getElementById("supplierDescription")
-        .value.trim()
-
+      document.getElementById("supplierDescription").value.trim()
   };
 
-
-  if(!supplier.company_name){
+  if (!supplier.company_name) {
 
     showMessage(
       "supplierMessage",
       "Company name is required.",
-      "error"
+      false
     );
 
     return;
-
   }
-
 
   let result;
 
-
-  if(id){
+  if (id) {
 
     result =
       await supabaseClient
         .from("suppliers")
         .update(supplier)
-        .eq("id",id);
+        .eq("id", id);
 
-  }else{
+  } else {
 
     result =
       await supabaseClient
         .from("suppliers")
-        .insert([supplier]);
-
+        .insert(supplier);
   }
 
-
-  if(result.error){
+  if (result.error) {
 
     showMessage(
       "supplierMessage",
       result.error.message,
-      "error"
+      false
     );
 
     return;
-
   }
-
 
   showMessage(
     "supplierMessage",
-    id
-      ? "Supplier updated successfully."
-      : "Supplier added successfully.",
-    "success"
+    "Supplier saved successfully.",
+    true
   );
-
 
   clearSupplierForm();
 
   loadSuppliers();
-
 }
 
 
-async function loadSuppliers(){
+function editSupplier(supplier) {
 
-  const {data,error} =
-    await supabaseClient
-      .from("suppliers")
-      .select("*")
-      .order(
-        "created_at",
-        {ascending:false}
-      );
+  document.getElementById("supplierId").value =
+    supplier.id;
+
+  document.getElementById("companyName").value =
+    supplier.company_name || "";
+
+  document.getElementById("contactPerson").value =
+    supplier.contact_person || "";
+
+  document.getElementById("supplierPhone").value =
+    supplier.phone || "";
+
+  document.getElementById("supplierEmail").value =
+    supplier.email || "";
+
+  document.getElementById("supplierAddress").value =
+    supplier.address || "";
+
+  document.getElementById("licenseNumber").value =
+    supplier.license_number || "";
+
+  document.getElementById("supplierDescription").value =
+    supplier.description || "";
+}
 
 
-  if(error){
+async function deleteSupplier(id) {
 
-    console.error(error);
-
+  if (!confirm("Delete this supplier?"))
     return;
 
-  }
-
-
-  document
-    .getElementById("supplierCount")
-    .textContent=data.length;
-
-
-  const list =
-    document.getElementById(
-      "supplierList"
-    );
-
-  list.innerHTML="";
-
-
-  data.forEach(supplier=>{
-
-    const row =
-      document.createElement("tr");
-
-
-    row.innerHTML=`
-
-      <td>
-        ${escapeHtml(
-          supplier.company_name
-        )}
-      </td>
-
-      <td>
-        ${escapeHtml(
-          supplier.contact_person || ""
-        )}
-      </td>
-
-      <td>
-        ${escapeHtml(
-          supplier.phone || ""
-        )}
-      </td>
-
-      <td>
-        ${escapeHtml(
-          supplier.email || ""
-        )}
-      </td>
-
-      <td>
-        ${escapeHtml(
-          supplier.license_number || ""
-        )}
-      </td>
-
-      <td>
-
-        <button
-          class="edit small-btn"
-          onclick='editSupplier(${JSON.stringify(supplier)})'>
-          Edit
-        </button>
-
-        <button
-          class="danger small-btn"
-          onclick="deleteSupplier(${supplier.id})">
-          Delete
-        </button>
-
-      </td>
-
-    `;
-
-
-    list.appendChild(row);
-
-  });
-
-}
-
-
-function editSupplier(supplier){
-
-  document
-    .getElementById("supplierId")
-    .value=supplier.id;
-
-  document
-    .getElementById("companyName")
-    .value=supplier.company_name || "";
-
-  document
-    .getElementById("contactPerson")
-    .value=supplier.contact_person || "";
-
-  document
-    .getElementById("supplierPhone")
-    .value=supplier.phone || "";
-
-  document
-    .getElementById("supplierEmail")
-    .value=supplier.email || "";
-
-  document
-    .getElementById("supplierAddress")
-    .value=supplier.address || "";
-
-  document
-    .getElementById("licenseNumber")
-    .value=supplier.license_number || "";
-
-  document
-    .getElementById("supplierDescription")
-    .value=supplier.description || "";
-
-  document
-    .getElementById("supplierSaveButton")
-    .textContent="Update Supplier";
-
-  showPanel("suppliersPanel");
-
-}
-
-
-async function deleteSupplier(id){
-
-  if(!confirm(
-    "Delete this supplier?"
-  )) return;
-
-
-  const {error} =
+  const { error } =
     await supabaseClient
       .from("suppliers")
       .delete()
-      .eq("id",id);
+      .eq("id", id);
 
-
-  if(error){
+  if (error) {
 
     alert(error.message);
 
     return;
-
   }
-
 
   loadSuppliers();
-
 }
 
 
-function clearSupplierForm(){
+function clearSupplierForm() {
 
-  document
-    .getElementById("supplierId")
-    .value="";
+  document.getElementById("supplierId").value = "";
 
-  document
-    .getElementById("companyName")
-    .value="";
+  document.getElementById("companyName").value = "";
 
-  document
-    .getElementById("contactPerson")
-    .value="";
+  document.getElementById("contactPerson").value = "";
 
-  document
-    .getElementById("supplierPhone")
-    .value="";
+  document.getElementById("supplierPhone").value = "";
 
-  document
-    .getElementById("supplierEmail")
-    .value="";
+  document.getElementById("supplierEmail").value = "";
 
-  document
-    .getElementById("supplierAddress")
-    .value="";
+  document.getElementById("supplierAddress").value = "";
 
-  document
-    .getElementById("licenseNumber")
-    .value="";
+  document.getElementById("licenseNumber").value = "";
 
-  document
-    .getElementById("supplierDescription")
-    .value="";
-
-  document
-    .getElementById("supplierSaveButton")
-    .textContent="Add Supplier";
-
+  document.getElementById("supplierDescription").value = "";
 }
 
 
-/* =========================
+/* ============================
    USERS
-========================= */
+============================ */
 
-async function saveUser(){
+async function loadUsers() {
+
+  const { data, error } =
+    await supabaseClient
+      .from("user_accounts")
+      .select("*")
+      .order("id", { ascending: false });
+
+  if (error) {
+
+    showMessage(
+      "userMessage",
+      error.message,
+      false
+    );
+
+    return;
+  }
+
+  const table =
+    document.getElementById("usersTable");
+
+  table.innerHTML = "";
+
+  (data || []).forEach(user => {
+
+    table.innerHTML += `
+      <tr>
+
+        <td>${escapeHtml(user.full_name)}</td>
+
+        <td>${escapeHtml(user.email)}</td>
+
+        <td>${escapeHtml(user.role)}</td>
+
+        <td>${escapeHtml(user.status)}</td>
+
+        <td>
+
+          <button class="btn-secondary"
+            onclick='editUser(${JSON.stringify(user)})'>
+            Edit
+          </button>
+
+          <button class="btn-danger"
+            onclick="deleteUser(${user.id})">
+            Delete
+          </button>
+
+        </td>
+
+      </tr>
+    `;
+  });
+
+  await refreshDashboard();
+}
+
+
+async function saveUser() {
 
   const id =
-    document
-      .getElementById("userId")
-      .value;
+    document.getElementById("userId").value;
 
-
-  const user={
+  const user = {
 
     full_name:
-      document
-        .getElementById("fullName")
-        .value.trim(),
+      document.getElementById("userFullName").value.trim(),
 
     email:
-      document
-        .getElementById("userEmail")
-        .value.trim(),
+      document.getElementById("userEmail").value.trim(),
 
     role:
-      document
-        .getElementById("userRole")
-        .value,
+      document.getElementById("userRole").value,
 
     status:
-      document
-        .getElementById("userStatus")
-        .value
-
+      document.getElementById("userStatus").value
   };
-
-
-  if(!user.full_name){
-
-    showMessage(
-      "userMessage",
-      "Full name is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(!user.email){
-
-    showMessage(
-      "userMessage",
-      "Email is required.",
-      "error"
-    );
-
-    return;
-
-  }
-
 
   let result;
 
-
-  if(id){
+  if (id) {
 
     result =
       await supabaseClient
         .from("user_accounts")
         .update(user)
-        .eq("id",id);
+        .eq("id", id);
 
-  }else{
+  } else {
 
     result =
       await supabaseClient
         .from("user_accounts")
-        .insert([user]);
-
+        .insert(user);
   }
 
-
-  if(result.error){
+  if (result.error) {
 
     showMessage(
       "userMessage",
       result.error.message,
-      "error"
+      false
     );
 
     return;
-
   }
-
 
   showMessage(
     "userMessage",
-    id
-      ? "User updated successfully."
-      : "User added successfully.",
-    "success"
+    "User saved successfully.",
+    true
   );
-
 
   clearUserForm();
 
   loadUsers();
-
 }
 
 
-async function loadUsers(){
+function editUser(user) {
 
-  const {data,error} =
-    await supabaseClient
-      .from("user_accounts")
-      .select("*")
-      .order(
-        "created_at",
-        {ascending:false}
-      );
+  document.getElementById("userId").value =
+    user.id;
+
+  document.getElementById("userFullName").value =
+    user.full_name || "";
+
+  document.getElementById("userEmail").value =
+    user.email || "";
+
+  document.getElementById("userRole").value =
+    user.role || "user";
+
+  document.getElementById("userStatus").value =
+    user.status || "active";
+}
 
 
-  if(error){
+async function deleteUser(id) {
 
-    console.error(error);
-
+  if (!confirm("Delete this user record?"))
     return;
 
-  }
-
-
-  document
-    .getElementById("userCount")
-    .textContent=data.length;
-
-
-  const list =
-    document.getElementById(
-      "userList"
-    );
-
-  list.innerHTML="";
-
-
-  data.forEach(user=>{
-
-    const row =
-      document.createElement("tr");
-
-
-    const statusClass =
-      user.status === "active"
-        ? "active-badge"
-        : "inactive-badge";
-
-
-    row.innerHTML=`
-
-      <td>
-        ${escapeHtml(
-          user.full_name || ""
-        )}
-      </td>
-
-      <td>
-        ${escapeHtml(
-          user.email || ""
-        )}
-      </td>
-
-      <td>
-        ${escapeHtml(
-          user.role || "user"
-        )}
-      </td>
-
-      <td>
-
-        <span
-          class="badge ${statusClass}">
-          ${escapeHtml(
-            user.status || "active"
-          )}
-        </span>
-
-      </td>
-
-      <td>
-
-        <button
-          class="edit small-btn"
-          onclick='editUser(${JSON.stringify(user)})'>
-          Edit
-        </button>
-
-        <button
-          class="danger small-btn"
-          onclick="deleteUser(${user.id})">
-          Delete
-        </button>
-
-      </td>
-
-    `;
-
-
-    list.appendChild(row);
-
-  });
-
-}
-
-
-function editUser(user){
-
-  document
-    .getElementById("userId")
-    .value=user.id;
-
-  document
-    .getElementById("fullName")
-    .value=user.full_name || "";
-
-  document
-    .getElementById("userEmail")
-    .value=user.email || "";
-
-  document
-    .getElementById("userRole")
-    .value=user.role || "user";
-
-  document
-    .getElementById("userStatus")
-    .value=user.status || "active";
-
-  document
-    .getElementById("userSaveButton")
-    .textContent="Update User";
-
-  showPanel("usersPanel");
-
-}
-
-
-async function deleteUser(id){
-
-  if(!confirm(
-    "Delete this user record?"
-  )) return;
-
-
-  const {error} =
+  const { error } =
     await supabaseClient
       .from("user_accounts")
       .delete()
-      .eq("id",id);
+      .eq("id", id);
 
-
-  if(error){
+  if (error) {
 
     alert(error.message);
 
     return;
-
   }
-
 
   loadUsers();
-
 }
 
 
-function clearUserForm(){
+function clearUserForm() {
 
-  document
-    .getElementById("userId")
-    .value="";
+  document.getElementById("userId").value = "";
 
-  document
-    .getElementById("fullName")
-    .value="";
+  document.getElementById("userFullName").value = "";
 
-  document
-    .getElementById("userEmail")
-    .value="";
+  document.getElementById("userEmail").value = "";
 
-  document
-    .getElementById("userRole")
-    .value="user";
+  document.getElementById("userRole").value = "user";
 
-  document
-    .getElementById("userStatus")
-    .value="active";
-
-  document
-    .getElementById("userSaveButton")
-    .textContent="Add User";
-
+  document.getElementById("userStatus").value = "active";
 }
 
 
-/* =========================
-   HTML SECURITY
-========================= */
+/* ============================
+   INVENTORY
+============================ */
 
-function escapeHtml(value){
+async function loadInventoryProducts() {
 
-  return String(value)
-
-    .replace(/&/g,"&amp;")
-
-    .replace(/</g,"&lt;")
-
-    .replace(/>/g,"&gt;")
-
-    .replace(/"/g,"&quot;")
-
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================
-   EXISTING SESSION
-========================= */
-
-async function checkExistingSession(){
-
-  const {data} =
+  const { data, error } =
     await supabaseClient
-      .auth
-      .getSession();
+      .from("products")
+      .select("id,name,stock")
+      .order("name");
 
+  if (error) {
 
-  if(data.session){
+    showMessage(
+      "inventoryMessage",
+      error.message,
+      false
+    );
 
-    await checkAdmin();
-
-  }else{
-
-    showPublic();
-
+    return;
   }
 
+  const select =
+    document.getElementById("inventoryProduct");
+
+  select.innerHTML =
+    '<option value="">Select Product</option>';
+
+  (data || []).forEach(product => {
+
+    select.innerHTML += `
+      <option value="${product.id}">
+        ${escapeHtml(product.name)}
+        — Stock: ${product.stock || 0}
+      </option>
+    `;
+  });
 }
 
 
-checkExistingSession();
+async function recordInventory() {
+
+  const productId =
+    document.getElementById("inventoryProduct").value;
+
+  const type =
+    document.getElementById("transactionType").value;
+
+  const quantity =
+    Number(document.getElementById("transactionQuantity").value);
+
+  const reference =
+    document.getElementById("referenceNumber").value.trim();
+
+  const notes =
+    document.getElementById("inventoryNotes").value.trim();
+
+  if (!productId) {
+
+    showMessage(
+      "inventoryMessage",
+      "Please select a product.",
+      false
+    );
+
+    return;
+  }
+
+  if (!quantity || quantity <= 0) {
+
+    showMessage(
+      "inventoryMessage",
+      "Quantity must be greater than zero.",
+      false
+    );
+
+    return;
+  }
+
+
+  /* Get current stock */
+
+  const { data: product, error: productError } =
+    await supabaseClient
+      .from("products")
+      .select("id,stock")
+      .eq("id", productId)
+      .single();
+
+  if (productError || !product) {
+
+    showMessage(
+      "inventoryMessage",
+      "Product could not be found.",
+      false
+    );
+
+    return;
+  }
+
+  const currentStock =
+    Number(product.stock || 0);
+
+  let newStock;
+
+
+  if (type === "stock_in") {
+
+    newStock =
+      currentStock + quantity;
+
+  } else {
+
+    if (currentStock < quantity) {
+
+      showMessage(
+        "inventoryMessage",
+        "Insufficient stock.",
+        false
+      );
+
+      return;
+    }
+
+    newStock =
+      currentStock - quantity;
+  }
+
+
+  const {
+    data: sessionData
+  } = await supabaseClient.auth.getSession();
+
+  const userId =
+    sessionData.session?.user?.id || null;
+
+
+  /* Insert transaction */
+
+  const { error: transactionError } =
+    await supabaseClient
+      .from("inventory_transactions")
+      .insert({
+
+        product_id: productId,
+
+        transaction_type: type,
+
+        quantity: quantity,
+
+        reference_number:
+          reference || null,
+
+        notes:
+          notes || null,
+
+        created_by:
+          userId
+
+      });
+
+  if (transactionError) {
+
+    showMessage(
+      "inventoryMessage",
+      transactionError.message,
+      false
+    );
+
+    return;
+  }
+
+
+  /* Update product stock */
+
+  const { error: stockError } =
+    await supabaseClient
+      .from("products")
+      .update({
+        stock: newStock
+      })
+      .eq("id", productId);
+
+  if (stockError) {
+
+    showMessage(
+      "inventoryMessage",
+      "Transaction recorded but stock update failed: " +
+      stockError.message,
+      false
+    );
+
+    return;
+  }
+
+
+  showMessage(
+    "inventoryMessage",
+    "Inventory transaction recorded successfully.",
+    true
+  );
+
+
+  document.getElementById("transactionQuantity").value = "";
+
+  document.getElementById("referenceNumber").value = "";
+
+  document.getElementById("inventoryNotes").value = "";
+
+
+  await loadInventoryProducts();
+
+  await loadInventoryTable();
+
+  await loadInventoryHistory();
+
+  await refreshDashboard();
+
+  await loadProducts();
+}
+
+
+async function loadInventoryTable() {
+
+  const { data, error } =
+    await supabaseClient
+      .from("products")
+      .select("id,name,generic_name,category,stock")
+      .order("name");
+
+  if (error)
+    return;
+
+  const table =
+    document.getElementById("inventoryTable");
+
+  table.innerHTML = "";
+
+  (data || []).forEach(product => {
+
+    const stock =
+      Number(product.stock || 0);
+
+    const low =
+      stock <= 10;
+
+    table.innerHTML += `
+      <tr>
+
+        <td>${escapeHtml(product.name)}</td>
+
+        <td>${escapeHtml(product.generic_name)}</td>
+
+        <td>${escapeHtml(product.category)}</td>
+
+        <td>
+          <strong>${stock}</strong>
+        </td>
+
+        <td class="${low ? "low-stock" : "stock-ok"}">
+
+          ${low ? "⚠️ LOW STOCK" : "✅ OK"}
+
+        </td>
+
+      </tr>
+    `;
+  });
+}
+
+
+async function loadInventoryHistory() {
+
+  const { data, error } =
+    await supabaseClient
+      .from("inventory_transactions")
+      .select(`
+        id,
+        transaction_type,
+        quantity,
+        reference_number,
+        notes,
+        created_at,
+        products (
+          name
+        )
+      `)
+      .order("created_at", {
+        ascending: false
+      });
+
+  if (error) {
+
+    console.log(error);
+
+    return;
+  }
+
+  const table =
+    document.getElementById("inventoryHistoryTable");
+
+  table.innerHTML = "";
+
+  (data || []).forEach(item => {
+
+    const date =
+      new Date(item.created_at)
+        .toLocaleString();
+
+    const type =
+      item.transaction_type === "stock_in"
+        ? "📥 Stock In"
+        : "📤 Stock Out";
+
+    table.innerHTML += `
+      <tr>
+
+        <td>${escapeHtml(date)}</td>
+
+        <td>
+          ${escapeHtml(item.products?.name)}
+        </td>
+
+        <td>${type}</td>
+
+        <td>${item.quantity}</td>
+
+        <td>
+          ${escapeHtml(item.reference_number)}
+        </td>
+
+        <td>
+          ${escapeHtml(item.notes)}
+        </td>
+
+      </tr>
+    `;
+  });
+}
+
+
+/* ============================
+   MESSAGES
+============================ */
+
+function showMessage(elementId, text, success) {
+
+  const element =
+    document.getElementById(elementId);
+
+  element.innerHTML = `
+    <div class="message ${success ? "success" : "error"}">
+      ${escapeHtml(text)}
+    </div>
+  `;
+
+  setTimeout(() => {
+
+    element.innerHTML = "";
+
+  }, 5000);
+}
+
+
+/* ============================
+   START WEBSITE
+============================ */
+
+checkAdmin();
 
 </script>
 
