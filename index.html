@@ -9,6 +9,11 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
+    /* =====================================================
+       GENERAL
+    ===================================================== */
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -22,6 +27,10 @@
       line-height: 1.6;
     }
 
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
     header {
       background: linear-gradient(135deg, #075e54, #087f5b);
       color: white;
@@ -29,11 +38,11 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.18);
     }
 
     .header-container {
-      max-width: 1200px;
+      max-width: 1250px;
       margin: auto;
       display: flex;
       justify-content: space-between;
@@ -41,9 +50,19 @@
       gap: 20px;
     }
 
+    /* =====================================================
+       ATTRACTIVE WEBSITE NAME
+    ===================================================== */
+
     .logo {
-      font-size: 21px;
-      font-weight: bold;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      color: #ffffff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.30);
+      max-width: 600px;
     }
 
     nav {
@@ -61,15 +80,21 @@
       border-radius: 7px;
       cursor: pointer;
       font-weight: bold;
+      transition: 0.2s;
     }
 
     nav button:hover {
       background: white;
       color: #075e54;
+      transform: translateY(-1px);
     }
 
+    /* =====================================================
+       MAIN
+    ===================================================== */
+
     main {
-      max-width: 1200px;
+      max-width: 1250px;
       margin: auto;
       padding: 20px;
     }
@@ -78,33 +103,50 @@
       margin-bottom: 25px;
     }
 
+    /* =====================================================
+       HERO
+    ===================================================== */
+
     .hero {
-      background: linear-gradient(135deg, #d9f5ed, #ffffff);
-      border-radius: 15px;
-      padding: 55px 25px;
+      background:
+        linear-gradient(
+          135deg,
+          #d9f5ed,
+          #ffffff
+        );
+
+      border-radius: 18px;
+      padding: 60px 25px;
       text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .hero h1 {
+      font-family: Georgia, "Times New Roman", serif;
       color: #075e54;
-      font-size: 38px;
+      font-size: 43px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
       margin-bottom: 15px;
     }
 
     .hero p {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
-      font-size: 18px;
+      font-size: 19px;
     }
 
     .hero-buttons {
-      margin-top: 25px;
+      margin-top: 28px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
     }
+
+    /* =====================================================
+       BUTTONS
+    ===================================================== */
 
     .btn {
       border: none;
@@ -114,10 +156,12 @@
       font-weight: bold;
       background: #087f5b;
       color: white;
+      transition: 0.2s;
     }
 
     .btn:hover {
       opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     .btn-danger {
@@ -136,10 +180,14 @@
       background: #1864ab;
     }
 
+    /* =====================================================
+       CARDS
+    ===================================================== */
+
     .card {
       background: white;
-      border-radius: 12px;
-      padding: 22px;
+      border-radius: 13px;
+      padding: 23px;
       margin-bottom: 20px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.07);
     }
@@ -147,6 +195,7 @@
     .card h2 {
       color: #075e54;
       margin-bottom: 15px;
+      font-size: 26px;
     }
 
     .card h3 {
@@ -154,17 +203,27 @@
       color: #087f5b;
     }
 
+    /* =====================================================
+       GRID
+    ===================================================== */
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(230px, 1fr));
       gap: 18px;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
       gap: 18px;
     }
+
+    /* =====================================================
+       PRODUCT CARDS
+    ===================================================== */
 
     .product-card {
       background: white;
@@ -185,11 +244,19 @@
       padding: 15px;
     }
 
+    .product-info h3 {
+      font-size: 20px;
+    }
+
     .price {
       font-size: 20px;
       font-weight: bold;
       color: #087f5b;
     }
+
+    /* =====================================================
+       FORMS
+    ===================================================== */
 
     .form-group {
       margin-bottom: 14px;
@@ -219,13 +286,22 @@
 
     .form-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
       gap: 15px;
     }
+
+    /* =====================================================
+       HIDDEN
+    ===================================================== */
 
     .hidden {
       display: none !important;
     }
+
+    /* =====================================================
+       MESSAGES
+    ===================================================== */
 
     .message {
       padding: 12px;
@@ -248,6 +324,10 @@
       background: #dbeafe;
       color: #1d4ed8;
     }
+
+    /* =====================================================
+       TABLE
+    ===================================================== */
 
     table {
       width: 100%;
@@ -273,6 +353,10 @@
       overflow-x: auto;
     }
 
+    /* =====================================================
+       STATISTICS
+    ===================================================== */
+
     .stat {
       background: #f8f9fa;
       padding: 20px;
@@ -286,6 +370,10 @@
       font-weight: bold;
       color: #075e54;
     }
+
+    /* =====================================================
+       CONTACT
+    ===================================================== */
 
     .contact-box {
       text-align: center;
@@ -301,13 +389,9 @@
       font-weight: bold;
     }
 
-    footer {
-      background: #075e54;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 30px;
-    }
+    /* =====================================================
+       BADGES
+    ===================================================== */
 
     .badge {
       display: inline-block;
@@ -338,9 +422,37 @@
       color: #1d4ed8;
     }
 
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+      background: #075e54;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 30px;
+    }
+
+    footer h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
     @media (max-width: 700px) {
+
       .header-container {
         flex-direction: column;
+      }
+
+      .logo {
+        font-size: 21px;
+        text-align: center;
+        letter-spacing: 0.4px;
       }
 
       nav {
@@ -352,8 +464,16 @@
         padding: 8px;
       }
 
+      .hero {
+        padding: 40px 18px;
+      }
+
       .hero h1 {
-        font-size: 28px;
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 16px;
       }
 
       main {
@@ -363,43 +483,86 @@
       .card {
         padding: 16px;
       }
+
+      .card h2 {
+        font-size: 23px;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header>
+
   <div class="header-container">
 
     <div class="logo">
-      💊 K2 Pharmaceutical Sales and Promotion ET
+      💊 K2 PHARMACEUTICAL SALES & PROMOTION ET
     </div>
 
     <nav>
-      <button onclick="showSection('home')">Home</button>
-      <button onclick="showSection('products')">Products</button>
-      <button onclick="showSection('cosmetics')">Cosmetics</button>
-      <button onclick="showSection('order')">Place Order</button>
-      <button onclick="showSection('register')">Create Account</button>
-      <button onclick="showSection('login')">Login</button>
-      <button onclick="showSection('admin')">Admin</button>
-      <button onclick="logout()">Logout</button>
+
+      <button onclick="showSection('home')">
+        Home
+      </button>
+
+      <button onclick="showSection('products')">
+        Products
+      </button>
+
+      <button onclick="showSection('cosmetics')">
+        Cosmetics
+      </button>
+
+      <button onclick="showSection('order')">
+        Place Order
+      </button>
+
+      <button onclick="showSection('register')">
+        Create Account
+      </button>
+
+      <button onclick="showSection('login')">
+        Login
+      </button>
+
+      <button onclick="showSection('admin')">
+        Admin
+      </button>
+
+      <button onclick="logout()">
+        Logout
+      </button>
+
     </nav>
 
   </div>
+
 </header>
+
 
 <main>
 
-<!-- ================= HOME ================= -->
+
+<!-- =====================================================
+     HOME
+===================================================== -->
 
 <section id="home">
 
   <div class="hero">
 
     <h1>
-      K2 Pharmaceutical Sales and Promotion ET
+      K2 PHARMACEUTICAL SALES & PROMOTION ET
     </h1>
 
     <p>
@@ -408,52 +571,109 @@
     </p>
 
     <div class="hero-buttons">
-      <button class="btn" onclick="showSection('products')">
+
+      <button
+        class="btn"
+        onclick="showSection('products')">
         💊 View Products
       </button>
 
-      <button class="btn" onclick="showSection('register')">
+      <button
+        class="btn"
+        onclick="showSection('register')">
         👤 Create Account
       </button>
 
-      <button class="btn btn-blue" onclick="showSection('order')">
+      <button
+        class="btn btn-blue"
+        onclick="showSection('order')">
         🛒 Place Order
       </button>
+
     </div>
 
   </div>
 
+
   <br>
+
 
   <div class="card">
 
-    <h2>Our Platform</h2>
+    <h2>
+      Our Platform
+    </h2>
 
     <div class="grid">
 
-      <div class="stat">
-        <div class="stat-number">💊</div>
-        <h3>Pharmaceuticals</h3>
-        <p>Discover pharmaceutical products from suppliers.</p>
-      </div>
 
       <div class="stat">
-        <div class="stat-number">🏢</div>
-        <h3>Suppliers</h3>
-        <p>Promote products and connect with buyers.</p>
+
+        <div class="stat-number">
+          💊
+        </div>
+
+        <h3>
+          Pharmaceuticals
+        </h3>
+
+        <p>
+          Discover pharmaceutical products from suppliers.
+        </p>
+
       </div>
 
-      <div class="stat">
-        <div class="stat-number">🏪</div>
-        <h3>Buyers</h3>
-        <p>Pharmacies and drug stores can discover products.</p>
-      </div>
 
       <div class="stat">
-        <div class="stat-number">💄</div>
-        <h3>Cosmetics</h3>
-        <p>Promote cosmetic and personal-care products.</p>
+
+        <div class="stat-number">
+          🏢
+        </div>
+
+        <h3>
+          Suppliers
+        </h3>
+
+        <p>
+          Promote products and connect with buyers.
+        </p>
+
       </div>
+
+
+      <div class="stat">
+
+        <div class="stat-number">
+          🏪
+        </div>
+
+        <h3>
+          Buyers
+        </h3>
+
+        <p>
+          Pharmacies and drug stores can discover products.
+        </p>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-number">
+          💄
+        </div>
+
+        <h3>
+          Cosmetics
+        </h3>
+
+        <p>
+          Promote cosmetic and personal-care products.
+        </p>
+
+      </div>
+
 
     </div>
 
@@ -462,85 +682,136 @@
 </section>
 
 
-<!-- ================= ABOUT K2 ================= -->
+<!-- =====================================================
+     ABOUT K2
+===================================================== -->
 
 <section id="about-k2">
 
   <div class="card">
 
-    <h2>🏢 About K2 Pharmaceutical Sales and Promotion ET</h2>
+    <h2>
+      🏢 About K2 Pharmaceutical Sales and Promotion ET
+    </h2>
 
     <p>
-      <strong>K2 Pharmaceutical Sales and Promotion ET</strong>
-      is a pharmaceutical sales, promotion and networking platform
-      designed to connect pharmaceutical suppliers with pharmacies,
-      drug stores and other qualified buyers in Ethiopia.
+
+      <strong>
+        K2 Pharmaceutical Sales and Promotion ET
+      </strong>
+
+      is a pharmaceutical sales, promotion and networking
+      platform designed to connect pharmaceutical suppliers
+      with pharmacies, drug stores and other qualified buyers
+      in Ethiopia.
+
     </p>
 
     <br>
 
     <p>
-      Our platform helps suppliers promote their pharmaceutical,
-      healthcare and cosmetic products while making it easier for
-      buyers to discover products and submit orders.
+
+      Our platform helps suppliers promote pharmaceutical,
+      healthcare and cosmetic products while making it easier
+      for buyers to discover products and submit orders.
+
     </p>
 
     <br>
+
 
     <div class="grid">
 
-      <div class="card">
-        <h3>💊 Pharmaceutical Products</h3>
-        <p>
-          Promotion and presentation of pharmaceutical products
-          from suppliers.
-        </p>
-      </div>
 
       <div class="card">
-        <h3>🏢 Suppliers</h3>
+
+        <h3>
+          💊 Pharmaceutical Products
+        </h3>
+
         <p>
-          A platform for suppliers to showcase their products
-          and reach potential buyers.
+          Promotion and presentation of pharmaceutical
+          products from suppliers.
         </p>
+
       </div>
 
-      <div class="card">
-        <h3>🏪 Buyers</h3>
-        <p>
-          Pharmacies and drug stores can discover products
-          and submit orders.
-        </p>
-      </div>
 
       <div class="card">
-        <h3>💄 Cosmetics</h3>
+
+        <h3>
+          🏢 Suppliers
+        </h3>
+
         <p>
-          Promotion and visibility for cosmetic and personal-care
-          products.
+          A platform for suppliers to showcase their
+          products and reach potential buyers.
         </p>
+
       </div>
+
+
+      <div class="card">
+
+        <h3>
+          🏪 Buyers
+        </h3>
+
+        <p>
+          Pharmacies and drug stores can discover
+          products and submit orders.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>
+          💄 Cosmetics
+        </h3>
+
+        <p>
+          Promotion and visibility for cosmetic and
+          personal-care products.
+        </p>
+
+      </div>
+
 
     </div>
 
+
     <br>
 
-    <h3>Our Vision</h3>
+
+    <h3>
+      Our Vision
+    </h3>
 
     <p>
-      To become a trusted digital platform connecting pharmaceutical
-      suppliers and buyers and improving access to product information
-      and business opportunities in Ethiopia.
+
+      To become a trusted digital platform connecting
+      pharmaceutical suppliers and buyers and improving
+      access to product information and business
+      opportunities in Ethiopia.
+
     </p>
 
+
     <br>
 
-    <h3>Our Mission</h3>
+
+    <h3>
+      Our Mission
+    </h3>
 
     <p>
-      To provide a simple, professional and accessible platform for
-      pharmaceutical product promotion, supplier networking and
-      buyer-supplier communication.
+
+      To provide a simple, professional and accessible
+      platform for pharmaceutical product promotion,
+      supplier networking and buyer-supplier communication.
+
     </p>
 
   </div>
@@ -548,15 +819,21 @@
 </section>
 
 
-<!-- ================= ABOUT ME ================= -->
+<!-- =====================================================
+     ABOUT ME
+===================================================== -->
 
 <section id="about-me">
 
   <div class="card contact-box">
 
-    <h2>👨‍⚕️ About Me</h2>
+    <h2>
+      👨‍⚕️ About Me
+    </h2>
 
-    <h3>Kinfe Kassa</h3>
+    <h3>
+      Kinfe Kassa
+    </h3>
 
     <p>
       💊 <strong>Pharmacist</strong>
@@ -565,16 +842,22 @@
     <br>
 
     <p>
-      I am Kinfe Kassa, a pharmacist interested in pharmaceutical
-      sales, promotion, supply and professional networking.
+
+      I am Kinfe Kassa, a pharmacist interested in
+      pharmaceutical sales, promotion, supply and
+      professional networking.
+
     </p>
 
     <br>
 
     <p>
+
       I created K2 Pharmaceutical Sales and Promotion ET
-      with the goal of helping connect pharmaceutical suppliers
-      with pharmacies, drug stores and buyers in Ethiopia.
+      with the goal of helping connect pharmaceutical
+      suppliers with pharmacies, drug stores and buyers
+      in Ethiopia.
+
     </p>
 
     <br>
@@ -587,7 +870,8 @@
     </p>
 
     <p>
-      📍 <strong>Country:</strong> Ethiopia
+      📍 <strong>Country:</strong>
+      Ethiopia
     </p>
 
     <p>
@@ -601,7 +885,9 @@
       class="telegram-button"
       href="https://t.me/kinfe2330"
       target="_blank">
+
       📱 Message Me on Telegram
+
     </a>
 
   </div>
@@ -609,18 +895,31 @@
 </section>
 
 
-<!-- ================= PRODUCTS ================= -->
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
 
 <section id="products" class="hidden">
 
   <div class="card">
 
-    <h2>💊 Pharmaceutical Products</h2>
+    <h2>
+      💊 Pharmaceutical Products
+    </h2>
 
-    <div id="productsMessage" class="message"></div>
+    <div
+      id="productsMessage"
+      class="message">
+    </div>
 
-    <div id="publicProducts" class="product-grid">
-      <p>Loading products...</p>
+    <div
+      id="publicProducts"
+      class="product-grid">
+
+      <p>
+        Loading products...
+      </p>
+
     </div>
 
   </div>
@@ -628,18 +927,31 @@
 </section>
 
 
-<!-- ================= COSMETICS ================= -->
+<!-- =====================================================
+     COSMETICS
+===================================================== -->
 
 <section id="cosmetics" class="hidden">
 
   <div class="card">
 
-    <h2>💄 Cosmetics & Personal Care</h2>
+    <h2>
+      💄 Cosmetics & Personal Care
+    </h2>
 
-    <div id="cosmeticsMessage" class="message"></div>
+    <div
+      id="cosmeticsMessage"
+      class="message">
+    </div>
 
-    <div id="publicCosmetics" class="product-grid">
-      <p>Loading cosmetics...</p>
+    <div
+      id="publicCosmetics"
+      class="product-grid">
+
+      <p>
+        Loading cosmetics...
+      </p>
+
     </div>
 
   </div>
@@ -647,106 +959,215 @@
 </section>
 
 
-<!-- ================= REGISTER ================= -->
+<!-- =====================================================
+     REGISTER
+===================================================== -->
 
 <section id="register" class="hidden">
 
   <div class="card">
 
-    <h2>👤 Create Account</h2>
+    <h2>
+      👤 Create Account
+    </h2>
 
-    <div id="registerMessage" class="message"></div>
+    <div
+      id="registerMessage"
+      class="message">
+    </div>
+
 
     <form id="registerForm">
 
-      <div class="form-row">
-
-        <div class="form-group">
-          <label>Account Type</label>
-
-          <select id="registerRole" required>
-            <option value="buyer">Buyer</option>
-            <option value="supplier">Supplier</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Full Name / Contact Person</label>
-          <input id="registerFullName" required>
-        </div>
-
-      </div>
 
       <div class="form-row">
 
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="registerEmail" required>
-        </div>
 
         <div class="form-group">
-          <label>Phone</label>
-          <input id="registerPhone">
-        </div>
 
-      </div>
+          <label>
+            Account Type
+          </label>
 
-      <div class="form-row">
+          <select
+            id="registerRole"
+            required>
 
-        <div class="form-group">
-          <label>Business Name</label>
-          <input id="registerBusinessName" required>
-        </div>
+            <option value="buyer">
+              Buyer
+            </option>
 
-        <div class="form-group">
-          <label>Business Type</label>
-
-          <select id="registerBusinessType">
-
-            <option value="">Select</option>
-            <option value="Pharmacy">Pharmacy</option>
-            <option value="Drug Store">Drug Store</option>
-            <option value="Pharmaceutical Supplier">Pharmaceutical Supplier</option>
-            <option value="Wholesaler">Wholesaler</option>
-            <option value="Distributor">Distributor</option>
-            <option value="Other">Other</option>
+            <option value="supplier">
+              Supplier
+            </option>
 
           </select>
 
         </div>
 
+
+        <div class="form-group">
+
+          <label>
+            Full Name / Contact Person
+          </label>
+
+          <input
+            id="registerFullName"
+            required>
+
+        </div>
+
+
       </div>
+
 
       <div class="form-row">
 
-        <div class="form-group">
-          <label>Address</label>
-          <input id="registerAddress">
-        </div>
 
         <div class="form-group">
-          <label>License Number</label>
-          <input id="registerLicense">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="registerEmail"
+            required>
+
         </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Phone
+          </label>
+
+          <input
+            id="registerPhone">
+
+        </div>
+
 
       </div>
+
+
+      <div class="form-row">
+
+
+        <div class="form-group">
+
+          <label>
+            Business Name
+          </label>
+
+          <input
+            id="registerBusinessName"
+            required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Business Type
+          </label>
+
+          <select
+            id="registerBusinessType">
+
+            <option value="">
+              Select
+            </option>
+
+            <option value="Pharmacy">
+              Pharmacy
+            </option>
+
+            <option value="Drug Store">
+              Drug Store
+            </option>
+
+            <option value="Pharmaceutical Supplier">
+              Pharmaceutical Supplier
+            </option>
+
+            <option value="Wholesaler">
+              Wholesaler
+            </option>
+
+            <option value="Distributor">
+              Distributor
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="form-row">
+
+
+        <div class="form-group">
+
+          <label>
+            Address
+          </label>
+
+          <input
+            id="registerAddress">
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label>
+            License Number
+          </label>
+
+          <input
+            id="registerLicense">
+
+        </div>
+
+
+      </div>
+
 
       <div class="form-group">
 
-        <label>Password</label>
+        <label>
+          Password
+        </label>
 
         <input
           type="password"
           id="registerPassword"
           minlength="6"
-          required
-        >
+          required>
 
       </div>
 
-      <button class="btn" type="submit">
+
+      <button
+        class="btn"
+        type="submit">
+
         Create Account
+
       </button>
+
 
     </form>
 
@@ -755,45 +1176,63 @@
 </section>
 
 
-<!-- ================= LOGIN ================= -->
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <section id="login" class="hidden">
 
   <div class="card">
 
-    <h2>🔐 Login</h2>
+    <h2>
+      🔐 Login
+    </h2>
 
-    <div id="loginMessage" class="message"></div>
+    <div
+      id="loginMessage"
+      class="message">
+    </div>
+
 
     <form id="loginForm">
 
+
       <div class="form-group">
 
-        <label>Email</label>
+        <label>
+          Email
+        </label>
 
         <input
           type="email"
           id="loginEmail"
-          required
-        >
+          required>
 
       </div>
 
+
       <div class="form-group">
 
-        <label>Password</label>
+        <label>
+          Password
+        </label>
 
         <input
           type="password"
           id="loginPassword"
-          required
-        >
+          required>
 
       </div>
 
-      <button class="btn" type="submit">
+
+      <button
+        class="btn"
+        type="submit">
+
         Login
+
       </button>
+
 
     </form>
 
@@ -802,148 +1241,233 @@
 </section>
 
 
-<!-- ================= SUPPLIER DASHBOARD ================= -->
+<!-- =====================================================
+     SUPPLIER DASHBOARD
+===================================================== -->
 
-<section id="supplierDashboard" class="hidden">
+<section
+  id="supplierDashboard"
+  class="hidden">
+
 
   <div class="card">
 
-    <h2>🏢 Supplier Dashboard</h2>
+    <h2>
+      🏢 Supplier Dashboard
+    </h2>
 
     <div id="supplierWelcome"></div>
 
   </div>
 
+
   <div class="card">
 
-    <h2>My Supplier Profile</h2>
+    <h2>
+      My Supplier Profile
+    </h2>
 
     <div id="supplierProfile"></div>
 
   </div>
 
+
   <div class="card">
 
-    <h2>My Products</h2>
+    <h2>
+      My Products
+    </h2>
 
     <div id="supplierProducts"></div>
 
   </div>
 
+
 </section>
 
 
-<!-- ================= BUYER DASHBOARD ================= -->
+<!-- =====================================================
+     BUYER DASHBOARD
+===================================================== -->
 
-<section id="buyerDashboard" class="hidden">
+<section
+  id="buyerDashboard"
+  class="hidden">
+
 
   <div class="card">
 
-    <h2>🏪 Buyer Dashboard</h2>
+    <h2>
+      🏪 Buyer Dashboard
+    </h2>
 
     <div id="buyerWelcome"></div>
 
   </div>
 
+
   <div class="card">
 
-    <h2>My Orders</h2>
+    <h2>
+      My Orders
+    </h2>
 
     <div id="buyerOrders"></div>
 
   </div>
 
+
 </section>
 
 
-<!-- ================= ORDER ================= -->
+<!-- =====================================================
+     PLACE ORDER
+===================================================== -->
 
-<section id="order" class="hidden">
+<section
+  id="order"
+  class="hidden">
+
 
   <div class="card">
 
-    <h2>🛒 Place an Order</h2>
+    <h2>
+      🛒 Place an Order
+    </h2>
 
-    <div id="orderMessage" class="message"></div>
+    <div
+      id="orderMessage"
+      class="message">
+    </div>
+
 
     <form id="orderForm">
 
+
       <div class="form-row">
 
-        <div class="form-group">
-
-          <label>Customer / Business Name</label>
-
-          <input id="orderCustomerName" required>
-
-        </div>
 
         <div class="form-group">
 
-          <label>Email</label>
+          <label>
+            Customer / Business Name
+          </label>
 
-          <input type="email" id="orderCustomerEmail">
+          <input
+            id="orderCustomerName"
+            required>
 
         </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Email
+          </label>
+
+          <input
+            type="email"
+            id="orderCustomerEmail">
+
+        </div>
+
 
       </div>
 
+
       <div class="form-row">
 
-        <div class="form-group">
-
-          <label>Phone</label>
-          <input id="orderCustomerPhone">
-        </div>
 
         <div class="form-group">
 
-          <label>Address</label>
-          <input id="orderCustomerAddress">
+          <label>
+            Phone
+          </label>
+
+          <input
+            id="orderCustomerPhone">
 
         </div>
+
+
+        <div class="form-group">
+
+          <label>
+            Address
+          </label>
+
+          <input
+            id="orderCustomerAddress">
+
+        </div>
+
 
       </div>
 
+
       <div class="form-row">
+
 
         <div class="form-group">
 
-          <label>Product</label>
+          <label>
+            Product
+          </label>
 
-          <select id="orderProduct" required>
-            <option value="">Loading...</option>
+          <select
+            id="orderProduct"
+            required>
+
+            <option value="">
+              Loading...
+            </option>
+
           </select>
 
         </div>
 
+
         <div class="form-group">
 
-          <label>Quantity</label>
+          <label>
+            Quantity
+          </label>
 
           <input
             type="number"
             id="orderQuantity"
             min="1"
             value="1"
-            required
-          >
+            required>
 
         </div>
 
+
       </div>
+
 
       <div class="form-group">
 
-        <label>Notes</label>
+        <label>
+          Notes
+        </label>
 
-        <textarea id="orderNotes"></textarea>
+        <textarea
+          id="orderNotes">
+        </textarea>
 
       </div>
 
-      <button class="btn btn-blue" type="submit">
+
+      <button
+        class="btn btn-blue"
+        type="submit">
+
         Submit Order
+
       </button>
+
 
     </form>
 
@@ -952,56 +1476,90 @@
 </section>
 
 
-<!-- ================= ADMIN ================= -->
+<!-- =====================================================
+     ADMIN
+===================================================== -->
 
-<section id="admin" class="hidden">
+<section
+  id="admin"
+  class="hidden">
 
-  <div id="adminLoginBox" class="card">
 
-    <h2>🔐 Admin Login</h2>
+  <!-- ADMIN LOGIN -->
 
-    <div id="adminLoginMessage" class="message"></div>
+  <div
+    id="adminLoginBox"
+    class="card">
+
+
+    <h2>
+      🔐 Admin Login
+    </h2>
+
+
+    <div
+      id="adminLoginMessage"
+      class="message">
+    </div>
+
 
     <form id="adminLoginForm">
 
+
       <div class="form-group">
 
-        <label>Email</label>
+        <label>
+          Email
+        </label>
 
         <input
           type="email"
           id="adminEmail"
-          required
-        >
+          required>
 
       </div>
 
+
       <div class="form-group">
 
-        <label>Password</label>
+        <label>
+          Password
+        </label>
 
         <input
           type="password"
           id="adminPassword"
-          required
-        >
+          required>
 
       </div>
 
-      <button class="btn" type="submit">
+
+      <button
+        class="btn"
+        type="submit">
+
         Admin Login
+
       </button>
+
 
     </form>
 
   </div>
 
 
-  <div id="adminDashboard" class="hidden">
+  <!-- ADMIN DASHBOARD -->
+
+  <div
+    id="adminDashboard"
+    class="hidden">
+
 
     <div class="card">
 
-      <h2>⚙️ Admin Dashboard</h2>
+      <h2>
+        ⚙️ Admin Dashboard
+      </h2>
 
       <p>
         Welcome, Super Administrator.
@@ -1010,7 +1568,10 @@
     </div>
 
 
+    <!-- STATISTICS -->
+
     <div class="grid">
+
 
       <div class="stat">
 
@@ -1020,9 +1581,12 @@
           0
         </div>
 
-        <h3>Products</h3>
+        <h3>
+          Products
+        </h3>
 
       </div>
+
 
       <div class="stat">
 
@@ -1032,9 +1596,12 @@
           0
         </div>
 
-        <h3>Cosmetics</h3>
+        <h3>
+          Cosmetics
+        </h3>
 
       </div>
+
 
       <div class="stat">
 
@@ -1044,9 +1611,12 @@
           0
         </div>
 
-        <h3>Users</h3>
+        <h3>
+          Users
+        </h3>
 
       </div>
+
 
       <div class="stat">
 
@@ -1056,9 +1626,12 @@
           0
         </div>
 
-        <h3>Orders</h3>
+        <h3>
+          Orders
+        </h3>
 
       </div>
+
 
     </div>
 
@@ -1067,123 +1640,245 @@
 
     <div class="card">
 
-      <h2>💊 Manage Products</h2>
+      <h2>
+        💊 Manage Products
+      </h2>
 
-      <div id="adminProductMessage" class="message"></div>
+
+      <div
+        id="adminProductMessage"
+        class="message">
+      </div>
+
 
       <form id="productForm">
 
+
         <div class="form-row">
 
-          <div class="form-group">
-            <label>Product Name</label>
-            <input id="productName" required>
-          </div>
 
           <div class="form-group">
-            <label>Generic Name</label>
-            <input id="genericName">
+
+            <label>
+              Product Name
+            </label>
+
+            <input
+              id="productName"
+              required>
+
           </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Generic Name
+            </label>
+
+            <input
+              id="genericName">
+
+          </div>
+
 
         </div>
 
+
         <div class="form-row">
 
-          <div class="form-group">
-            <label>Category</label>
-            <input id="productCategory">
-          </div>
 
           <div class="form-group">
-            <label>Strength</label>
-            <input id="productStrength">
+
+            <label>
+              Category
+            </label>
+
+            <input
+              id="productCategory">
+
           </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Strength
+            </label>
+
+            <input
+              id="productStrength">
+
+          </div>
+
 
         </div>
 
+
         <div class="form-row">
 
-          <div class="form-group">
-            <label>Dosage Form</label>
-            <input id="dosageForm">
-          </div>
 
           <div class="form-group">
-            <label>Manufacturer</label>
-            <input id="manufacturer">
+
+            <label>
+              Dosage Form
+            </label>
+
+            <input
+              id="dosageForm">
+
           </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Manufacturer
+            </label>
+
+            <input
+              id="manufacturer">
+
+          </div>
+
 
         </div>
 
+
         <div class="form-row">
 
-          <div class="form-group">
-            <label>Supplier</label>
-            <input id="productSupplier">
-          </div>
 
           <div class="form-group">
-            <label>Price</label>
+
+            <label>
+              Supplier
+            </label>
+
+            <input
+              id="productSupplier">
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Price
+            </label>
+
             <input
               type="number"
               step="0.01"
-              id="productPrice"
-            >
+              id="productPrice">
+
           </div>
 
+
         </div>
+
 
         <div class="form-row">
 
+
           <div class="form-group">
-            <label>Stock</label>
+
+            <label>
+              Stock
+            </label>
+
             <input
               type="number"
               id="productStock"
-              value="0"
-            >
+              value="0">
+
           </div>
+
 
           <div class="form-group">
-            <label>Image URL</label>
-            <input id="productImage">
+
+            <label>
+              Image URL
+            </label>
+
+            <input
+              id="productImage">
+
           </div>
 
+
         </div>
+
 
         <div class="form-group">
 
-          <label>Description</label>
-          <textarea id="productDescription"></textarea>
+          <label>
+            Description
+          </label>
+
+          <textarea
+            id="productDescription">
+          </textarea>
 
         </div>
 
-        <button class="btn" type="submit">
+
+        <button
+          class="btn"
+          type="submit">
+
           ➕ Add Product
+
         </button>
+
 
       </form>
 
+
       <br>
+
 
       <div class="table-wrapper">
 
         <table>
 
+
           <thead>
 
             <tr>
-              <th>Name</th>
-              <th>Generic</th>
-              <th>Supplier</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Action</th>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Generic
+              </th>
+
+              <th>
+                Supplier
+              </th>
+
+              <th>
+                Price
+              </th>
+
+              <th>
+                Stock
+              </th>
+
+              <th>
+                Action
+              </th>
+
             </tr>
 
           </thead>
 
-          <tbody id="adminProductsTable"></tbody>
+
+          <tbody
+            id="adminProductsTable">
+          </tbody>
+
 
         </table>
 
@@ -1196,113 +1891,217 @@
 
     <div class="card">
 
-      <h2>💄 Manage Cosmetics</h2>
+      <h2>
+        💄 Manage Cosmetics
+      </h2>
 
-      <div id="adminCosmeticMessage" class="message"></div>
+
+      <div
+        id="adminCosmeticMessage"
+        class="message">
+      </div>
+
 
       <form id="cosmeticForm">
 
+
         <div class="form-row">
 
-          <div class="form-group">
-            <label>Name</label>
-            <input id="cosmeticName" required>
-          </div>
 
           <div class="form-group">
-            <label>Brand</label>
-            <input id="cosmeticBrand">
+
+            <label>
+              Name
+            </label>
+
+            <input
+              id="cosmeticName"
+              required>
+
           </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Brand
+            </label>
+
+            <input
+              id="cosmeticBrand">
+
+          </div>
+
 
         </div>
 
+
         <div class="form-row">
 
-          <div class="form-group">
-            <label>Category</label>
-            <input id="cosmeticCategory">
-          </div>
 
           <div class="form-group">
-            <label>Supplier</label>
-            <input id="cosmeticSupplier">
+
+            <label>
+              Category
+            </label>
+
+            <input
+              id="cosmeticCategory">
+
           </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Supplier
+            </label>
+
+            <input
+              id="cosmeticSupplier">
+
+          </div>
+
 
         </div>
 
+
         <div class="form-row">
 
+
           <div class="form-group">
-            <label>Price</label>
+
+            <label>
+              Price
+            </label>
+
             <input
               type="number"
               step="0.01"
-              id="cosmeticPrice"
-            >
+              id="cosmeticPrice">
+
           </div>
 
+
           <div class="form-group">
-            <label>Promotional Price</label>
+
+            <label>
+              Promotional Price
+            </label>
+
             <input
               type="number"
               step="0.01"
-              id="cosmeticPromoPrice"
-            >
+              id="cosmeticPromoPrice">
+
           </div>
+
 
         </div>
 
+
         <div class="form-row">
 
+
           <div class="form-group">
-            <label>Stock</label>
+
+            <label>
+              Stock
+            </label>
+
             <input
               type="number"
               id="cosmeticStock"
-              value="0"
-            >
+              value="0">
+
           </div>
+
 
           <div class="form-group">
-            <label>Image URL</label>
-            <input id="cosmeticImage">
+
+            <label>
+              Image URL
+            </label>
+
+            <input
+              id="cosmeticImage">
+
           </div>
 
+
         </div>
+
 
         <div class="form-group">
 
-          <label>Description</label>
-          <textarea id="cosmeticDescription"></textarea>
+          <label>
+            Description
+          </label>
+
+          <textarea
+            id="cosmeticDescription">
+          </textarea>
 
         </div>
 
-        <button class="btn" type="submit">
+
+        <button
+          class="btn"
+          type="submit">
+
           ➕ Add Cosmetic
+
         </button>
+
 
       </form>
 
+
       <br>
 
+
       <div class="table-wrapper">
 
         <table>
 
+
           <thead>
 
             <tr>
-              <th>Name</th>
-              <th>Brand</th>
-              <th>Price</th>
-              <th>Promo Price</th>
-              <th>Stock</th>
-              <th>Action</th>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Brand
+              </th>
+
+              <th>
+                Price
+              </th>
+
+              <th>
+                Promo Price
+              </th>
+
+              <th>
+                Stock
+              </th>
+
+              <th>
+                Action
+              </th>
+
             </tr>
 
           </thead>
 
-          <tbody id="adminCosmeticsTable"></tbody>
+
+          <tbody
+            id="adminCosmeticsTable">
+          </tbody>
+
 
         </table>
 
@@ -1311,30 +2110,57 @@
     </div>
 
 
-    <!-- ADMIN SUPPLIERS -->
+    <!-- SUPPLIERS -->
 
     <div class="card">
 
-      <h2>🏢 Supplier Accounts</h2>
+      <h2>
+        🏢 Supplier Accounts
+      </h2>
+
 
       <div class="table-wrapper">
 
         <table>
 
+
           <thead>
 
             <tr>
-              <th>Company</th>
-              <th>Contact</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Approved</th>
-              <th>Action</th>
+
+              <th>
+                Company
+              </th>
+
+              <th>
+                Contact
+              </th>
+
+              <th>
+                Email
+              </th>
+
+              <th>
+                Phone
+              </th>
+
+              <th>
+                Approved
+              </th>
+
+              <th>
+                Action
+              </th>
+
             </tr>
 
           </thead>
 
-          <tbody id="adminSuppliersTable"></tbody>
+
+          <tbody
+            id="adminSuppliersTable">
+          </tbody>
+
 
         </table>
 
@@ -1343,30 +2169,57 @@
     </div>
 
 
-    <!-- ADMIN USERS -->
+    <!-- USERS -->
 
     <div class="card">
 
-      <h2>👥 User Accounts</h2>
+      <h2>
+        👥 User Accounts
+      </h2>
+
 
       <div class="table-wrapper">
 
         <table>
 
+
           <thead>
 
             <tr>
-              <th>Name</th>
-              <th>Business</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Approved</th>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Business
+              </th>
+
+              <th>
+                Email
+              </th>
+
+              <th>
+                Role
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Approved
+              </th>
+
             </tr>
 
           </thead>
 
-          <tbody id="adminUsersTable"></tbody>
+
+          <tbody
+            id="adminUsersTable">
+          </tbody>
+
 
         </table>
 
@@ -1375,48 +2228,86 @@
     </div>
 
 
-    <!-- ADMIN ORDERS -->
+    <!-- ORDERS -->
 
     <div class="card">
 
-      <h2>🛒 Customer Orders</h2>
+      <h2>
+        🛒 Customer Orders
+      </h2>
+
 
       <div class="table-wrapper">
 
         <table>
 
+
           <thead>
 
             <tr>
-              <th>Order No.</th>
-              <th>Customer</th>
-              <th>Product</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Status</th>
-              <th>Action</th>
+
+              <th>
+                Order No.
+              </th>
+
+              <th>
+                Customer
+              </th>
+
+              <th>
+                Product
+              </th>
+
+              <th>
+                Quantity
+              </th>
+
+              <th>
+                Total
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Action
+              </th>
+
             </tr>
 
           </thead>
 
-          <tbody id="adminOrdersTable"></tbody>
+
+          <tbody
+            id="adminOrdersTable">
+          </tbody>
+
 
         </table>
 
       </div>
 
     </div>
+
 
   </div>
 
 </section>
 
+
 </main>
 
 
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
 
-  <h3>K2 Pharmaceutical Sales and Promotion ET</h3>
+  <h3>
+    K2 Pharmaceutical Sales and Promotion ET
+  </h3>
 
   <p>
     Connecting pharmaceutical suppliers with buyers in Ethiopia.
@@ -1442,9 +2333,9 @@
 
 <script>
 
-/* =========================================================
+/* =====================================================
    SUPABASE CONNECTION
-========================================================= */
+===================================================== */
 
 const SUPABASE_URL =
 "https://wslresoojzwalyznskfi.supabase.co";
@@ -1459,20 +2350,23 @@ window.supabase.createClient(
 );
 
 
-/* =========================================================
-   GLOBAL
-========================================================= */
+/* =====================================================
+   GLOBAL USER
+===================================================== */
 
 let currentUser = null;
 
 
-/* =========================================================
-   SECTION NAVIGATION
-========================================================= */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function showSection(sectionId) {
 
-  const sections = document.querySelectorAll("main > section");
+  const sections =
+    document.querySelectorAll(
+      "main > section"
+    );
 
   sections.forEach(section => {
     section.classList.add("hidden");
@@ -1482,11 +2376,14 @@ function showSection(sectionId) {
     document.getElementById(sectionId);
 
   if (selected) {
+
     selected.classList.remove("hidden");
+
     window.scrollTo({
       top: 0,
       behavior: "smooth"
     });
+
   }
 
   if (sectionId === "products") {
@@ -1512,12 +2409,13 @@ function showSection(sectionId) {
   if (sectionId === "admin") {
     checkAdmin();
   }
+
 }
 
 
-/* =========================================================
+/* =====================================================
    MESSAGE
-========================================================= */
+===================================================== */
 
 function showMessage(
   elementId,
@@ -1536,16 +2434,20 @@ function showMessage(
     "message " + type;
 
   element.style.display = "block";
+
 }
 
 
-/* =========================================================
+/* =====================================================
    ESCAPE HTML
-========================================================= */
+===================================================== */
 
 function escapeHTML(value) {
 
-  if (value === null || value === undefined) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
     return "";
   }
 
@@ -1555,297 +2457,421 @@ function escapeHTML(value) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+
 }
 
 
-/* =========================================================
+/* =====================================================
    REGISTER
-========================================================= */
+===================================================== */
 
 document
 .getElementById("registerForm")
-.addEventListener("submit", async function(event) {
+.addEventListener(
+  "submit",
+  async function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const role =
-    document.getElementById("registerRole").value;
+    const role =
+      document.getElementById(
+        "registerRole"
+      ).value;
 
-  const fullName =
-    document.getElementById("registerFullName").value.trim();
+    const fullName =
+      document.getElementById(
+        "registerFullName"
+      ).value.trim();
 
-  const email =
-    document.getElementById("registerEmail").value.trim();
+    const email =
+      document.getElementById(
+        "registerEmail"
+      ).value.trim();
 
-  const phone =
-    document.getElementById("registerPhone").value.trim();
+    const phone =
+      document.getElementById(
+        "registerPhone"
+      ).value.trim();
 
-  const businessName =
-    document.getElementById("registerBusinessName").value.trim();
+    const businessName =
+      document.getElementById(
+        "registerBusinessName"
+      ).value.trim();
 
-  const businessType =
-    document.getElementById("registerBusinessType").value;
+    const businessType =
+      document.getElementById(
+        "registerBusinessType"
+      ).value;
 
-  const address =
-    document.getElementById("registerAddress").value.trim();
+    const address =
+      document.getElementById(
+        "registerAddress"
+      ).value.trim();
 
-  const licenseNumber =
-    document.getElementById("registerLicense").value.trim();
+    const licenseNumber =
+      document.getElementById(
+        "registerLicense"
+      ).value.trim();
 
-  const password =
-    document.getElementById("registerPassword").value;
+    const password =
+      document.getElementById(
+        "registerPassword"
+      ).value;
 
-  showMessage(
-    "registerMessage",
-    "Creating account...",
-    "info"
-  );
-
-  const { data, error } =
-    await supabaseClient.auth.signUp({
-
-      email: email,
-
-      password: password,
-
-      options: {
-
-        data: {
-
-          role: role,
-
-          full_name: fullName,
-
-          phone: phone,
-
-          business_name: businessName,
-
-          business_type: businessType,
-
-          address: address,
-
-          license_number: licenseNumber
-
-        }
-
-      }
-
-    });
-
-  if (error) {
 
     showMessage(
       "registerMessage",
-      error.message,
-      "error"
+      "Creating account...",
+      "info"
     );
 
-    return;
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signUp({
+
+        email: email,
+
+        password: password,
+
+        options: {
+
+          data: {
+
+            role: role,
+
+            full_name: fullName,
+
+            phone: phone,
+
+            business_name:
+              businessName,
+
+            business_type:
+              businessType,
+
+            address: address,
+
+            license_number:
+              licenseNumber
+
+          }
+
+        }
+
+      });
+
+
+    if (error) {
+
+      showMessage(
+        "registerMessage",
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      "registerMessage",
+      "Account created successfully. Please check your email if email confirmation is enabled.",
+      "success"
+    );
+
+
+    document
+      .getElementById(
+        "registerForm"
+      )
+      .reset();
+
   }
-
-  showMessage(
-    "registerMessage",
-    "Account created successfully. Please check your email if email confirmation is enabled.",
-    "success"
-  );
-
-  document
-    .getElementById("registerForm")
-    .reset();
-
-});
+);
 
 
-/* =========================================================
+/* =====================================================
    LOGIN
-========================================================= */
+===================================================== */
 
 document
 .getElementById("loginForm")
-.addEventListener("submit", async function(event) {
+.addEventListener(
+  "submit",
+  async function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const email =
-    document.getElementById("loginEmail").value.trim();
 
-  const password =
-    document.getElementById("loginPassword").value;
+    const email =
+      document.getElementById(
+        "loginEmail"
+      ).value.trim();
 
-  showMessage(
-    "loginMessage",
-    "Logging in...",
-    "info"
-  );
+    const password =
+      document.getElementById(
+        "loginPassword"
+      ).value;
 
-  const { data, error } =
-    await supabaseClient.auth
-      .signInWithPassword({
-        email,
-        password
-      });
-
-  if (error) {
 
     showMessage(
       "loginMessage",
-      error.message,
-      "error"
+      "Logging in...",
+      "info"
     );
 
-    return;
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
+          email,
+          password
+        });
+
+
+    if (error) {
+
+      showMessage(
+        "loginMessage",
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    currentUser =
+      data.user;
+
+    await routeUser();
+
   }
-
-  currentUser = data.user;
-
-  await routeUser();
-
-});
+);
 
 
-/* =========================================================
+/* =====================================================
    ADMIN LOGIN
-========================================================= */
+===================================================== */
 
 document
 .getElementById("adminLoginForm")
-.addEventListener("submit", async function(event) {
+.addEventListener(
+  "submit",
+  async function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const email =
-    document.getElementById("adminEmail").value.trim();
 
-  const password =
-    document.getElementById("adminPassword").value;
+    const email =
+      document.getElementById(
+        "adminEmail"
+      ).value.trim();
 
-  showMessage(
-    "adminLoginMessage",
-    "Logging in...",
-    "info"
-  );
+    const password =
+      document.getElementById(
+        "adminPassword"
+      ).value;
 
-  const { data, error } =
-    await supabaseClient.auth
-      .signInWithPassword({
-        email,
-        password
-      });
-
-  if (error) {
 
     showMessage(
       "adminLoginMessage",
-      error.message,
-      "error"
+      "Logging in...",
+      "info"
     );
 
-    return;
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
+          email,
+          password
+        });
+
+
+    if (error) {
+
+      showMessage(
+        "adminLoginMessage",
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    currentUser =
+      data.user;
+
+
+    const {
+      data: profile,
+      error: profileError
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "role,email"
+        )
+        .eq(
+          "id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (
+      profileError ||
+      !profile ||
+      profile.role !== "super_admin"
+    ) {
+
+      await supabaseClient
+        .auth
+        .signOut();
+
+      currentUser = null;
+
+      showMessage(
+        "adminLoginMessage",
+        "This account is not a Super Admin.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    document
+      .getElementById(
+        "adminLoginBox"
+      )
+      .classList.add("hidden");
+
+
+    document
+      .getElementById(
+        "adminDashboard"
+      )
+      .classList.remove("hidden");
+
+
+    await loadAdminDashboard();
+
   }
-
-  currentUser = data.user;
-
-  const { data: profile, error: profileError } =
-    await supabaseClient
-      .from("profiles")
-      .select("role,email")
-      .eq("id", currentUser.id)
-      .maybeSingle();
-
-  if (
-    profileError ||
-    !profile ||
-    profile.role !== "super_admin"
-  ) {
-
-    await supabaseClient.auth.signOut();
-
-    currentUser = null;
-
-    showMessage(
-      "adminLoginMessage",
-      "This account is not a Super Admin.",
-      "error"
-    );
-
-    return;
-  }
-
-  document
-    .getElementById("adminLoginBox")
-    .classList.add("hidden");
-
-  document
-    .getElementById("adminDashboard")
-    .classList.remove("hidden");
-
-  await loadAdminDashboard();
-
-});
+);
 
 
-/* =========================================================
+/* =====================================================
    ROUTE USER
-========================================================= */
+===================================================== */
 
 async function routeUser() {
 
   if (!currentUser) return;
 
-  const { data: profile } =
+
+  const {
+    data: profile
+  } =
     await supabaseClient
       .from("profiles")
-      .select("role,email")
-      .eq("id", currentUser.id)
+      .select(
+        "role,email"
+      )
+      .eq(
+        "id",
+        currentUser.id
+      )
       .maybeSingle();
+
 
   if (!profile) {
 
     alert(
-      "Your account was created, but your profile has not been created yet. Please contact the administrator."
+      "Your account was created, but your profile has not been created yet."
     );
 
     return;
+
   }
 
-  if (profile.role === "super_admin") {
+
+  if (
+    profile.role ===
+    "super_admin"
+  ) {
 
     showSection("admin");
 
-    document
-      .getElementById("adminLoginBox")
-      .classList.add("hidden");
 
     document
-      .getElementById("adminDashboard")
+      .getElementById(
+        "adminLoginBox"
+      )
+      .classList.add("hidden");
+
+
+    document
+      .getElementById(
+        "adminDashboard"
+      )
       .classList.remove("hidden");
+
 
     await loadAdminDashboard();
 
   }
 
-  else if (profile.role === "supplier") {
 
-    showSection("supplierDashboard");
+  else if (
+    profile.role ===
+    "supplier"
+  ) {
+
+    showSection(
+      "supplierDashboard"
+    );
 
     await loadSupplierDashboard();
 
   }
 
-  else if (profile.role === "buyer") {
 
-    showSection("buyerDashboard");
+  else if (
+    profile.role ===
+    "buyer"
+  ) {
+
+    showSection(
+      "buyerDashboard"
+    );
 
     await loadBuyerDashboard();
 
   }
+
 
   else {
 
     showSection("home");
 
     alert(
-      "You are logged in, but your account role is not yet configured."
+      "Your account role is not yet configured."
     );
 
   }
@@ -1853,66 +2879,89 @@ async function routeUser() {
 }
 
 
-/* =========================================================
+/* =====================================================
    LOGOUT
-========================================================= */
+===================================================== */
 
 async function logout() {
 
-  await supabaseClient.auth.signOut();
+  await supabaseClient
+    .auth
+    .signOut();
 
   currentUser = null;
 
-  document
-    .getElementById("adminLoginBox")
-    .classList.remove("hidden");
 
   document
-    .getElementById("adminDashboard")
+    .getElementById(
+      "adminLoginBox"
+    )
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById(
+      "adminDashboard"
+    )
     .classList.add("hidden");
+
 
   showSection("home");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    CURRENT USER
-========================================================= */
+===================================================== */
 
 async function getCurrentUser() {
 
   const {
     data
-  } = await supabaseClient.auth.getUser();
+  } =
+    await supabaseClient
+      .auth
+      .getUser();
 
-  currentUser = data.user || null;
+  currentUser =
+    data.user || null;
 
   return currentUser;
+
 }
 
 
-/* =========================================================
+/* =====================================================
    PUBLIC PRODUCTS
-========================================================= */
+===================================================== */
 
 async function loadPublicProducts() {
 
   const container =
-    document.getElementById("publicProducts");
+    document.getElementById(
+      "publicProducts"
+    );
+
 
   container.innerHTML =
     "<p>Loading products...</p>";
 
+
   const {
     data,
     error
-  } = await supabaseClient
-    .from("products")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
@@ -1920,23 +2969,33 @@ async function loadPublicProducts() {
       "<p>Unable to load products.</p>";
 
     return;
+
   }
 
-  if (!data || data.length === 0) {
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     container.innerHTML =
       "<p>No pharmaceutical products have been added yet.</p>";
 
     return;
+
   }
+
 
   container.innerHTML =
     data.map(product => {
 
       const image =
         product.image_url
-        ? escapeHTML(product.image_url)
-        : "";
+          ? escapeHTML(
+              product.image_url
+            )
+          : "";
+
 
       return `
 
@@ -1944,70 +3003,134 @@ async function loadPublicProducts() {
 
           ${
             image
-            ? `<img
-                class="product-image"
-                src="${image}"
-                alt="${escapeHTML(product.name)}"
-              >`
-            : `<div
-                class="product-image"
-                style="display:flex;align-items:center;justify-content:center;font-size:50px;"
-              >
-                💊
-              </div>`
+              ? `
+                <img
+                  class="product-image"
+                  src="${image}"
+                  alt="${escapeHTML(product.name)}"
+                >
+              `
+              : `
+                <div
+                  class="product-image"
+                  style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:50px;
+                  "
+                >
+                  💊
+                </div>
+              `
           }
+
 
           <div class="product-info">
 
             <h3>
-              ${escapeHTML(product.name)}
+              ${escapeHTML(
+                product.name
+              )}
             </h3>
 
-            <p>
-              <strong>Generic:</strong>
-              ${escapeHTML(product.generic_name || "-")}
-            </p>
 
             <p>
-              <strong>Strength:</strong>
-              ${escapeHTML(product.strength || "-")}
+              <strong>
+                Generic:
+              </strong>
+
+              ${escapeHTML(
+                product.generic_name ||
+                "-"
+              )}
+
             </p>
 
-            <p>
-              <strong>Form:</strong>
-              ${escapeHTML(product.dosage_form || "-")}
-            </p>
 
             <p>
-              <strong>Supplier:</strong>
-              ${escapeHTML(product.supplier || "-")}
+              <strong>
+                Strength:
+              </strong>
+
+              ${escapeHTML(
+                product.strength ||
+                "-"
+              )}
+
             </p>
 
+
             <p>
-              <strong>Stock:</strong>
+              <strong>
+                Form:
+              </strong>
+
+              ${escapeHTML(
+                product.dosage_form ||
+                "-"
+              )}
+
+            </p>
+
+
+            <p>
+              <strong>
+                Supplier:
+              </strong>
+
+              ${escapeHTML(
+                product.supplier ||
+                "-"
+              )}
+
+            </p>
+
+
+            <p>
+              <strong>
+                Stock:
+              </strong>
+
               ${product.stock ?? 0}
+
             </p>
+
 
             <p class="price">
+
               ${
                 product.price !== null
-                ? Number(product.price).toFixed(2) + " ETB"
-                : "Price on request"
+                  ? Number(
+                      product.price
+                    ).toFixed(2) +
+                    " ETB"
+                  : "Price on request"
               }
+
             </p>
+
 
             <p>
-              ${escapeHTML(product.description || "")}
+              ${escapeHTML(
+                product.description ||
+                ""
+              )}
             </p>
 
+
             <br>
+
 
             <button
               class="btn btn-blue"
               onclick="selectProductForOrder(${product.id})"
             >
+
               🛒 Order
+
             </button>
+
 
           </div>
 
@@ -2020,28 +3143,40 @@ async function loadPublicProducts() {
 }
 
 
-/* =========================================================
+/* =====================================================
    PUBLIC COSMETICS
-========================================================= */
+===================================================== */
 
 async function loadPublicCosmetics() {
 
   const container =
-    document.getElementById("publicCosmetics");
+    document.getElementById(
+      "publicCosmetics"
+    );
+
 
   container.innerHTML =
     "<p>Loading cosmetics...</p>";
 
+
   const {
     data,
     error
-  } = await supabaseClient
-    .from("cosmetics")
-    .select("*")
-    .eq("is_active", true)
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from("cosmetics")
+      .select("*")
+      .eq(
+        "is_active",
+        true
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
@@ -2049,95 +3184,158 @@ async function loadPublicCosmetics() {
       "<p>Unable to load cosmetics.</p>";
 
     return;
+
   }
 
-  if (!data || data.length === 0) {
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     container.innerHTML =
       "<p>No cosmetics have been added yet.</p>";
 
     return;
+
   }
+
 
   container.innerHTML =
     data.map(item => {
 
       const image =
         item.image_url
-        ? escapeHTML(item.image_url)
-        : "";
+          ? escapeHTML(
+              item.image_url
+            )
+          : "";
+
 
       const displayPrice =
-        item.promotional_price !== null &&
-        item.promotional_price !== undefined
+        item.promotional_price !==
+          null &&
+        item.promotional_price !==
+          undefined
           ? item.promotional_price
           : item.price;
+
 
       return `
 
         <div class="product-card">
 
+
           ${
             image
-            ? `<img
-                class="product-image"
-                src="${image}"
-                alt="${escapeHTML(item.name)}"
-              >`
-            : `<div
-                class="product-image"
-                style="display:flex;align-items:center;justify-content:center;font-size:50px;"
-              >
-                💄
-              </div>`
+              ? `
+                <img
+                  class="product-image"
+                  src="${image}"
+                  alt="${escapeHTML(item.name)}"
+                >
+              `
+              : `
+                <div
+                  class="product-image"
+                  style="
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:50px;
+                  "
+                >
+                  💄
+                </div>
+              `
           }
+
 
           <div class="product-info">
 
             <h3>
-              ${escapeHTML(item.name)}
+              ${escapeHTML(
+                item.name
+              )}
             </h3>
 
-            <p>
-              <strong>Brand:</strong>
-              ${escapeHTML(item.brand || "-")}
-            </p>
 
             <p>
-              <strong>Category:</strong>
-              ${escapeHTML(item.category || "-")}
+              <strong>
+                Brand:
+              </strong>
+
+              ${escapeHTML(
+                item.brand || "-"
+              )}
+
             </p>
 
-            <p>
-              ${escapeHTML(item.description || "")}
-            </p>
 
             <p>
-              <strong>Stock:</strong>
+              <strong>
+                Category:
+              </strong>
+
+              ${escapeHTML(
+                item.category ||
+                "-"
+              )}
+
+            </p>
+
+
+            <p>
+              ${escapeHTML(
+                item.description ||
+                ""
+              )}
+            </p>
+
+
+            <p>
+              <strong>
+                Stock:
+              </strong>
+
               ${item.stock ?? 0}
+
             </p>
+
 
             ${
-              item.promotional_price !== null &&
-              item.promotional_price !== undefined
-              ? `
-                <p>
-                  <del>
-                    ${Number(item.price || 0).toFixed(2)} ETB
-                  </del>
-                </p>
-              `
-              : ""
+              item.promotional_price !==
+                null &&
+              item.promotional_price !==
+                undefined
+                ? `
+                  <p>
+                    <del>
+                      ${Number(
+                        item.price || 0
+                      ).toFixed(2)}
+                      ETB
+                    </del>
+                  </p>
+                `
+                : ""
             }
 
+
             <p class="price">
+
               ${
                 displayPrice !== null &&
                 displayPrice !== undefined
-                ? Number(displayPrice).toFixed(2) + " ETB"
-                : "Price on request"
+                  ? Number(
+                      displayPrice
+                    ).toFixed(2) +
+                    " ETB"
+                  : "Price on request"
               }
+
             </p>
+
 
           </div>
 
@@ -2150,22 +3348,29 @@ async function loadPublicCosmetics() {
 }
 
 
-/* =========================================================
+/* =====================================================
    ORDER PRODUCTS
-========================================================= */
+===================================================== */
 
 async function loadOrderProducts() {
 
   const select =
-    document.getElementById("orderProduct");
+    document.getElementById(
+      "orderProduct"
+    );
+
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("products")
-    .select("id,name,price,stock")
-    .order("name");
+  } =
+    await supabaseClient
+      .from("products")
+      .select(
+        "id,name,price,stock"
+      )
+      .order("name");
+
 
   if (error) {
 
@@ -2173,274 +3378,378 @@ async function loadOrderProducts() {
       '<option value="">Unable to load products</option>';
 
     return;
+
   }
+
 
   select.innerHTML =
     '<option value="">Select Product</option>';
 
+
   data.forEach(product => {
 
     const option =
-      document.createElement("option");
+      document.createElement(
+        "option"
+      );
 
-    option.value = product.id;
+
+    option.value =
+      product.id;
+
 
     option.textContent =
-      `${product.name} — ${product.price ?? "Price on request"} ETB — Stock: ${product.stock ?? 0}`;
+      `${product.name} — ${
+        product.price ??
+        "Price on request"
+      } ETB — Stock: ${
+        product.stock ?? 0
+      }`;
+
 
     option.dataset.price =
       product.price || 0;
 
-    select.appendChild(option);
+
+    select.appendChild(
+      option
+    );
 
   });
 
 }
 
 
-/* =========================================================
-   SELECT PRODUCT FOR ORDER
-========================================================= */
+/* =====================================================
+   SELECT PRODUCT
+===================================================== */
 
-function selectProductForOrder(productId) {
+function selectProductForOrder(
+  productId
+) {
 
   showSection("order");
 
+
   const select =
-    document.getElementById("orderProduct");
+    document.getElementById(
+      "orderProduct"
+    );
+
 
   setTimeout(() => {
 
-    select.value = productId;
+    select.value =
+      productId;
 
   }, 300);
 
 }
 
 
-/* =========================================================
+/* =====================================================
    PLACE ORDER
-========================================================= */
+===================================================== */
 
 document
 .getElementById("orderForm")
-.addEventListener("submit", async function(event) {
+.addEventListener(
+  "submit",
+  async function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const customerName =
-    document.getElementById("orderCustomerName").value.trim();
 
-  const customerEmail =
-    document.getElementById("orderCustomerEmail").value.trim();
+    const customerName =
+      document.getElementById(
+        "orderCustomerName"
+      ).value.trim();
 
-  const customerPhone =
-    document.getElementById("orderCustomerPhone").value.trim();
 
-  const customerAddress =
-    document.getElementById("orderCustomerAddress").value.trim();
+    const customerEmail =
+      document.getElementById(
+        "orderCustomerEmail"
+      ).value.trim();
 
-  const productId =
-    document.getElementById("orderProduct").value;
 
-  const quantity =
-    Number(
-      document.getElementById("orderQuantity").value
-    );
+    const customerPhone =
+      document.getElementById(
+        "orderCustomerPhone"
+      ).value.trim();
 
-  const notes =
-    document.getElementById("orderNotes").value.trim();
 
-  if (!productId || quantity <= 0) {
+    const customerAddress =
+      document.getElementById(
+        "orderCustomerAddress"
+      ).value.trim();
+
+
+    const productId =
+      document.getElementById(
+        "orderProduct"
+      ).value;
+
+
+    const quantity =
+      Number(
+        document.getElementById(
+          "orderQuantity"
+        ).value
+      );
+
+
+    const notes =
+      document.getElementById(
+        "orderNotes"
+      ).value.trim();
+
+
+    if (
+      !productId ||
+      quantity <= 0
+    ) {
+
+      showMessage(
+        "orderMessage",
+        "Please select a product and enter a valid quantity.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const {
+      data: product,
+      error: productError
+    } =
+      await supabaseClient
+        .from("products")
+        .select(
+          "id,name,price,stock"
+        )
+        .eq(
+          "id",
+          productId
+        )
+        .single();
+
+
+    if (
+      productError ||
+      !product
+    ) {
+
+      showMessage(
+        "orderMessage",
+        "Product could not be found.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (
+      product.stock !== null &&
+      quantity >
+        product.stock
+    ) {
+
+      showMessage(
+        "orderMessage",
+        "Requested quantity is greater than available stock.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const unitPrice =
+      Number(
+        product.price || 0
+      );
+
+
+    const totalPrice =
+      unitPrice *
+      quantity;
+
+
+    const user =
+      await getCurrentUser();
+
+
+    const orderData = {
+
+      customer_name:
+        customerName,
+
+      customer_email:
+        customerEmail ||
+        null,
+
+      customer_phone:
+        customerPhone ||
+        null,
+
+      customer_address:
+        customerAddress ||
+        null,
+
+      product_id:
+        Number(productId),
+
+      quantity:
+        quantity,
+
+      unit_price:
+        unitPrice,
+
+      total_price:
+        totalPrice,
+
+      status:
+        "pending",
+
+      notes:
+        notes || null
+
+    };
+
+
+    if (user) {
+
+      orderData.buyer_user_id =
+        user.id;
+
+    }
+
 
     showMessage(
       "orderMessage",
-      "Please select a product and enter a valid quantity.",
-      "error"
+      "Submitting order...",
+      "info"
     );
 
-    return;
-  }
 
-  const {
-    data: product,
-    error: productError
-  } = await supabaseClient
-    .from("products")
-    .select("id,name,price,stock")
-    .eq("id", productId)
-    .single();
-
-  if (productError || !product) {
-
-    showMessage(
-      "orderMessage",
-      "Product could not be found.",
-      "error"
-    );
-
-    return;
-  }
-
-  if (
-    product.stock !== null &&
-    quantity > product.stock
-  ) {
-
-    showMessage(
-      "orderMessage",
-      "Requested quantity is greater than available stock.",
-      "error"
-    );
-
-    return;
-  }
-
-  const unitPrice =
-    Number(product.price || 0);
-
-  const totalPrice =
-    unitPrice * quantity;
-
-  const user =
-    await getCurrentUser();
-
-  const orderData = {
-
-    customer_name: customerName,
-
-    customer_email:
-      customerEmail || null,
-
-    customer_phone:
-      customerPhone || null,
-
-    customer_address:
-      customerAddress || null,
-
-    product_id:
-      Number(productId),
-
-    quantity:
-      quantity,
-
-    unit_price:
-      unitPrice,
-
-    total_price:
-      totalPrice,
-
-    status:
-      "pending",
-
-    notes:
-      notes || null
-
-  };
-
-  /*
-    Add buyer_user_id when the column exists.
-  */
-
-  if (user) {
-
-    orderData.buyer_user_id =
-      user.id;
-
-  }
-
-  showMessage(
-    "orderMessage",
-    "Submitting order...",
-    "info"
-  );
-
-  let result =
-    await supabaseClient
-      .from("orders")
-      .insert(orderData)
-      .select()
-      .single();
-
-  /*
-    If buyer_user_id does not exist yet,
-    retry without it.
-  */
-
-  if (
-    result.error &&
-    result.error.message &&
-    result.error.message
-      .toLowerCase()
-      .includes("buyer_user_id")
-  ) {
-
-    delete orderData.buyer_user_id;
-
-    result =
+    let result =
       await supabaseClient
         .from("orders")
         .insert(orderData)
         .select()
         .single();
 
-  }
 
-  if (result.error) {
+    if (
+      result.error &&
+      result.error.message &&
+      result.error.message
+        .toLowerCase()
+        .includes(
+          "buyer_user_id"
+        )
+    ) {
+
+      delete orderData.buyer_user_id;
+
+
+      result =
+        await supabaseClient
+          .from("orders")
+          .insert(orderData)
+          .select()
+          .single();
+
+    }
+
+
+    if (result.error) {
+
+      showMessage(
+        "orderMessage",
+        result.error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const orderNumber =
+      result.data?.order_number;
+
 
     showMessage(
       "orderMessage",
-      result.error.message,
-      "error"
+      orderNumber
+        ? `Order submitted successfully. Your order number is ${orderNumber}.`
+        : "Order submitted successfully.",
+      "success"
     );
 
-    return;
+
+    document
+      .getElementById(
+        "orderForm"
+      )
+      .reset();
+
   }
-
-  const orderNumber =
-    result.data?.order_number;
-
-  showMessage(
-    "orderMessage",
-    orderNumber
-      ? `Order submitted successfully. Your order number is ${orderNumber}.`
-      : "Order submitted successfully.",
-    "success"
-  );
-
-  document
-    .getElementById("orderForm")
-    .reset();
-
-});
+);
 
 
-/* =========================================================
+/* =====================================================
    SUPPLIER DASHBOARD
-========================================================= */
+===================================================== */
 
 async function loadSupplierDashboard() {
 
   const user =
     await getCurrentUser();
 
+
   if (!user) return;
 
+
   document
-    .getElementById("supplierWelcome")
+    .getElementById(
+      "supplierWelcome"
+    )
     .innerHTML =
-      `<p>Logged in as <strong>${escapeHTML(user.email)}</strong></p>`;
+      `<p>
+        Logged in as
+        <strong>
+          ${escapeHTML(user.email)}
+        </strong>
+      </p>`;
+
 
   const {
     data: profile
-  } = await supabaseClient
-    .from("supplier_profiles")
-    .select("*")
-    .eq("user_id", user.id)
-    .maybeSingle();
+  } =
+    await supabaseClient
+      .from(
+        "supplier_profiles"
+      )
+      .select("*")
+      .eq(
+        "user_id",
+        user.id
+      )
+      .maybeSingle();
+
 
   const profileContainer =
-    document.getElementById("supplierProfile");
+    document.getElementById(
+      "supplierProfile"
+    );
+
 
   if (!profile) {
 
@@ -2454,68 +3763,137 @@ async function loadSupplierDashboard() {
     profileContainer.innerHTML = `
 
       <p>
-        <strong>Company:</strong>
-        ${escapeHTML(profile.company_name)}
+        <strong>
+          Company:
+        </strong>
+
+        ${escapeHTML(
+          profile.company_name
+        )}
+
       </p>
 
-      <p>
-        <strong>Contact Person:</strong>
-        ${escapeHTML(profile.contact_person || "-")}
-      </p>
 
       <p>
-        <strong>Phone:</strong>
-        ${escapeHTML(profile.phone || "-")}
+        <strong>
+          Contact Person:
+        </strong>
+
+        ${escapeHTML(
+          profile.contact_person ||
+          "-"
+        )}
+
       </p>
 
-      <p>
-        <strong>Email:</strong>
-        ${escapeHTML(profile.email || "-")}
-      </p>
 
       <p>
-        <strong>Address:</strong>
-        ${escapeHTML(profile.address || "-")}
+        <strong>
+          Phone:
+        </strong>
+
+        ${escapeHTML(
+          profile.phone ||
+          "-"
+        )}
+
       </p>
 
-      <p>
-        <strong>License:</strong>
-        ${escapeHTML(profile.license_number || "-")}
-      </p>
 
       <p>
-        <strong>Approval:</strong>
+        <strong>
+          Email:
+        </strong>
+
+        ${escapeHTML(
+          profile.email ||
+          "-"
+        )}
+
+      </p>
+
+
+      <p>
+        <strong>
+          Address:
+        </strong>
+
+        ${escapeHTML(
+          profile.address ||
+          "-"
+        )}
+
+      </p>
+
+
+      <p>
+        <strong>
+          License:
+        </strong>
+
+        ${escapeHTML(
+          profile.license_number ||
+          "-"
+        )}
+
+      </p>
+
+
+      <p>
+        <strong>
+          Approval:
+        </strong>
+
         ${
           profile.approved
-          ? '<span class="badge badge-green">Approved</span>'
-          : '<span class="badge badge-orange">Pending Approval</span>'
+            ? '<span class="badge badge-green">Approved</span>'
+            : '<span class="badge badge-orange">Pending Approval</span>'
         }
+
       </p>
 
     `;
 
   }
 
+
   const {
     data: products
-  } = await supabaseClient
-    .from("products")
-    .select("*")
-    .eq("supplier", profile?.company_name || "")
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .eq(
+        "supplier",
+        profile?.company_name ||
+        ""
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   const container =
-    document.getElementById("supplierProducts");
+    document.getElementById(
+      "supplierProducts"
+    );
 
-  if (!products || products.length === 0) {
+
+  if (
+    !products ||
+    products.length === 0
+  ) {
 
     container.innerHTML =
       "<p>No products are currently associated with your supplier account.</p>";
 
     return;
+
   }
+
 
   container.innerHTML = `
 
@@ -2526,26 +3904,46 @@ async function loadSupplierDashboard() {
         <thead>
 
           <tr>
-            <th>Product</th>
-            <th>Generic</th>
-            <th>Price</th>
-            <th>Stock</th>
+
+            <th>
+              Product
+            </th>
+
+            <th>
+              Generic
+            </th>
+
+            <th>
+              Price
+            </th>
+
+            <th>
+              Stock
+            </th>
+
           </tr>
 
         </thead>
 
+
         <tbody>
 
-          ${products.map(product => `
+          ${products.map(
+            product => `
 
             <tr>
 
               <td>
-                ${escapeHTML(product.name)}
+                ${escapeHTML(
+                  product.name
+                )}
               </td>
 
               <td>
-                ${escapeHTML(product.generic_name || "-")}
+                ${escapeHTML(
+                  product.generic_name ||
+                  "-"
+                )}
               </td>
 
               <td>
@@ -2558,7 +3956,8 @@ async function loadSupplierDashboard() {
 
             </tr>
 
-          `).join("")}
+          `
+          ).join("")}
 
         </tbody>
 
@@ -2571,65 +3970,89 @@ async function loadSupplierDashboard() {
 }
 
 
-/* =========================================================
+/* =====================================================
    BUYER DASHBOARD
-========================================================= */
+===================================================== */
 
 async function loadBuyerDashboard() {
 
   const user =
     await getCurrentUser();
 
+
   if (!user) return;
 
+
   document
-    .getElementById("buyerWelcome")
+    .getElementById(
+      "buyerWelcome"
+    )
     .innerHTML =
-      `<p>Logged in as <strong>${escapeHTML(user.email)}</strong></p>`;
+      `<p>
+        Logged in as
+        <strong>
+          ${escapeHTML(user.email)}
+        </strong>
+      </p>`;
+
 
   const container =
-    document.getElementById("buyerOrders");
+    document.getElementById(
+      "buyerOrders"
+    );
 
-  /*
-    Requires buyer_user_id for logged-in buyer order history.
-  */
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("orders")
-    .select(`
-      *,
-      products (
-        name
+  } =
+    await supabaseClient
+      .from("orders")
+      .select(`
+        *,
+        products (
+          name
+        )
+      `)
+      .eq(
+        "buyer_user_id",
+        user.id
       )
-    `)
-    .eq("buyer_user_id", user.id)
-    .order("created_at", {
-      ascending: false
-    });
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
     container.innerHTML = `
       <p>
         Your order history is not available yet.
-        The buyer_user_id database column and policy
+        The buyer_user_id database column or policy
         may still need to be added.
       </p>
     `;
 
     return;
+
   }
 
-  if (!data || data.length === 0) {
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
 
     container.innerHTML =
       "<p>You have not placed any orders yet.</p>";
 
     return;
+
   }
+
 
   container.innerHTML = `
 
@@ -2640,28 +4063,55 @@ async function loadBuyerDashboard() {
         <thead>
 
           <tr>
-            <th>Order</th>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Date</th>
+
+            <th>
+              Order
+            </th>
+
+            <th>
+              Product
+            </th>
+
+            <th>
+              Quantity
+            </th>
+
+            <th>
+              Total
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+              Date
+            </th>
+
           </tr>
 
         </thead>
 
+
         <tbody>
 
-          ${data.map(order => `
+          ${data.map(
+            order => `
 
             <tr>
 
               <td>
-                ${escapeHTML(order.order_number || "-")}
+                ${escapeHTML(
+                  order.order_number ||
+                  "-"
+                )}
               </td>
 
               <td>
-                ${escapeHTML(order.products?.name || "-")}
+                ${escapeHTML(
+                  order.products?.name ||
+                  "-"
+                )}
               </td>
 
               <td>
@@ -2669,22 +4119,36 @@ async function loadBuyerDashboard() {
               </td>
 
               <td>
-                ${Number(order.total_price || 0).toFixed(2)} ETB
+                ${Number(
+                  order.total_price ||
+                  0
+                ).toFixed(2)}
+                ETB
               </td>
 
               <td>
+
                 <span class="badge">
-                  ${escapeHTML(order.status || "pending")}
+
+                  ${escapeHTML(
+                    order.status ||
+                    "pending"
+                  )}
+
                 </span>
+
               </td>
 
               <td>
-                ${new Date(order.created_at).toLocaleString()}
+                ${new Date(
+                  order.created_at
+                ).toLocaleString()}
               </td>
 
             </tr>
 
-          `).join("")}
+          `
+          ).join("")}
 
         </tbody>
 
@@ -2697,48 +4161,77 @@ async function loadBuyerDashboard() {
 }
 
 
-/* =========================================================
+/* =====================================================
    CHECK ADMIN
-========================================================= */
+===================================================== */
 
 async function checkAdmin() {
 
   const user =
     await getCurrentUser();
 
+
   if (!user) {
 
     document
-      .getElementById("adminLoginBox")
-      .classList.remove("hidden");
+      .getElementById(
+        "adminLoginBox"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
 
     document
-      .getElementById("adminDashboard")
-      .classList.add("hidden");
+      .getElementById(
+        "adminDashboard"
+      )
+      .classList.add(
+        "hidden"
+      );
+
 
     return;
+
   }
+
 
   const {
     data: profile
-  } = await supabaseClient
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .maybeSingle();
+  } =
+    await supabaseClient
+      .from("profiles")
+      .select("role")
+      .eq(
+        "id",
+        user.id
+      )
+      .maybeSingle();
+
 
   if (
     profile &&
-    profile.role === "super_admin"
+    profile.role ===
+      "super_admin"
   ) {
 
     document
-      .getElementById("adminLoginBox")
-      .classList.add("hidden");
+      .getElementById(
+        "adminLoginBox"
+      )
+      .classList.add(
+        "hidden"
+      );
+
 
     document
-      .getElementById("adminDashboard")
-      .classList.remove("hidden");
+      .getElementById(
+        "adminDashboard"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
 
     await loadAdminDashboard();
 
@@ -2747,9 +4240,9 @@ async function checkAdmin() {
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN DASHBOARD
-========================================================= */
+===================================================== */
 
 async function loadAdminDashboard() {
 
@@ -2766,52 +4259,74 @@ async function loadAdminDashboard() {
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN PRODUCTS
-========================================================= */
+===================================================== */
 
 async function loadAdminProducts() {
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("products")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from("products")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
     console.error(error);
 
     return;
+
   }
 
+
   document
-    .getElementById("adminProductCount")
+    .getElementById(
+      "adminProductCount"
+    )
     .textContent =
       data.length;
 
+
   const table =
-    document.getElementById("adminProductsTable");
+    document.getElementById(
+      "adminProductsTable"
+    );
+
 
   table.innerHTML =
-    data.map(product => `
+    data.map(
+      product => `
 
       <tr>
 
         <td>
-          ${escapeHTML(product.name)}
+          ${escapeHTML(
+            product.name
+          )}
         </td>
 
         <td>
-          ${escapeHTML(product.generic_name || "-")}
+          ${escapeHTML(
+            product.generic_name ||
+            "-"
+          )}
         </td>
 
         <td>
-          ${escapeHTML(product.supplier || "-")}
+          ${escapeHTML(
+            product.supplier ||
+            "-"
+          )}
         </td>
 
         <td>
@@ -2826,110 +4341,155 @@ async function loadAdminProducts() {
 
           <button
             class="btn btn-danger"
-            onclick="deleteProduct(${product.id})"
-          >
+            onclick="deleteProduct(${product.id})">
+
             Delete
+
           </button>
 
         </td>
 
       </tr>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADD PRODUCT
-========================================================= */
+===================================================== */
 
 document
 .getElementById("productForm")
-.addEventListener("submit", async function(event) {
+.addEventListener(
+  "submit",
+  async function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const product = {
 
-    name:
-      document.getElementById("productName").value.trim(),
+    const product = {
 
-    generic_name:
-      document.getElementById("genericName").value.trim() || null,
+      name:
+        document.getElementById(
+          "productName"
+        ).value.trim(),
 
-    category:
-      document.getElementById("productCategory").value.trim() || null,
+      generic_name:
+        document.getElementById(
+          "genericName"
+        ).value.trim() ||
+        null,
 
-    strength:
-      document.getElementById("productStrength").value.trim() || null,
+      category:
+        document.getElementById(
+          "productCategory"
+        ).value.trim() ||
+        null,
 
-    dosage_form:
-      document.getElementById("dosageForm").value.trim() || null,
+      strength:
+        document.getElementById(
+          "productStrength"
+        ).value.trim() ||
+        null,
 
-    manufacturer:
-      document.getElementById("manufacturer").value.trim() || null,
+      dosage_form:
+        document.getElementById(
+          "dosageForm"
+        ).value.trim() ||
+        null,
 
-    supplier:
-      document.getElementById("productSupplier").value.trim() || null,
+      manufacturer:
+        document.getElementById(
+          "manufacturer"
+        ).value.trim() ||
+        null,
 
-    price:
-      Number(
-        document.getElementById("productPrice").value
-      ) || null,
+      supplier:
+        document.getElementById(
+          "productSupplier"
+        ).value.trim() ||
+        null,
 
-    stock:
-      Number(
-        document.getElementById("productStock").value
-      ) || 0,
+      price:
+        Number(
+          document.getElementById(
+            "productPrice"
+          ).value
+        ) || null,
 
-    description:
-      document.getElementById("productDescription").value.trim() || null,
+      stock:
+        Number(
+          document.getElementById(
+            "productStock"
+          ).value
+        ) || 0,
 
-    image_url:
-      document.getElementById("productImage").value.trim() || null
+      description:
+        document.getElementById(
+          "productDescription"
+        ).value.trim() ||
+        null,
 
-  };
+      image_url:
+        document.getElementById(
+          "productImage"
+        ).value.trim() ||
+        null
 
-  const {
-    error
-  } = await supabaseClient
-    .from("products")
-    .insert(product);
+    };
 
-  if (error) {
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("products")
+        .insert(product);
+
+
+    if (error) {
+
+      showMessage(
+        "adminProductMessage",
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
 
     showMessage(
       "adminProductMessage",
-      error.message,
-      "error"
+      "Product added successfully.",
+      "success"
     );
 
-    return;
+
+    document
+      .getElementById(
+        "productForm"
+      )
+      .reset();
+
+
+    await loadAdminProducts();
+
+    await loadPublicProducts();
+
+    await loadOrderProducts();
+
   }
-
-  showMessage(
-    "adminProductMessage",
-    "Product added successfully.",
-    "success"
-  );
-
-  document
-    .getElementById("productForm")
-    .reset();
-
-  await loadAdminProducts();
-
-  await loadPublicProducts();
-
-  await loadOrderProducts();
-
-});
+);
 
 
-/* =========================================================
+/* =====================================================
    DELETE PRODUCT
-========================================================= */
+===================================================== */
 
 async function deleteProduct(id) {
 
@@ -2938,22 +4498,34 @@ async function deleteProduct(id) {
       "Are you sure you want to delete this product?"
     )
   ) {
+
     return;
+
   }
+
 
   const {
     error
-  } = await supabaseClient
-    .from("products")
-    .delete()
-    .eq("id", id);
+  } =
+    await supabaseClient
+      .from("products")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
 
   if (error) {
 
-    alert(error.message);
+    alert(
+      error.message
+    );
 
     return;
+
   }
+
 
   await loadAdminProducts();
 
@@ -2964,48 +4536,67 @@ async function deleteProduct(id) {
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN COSMETICS
-========================================================= */
+===================================================== */
 
 async function loadAdminCosmetics() {
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("cosmetics")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from("cosmetics")
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
     console.error(error);
 
     return;
+
   }
 
+
   document
-    .getElementById("adminCosmeticCount")
+    .getElementById(
+      "adminCosmeticCount"
+    )
     .textContent =
       data.length;
 
+
   const table =
-    document.getElementById("adminCosmeticsTable");
+    document.getElementById(
+      "adminCosmeticsTable"
+    );
+
 
   table.innerHTML =
-    data.map(item => `
+    data.map(
+      item => `
 
       <tr>
 
         <td>
-          ${escapeHTML(item.name)}
+          ${escapeHTML(
+            item.name
+          )}
         </td>
 
         <td>
-          ${escapeHTML(item.brand || "-")}
+          ${escapeHTML(
+            item.brand ||
+            "-"
+          )}
         </td>
 
         <td>
@@ -3024,110 +4615,148 @@ async function loadAdminCosmetics() {
 
           <button
             class="btn btn-danger"
-            onclick="deleteCosmetic(${item.id})"
-          >
+            onclick="deleteCosmetic(${item.id})">
+
             Delete
+
           </button>
 
         </td>
 
       </tr>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADD COSMETIC
-========================================================= */
+===================================================== */
 
 document
 .getElementById("cosmeticForm")
-.addEventListener("submit", async function(event) {
+.addEventListener(
+  "submit",
+  async function(event) {
 
-  event.preventDefault();
+    event.preventDefault();
 
-  const item = {
 
-    name:
-      document.getElementById("cosmeticName").value.trim(),
+    const item = {
 
-    brand:
-      document.getElementById("cosmeticBrand").value.trim() || null,
+      name:
+        document.getElementById(
+          "cosmeticName"
+        ).value.trim(),
 
-    category:
-      document.getElementById("cosmeticCategory").value.trim() || null,
+      brand:
+        document.getElementById(
+          "cosmeticBrand"
+        ).value.trim() ||
+        null,
 
-    description:
-      document.getElementById("cosmeticDescription").value.trim() || null,
+      category:
+        document.getElementById(
+          "cosmeticCategory"
+        ).value.trim() ||
+        null,
 
-    price:
-      Number(
-        document.getElementById("cosmeticPrice").value
-      ) || null,
+      description:
+        document.getElementById(
+          "cosmeticDescription"
+        ).value.trim() ||
+        null,
 
-    promotional_price:
-      Number(
-        document.getElementById("cosmeticPromoPrice").value
-      ) || null,
+      price:
+        Number(
+          document.getElementById(
+            "cosmeticPrice"
+          ).value
+        ) || null,
 
-    stock:
-      Number(
-        document.getElementById("cosmeticStock").value
-      ) || 0,
+      promotional_price:
+        Number(
+          document.getElementById(
+            "cosmeticPromoPrice"
+          ).value
+        ) || null,
 
-    supplier:
-      document.getElementById("cosmeticSupplier").value.trim() || null,
+      stock:
+        Number(
+          document.getElementById(
+            "cosmeticStock"
+          ).value
+        ) || 0,
 
-    image_url:
-      document.getElementById("cosmeticImage").value.trim() || null,
+      supplier:
+        document.getElementById(
+          "cosmeticSupplier"
+        ).value.trim() ||
+        null,
 
-    is_featured:
-      false,
+      image_url:
+        document.getElementById(
+          "cosmeticImage"
+        ).value.trim() ||
+        null,
 
-    is_active:
-      true
+      is_featured:
+        false,
 
-  };
+      is_active:
+        true
 
-  const {
-    error
-  } = await supabaseClient
-    .from("cosmetics")
-    .insert(item);
+    };
 
-  if (error) {
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("cosmetics")
+        .insert(item);
+
+
+    if (error) {
+
+      showMessage(
+        "adminCosmeticMessage",
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
 
     showMessage(
       "adminCosmeticMessage",
-      error.message,
-      "error"
+      "Cosmetic added successfully.",
+      "success"
     );
 
-    return;
+
+    document
+      .getElementById(
+        "cosmeticForm"
+      )
+      .reset();
+
+
+    await loadAdminCosmetics();
+
+    await loadPublicCosmetics();
+
   }
-
-  showMessage(
-    "adminCosmeticMessage",
-    "Cosmetic added successfully.",
-    "success"
-  );
-
-  document
-    .getElementById("cosmeticForm")
-    .reset();
-
-  await loadAdminCosmetics();
-
-  await loadPublicCosmetics();
-
-});
+);
 
 
-/* =========================================================
+/* =====================================================
    DELETE COSMETIC
-========================================================= */
+===================================================== */
 
 async function deleteCosmetic(id) {
 
@@ -3136,22 +4765,34 @@ async function deleteCosmetic(id) {
       "Are you sure you want to delete this cosmetic?"
     )
   ) {
+
     return;
+
   }
+
 
   const {
     error
-  } = await supabaseClient
-    .from("cosmetics")
-    .delete()
-    .eq("id", id);
+  } =
+    await supabaseClient
+      .from("cosmetics")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
 
   if (error) {
 
-    alert(error.message);
+    alert(
+      error.message
+    );
 
     return;
+
   }
+
 
   await loadAdminCosmetics();
 
@@ -3160,59 +4801,83 @@ async function deleteCosmetic(id) {
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN SUPPLIERS
-========================================================= */
+===================================================== */
 
 async function loadAdminSuppliers() {
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("supplier_profiles")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from(
+        "supplier_profiles"
+      )
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
     console.error(error);
 
     return;
+
   }
 
+
   const table =
-    document.getElementById("adminSuppliersTable");
+    document.getElementById(
+      "adminSuppliersTable"
+    );
+
 
   table.innerHTML =
-    data.map(supplier => `
+    data.map(
+      supplier => `
 
       <tr>
 
         <td>
-          ${escapeHTML(supplier.company_name)}
+          ${escapeHTML(
+            supplier.company_name
+          )}
         </td>
 
         <td>
-          ${escapeHTML(supplier.contact_person || "-")}
+          ${escapeHTML(
+            supplier.contact_person ||
+            "-"
+          )}
         </td>
 
         <td>
-          ${escapeHTML(supplier.email || "-")}
+          ${escapeHTML(
+            supplier.email ||
+            "-"
+          )}
         </td>
 
         <td>
-          ${escapeHTML(supplier.phone || "-")}
+          ${escapeHTML(
+            supplier.phone ||
+            "-"
+          )}
         </td>
 
         <td>
 
           ${
             supplier.approved
-            ? '<span class="badge badge-green">Approved</span>'
-            : '<span class="badge badge-orange">Pending</span>'
+              ? '<span class="badge badge-green">Approved</span>'
+              : '<span class="badge badge-orange">Pending</span>'
           }
 
         </td>
@@ -3221,36 +4886,39 @@ async function loadAdminSuppliers() {
 
           ${
             supplier.approved
-            ? `
-              <button
-                class="btn btn-danger"
-                onclick="setSupplierApproval(${supplier.id}, false)"
-              >
-                Revoke
-              </button>
-            `
-            : `
-              <button
-                class="btn"
-                onclick="setSupplierApproval(${supplier.id}, true)"
-              >
-                Approve
-              </button>
-            `
+              ? `
+                <button
+                  class="btn btn-danger"
+                  onclick="setSupplierApproval(${supplier.id}, false)">
+
+                  Revoke
+
+                </button>
+              `
+              : `
+                <button
+                  class="btn"
+                  onclick="setSupplierApproval(${supplier.id}, true)">
+
+                  Approve
+
+                </button>
+              `
           }
 
         </td>
 
       </tr>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    SUPPLIER APPROVAL
-========================================================= */
+===================================================== */
 
 async function setSupplierApproval(
   id,
@@ -3259,221 +4927,336 @@ async function setSupplierApproval(
 
   const {
     error
-  } = await supabaseClient
-    .from("supplier_profiles")
-    .update({
-      approved: approved
-    })
-    .eq("id", id);
+  } =
+    await supabaseClient
+      .from(
+        "supplier_profiles"
+      )
+      .update({
+        approved:
+          approved
+      })
+      .eq(
+        "id",
+        id
+      );
+
 
   if (error) {
 
-    alert(error.message);
+    alert(
+      error.message
+    );
 
     return;
+
   }
+
 
   await loadAdminSuppliers();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN USERS
-========================================================= */
+===================================================== */
 
 async function loadAdminUsers() {
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("user_accounts")
-    .select("*")
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from(
+        "user_accounts"
+      )
+      .select("*")
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
     console.error(error);
 
     return;
+
   }
 
+
   document
-    .getElementById("adminUserCount")
+    .getElementById(
+      "adminUserCount"
+    )
     .textContent =
       data.length;
 
+
   const table =
-    document.getElementById("adminUsersTable");
+    document.getElementById(
+      "adminUsersTable"
+    );
+
 
   table.innerHTML =
-    data.map(user => `
+    data.map(
+      user => `
 
       <tr>
 
         <td>
-          ${escapeHTML(user.full_name || "-")}
+          ${escapeHTML(
+            user.full_name ||
+            "-"
+          )}
         </td>
 
         <td>
-          ${escapeHTML(user.business_name || "-")}
+          ${escapeHTML(
+            user.business_name ||
+            "-"
+          )}
         </td>
 
         <td>
-          ${escapeHTML(user.email || "-")}
+          ${escapeHTML(
+            user.email ||
+            "-"
+          )}
         </td>
 
         <td>
+
           <span class="badge badge-blue">
-            ${escapeHTML(user.role || "user")}
+
+            ${escapeHTML(
+              user.role ||
+              "user"
+            )}
+
           </span>
+
         </td>
 
         <td>
-          ${escapeHTML(user.status || "-")}
+          ${escapeHTML(
+            user.status ||
+            "-"
+          )}
         </td>
 
         <td>
 
           ${
             user.approved
-            ? '<span class="badge badge-green">Approved</span>'
-            : '<span class="badge badge-orange">Pending</span>'
+              ? '<span class="badge badge-green">Approved</span>'
+              : '<span class="badge badge-orange">Pending</span>'
           }
 
         </td>
 
       </tr>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN ORDERS
-========================================================= */
+===================================================== */
 
 async function loadAdminOrders() {
 
   const {
     data,
     error
-  } = await supabaseClient
-    .from("orders")
-    .select(`
-      *,
-      products (
-        name
-      )
-    `)
-    .order("created_at", {
-      ascending: false
-    });
+  } =
+    await supabaseClient
+      .from("orders")
+      .select(`
+        *,
+        products (
+          name
+        )
+      `)
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
 
   if (error) {
 
     console.error(error);
 
     return;
+
   }
 
+
   document
-    .getElementById("adminOrderCount")
+    .getElementById(
+      "adminOrderCount"
+    )
     .textContent =
       data.length;
 
+
   const table =
-    document.getElementById("adminOrdersTable");
+    document.getElementById(
+      "adminOrdersTable"
+    );
+
 
   table.innerHTML =
-    data.map(order => `
+    data.map(
+      order => `
 
       <tr>
 
         <td>
-          ${escapeHTML(order.order_number || "-")}
+          ${escapeHTML(
+            order.order_number ||
+            "-"
+          )}
         </td>
+
 
         <td>
 
           <strong>
-            ${escapeHTML(order.customer_name)}
+            ${escapeHTML(
+              order.customer_name
+            )}
           </strong>
 
           <br>
 
-          ${escapeHTML(order.customer_phone || "")}
+          ${escapeHTML(
+            order.customer_phone ||
+            ""
+          )}
 
           <br>
 
-          ${escapeHTML(order.customer_email || "")}
+          ${escapeHTML(
+            order.customer_email ||
+            ""
+          )}
 
         </td>
+
 
         <td>
-          ${escapeHTML(order.products?.name || "-")}
+          ${escapeHTML(
+            order.products?.name ||
+            "-"
+          )}
         </td>
+
 
         <td>
           ${order.quantity}
         </td>
 
+
         <td>
-          ${Number(order.total_price || 0).toFixed(2)} ETB
+          ${Number(
+            order.total_price ||
+            0
+          ).toFixed(2)}
+          ETB
         </td>
+
 
         <td>
 
           <span class="badge">
-            ${escapeHTML(order.status || "pending")}
+
+            ${escapeHTML(
+              order.status ||
+              "pending"
+            )}
+
           </span>
 
         </td>
 
+
         <td>
 
           <select
-            onchange="updateOrderStatus(${order.id}, this.value)"
-          >
+            onchange="updateOrderStatus(${order.id}, this.value)">
 
             <option
               value="pending"
-              ${order.status === "pending" ? "selected" : ""}
-            >
+              ${
+                order.status ===
+                "pending"
+                  ? "selected"
+                  : ""
+              }>
               Pending
             </option>
 
+
             <option
               value="confirmed"
-              ${order.status === "confirmed" ? "selected" : ""}
-            >
+              ${
+                order.status ===
+                "confirmed"
+                  ? "selected"
+                  : ""
+              }>
               Confirmed
             </option>
 
+
             <option
               value="processing"
-              ${order.status === "processing" ? "selected" : ""}
-            >
+              ${
+                order.status ===
+                "processing"
+                  ? "selected"
+                  : ""
+              }>
               Processing
             </option>
 
+
             <option
               value="completed"
-              ${order.status === "completed" ? "selected" : ""}
-            >
+              ${
+                order.status ===
+                "completed"
+                  ? "selected"
+                  : ""
+              }>
               Completed
             </option>
 
+
             <option
               value="cancelled"
-              ${order.status === "cancelled" ? "selected" : ""}
-            >
+              ${
+                order.status ===
+                "cancelled"
+                  ? "selected"
+                  : ""
+              }>
               Cancelled
             </option>
+
 
           </select>
 
@@ -3481,14 +5264,15 @@ async function loadAdminOrders() {
 
       </tr>
 
-    `).join("");
+    `
+    ).join("");
 
 }
 
 
-/* =========================================================
+/* =====================================================
    UPDATE ORDER STATUS
-========================================================= */
+===================================================== */
 
 async function updateOrderStatus(
   orderId,
@@ -3497,50 +5281,66 @@ async function updateOrderStatus(
 
   const {
     error
-  } = await supabaseClient
-    .from("orders")
-    .update({
-      status: status
-    })
-    .eq("id", orderId);
+  } =
+    await supabaseClient
+      .from("orders")
+      .update({
+        status:
+          status
+      })
+      .eq(
+        "id",
+        orderId
+      );
+
 
   if (error) {
 
-    alert(error.message);
+    alert(
+      error.message
+    );
 
     return;
+
   }
+
 
   await loadAdminOrders();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    AUTH STATE
-========================================================= */
+===================================================== */
 
 supabaseClient
   .auth
   .onAuthStateChange(
-    async (event, session) => {
+    async (
+      event,
+      session
+    ) => {
 
       currentUser =
-        session?.user || null;
+        session?.user ||
+        null;
 
     }
   );
 
 
-/* =========================================================
+/* =====================================================
    INITIAL LOAD
-========================================================= */
+===================================================== */
 
 document.addEventListener(
   "DOMContentLoaded",
   async function() {
 
-    showSection("home");
+    showSection(
+      "home"
+    );
 
     await loadPublicProducts();
 
