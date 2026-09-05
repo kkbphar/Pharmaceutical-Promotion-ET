@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharmaceutical Promotion ET — Connecting Suppliers with Buyers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16302A;
+    --ink-soft:#3F544A;
+    --paper:#ECE3CF;
+    --paper-alt:#E1D5B8;
+    --card:#F5EEDD;
+    --line:#C7B48D;
+    --accent:#C2791E;
+    --accent-ink:#7A4A10;
+    --teal:#2C6659;
+    --teal-soft:#DCE7E1;
+    --flag:#93392E;
+    --flag-soft:#F1DCD5;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:16px;
+    line-height:1.5;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(236,227,207,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:var(--maxw);margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);}
+  .brand-mark{
+    width:42px;height:42px;border-radius:3px;
+    background:var(--ink);color:var(--paper);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:18px;
+    border:1px solid var(--ink);
+    transform:rotate(-2deg);
+  }
+  .brand-name{font-family:'Fraunces',serif;font-weight:600;font-size:18px;line-height:1.15;}
+  .brand-name span{display:block;font-family:'IBM Plex Sans',sans-serif;font-weight:500;font-size:11px;color:var(--ink-soft);letter-spacing:0.02em;}
+  nav.links{display:flex;gap:28px;font-size:14.5px;}
+  nav.links a{text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;}
+  nav.links a:hover{border-bottom-color:var(--accent);}
+  .nav-ctas{display:flex;gap:10px;}
+  .btn{
+    display:inline-block;padding:10px 18px;border-radius:2px;
+    font-size:14px;font-weight:500;text-decoration:none;
+    border:1px solid var(--ink);white-space:nowrap;
+  }
+  .btn-solid{background:var(--ink);color:var(--paper);}
+  .btn-solid:hover{background:var(--teal);border-color:var(--teal);}
+  .btn-ghost{background:transparent;color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-alt);}
+  .btn-accent{background:var(--accent);border-color:var(--accent-ink);color:#FBF3E3;}
+  .btn-accent:hover{background:var(--accent-ink);}
+  .menu-toggle{display:none;background:none;border:1px solid var(--ink);border-radius:2px;padding:8px 10px;font-size:16px;}
+
+  /* ===== Hero ===== */
+  .hero{padding:64px 0 56px;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:start;}
+  .eyebrow-line{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .hero h1{font-size:46px;line-height:1.08;max-width:15ch;}
+  .hero p.lede{font-size:17.5px;color:var(--ink-soft);max-width:46ch;margin-top:18px;}
+  .search-box{
+    margin-top:30px;display:flex;border:1px solid var(--ink);border-radius:2px;overflow:hidden;background:var(--card);max-width:520px;
+  }
+  .search-box input{
+    flex:1;border:none;background:transparent;padding:14px 16px;font-size:15px;font-family:'IBM Plex Sans',sans-serif;color:var(--ink);outline:none;
+  }
+  .search-box button{border:none;background:var(--ink);color:var(--paper);padding:0 22px;font-size:14px;font-weight:500;cursor:pointer;}
+  .search-hint{font-size:13px;color:var(--ink-soft);margin-top:10px;}
+  .hero-ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+
+  .manifest{
+    border:1px solid var(--ink);background:var(--card);
+  }
+  .manifest-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:14px 18px;border-bottom:1px solid var(--line);
+  }
+  .manifest-head h3{font-size:15px;font-weight:600;}
+  .manifest-head .mono{font-size:11px;color:var(--ink-soft);}
+  .manifest-row{
+    display:grid;grid-template-columns:1fr auto;gap:6px 14px;
+    padding:14px 18px;border-bottom:1px solid var(--line);
+  }
+  .manifest-row:last-child{border-bottom:none;}
+  .manifest-row .item{font-size:14.5px;font-weight:500;}
+  .manifest-row .meta{font-size:12.5px;color:var(--ink-soft);grid-column:1;}
+  .manifest-row .qty{font-size:12.5px;text-align:right;font-family:'IBM Plex Mono',monospace;color:var(--ink-soft);align-self:start;}
+  .manifest-foot{padding:12px 18px;font-size:13px;}
+  .manifest-foot a{text-decoration:none;border-bottom:1px solid var(--accent);color:var(--accent-ink);font-weight:500;}
+
+  /* ===== Section shell ===== */
+  section{padding:56px 0;border-bottom:1px solid var(--line);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:30px;gap:20px;flex-wrap:wrap;}
+  .section-head h2{font-size:28px;}
+  .section-head p{color:var(--ink-soft);font-size:14.5px;max-width:42ch;margin-top:6px;}
+  .see-all{font-size:13.5px;text-decoration:none;border-bottom:1px solid var(--accent);color:var(--accent-ink);font-weight:500;padding-bottom:1px;white-space:nowrap;}
+
+  /* ===== Categories ===== */
+  .cat-strip{
+    display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--ink);
+  }
+  .cat-cell{
+    padding:20px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    font-size:14px;font-weight:500;
+    display:flex;flex-direction:column;justify-content:space-between;gap:26px;
+    min-height:96px;
+  }
+  .cat-cell:nth-child(5n){border-right:none;}
+  .cat-cell .num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);}
+
+  /* ===== Ledger list (suppliers / products / requests) ===== */
+  .ledger{border-top:1px solid var(--ink);}
+  .ledger-row{
+    display:grid;grid-template-columns:2.1fr 1.3fr 1.6fr auto;gap:18px;
+    align-items:center;padding:18px 4px;border-bottom:1px solid var(--line);
+  }
+  .ledger-row .name{font-weight:600;font-size:15.5px;}
+  .ledger-row .sub{font-size:13px;color:var(--ink-soft);margin-top:3px;}
+  .badge{
+    display:inline-block;font-size:11px;font-weight:500;padding:3px 8px;border-radius:2px;
+    background:var(--teal-soft);color:var(--teal);margin-left:8px;
+  }
+  .tags{font-size:13px;color:var(--ink-soft);}
+  .stock{font-size:13px;font-weight:500;}
+  .stock.in{color:var(--teal);}
+  .stock.limited{color:var(--flag);}
+  .ledger-row .cta{text-align:right;}
+  .ledger-row .cta a{font-size:13.5px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:1px;}
+
+  /* Buyer requests table variant */
+  .req-row{grid-template-columns:2.2fr 1fr 1.2fr 1fr auto;}
+  .flag-date{font-size:13px;font-family:'IBM Plex Mono',monospace;color:var(--flag);background:var(--flag-soft);padding:3px 8px;border-radius:2px;display:inline-block;}
+
+  /* ===== How it works ===== */
+  .tracks{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .track h3{font-size:19px;margin-bottom:18px;}
+  .step{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line);}
+  .step:first-of-type{border-top:none;}
+  .step .n{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);padding-top:2px;}
+  .step .t{font-size:15px;font-weight:600;}
+  .step .d{font-size:13.5px;color:var(--ink-soft);margin-top:3px;}
+
+  /* ===== Advertising banner ===== */
+  .promo{
+    display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+    background:var(--ink);color:var(--paper);padding:34px 32px;border:1px solid var(--ink);
+  }
+  .promo h3{font-size:21px;color:var(--paper);max-width:32ch;}
+  .promo p{font-size:14px;color:#C9D6CF;margin-top:6px;max-width:44ch;}
+
+  /* ===== CTA band ===== */
+  .cta-band{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);}
+  .cta-panel{padding:34px;border-right:1px solid var(--line);}
+  .cta-panel:last-child{border-right:none;}
+  .cta-panel h3{font-size:20px;margin-bottom:8px;}
+  .cta-panel p{font-size:14px;color:var(--ink-soft);margin-bottom:20px;max-width:38ch;}
+
+  /* ===== Footer ===== */
+  footer{padding:48px 0 34px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:28px;}
+  .foot-col h4{font-size:13px;text-transform:none;font-weight:600;margin-bottom:12px;}
+  .foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
+  .foot-col a{font-size:13.5px;text-decoration:none;color:var(--ink-soft);}
+  .foot-col a:hover{color:var(--ink);}
+  .foot-bottom{
+    margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);flex-wrap:wrap;gap:8px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:880px){
+    nav.links{display:none;}
+    .menu-toggle{display:inline-block;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:36px;}
+    .cat-strip{grid-template-columns:repeat(2,1fr);}
+    .cat-cell:nth-child(5n){border-right:1px solid var(--line);}
+    .cat-cell:nth-child(2n){border-right:none;}
+    .tracks{grid-template-columns:1fr;}
+    .cta-band{grid-template-columns:1fr;}
+    .cta-panel{border-right:none;border-bottom:1px solid var(--line);}
+    .cta-panel:last-child{border-bottom:none;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    .ledger-row{grid-template-columns:1fr;gap:6px;}
+    .ledger-row .cta{text-align:left;margin-top:4px;}
+    .req-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <a class="brand" href="#top">
+      <div class="brand-mark">P</div>
+      <div class="brand-name">Pharmaceutical<br>Promotion ET<span>Connecting suppliers with buyers</span></div>
+    </a>
+    <nav class="links">
+      <a href="#products">Products</a>
+      <a href="#suppliers">Suppliers</a>
+      <a href="#requests">Buyer Requests</a>
+      <a href="#advertising">Advertising</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-ctas">
+      <a class="btn btn-ghost" href="#contact">Post a Request</a>
+      <a class="btn btn-solid" href="#suppliers">Register as Supplier</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-bottom:1px solid var(--line);padding-bottom:56px;">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow-line mono">Ethiopia's B2B pharmaceutical marketplace</div>
+        <h1>Connecting pharmaceutical suppliers with buyers.</h1>
+        <p class="lede">Manufacturers, importers and distributors list what they carry. Pharmacies, drug stores and hospitals find it, request it, and order direct — no middleman required.</p>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search a product, generic name or category…">
+          <button id="searchBtn">Search</button>
+        </div>
+        <div class="search-hint">Try "amoxicillin", "surgical gloves" or "laboratory reagents"</div>
+        <div class="hero-ctas">
+          <a class="btn btn-accent" href="#requests">Post a Buyer Request</a>
+          <a class="btn btn-ghost" href="#suppliers">Find a Supplier</a>
+        </div>
+      </div>
+
+      <div class="manifest">
+        <div class="manifest-head">
+          <h3>Latest buyer requests</h3>
+          <span class="mono">LIVE</span>
+        </div>
+        <div class="manifest-row">
+          <div>
+            <div class="item">Amoxicillin 500mg capsules</div>
+            <div class="meta">Addis Ababa · required by 12 Sep</div>
+          </div>
+          <div class="qty">50,000 units</div>
+        </div>
+        <div class="manifest-row">
+          <div>
+            <div class="item">Surgical gloves, latex, size M</div>
+            <div class="meta">Adama · required by 20 Sep</div>
+          </div>
+          <div class="qty">20,000 boxes</div>
+        </div>
+        <div class="manifest-row">
+          <div>
+            <div class="item">Digital thermometers</div>
+            <div class="meta">Bahir Dar · required by 05 Oct</div>
+          </div>
+          <div class="qty">1,200 units</div>
+        </div>
+        <div class="manifest-row">
+          <div>
+            <div class="item">Paracetamol 500mg tablets</div>
+            <div class="meta">Hawassa · required by 15 Sep</div>
+          </div>
+          <div class="qty">100,000 units</div>
+        </div>
+        <div class="manifest-foot"><a href="#requests">View all buyer requests →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Search by category</h2>
+          <p>Every listing on the platform is filed under one of these classifications.</p>
+        </div>
+      </div>
+      <div class="cat-strip">
+        <div class="cat-cell"><span>Medicines</span><span class="num">01</span></div>
+        <div class="cat-cell"><span>Medical Devices</span><span class="num">02</span></div>
+        <div class="cat-cell"><span>Medical Supplies</span><span class="num">03</span></div>
+        <div class="cat-cell"><span>Laboratory Products</span><span class="num">04</span></div>
+        <div class="cat-cell"><span>Surgical Supplies</span><span class="num">05</span></div>
+        <div class="cat-cell"><span>Personal Protective Equipment</span><span class="num">06</span></div>
+        <div class="cat-cell"><span>Hospital Supplies</span><span class="num">07</span></div>
+        <div class="cat-cell"><span>Pharmacy Supplies</span><span class="num">08</span></div>
+        <div class="cat-cell"><span>Cosmetics</span><span class="num">09</span></div>
+        <div class="cat-cell"><span>Other Pharmaceutical Products</span><span class="num">10</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED SUPPLIERS -->
+  <section id="suppliers">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Featured suppliers</h2>
+          <p>Verified manufacturers, importers and distributors currently listing on the platform.</p>
+        </div>
+        <a class="see-all" href="#contact">View supplier directory →</a>
+      </div>
+      <div class="ledger">
+        <div class="ledger-row">
+          <div>
+            <div class="name">Nile Pharma Distribution PLC <span class="badge">Verified</span></div>
+            <div class="sub">Addis Ababa</div>
+          </div>
+          <div class="tags">Medicines</div>
+          <div class="tags">Hospital Supplies</div>
+          <div class="cta"><a href="#contact">Contact supplier</a></div>
+        </div>
+        <div class="ledger-row">
+          <div>
+            <div class="name">MedTech Import &amp; Supply <span class="badge">Verified</span></div>
+            <div class="sub">Adama</div>
+          </div>
+          <div class="tags">Medical Devices</div>
+          <div class="tags">Laboratory Products</div>
+          <div class="cta"><a href="#contact">Contact supplier</a></div>
+        </div>
+        <div class="ledger-row">
+          <div>
+            <div class="name">Abay Surgical &amp; PPE Trading <span class="badge">Verified</span></div>
+            <div class="sub">Bahir Dar</div>
+          </div>
+          <div class="tags">Surgical Supplies</div>
+          <div class="tags">PPE</div>
+          <div class="cta"><a href="#contact">Contact supplier</a></div>
+        </div>
+        <div class="ledger-row">
+          <div>
+            <div class="name">Highland Cosmetics &amp; Pharmacy Supplies <span class="badge">Verified</span></div>
+            <div class="sub">Mekelle</div>
+          </div>
+          <div class="tags">Cosmetics</div>
+          <div class="tags">Pharmacy Supplies</div>
+          <div class="cta"><a href="#contact">Contact supplier</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Featured products</h2>
+          <p>A sample of what's currently listed and available to order.</p>
+        </div>
+        <a class="see-all" href="#contact">Search all products →</a>
+      </div>
+      <div class="ledger">
+        <div class="ledger-row">
+          <div>
+            <div class="name">Amoxicillin 500mg capsules</div>
+            <div class="sub">Manufacturer: EthioPharma Labs · Pack: 10×10 blister</div>
+          </div>
+          <div class="tags">Medicines</div>
+          <div class="stock in">In stock</div>
+          <div class="cta"><a href="#contact">Request product</a></div>
+        </div>
+        <div class="ledger-row">
+          <div>
+            <div class="name">N95 respirator masks</div>
+            <div class="sub">Manufacturer: SinoMed · Pack: 20 / box</div>
+          </div>
+          <div class="tags">PPE</div>
+          <div class="stock in">In stock</div>
+          <div class="cta"><a href="#contact">Request product</a></div>
+        </div>
+        <div class="ledger-row">
+          <div>
+            <div class="name">Digital blood pressure monitor</div>
+            <div class="sub">Manufacturer: Omron · Pack: 1 unit</div>
+          </div>
+          <div class="tags">Medical Devices</div>
+          <div class="stock in">In stock</div>
+          <div class="cta"><a href="#contact">Request product</a></div>
+        </div>
+        <div class="ledger-row">
+          <div>
+            <div class="name">Surgical sutures (Vicryl)</div>
+            <div class="sub">Manufacturer: Ethicon · Pack: 12 / box</div>
+          </div>
+          <div class="tags">Surgical Supplies</div>
+          <div class="stock limited">Limited stock</div>
+          <div class="cta"><a href="#contact">Request product</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUYER REQUESTS -->
+  <section id="requests">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Latest buyer requests</h2>
+          <p>Pharmacies, drug stores and hospitals looking to buy right now.</p>
+        </div>
+        <a class="btn btn-accent" href="#contact">Post a Buyer Request</a>
+      </div>
+      <div class="ledger">
+        <div class="ledger-row req-row">
+          <div>
+            <div class="name">Amoxicillin 500mg capsules</div>
+            <div class="sub">Posted by a pharmacy buyer</div>
+          </div>
+          <div class="tags">50,000 units</div>
+          <div class="tags">Addis Ababa</div>
+          <div class="flag-date">by 12 Sep</div>
+          <div class="cta"><a href="#contact">Respond</a></div>
+        </div>
+        <div class="ledger-row req-row">
+          <div>
+            <div class="name">Surgical gloves, latex, size M</div>
+            <div class="sub">Posted by a hospital buyer</div>
+          </div>
+          <div class="tags">20,000 boxes</div>
+          <div class="tags">Adama</div>
+          <div class="flag-date">by 20 Sep</div>
+          <div class="cta"><a href="#contact">Respond</a></div>
+        </div>
+        <div class="ledger-row req-row">
+          <div>
+            <div class="name">Digital thermometers</div>
+            <div class="sub">Posted by a drug store buyer</div>
+          </div>
+          <div class="tags">1,200 units</div>
+          <div class="tags">Bahir Dar</div>
+          <div class="flag-date">by 05 Oct</div>
+          <div class="cta"><a href="#contact">Respond</a></div>
+        </div>
+        <div class="ledger-row req-row">
+          <div>
+            <div class="name">Paracetamol 500mg tablets</div>
+            <div class="sub">Posted by a pharmacy buyer</div>
+          </div>
+          <div class="tags">100,000 units</div>
+          <div class="tags">Hawassa</div>
+          <div class="flag-date">by 15 Sep</div>
+          <div class="cta"><a href="#contact">Respond</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>How it works</h2>
+          <p>The same platform, two sides of the same trade.</p>
+        </div>
+      </div>
+      <div class="tracks">
+        <div class="track">
+          <h3>For suppliers</h3>
+          <div class="step">
+            <div class="n">01</div>
+            <div><div class="t">Create your company profile</div><div class="d">Add your license and registration details so buyers know you're verified.</div></div>
+          </div>
+          <div class="step">
+            <div class="n">02</div>
+            <div><div class="t">List your products</div><div class="d">Generic and brand name, manufacturer, strength, dosage form, pack size and availability.</div></div>
+          </div>
+          <div class="step">
+            <div class="n">03</div>
+            <div><div class="t">Receive buyer inquiries</div><div class="d">Respond directly through messages or WhatsApp and Telegram.</div></div>
+          </div>
+        </div>
+        <div class="track">
+          <h3>For buyers</h3>
+          <div class="step">
+            <div class="n">01</div>
+            <div><div class="t">Search or post a request</div><div class="d">Find a listed product, or post exactly what you need and how much.</div></div>
+          </div>
+          <div class="step">
+            <div class="n">02</div>
+            <div><div class="t">Compare verified suppliers</div><div class="d">Check location, categories offered and verification status.</div></div>
+          </div>
+          <div class="step">
+            <div class="n">03</div>
+            <div><div class="t">Contact and finalize</div><div class="d">Reach out directly to agree on price, quantity and delivery.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVERTISING -->
+  <section id="advertising">
+    <div class="wrap">
+      <div class="promo">
+        <div>
+          <h3>Get featured placement for your company or product</h3>
+          <p>Premium supplier accounts and featured listings put your profile at the top of search and on the homepage.</p>
+        </div>
+        <a class="btn btn-accent" href="#contact">Advertise with us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>About Pharmaceutical Promotion ET</h2>
+          <p>A trade platform built for the way the pharmaceutical supply chain actually works.</p>
+        </div>
+      </div>
+      <div class="cta-band" style="border:1px solid var(--ink);">
+        <div class="cta-panel">
+          <h3>Who we are</h3>
+          <p>A B2B platform connecting pharmaceutical manufacturers, importers and distributors with pharmacies, drug stores and hospitals across Ethiopia.</p>
+        </div>
+        <div class="cta-panel">
+          <h3>Why this platform</h3>
+          <p>Verified suppliers, transparent buyer requests and direct contact — no listing gets buried and no buyer is left guessing who to call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FINAL CTA -->
+  <section id="contact" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Get started</h2>
+          <p>Register a supplier account or post your first buyer request.</p>
+        </div>
+      </div>
+      <div class="cta-band">
+        <div class="cta-panel">
+          <h3>Register as a supplier</h3>
+          <p>List your products, build a verified profile and start receiving buyer inquiries.</p>
+          <a class="btn btn-solid" href="#">Register as Supplier</a>
+        </div>
+        <div class="cta-panel">
+          <h3>Post a buyer request</h3>
+          <p>Tell suppliers exactly what you need, how much, and by when.</p>
+          <a class="btn btn-accent" href="#">Post a Buyer Request</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="brand-name" style="margin-bottom:10px;">Pharmaceutical<br>Promotion ET</div>
+        <p style="font-size:13px;color:var(--ink-soft);max-width:32ch;">Connecting pharmaceutical suppliers with buyers, across Ethiopia.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#products">Search products</a></li>
+          <li><a href="#suppliers">Find a supplier</a></li>
+          <li><a href="#requests">Buyer requests</a></li>
+          <li><a href="#advertising">Advertising</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#categories">Medicines</a></li>
+          <li><a href="#categories">Medical Devices</a></li>
+          <li><a href="#categories">Surgical Supplies</a></li>
+          <li><a href="#categories">Hospital Supplies</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+251900000000">+251 9XX XXX XXX</a></li>
+          <li><a href="mailto:info@pharmaceuticalpromotion.et">info@pharmaceuticalpromotion.et</a></li>
+          <li><a href="#">Telegram</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Pharmaceutical Promotion ET. All rights reserved.</div>
+      <div>Addis Ababa, Ethiopia</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('nav.links');
+  toggle.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.flexDirection = 'column';
+    navLinks.style.position = 'absolute';
+    navLinks.style.top = '68px';
+    navLinks.style.left = '0';
+    navLinks.style.right = '0';
+    navLinks.style.background = 'var(--paper)';
+    navLinks.style.padding = '16px 28px';
+    navLinks.style.borderBottom = '1px solid var(--line)';
+    navLinks.style.gap = '14px';
+  });
+
+  // Simple search -> scroll to categories and hint result
+  const searchBtn = document.getElementById('searchBtn');
+  const searchInput = document.getElementById('searchInput');
+  function runSearch(){
+    const q = searchInput.value.trim();
+    document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  }
+  searchBtn.addEventListener('click', runSearch);
+  searchInput.addEventListener('keydown', e => { if(e.key === 'Enter'){ runSearch(); }});
+</script>
+
+</body>
+</html>
