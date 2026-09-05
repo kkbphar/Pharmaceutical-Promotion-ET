@@ -10,235 +10,307 @@
 
 <style>
 *{
-  box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f4f7f9;
-  color:#222;
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#f4f7f9;
+color:#222;
 }
 
 header{
-  background:#087f5b;
-  color:white;
-  padding:18px;
-  text-align:center;
+background:#087f5b;
+color:white;
+padding:20px;
+text-align:center;
 }
 
 header h1{
-  margin:0;
-  font-size:25px;
+margin:0;
+font-size:26px;
 }
 
 header p{
-  margin:6px 0 0;
+margin:7px 0 0;
 }
 
 nav{
-  background:#075e45;
-  padding:10px;
-  text-align:center;
+background:#075e45;
+padding:10px;
+text-align:center;
 }
 
 nav button{
-  background:none;
-  border:0;
-  color:white;
-  margin:4px;
-  padding:10px 13px;
-  cursor:pointer;
-  font-weight:bold;
-  border-radius:6px;
+background:none;
+border:0;
+color:white;
+margin:3px;
+padding:10px 12px;
+cursor:pointer;
+font-weight:bold;
+border-radius:6px;
 }
 
 nav button:hover{
-  background:#087f5b;
+background:#087f5b;
 }
 
 .container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
+max-width:1100px;
+margin:auto;
+padding:20px;
 }
 
 .page{
-  display:none;
+display:none;
 }
 
 .page.active{
-  display:block;
+display:block;
 }
 
 .card{
-  background:white;
-  padding:20px;
-  margin:15px 0;
-  border-radius:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+background:white;
+padding:20px;
+margin:15px 0;
+border-radius:14px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:18px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:18px;
 }
 
-input,select,textarea{
-  width:100%;
-  padding:12px;
-  margin:7px 0 14px;
-  border:1px solid #ccc;
-  border-radius:7px;
+input,
+select,
+textarea{
+width:100%;
+padding:12px;
+margin:7px 0 14px;
+border:1px solid #ccc;
+border-radius:7px;
+font-size:15px;
 }
 
 textarea{
-  min-height:90px;
+min-height:90px;
 }
 
 .btn{
-  background:#087f5b;
-  color:white;
-  border:0;
-  padding:12px 18px;
-  border-radius:7px;
-  cursor:pointer;
-  font-weight:bold;
+background:#087f5b;
+color:white;
+border:0;
+padding:12px 18px;
+border-radius:7px;
+cursor:pointer;
+font-weight:bold;
+text-decoration:none;
+display:inline-block;
 }
 
 .btn:hover{
-  background:#056747;
+background:#056747;
 }
 
 .btn-danger{
-  background:#c92a2a;
+background:#c92a2a;
 }
 
 .btn-blue{
-  background:#1971c2;
+background:#1971c2;
 }
 
 .btn-orange{
-  background:#e67700;
+background:#e67700;
+}
+
+.telegram-btn{
+background:#229ED9;
+font-size:16px;
+padding:13px 20px;
+}
+
+.telegram-btn:hover{
+background:#168dcc;
 }
 
 .hero{
-  background:linear-gradient(135deg,#087f5b,#0ca678);
-  color:white;
-  padding:45px 20px;
-  text-align:center;
-  border-radius:14px;
+background:linear-gradient(135deg,#087f5b,#0ca678);
+color:white;
+padding:50px 20px;
+text-align:center;
+border-radius:14px;
 }
 
 .hero h2{
-  font-size:32px;
+font-size:32px;
+margin-top:0;
+}
+
+.hero p{
+font-size:17px;
+line-height:1.6;
 }
 
 .stat{
-  text-align:center;
-  padding:25px;
-  background:white;
-  border-radius:12px;
+text-align:center;
+padding:25px;
+background:white;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
 
 .stat strong{
-  display:block;
-  font-size:30px;
-  color:#087f5b;
+display:block;
+font-size:30px;
+color:#087f5b;
+margin-bottom:8px;
 }
 
 .product{
-  background:white;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
 
 .product img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  background:#eee;
+width:100%;
+height:180px;
+object-fit:cover;
+background:#eee;
 }
 
 .product-body{
-  padding:15px;
+padding:15px;
 }
 
 .price{
-  color:#087f5b;
-  font-size:20px;
-  font-weight:bold;
+color:#087f5b;
+font-size:20px;
+font-weight:bold;
 }
 
 .promo{
-  color:#c92a2a;
-  font-weight:bold;
+color:#c92a2a;
+font-weight:bold;
 }
 
 .featured{
-  background:#fff3bf;
-  padding:5px 8px;
-  border-radius:5px;
-  display:inline-block;
-  margin-bottom:8px;
+background:#fff3bf;
+padding:5px 8px;
+border-radius:5px;
+display:inline-block;
+margin-bottom:8px;
 }
 
 .status{
-  padding:10px;
-  border-radius:7px;
-  margin:10px 0;
+padding:10px;
+border-radius:7px;
+margin:10px 0;
 }
 
 .pending{
-  background:#fff3bf;
-  color:#7f6000;
+background:#fff3bf;
+color:#7f6000;
 }
 
 .approved{
-  background:#d3f9d8;
-  color:#176b2c;
+background:#d3f9d8;
+color:#176b2c;
 }
 
 .error{
-  background:#ffe3e3;
-  color:#a61e1e;
+background:#ffe3e3;
+color:#a61e1e;
 }
 
 .success{
-  background:#d3f9d8;
-  color:#176b2c;
+background:#d3f9d8;
+color:#176b2c;
 }
 
 .small{
-  font-size:13px;
-  color:#666;
+font-size:13px;
+color:#666;
+}
+
+.contact-card{
+text-align:center;
+}
+
+.contact-card h2{
+color:#087f5b;
+}
+
+.contact-info{
+margin:12px 0;
+font-size:16px;
+}
+
+.contact-info a{
+color:#087f5b;
+font-weight:bold;
+text-decoration:none;
+}
+
+.contact-info a:hover{
+text-decoration:underline;
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  background:white;
+width:100%;
+border-collapse:collapse;
+background:white;
 }
 
-th,td{
-  padding:10px;
-  border:1px solid #ddd;
-  text-align:left;
+th,
+td{
+padding:10px;
+border:1px solid #ddd;
+text-align:left;
 }
 
 th{
-  background:#087f5b;
-  color:white;
+background:#087f5b;
+color:white;
 }
 
 footer{
-  margin-top:40px;
-  background:#075e45;
-  color:white;
-  text-align:center;
-  padding:25px;
+margin-top:40px;
+background:#075e45;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+@media(max-width:600px){
+
+header h1{
+font-size:22px;
+}
+
+nav button{
+font-size:12px;
+padding:8px;
+}
+
+.hero h2{
+font-size:26px;
+}
+
+.container{
+padding:12px;
+}
+
+table{
+font-size:12px;
+}
+
 }
 </style>
 </head>
@@ -246,122 +318,322 @@ footer{
 <body>
 
 <header>
-  <h1>💊 Pharmaceutical Promotion ET</h1>
-  <p>Connecting Suppliers with Buyers</p>
+
+<h1>💊 Pharmaceutical Promotion ET</h1>
+
+<p>
+Connecting Suppliers with Buyers
+</p>
+
 </header>
 
+
 <nav>
-  <button onclick="showPage('home')">🏠 Home</button>
-  <button onclick="showPage('products')">💊 Products</button>
-  <button onclick="showPage('cosmetics')">💄 Cosmetics</button>
-  <button onclick="showPage('order')">🛒 Place Order</button>
-  <button onclick="showPage('register')">👤 Create Account</button>
-  <button onclick="showPage('login')">🔐 Login</button>
-  <button onclick="showPage('adminLogin')">👑 Admin</button>
-  <button id="logoutBtn" onclick="logout()" style="display:none;">🚪 Logout</button>
+
+<button onclick="showPage('home')">
+🏠 Home
+</button>
+
+<button onclick="showPage('products')">
+💊 Products
+</button>
+
+<button onclick="showPage('cosmetics')">
+💄 Cosmetics
+</button>
+
+<button onclick="showPage('order')">
+🛒 Place Order
+</button>
+
+<button onclick="showPage('register')">
+👤 Create Account
+</button>
+
+<button onclick="showPage('login')">
+🔐 Login
+</button>
+
+<button onclick="showPage('adminLogin')">
+👑 Admin
+</button>
+
+<button
+id="logoutBtn"
+onclick="logout()"
+style="display:none;">
+🚪 Logout
+</button>
+
 </nav>
+
 
 <div class="container">
 
+
 <!-- HOME -->
+
 <section id="home" class="page active">
 
 <div class="hero">
-  <h2>Pharmaceutical Promotion ET</h2>
-  <p>
-    A digital platform connecting pharmaceutical suppliers,
-    pharmacies, drug stores and buyers.
-  </p>
 
-  <button class="btn" onclick="showPage('register')">
-    Create Account
-  </button>
+<h2>
+Pharmaceutical Promotion ET
+</h2>
+
+<p>
+Connecting pharmaceutical and cosmetics suppliers
+with pharmacies, drug stores and buyers.
+</p>
+
+<button
+class="btn"
+onclick="showPage('register')">
+
+👤 Create Account
+
+</button>
+
 </div>
+
 
 <div class="grid">
 
 <div class="stat">
+
 <strong>💊</strong>
+
 Pharmaceutical Products
+
 </div>
 
+
 <div class="stat">
+
 <strong>💄</strong>
+
 Cosmetics
+
 </div>
 
+
 <div class="stat">
+
 <strong>🏭</strong>
+
 Suppliers
+
 </div>
+
 
 <div class="stat">
+
 <strong>🏪</strong>
+
 Buyers
+
 </div>
 
 </div>
+
 
 <div class="card">
-<h2>Our Platform</h2>
+
+<h2>
+🌐 About Pharmaceutical Promotion ET
+</h2>
 
 <p>
-Pharmaceutical Promotion ET helps suppliers promote their
-products and helps pharmacies, drug stores and other buyers
-find pharmaceutical and cosmetic products.
+Pharmaceutical Promotion ET is a digital platform designed
+to connect pharmaceutical and cosmetics suppliers with
+pharmacies, drug stores and other buyers.
 </p>
 
-<h3>For Suppliers</h3>
+<h3>
+For Suppliers 🏭
+</h3>
+
 <ul>
+
 <li>Create a supplier account</li>
-<li>Submit company information</li>
-<li>Promote products</li>
-<li>Connect with buyers</li>
+
+<li>Promote pharmaceutical products</li>
+
+<li>Promote cosmetics</li>
+
+<li>Connect with potential buyers</li>
+
 </ul>
 
-<h3>For Buyers</h3>
+
+<h3>
+For Buyers 🏪
+</h3>
+
 <ul>
+
 <li>Create a buyer account</li>
-<li>Browse pharmaceutical products</li>
+
+<li>Browse available products</li>
+
 <li>Browse cosmetics</li>
+
 <li>Submit orders</li>
+
 </ul>
+
+</div>
+
+
+<!-- ABOUT ME -->
+
+<div class="card contact-card">
+
+<h2>
+👨‍⚕️ About Me
+</h2>
+
+<p>
+I am <strong>Kinfe Kassa</strong>,
+a Pharmacist and the founder of
+<strong>Pharmaceutical Promotion ET</strong>.
+</p>
+
+<p>
+My goal is to connect pharmaceutical and cosmetics
+suppliers with pharmacies, drug stores and other buyers
+through a simple, accessible and professional digital platform.
+</p>
+
+
+<h3>
+📞 Contact Me
+</h3>
+
+
+<div class="contact-info">
+
+<strong>
+Founder:
+</strong>
+
+Kinfe Kassa
+
+</div>
+
+
+<div class="contact-info">
+
+<strong>
+Profession:
+</strong>
+
+Pharmacist
+
+</div>
+
+
+<div class="contact-info">
+
+<strong>
+Phone:
+</strong>
+
+<a href="tel:+251954973561">
+
++251 954 973 561
+
+</a>
+
+</div>
+
+
+<div class="contact-info">
+
+<strong>
+Telegram:
+</strong>
+
+@kinfe2330
+
+</div>
+
+
+<a
+href="https://t.me/kinfe2330"
+target="_blank"
+class="btn telegram-btn">
+
+📱 Message Me on Telegram
+
+</a>
+
+
+<div class="contact-info">
+
+<strong>
+Location:
+</strong>
+
+Ethiopia
+
+</div>
 
 </div>
 
 </section>
+
 
 
 <!-- PRODUCTS -->
+
 <section id="products" class="page">
 
-<h2>💊 Pharmaceutical Products</h2>
+<h2>
+💊 Pharmaceutical Products
+</h2>
 
 <div id="productsList" class="grid">
-<p>Loading products...</p>
+
+<p>
+Loading products...
+</p>
+
 </div>
 
 </section>
+
 
 
 <!-- COSMETICS -->
+
 <section id="cosmetics" class="page">
 
-<h2>💄 Cosmetics</h2>
+<h2>
+💄 Cosmetics
+</h2>
 
 <div id="cosmeticsList" class="grid">
-<p>Loading cosmetics...</p>
+
+<p>
+Loading cosmetics...
+</p>
+
 </div>
 
 </section>
 
 
+
 <!-- REGISTER -->
+
 <section id="register" class="page">
 
 <div class="card">
 
-<h2>👤 Create Account</h2>
+<h2>
+👤 Create Account
+</h2>
 
 <p>
 Create a Supplier or Buyer account.
@@ -369,67 +641,157 @@ Create a Supplier or Buyer account.
 
 <div id="registerMessage"></div>
 
-<label>Account Type</label>
+
+<label>
+Account Type
+</label>
 
 <select id="registerRole">
-<option value="buyer">🏪 Buyer</option>
-<option value="supplier">🏭 Supplier</option>
+
+<option value="buyer">
+🏪 Buyer
+</option>
+
+<option value="supplier">
+🏭 Supplier
+</option>
+
 </select>
 
-<label>Full Name</label>
-<input id="regFullName" type="text" placeholder="Your full name">
 
-<label>Email</label>
-<input id="regEmail" type="email" placeholder="Your email">
+<label>
+Full Name
+</label>
 
-<label>Password</label>
-<input id="regPassword" type="password" placeholder="Create password">
+<input
+id="regFullName"
+type="text"
+placeholder="Your full name">
 
-<label>Phone</label>
-<input id="regPhone" type="text" placeholder="Phone number">
 
-<label>Business / Company Name</label>
-<input id="regBusinessName" type="text" placeholder="Business or company name">
+<label>
+Email
+</label>
 
-<label>Business Type</label>
+<input
+id="regEmail"
+type="email"
+placeholder="Your email">
+
+
+<label>
+Password
+</label>
+
+<input
+id="regPassword"
+type="password"
+placeholder="Create password">
+
+
+<label>
+Phone
+</label>
+
+<input
+id="regPhone"
+type="text"
+placeholder="Phone number">
+
+
+<label>
+Business / Company Name
+</label>
+
+<input
+id="regBusinessName"
+type="text"
+placeholder="Business or company name">
+
+
+<label>
+Business Type
+</label>
 
 <select id="regBusinessType">
 
-<option value="">Select business type</option>
+<option value="">
+Select business type
+</option>
 
-<option value="Pharmacy">Pharmacy</option>
+<option value="Pharmacy">
+Pharmacy
+</option>
 
-<option value="Drug Store">Drug Store</option>
+<option value="Drug Store">
+Drug Store
+</option>
 
-<option value="Hospital">Hospital</option>
+<option value="Hospital">
+Hospital
+</option>
 
-<option value="Distributor">Distributor</option>
+<option value="Distributor">
+Distributor
+</option>
 
-<option value="Importer">Importer</option>
+<option value="Importer">
+Importer
+</option>
 
-<option value="Wholesaler">Wholesaler</option>
+<option value="Wholesaler">
+Wholesaler
+</option>
 
-<option value="Manufacturer">Manufacturer</option>
+<option value="Manufacturer">
+Manufacturer
+</option>
 
-<option value="Cosmetics Business">Cosmetics Business</option>
+<option value="Cosmetics Business">
+Cosmetics Business
+</option>
 
-<option value="Other">Other</option>
+<option value="Other">
+Other
+</option>
 
 </select>
 
-<label>Address</label>
-<input id="regAddress" type="text" placeholder="Business address">
 
-<label>License Number</label>
-<input id="regLicense" type="text" placeholder="License number">
+<label>
+Address
+</label>
 
-<button class="btn" onclick="registerUser()">
+<input
+id="regAddress"
+type="text"
+placeholder="Business address">
+
+
+<label>
+License Number
+</label>
+
+<input
+id="regLicense"
+type="text"
+placeholder="License number">
+
+
+<button
+class="btn"
+onclick="registerUser()">
+
 Create Account
+
 </button>
 
+
 <p class="small">
-After registration, your account may require email verification
-and administrator approval.
+
+After registration, your account may require
+email verification and administrator approval.
+
 </p>
 
 </div>
@@ -437,66 +799,107 @@ and administrator approval.
 </section>
 
 
+
 <!-- LOGIN -->
+
 <section id="login" class="page">
 
 <div class="card">
 
-<h2>🔐 Login</h2>
+<h2>
+🔐 Login
+</h2>
 
 <div id="loginMessage"></div>
 
-<label>Email</label>
 
-<input id="loginEmail" type="email" placeholder="Email">
+<label>
+Email
+</label>
 
-<label>Password</label>
+<input
+id="loginEmail"
+type="email"
+placeholder="Email">
 
-<input id="loginPassword" type="password" placeholder="Password">
 
-<button class="btn" onclick="loginUser()">
+<label>
+Password
+</label>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password">
+
+
+<button
+class="btn"
+onclick="loginUser()">
+
 Login
+
 </button>
+
 
 <p>
 Don't have an account?
-<button class="btn btn-blue" onclick="showPage('register')">
-Create Account
-</button>
 </p>
+
+<button
+class="btn btn-blue"
+onclick="showPage('register')">
+
+Create Account
+
+</button>
 
 </div>
 
 </section>
 
 
-<!-- SUPPLIER DASHBOARD -->
-<section id="supplierDashboard" class="page">
 
-<h2>🏭 Supplier Dashboard</h2>
+<!-- SUPPLIER DASHBOARD -->
+
+<section
+id="supplierDashboard"
+class="page">
+
+<h2>
+🏭 Supplier Dashboard
+</h2>
 
 <div id="supplierStatus"></div>
 
+
 <div class="card">
 
-<h3>Supplier Profile</h3>
+<h3>
+Supplier Profile
+</h3>
 
 <div id="supplierProfile"></div>
 
 </div>
 
+
 <div class="card">
 
-<h3>📦 Supplier Services</h3>
+<h3>
+📦 Supplier Services
+</h3>
 
 <p>
-Your supplier account allows you to connect with buyers
-and promote your pharmaceutical and cosmetic products.
+Your supplier account allows you to connect with
+buyers and promote pharmaceutical and cosmetic products.
 </p>
 
 <p class="small">
-Product management and supplier promotion tools will be
-connected to this dashboard.
+
+Additional supplier product management tools
+can be added to this dashboard.
+
 </p>
 
 </div>
@@ -504,35 +907,62 @@ connected to this dashboard.
 </section>
 
 
-<!-- BUYER DASHBOARD -->
-<section id="buyerDashboard" class="page">
 
-<h2>🏪 Buyer Dashboard</h2>
+<!-- BUYER DASHBOARD -->
+
+<section
+id="buyerDashboard"
+class="page">
+
+<h2>
+🏪 Buyer Dashboard
+</h2>
 
 <div id="buyerStatus"></div>
 
+
 <div class="card">
 
-<h3>Buyer Profile</h3>
+<h3>
+Buyer Profile
+</h3>
 
 <div id="buyerProfile"></div>
 
 </div>
 
+
 <div class="card">
 
-<h3>🛒 Buyer Services</h3>
+<h3>
+🛒 Buyer Services
+</h3>
 
-<button class="btn" onclick="showPage('products')">
-Browse Pharmaceutical Products
+
+<button
+class="btn"
+onclick="showPage('products')">
+
+💊 Browse Pharmaceutical Products
+
 </button>
 
-<button class="btn btn-orange" onclick="showPage('cosmetics')">
-Browse Cosmetics
+
+<button
+class="btn btn-orange"
+onclick="showPage('cosmetics')">
+
+💄 Browse Cosmetics
+
 </button>
 
-<button class="btn btn-blue" onclick="showPage('order')">
-Place Order
+
+<button
+class="btn btn-blue"
+onclick="showPage('order')">
+
+🛒 Place Order
+
 </button>
 
 </div>
@@ -540,41 +970,95 @@ Place Order
 </section>
 
 
+
 <!-- ORDER -->
+
 <section id="order" class="page">
 
-<h2>🛒 Place Order</h2>
+<h2>
+🛒 Place Order
+</h2>
 
 <div class="card">
 
 <div id="orderMessage"></div>
 
-<label>Customer / Business Name</label>
-<input id="orderName" type="text">
 
-<label>Email</label>
-<input id="orderEmail" type="email">
+<label>
+Customer / Business Name
+</label>
 
-<label>Phone</label>
-<input id="orderPhone" type="text">
+<input
+id="orderName"
+type="text">
 
-<label>Address</label>
-<input id="orderAddress" type="text">
 
-<label>Product</label>
+<label>
+Email
+</label>
+
+<input
+id="orderEmail"
+type="email">
+
+
+<label>
+Phone
+</label>
+
+<input
+id="orderPhone"
+type="text">
+
+
+<label>
+Address
+</label>
+
+<input
+id="orderAddress"
+type="text">
+
+
+<label>
+Product
+</label>
 
 <select id="orderProduct">
-<option value="">Select product</option>
+
+<option value="">
+Select product
+</option>
+
 </select>
 
-<label>Quantity</label>
-<input id="orderQuantity" type="number" min="1" value="1">
 
-<label>Notes</label>
-<textarea id="orderNotes"></textarea>
+<label>
+Quantity
+</label>
 
-<button class="btn" onclick="placeOrder()">
+<input
+id="orderQuantity"
+type="number"
+min="1"
+value="1">
+
+
+<label>
+Notes
+</label>
+
+<textarea
+id="orderNotes">
+</textarea>
+
+
+<button
+class="btn"
+onclick="placeOrder()">
+
 Submit Order
+
 </button>
 
 </div>
@@ -582,23 +1066,44 @@ Submit Order
 </section>
 
 
+
 <!-- ADMIN LOGIN -->
+
 <section id="adminLogin" class="page">
 
 <div class="card">
 
-<h2>👑 Super Admin Login</h2>
+<h2>
+👑 Super Admin Login
+</h2>
 
 <div id="adminLoginMessage"></div>
 
-<label>Email</label>
-<input id="adminEmail" type="email">
 
-<label>Password</label>
-<input id="adminPassword" type="password">
+<label>
+Email
+</label>
 
-<button class="btn" onclick="adminLogin()">
+<input
+id="adminEmail"
+type="email">
+
+
+<label>
+Password
+</label>
+
+<input
+id="adminPassword"
+type="password">
+
+
+<button
+class="btn"
+onclick="adminLogin()">
+
 Login as Admin
+
 </button>
 
 </div>
@@ -606,62 +1111,150 @@ Login as Admin
 </section>
 
 
+
 <!-- ADMIN DASHBOARD -->
+
 <section id="adminDashboard" class="page">
 
-<h2>👑 Super Admin Dashboard</h2>
+<h2>
+👑 Super Admin Dashboard
+</h2>
+
 
 <div class="grid">
 
 <div class="stat">
-<strong id="adminProductCount">0</strong>
+
+<strong id="adminProductCount">
+0
+</strong>
+
 Products
+
 </div>
 
+
 <div class="stat">
-<strong id="adminCosmeticCount">0</strong>
+
+<strong id="adminCosmeticCount">
+0
+</strong>
+
 Cosmetics
+
 </div>
 
+
 <div class="stat">
-<strong id="adminSupplierCount">0</strong>
+
+<strong id="adminSupplierCount">
+0
+</strong>
+
 Suppliers
+
 </div>
 
+
 <div class="stat">
-<strong id="adminUserCount">0</strong>
+
+<strong id="adminUserCount">
+0
+</strong>
+
 Users
+
 </div>
+
 
 <div class="stat">
-<strong id="adminOrderCount">0</strong>
+
+<strong id="adminOrderCount">
+0
+</strong>
+
 Orders
+
 </div>
 
 </div>
+
 
 
 <!-- ADMIN PRODUCTS -->
 
 <div class="card">
 
-<h2>💊 Manage Products</h2>
+<h2>
+💊 Manage Products
+</h2>
 
-<input id="pName" placeholder="Product name">
-<input id="pGeneric" placeholder="Generic name">
-<input id="pCategory" placeholder="Category">
-<input id="pStrength" placeholder="Strength">
-<input id="pDosage" placeholder="Dosage form">
-<input id="pManufacturer" placeholder="Manufacturer">
-<input id="pSupplier" placeholder="Supplier">
-<input id="pPrice" type="number" step="0.01" placeholder="Price">
-<input id="pStock" type="number" placeholder="Stock">
-<input id="pImage" placeholder="Image URL">
 
-<textarea id="pDescription" placeholder="Description"></textarea>
+<input
+id="pName"
+placeholder="Product name">
 
-<button class="btn" onclick="addProduct()">
+
+<input
+id="pGeneric"
+placeholder="Generic name">
+
+
+<input
+id="pCategory"
+placeholder="Category">
+
+
+<input
+id="pStrength"
+placeholder="Strength">
+
+
+<input
+id="pDosage"
+placeholder="Dosage form">
+
+
+<input
+id="pManufacturer"
+placeholder="Manufacturer">
+
+
+<input
+id="pSupplier"
+placeholder="Supplier">
+
+
+<input
+id="pPrice"
+type="number"
+step="0.01"
+placeholder="Price">
+
+
+<input
+id="pStock"
+type="number"
+placeholder="Stock">
+
+
+<input
+id="pImage"
+placeholder="Image URL">
+
+
+<textarea
+id="pDescription"
+placeholder="Description">
+</textarea>
+
+
+<button
+class="btn"
+onclick="addProduct()">
+
 Add Product
+
 </button>
 
 </div>
@@ -669,59 +1262,127 @@ Add Product
 
 <div class="card">
 
-<h3>Current Products</h3>
+<h3>
+Current Products
+</h3>
 
 <div id="adminProducts"></div>
 
 </div>
 
 
+
 <!-- ADMIN COSMETICS -->
 
 <div class="card">
 
-<h2>💄 Manage Cosmetics</h2>
+<h2>
+💄 Manage Cosmetics
+</h2>
 
-<input id="cName" placeholder="Cosmetic name">
 
-<input id="cBrand" placeholder="Brand">
+<input
+id="cName"
+placeholder="Cosmetic name">
 
-<input id="cCategory" placeholder="Category">
 
-<textarea id="cDescription" placeholder="Description"></textarea>
+<input
+id="cBrand"
+placeholder="Brand">
 
-<input id="cPrice" type="number" step="0.01" placeholder="Price">
 
-<input id="cPromoPrice" type="number" step="0.01" placeholder="Promotional price">
+<input
+id="cCategory"
+placeholder="Category">
 
-<input id="cStock" type="number" placeholder="Stock">
 
-<input id="cSupplier" placeholder="Supplier">
+<textarea
+id="cDescription"
+placeholder="Description">
+</textarea>
 
-<input id="cImage" placeholder="Image URL">
 
-<label>Promotion Start</label>
-<input id="cStart" type="date">
+<input
+id="cPrice"
+type="number"
+step="0.01"
+placeholder="Price">
 
-<label>Promotion End</label>
-<input id="cEnd" type="date">
+
+<input
+id="cPromoPrice"
+type="number"
+step="0.01"
+placeholder="Promotional price">
+
+
+<input
+id="cStock"
+type="number"
+placeholder="Stock">
+
+
+<input
+id="cSupplier"
+placeholder="Supplier">
+
+
+<input
+id="cImage"
+placeholder="Image URL">
+
 
 <label>
-<input id="cFeatured" type="checkbox">
- Featured
+Promotion Start
+</label>
+
+<input
+id="cStart"
+type="date">
+
+
+<label>
+Promotion End
+</label>
+
+<input
+id="cEnd"
+type="date">
+
+
+<label>
+
+<input
+id="cFeatured"
+type="checkbox">
+
+Featured
+
 </label>
 
 <br>
 
+
 <label>
-<input id="cActive" type="checkbox" checked>
- Active
+
+<input
+id="cActive"
+type="checkbox"
+checked>
+
+Active
+
 </label>
 
 <br><br>
 
-<button class="btn" onclick="addCosmetic()">
+
+<button
+class="btn"
+onclick="addCosmetic()">
+
 Add Cosmetic
+
 </button>
 
 </div>
@@ -729,40 +1390,51 @@ Add Cosmetic
 
 <div class="card">
 
-<h3>Current Cosmetics</h3>
+<h3>
+Current Cosmetics
+</h3>
 
 <div id="adminCosmetics"></div>
 
 </div>
 
 
+
 <!-- ADMIN SUPPLIERS -->
 
 <div class="card">
 
-<h2>🏭 Suppliers</h2>
+<h2>
+🏭 Suppliers
+</h2>
 
 <div id="adminSuppliers"></div>
 
 </div>
 
 
+
 <!-- ADMIN USERS -->
 
 <div class="card">
 
-<h2>👥 Users</h2>
+<h2>
+👥 Users
+</h2>
 
 <div id="adminUsers"></div>
 
 </div>
 
 
+
 <!-- ADMIN ORDERS -->
 
 <div class="card">
 
-<h2>🛒 Orders</h2>
+<h2>
+🛒 Orders
+</h2>
 
 <div id="adminOrders"></div>
 
@@ -771,6 +1443,7 @@ Add Cosmetic
 </section>
 
 </div>
+
 
 
 <footer>
@@ -783,7 +1456,12 @@ Add Cosmetic
 Connecting Suppliers • Pharmacies • Drug Stores • Buyers
 </p>
 
+<p>
+Founder: Kinfe Kassa | Pharmacist
+</p>
+
 </footer>
+
 
 
 <script>
@@ -801,8 +1479,10 @@ SUPABASE_PUBLISHABLE_KEY
 );
 
 
-let currentUser = null;
-let currentProfile = null;
+let currentUser=null;
+
+let currentProfile=null;
+
 
 
 /* =========================
@@ -811,19 +1491,25 @@ PAGE NAVIGATION
 
 function showPage(page){
 
-document.querySelectorAll(".page")
-.forEach(p => p.classList.remove("active"));
+document
+.querySelectorAll(".page")
+.forEach(p =>
+p.classList.remove("active")
+);
 
 const selected =
 document.getElementById(page);
 
 if(selected){
+
 selected.classList.add("active");
+
 }
 
 window.scrollTo(0,0);
 
 }
+
 
 
 /* =========================
@@ -873,7 +1559,7 @@ return;
 }
 
 
-if(password.length < 6){
+if(password.length<6){
 
 message.innerHTML =
 '<div class="status error">Password must be at least 6 characters.</div>';
@@ -895,15 +1581,25 @@ email:email,
 password:password,
 
 options:{
+
 data:{
+
 role:role,
+
 full_name:fullName,
+
 phone:phone,
+
 business_name:businessName,
+
 business_type:businessType,
+
 address:address,
+
 license_number:license
+
 }
+
 }
 
 });
@@ -923,15 +1619,20 @@ return;
 
 message.innerHTML =
 '<div class="status success">'+
+
 'Account created successfully! '+
-'Please check your email if email verification is required. '+
+'Please check your email if verification is required. '+
 'Your account may also require administrator approval.'+
+
 '</div>';
 
 
-document.getElementById("regPassword").value="";
+document
+.getElementById("regPassword")
+.value="";
 
 }
+
 
 
 /* =========================
@@ -991,6 +1692,7 @@ await loadCurrentUser();
 }
 
 
+
 /* =========================
 ADMIN LOGIN
 ========================= */
@@ -1044,6 +1746,7 @@ await loadCurrentUser();
 }
 
 
+
 /* =========================
 LOAD CURRENT USER
 ========================= */
@@ -1053,11 +1756,13 @@ async function loadCurrentUser(){
 const {data,error} =
 await supabaseClient.auth.getUser();
 
+
 if(error || !data.user){
 
 return;
 
 }
+
 
 currentUser =
 data.user;
@@ -1086,11 +1791,12 @@ currentProfile =
 profile;
 
 
-document.getElementById("logoutBtn")
+document
+.getElementById("logoutBtn")
 .style.display="inline-block";
 
 
-if(profile.role === "super_admin"){
+if(profile.role==="super_admin"){
 
 showPage("adminDashboard");
 
@@ -1098,7 +1804,7 @@ await loadAdminDashboard();
 
 }
 
-else if(profile.role === "supplier"){
+else if(profile.role==="supplier"){
 
 showPage("supplierDashboard");
 
@@ -1106,7 +1812,7 @@ await loadSupplierDashboard();
 
 }
 
-else if(profile.role === "buyer"){
+else if(profile.role==="buyer"){
 
 showPage("buyerDashboard");
 
@@ -1123,6 +1829,7 @@ alert(
 }
 
 }
+
 
 
 /* =========================
@@ -1154,7 +1861,9 @@ box.innerHTML =
 '</div>';
 
 profileBox.innerHTML =
-"<p>Email: "+escapeHtml(currentUser.email)+"</p>";
+"<p>Email: "+
+escapeHtml(currentUser.email)+
+"</p>";
 
 return;
 
@@ -1166,7 +1875,8 @@ if(data.approved){
 box.innerHTML =
 '<div class="status approved">✅ Your supplier account is approved.</div>';
 
-}else{
+}
+else{
 
 box.innerHTML =
 '<div class="status pending">⏳ Your supplier account is waiting for administrator approval.</div>';
@@ -1174,29 +1884,42 @@ box.innerHTML =
 }
 
 
-profileBox.innerHTML = `
+profileBox.innerHTML=`
 
-<p><strong>Company:</strong>
-${escapeHtml(data.company_name || "")}</p>
+<p>
+<strong>Company:</strong>
+${escapeHtml(data.company_name||"")}
+</p>
 
-<p><strong>Contact:</strong>
-${escapeHtml(data.contact_person || "")}</p>
+<p>
+<strong>Contact:</strong>
+${escapeHtml(data.contact_person||"")}
+</p>
 
-<p><strong>Phone:</strong>
-${escapeHtml(data.phone || "")}</p>
+<p>
+<strong>Phone:</strong>
+${escapeHtml(data.phone||"")}
+</p>
 
-<p><strong>Email:</strong>
-${escapeHtml(data.email || "")}</p>
+<p>
+<strong>Email:</strong>
+${escapeHtml(data.email||"")}
+</p>
 
-<p><strong>Address:</strong>
-${escapeHtml(data.address || "")}</p>
+<p>
+<strong>Address:</strong>
+${escapeHtml(data.address||"")}
+</p>
 
-<p><strong>License:</strong>
-${escapeHtml(data.license_number || "")}</p>
+<p>
+<strong>License:</strong>
+${escapeHtml(data.license_number||"")}
+</p>
 
 `;
 
 }
+
 
 
 /* =========================
@@ -1228,7 +1951,9 @@ box.innerHTML =
 '</div>';
 
 profileBox.innerHTML =
-"<p>Email: "+escapeHtml(currentUser.email)+"</p>";
+"<p>Email: "+
+escapeHtml(currentUser.email)+
+"</p>";
 
 return;
 
@@ -1240,7 +1965,8 @@ if(data.approved){
 box.innerHTML =
 '<div class="status approved">✅ Your buyer account is approved.</div>';
 
-}else{
+}
+else{
 
 box.innerHTML =
 '<div class="status pending">⏳ Your buyer account is waiting for administrator approval.</div>';
@@ -1248,32 +1974,47 @@ box.innerHTML =
 }
 
 
-profileBox.innerHTML = `
+profileBox.innerHTML=`
 
-<p><strong>Business:</strong>
-${escapeHtml(data.business_name || "")}</p>
+<p>
+<strong>Business:</strong>
+${escapeHtml(data.business_name||"")}
+</p>
 
-<p><strong>Business Type:</strong>
-${escapeHtml(data.business_type || "")}</p>
+<p>
+<strong>Business Type:</strong>
+${escapeHtml(data.business_type||"")}
+</p>
 
-<p><strong>Contact:</strong>
-${escapeHtml(data.contact_person || "")}</p>
+<p>
+<strong>Contact:</strong>
+${escapeHtml(data.contact_person||"")}
+</p>
 
-<p><strong>Phone:</strong>
-${escapeHtml(data.phone || "")}</p>
+<p>
+<strong>Phone:</strong>
+${escapeHtml(data.phone||"")}
+</p>
 
-<p><strong>Email:</strong>
-${escapeHtml(data.email || "")}</p>
+<p>
+<strong>Email:</strong>
+${escapeHtml(data.email||"")}
+</p>
 
-<p><strong>Address:</strong>
-${escapeHtml(data.address || "")}</p>
+<p>
+<strong>Address:</strong>
+${escapeHtml(data.address||"")}
+</p>
 
-<p><strong>License:</strong>
-${escapeHtml(data.license_number || "")}</p>
+<p>
+<strong>License:</strong>
+${escapeHtml(data.license_number||"")}
+</p>
 
 `;
 
 }
+
 
 
 /* =========================
@@ -1285,14 +2026,17 @@ async function logout(){
 await supabaseClient.auth.signOut();
 
 currentUser=null;
+
 currentProfile=null;
 
-document.getElementById("logoutBtn")
+document
+.getElementById("logoutBtn")
 .style.display="none";
 
 showPage("home");
 
 }
+
 
 
 /* =========================
@@ -1341,45 +2085,53 @@ return;
 
 
 box.innerHTML =
-data.map(product => `
+data.map(product=>`
 
 <div class="product">
 
-<img src="${safeImage(product.image_url)}"
+<img
+src="${safeImage(product.image_url)}"
 onerror="this.style.display='none'">
 
 <div class="product-body">
 
-<h3>${escapeHtml(product.name)}</h3>
+<h3>
+${escapeHtml(product.name)}
+</h3>
 
 <p>
 <strong>Generic:</strong>
-${escapeHtml(product.generic_name || "-")}
+${escapeHtml(product.generic_name||"-")}
 </p>
 
 <p>
 <strong>Strength:</strong>
-${escapeHtml(product.strength || "-")}
+${escapeHtml(product.strength||"-")}
 </p>
 
 <p>
 <strong>Form:</strong>
-${escapeHtml(product.dosage_form || "-")}
+${escapeHtml(product.dosage_form||"-")}
 </p>
 
 <p>
-${escapeHtml(product.description || "")}
+${escapeHtml(product.description||"")}
 </p>
 
 <div class="price">
-${product.price != null ?
+
+${product.price!=null ?
 Number(product.price).toFixed(2)+" ETB":
 "Price on request"}
+
 </div>
 
-<button class="btn"
+<button
+class="btn"
 onclick="prepareOrder(${product.id})">
+
 Order
+
 </button>
 
 </div>
@@ -1392,12 +2144,13 @@ Order
 select.innerHTML =
 '<option value="">Select product</option>'+
 
-data.map(product => `
+data.map(product=>`
 
 <option value="${product.id}">
 
 ${escapeHtml(product.name)}
-${product.price != null ?
+
+${product.price!=null ?
 " - "+Number(product.price).toFixed(2)+" ETB":
 ""}
 
@@ -1406,6 +2159,7 @@ ${product.price != null ?
 `).join("");
 
 }
+
 
 
 /* =========================
@@ -1449,11 +2203,12 @@ return;
 
 
 box.innerHTML =
-data.map(item => `
+data.map(item=>`
 
 <div class="product">
 
-<img src="${safeImage(item.image_url)}"
+<img
+src="${safeImage(item.image_url)}"
 onerror="this.style.display='none'">
 
 <div class="product-body">
@@ -1462,36 +2217,42 @@ ${item.is_featured ?
 '<span class="featured">⭐ Featured</span>':
 ""}
 
-<h3>${escapeHtml(item.name)}</h3>
+<h3>
+${escapeHtml(item.name)}
+</h3>
 
 <p>
 <strong>Brand:</strong>
-${escapeHtml(item.brand || "-")}
+${escapeHtml(item.brand||"-")}
 </p>
 
 <p>
-${escapeHtml(item.description || "")}
+${escapeHtml(item.description||"")}
 </p>
 
 ${
-item.promotional_price != null &&
-item.promotional_price < item.price
+item.promotional_price!=null &&
+item.price!=null &&
+item.promotional_price<item.price
+
 ?
 
 `
 
 <p class="promo">
 
-Promotion:
+🔥 Promotion:
 ${Number(item.promotional_price).toFixed(2)}
 ETB
 
 </p>
 
 <p>
+
 <del>
 ${Number(item.price).toFixed(2)} ETB
 </del>
+
 </p>
 
 `
@@ -1502,7 +2263,7 @@ ${Number(item.price).toFixed(2)} ETB
 
 <p class="price">
 
-${item.price != null ?
+${item.price!=null ?
 Number(item.price).toFixed(2)+" ETB":
 "Price on request"}
 
@@ -1521,18 +2282,21 @@ Number(item.price).toFixed(2)+" ETB":
 }
 
 
+
 /* =========================
 PREPARE ORDER
 ========================= */
 
 function prepareOrder(productId){
 
-document.getElementById("orderProduct")
+document
+.getElementById("orderProduct")
 .value=productId;
 
 showPage("order");
 
 }
+
 
 
 /* =========================
@@ -1566,7 +2330,7 @@ const message =
 document.getElementById("orderMessage");
 
 
-if(!name || !productId || quantity < 1){
+if(!name || !productId || quantity<1){
 
 message.innerHTML =
 '<div class="status error">Please enter your name, product and quantity.</div>';
@@ -1599,21 +2363,21 @@ return;
 
 
 const unitPrice =
-Number(product.price || 0);
+Number(product.price||0);
 
 const totalPrice =
-unitPrice * quantity;
+unitPrice*quantity;
 
 
 const orderData={
 
 customer_name:name,
 
-customer_email:email || null,
+customer_email:email||null,
 
-customer_phone:phone || null,
+customer_phone:phone||null,
 
-customer_address:address || null,
+customer_address:address||null,
 
 product_id:Number(productId),
 
@@ -1623,14 +2387,14 @@ unit_price:unitPrice,
 
 total_price:totalPrice,
 
-notes:notes || null
+notes:notes||null
 
 };
 
 
 if(currentUser){
 
-orderData.buyer_user_id =
+orderData.buyer_user_id=
 currentUser.id;
 
 }
@@ -1664,19 +2428,29 @@ message.innerHTML =
 (
 data && data.order_number
 ?
+
 "<br><strong>Order Number: "+
 escapeHtml(data.order_number)+
 "</strong>"
+
 :
+
 ""
+
 )
 
 +
+
 "</div>";
 
-document.getElementById("orderQuantity").value=1;
+
+
+document
+.getElementById("orderQuantity")
+.value=1;
 
 }
+
 
 
 /* =========================
@@ -1700,6 +2474,7 @@ await loadAdminStats();
 }
 
 
+
 /* =========================
 ADMIN STATS
 ========================= */
@@ -1707,12 +2482,15 @@ ADMIN STATS
 async function loadAdminStats(){
 
 const tables=[
+
 "products",
 "cosmetics",
 "suppliers",
 "user_accounts",
 "orders"
+
 ];
+
 
 for(const table of tables){
 
@@ -1726,23 +2504,38 @@ if(error) continue;
 
 
 if(table==="products")
-document.getElementById("adminProductCount").textContent=count||0;
+document
+.getElementById("adminProductCount")
+.textContent=count||0;
+
 
 if(table==="cosmetics")
-document.getElementById("adminCosmeticCount").textContent=count||0;
+document
+.getElementById("adminCosmeticCount")
+.textContent=count||0;
+
 
 if(table==="suppliers")
-document.getElementById("adminSupplierCount").textContent=count||0;
+document
+.getElementById("adminSupplierCount")
+.textContent=count||0;
+
 
 if(table==="user_accounts")
-document.getElementById("adminUserCount").textContent=count||0;
+document
+.getElementById("adminUserCount")
+.textContent=count||0;
+
 
 if(table==="orders")
-document.getElementById("adminOrderCount").textContent=count||0;
+document
+.getElementById("adminOrderCount")
+.textContent=count||0;
 
 }
 
 }
+
 
 
 /* =========================
@@ -1753,27 +2546,51 @@ async function addProduct(){
 
 const product={
 
-name:document.getElementById("pName").value.trim(),
+name:
+document.getElementById("pName")
+.value.trim(),
 
-generic_name:document.getElementById("pGeneric").value.trim() || null,
+generic_name:
+document.getElementById("pGeneric")
+.value.trim()||null,
 
-category:document.getElementById("pCategory").value.trim() || null,
+category:
+document.getElementById("pCategory")
+.value.trim()||null,
 
-strength:document.getElementById("pStrength").value.trim() || null,
+strength:
+document.getElementById("pStrength")
+.value.trim()||null,
 
-dosage_form:document.getElementById("pDosage").value.trim() || null,
+dosage_form:
+document.getElementById("pDosage")
+.value.trim()||null,
 
-manufacturer:document.getElementById("pManufacturer").value.trim() || null,
+manufacturer:
+document.getElementById("pManufacturer")
+.value.trim()||null,
 
-supplier:document.getElementById("pSupplier").value.trim() || null,
+supplier:
+document.getElementById("pSupplier")
+.value.trim()||null,
 
-price:Number(document.getElementById("pPrice").value)||0,
+price:
+Number(
+document.getElementById("pPrice").value
+)||0,
 
-stock:Number(document.getElementById("pStock").value)||0,
+stock:
+Number(
+document.getElementById("pStock").value
+)||0,
 
-image_url:document.getElementById("pImage").value.trim()||null,
+image_url:
+document.getElementById("pImage")
+.value.trim()||null,
 
-description:document.getElementById("pDescription").value.trim()||null
+description:
+document.getElementById("pDescription")
+.value.trim()||null
 
 };
 
@@ -1804,33 +2621,33 @@ return;
 
 alert("Product added successfully.");
 
-document.getElementById("pName").value="";
 
-document.getElementById("pGeneric").value="";
+[
+"pName",
+"pGeneric",
+"pCategory",
+"pStrength",
+"pDosage",
+"pManufacturer",
+"pSupplier",
+"pPrice",
+"pStock",
+"pImage",
+"pDescription"
+]
+.forEach(id=>{
 
-document.getElementById("pCategory").value="";
+document.getElementById(id).value="";
 
-document.getElementById("pStrength").value="";
+});
 
-document.getElementById("pDosage").value="";
-
-document.getElementById("pManufacturer").value="";
-
-document.getElementById("pSupplier").value="";
-
-document.getElementById("pPrice").value="";
-
-document.getElementById("pStock").value="";
-
-document.getElementById("pImage").value="";
-
-document.getElementById("pDescription").value="";
 
 await loadAdminProducts();
 
 await loadProducts();
 
 }
+
 
 
 /* =========================
@@ -1878,8 +2695,11 @@ box.innerHTML=`
 <tr>
 
 <th>Name</th>
+
 <th>Price</th>
+
 <th>Stock</th>
+
 <th>Action</th>
 
 </tr>
@@ -1889,19 +2709,24 @@ data.map(p=>`
 
 <tr>
 
-<td>${escapeHtml(p.name)}</td>
+<td>
+${escapeHtml(p.name)}
+</td>
 
 <td>
-${p.price != null ?
+${p.price!=null ?
 Number(p.price).toFixed(2)+" ETB":
 "-"}
 </td>
 
-<td>${p.stock ?? 0}</td>
+<td>
+${p.stock??0}
+</td>
 
 <td>
 
-<button class="btn btn-danger"
+<button
+class="btn btn-danger"
 onclick="deleteProduct(${p.id})">
 
 Delete
@@ -1922,9 +2747,11 @@ Delete
 }
 
 
+
 async function deleteProduct(id){
 
-if(!confirm("Delete this product?")) return;
+if(!confirm("Delete this product?"))
+return;
 
 
 const {error} =
@@ -1950,6 +2777,7 @@ await loadProducts();
 }
 
 
+
 /* =========================
 ADD COSMETIC
 ========================= */
@@ -1958,40 +2786,64 @@ async function addCosmetic(){
 
 const item={
 
-name:document.getElementById("cName").value.trim(),
+name:
+document.getElementById("cName")
+.value.trim(),
 
-brand:document.getElementById("cBrand").value.trim()||null,
+brand:
+document.getElementById("cBrand")
+.value.trim()||null,
 
-category:document.getElementById("cCategory").value.trim()||null,
+category:
+document.getElementById("cCategory")
+.value.trim()||null,
 
-description:document.getElementById("cDescription").value.trim()||null,
+description:
+document.getElementById("cDescription")
+.value.trim()||null,
 
-price:Number(document.getElementById("cPrice").value)||0,
+price:
+Number(
+document.getElementById("cPrice").value
+)||0,
 
 promotional_price:
 document.getElementById("cPromoPrice").value
 ?
-Number(document.getElementById("cPromoPrice").value)
+Number(
+document.getElementById("cPromoPrice").value
+)
 :
 null,
 
-stock:Number(document.getElementById("cStock").value)||0,
+stock:
+Number(
+document.getElementById("cStock").value
+)||0,
 
-supplier:document.getElementById("cSupplier").value.trim()||null,
+supplier:
+document.getElementById("cSupplier")
+.value.trim()||null,
 
-image_url:document.getElementById("cImage").value.trim()||null,
+image_url:
+document.getElementById("cImage")
+.value.trim()||null,
 
 promotion_start:
-document.getElementById("cStart").value||null,
+document.getElementById("cStart")
+.value||null,
 
 promotion_end:
-document.getElementById("cEnd").value||null,
+document.getElementById("cEnd")
+.value||null,
 
 is_featured:
-document.getElementById("cFeatured").checked,
+document.getElementById("cFeatured")
+.checked,
 
 is_active:
-document.getElementById("cActive").checked
+document.getElementById("cActive")
+.checked
 
 };
 
@@ -2027,6 +2879,7 @@ await loadAdminCosmetics();
 await loadCosmetics();
 
 }
+
 
 
 /* =========================
@@ -2074,10 +2927,15 @@ box.innerHTML=`
 <tr>
 
 <th>Name</th>
+
 <th>Brand</th>
+
 <th>Price</th>
+
 <th>Promo</th>
+
 <th>Stock</th>
+
 <th>Action</th>
 
 </tr>
@@ -2087,19 +2945,30 @@ data.map(c=>`
 
 <tr>
 
-<td>${escapeHtml(c.name)}</td>
+<td>
+${escapeHtml(c.name)}
+</td>
 
-<td>${escapeHtml(c.brand||"-")}</td>
+<td>
+${escapeHtml(c.brand||"-")}
+</td>
 
-<td>${c.price ?? "-"}</td>
+<td>
+${c.price??"-"}
+</td>
 
-<td>${c.promotional_price ?? "-"}</td>
+<td>
+${c.promotional_price??"-"}
+</td>
 
-<td>${c.stock ?? 0}</td>
+<td>
+${c.stock??0}
+</td>
 
 <td>
 
-<button class="btn btn-danger"
+<button
+class="btn btn-danger"
 onclick="deleteCosmetic(${c.id})">
 
 Delete
@@ -2120,9 +2989,11 @@ Delete
 }
 
 
+
 async function deleteCosmetic(id){
 
-if(!confirm("Delete this cosmetic?")) return;
+if(!confirm("Delete this cosmetic?"))
+return;
 
 
 const {error} =
@@ -2146,6 +3017,7 @@ await loadAdminCosmetics();
 await loadCosmetics();
 
 }
+
 
 
 /* =========================
@@ -2179,7 +3051,8 @@ return;
 
 if(!data || data.length===0){
 
-box.innerHTML="<p>No supplier accounts yet.</p>";
+box.innerHTML=
+"<p>No supplier accounts yet.</p>";
 
 return;
 
@@ -2193,9 +3066,13 @@ box.innerHTML=`
 <tr>
 
 <th>Company</th>
+
 <th>Contact</th>
+
 <th>Phone</th>
+
 <th>Approved</th>
+
 <th>Action</th>
 
 </tr>
@@ -2205,22 +3082,36 @@ data.map(s=>`
 
 <tr>
 
-<td>${escapeHtml(s.company_name)}</td>
-
-<td>${escapeHtml(s.contact_person||"-")}</td>
-
-<td>${escapeHtml(s.phone||"-")}</td>
+<td>
+${escapeHtml(s.company_name)}
+</td>
 
 <td>
-${s.approved ? "✅ Approved":"⏳ Pending"}
+${escapeHtml(s.contact_person||"-")}
+</td>
+
+<td>
+${escapeHtml(s.phone||"-")}
+</td>
+
+<td>
+${s.approved ?
+"✅ Approved":
+"⏳ Pending"}
 </td>
 
 <td>
 
-<button class="btn"
-onclick="toggleSupplierApproval(${s.id},${!s.approved})">
+<button
+class="btn"
+onclick="toggleSupplierApproval(
+${s.id},
+${!s.approved}
+)">
 
-${s.approved ? "Reject":"Approve"}
+${s.approved ?
+"Reject":
+"Approve"}
 
 </button>
 
@@ -2238,12 +3129,15 @@ ${s.approved ? "Reject":"Approve"}
 }
 
 
+
 async function toggleSupplierApproval(id,value){
 
 const {error} =
 await supabaseClient
 .from("supplier_profiles")
-.update({approved:value})
+.update({
+approved:value
+})
 .eq("id",id);
 
 
@@ -2259,6 +3153,7 @@ return;
 await loadAdminSuppliers();
 
 }
+
 
 
 /* =========================
@@ -2306,9 +3201,13 @@ box.innerHTML=`
 <tr>
 
 <th>Name</th>
+
 <th>Email</th>
+
 <th>Role</th>
+
 <th>Status</th>
+
 <th>Approved</th>
 
 </tr>
@@ -2318,15 +3217,27 @@ data.map(u=>`
 
 <tr>
 
-<td>${escapeHtml(u.full_name||"-")}</td>
+<td>
+${escapeHtml(u.full_name||"-")}
+</td>
 
-<td>${escapeHtml(u.email||"-")}</td>
+<td>
+${escapeHtml(u.email||"-")}
+</td>
 
-<td>${escapeHtml(u.role||"-")}</td>
+<td>
+${escapeHtml(u.role||"-")}
+</td>
 
-<td>${escapeHtml(u.status||"-")}</td>
+<td>
+${escapeHtml(u.status||"-")}
+</td>
 
-<td>${u.approved ? "✅":"⏳"}</td>
+<td>
+${u.approved ?
+"✅":
+"⏳"}
+</td>
 
 </tr>
 
@@ -2338,6 +3249,7 @@ data.map(u=>`
 `;
 
 }
+
 
 
 /* =========================
@@ -2388,10 +3300,15 @@ box.innerHTML=`
 <tr>
 
 <th>Order</th>
+
 <th>Customer</th>
+
 <th>Product</th>
+
 <th>Quantity</th>
+
 <th>Total</th>
+
 <th>Status</th>
 
 </tr>
@@ -2401,17 +3318,29 @@ data.map(o=>`
 
 <tr>
 
-<td>${escapeHtml(o.order_number||"-")}</td>
+<td>
+${escapeHtml(o.order_number||"-")}
+</td>
 
-<td>${escapeHtml(o.customer_name)}</td>
+<td>
+${escapeHtml(o.customer_name)}
+</td>
 
-<td>${escapeHtml(o.products?.name||"-")}</td>
+<td>
+${escapeHtml(o.products?.name||"-")}
+</td>
 
-<td>${o.quantity}</td>
+<td>
+${o.quantity}
+</td>
 
-<td>${o.total_price ?? "-"}</td>
+<td>
+${o.total_price??"-"}
+</td>
 
-<td>${escapeHtml(o.status||"pending")}</td>
+<td>
+${escapeHtml(o.status||"pending")}
+</td>
 
 </tr>
 
@@ -2425,17 +3354,23 @@ data.map(o=>`
 }
 
 
+
 /* =========================
 HELPERS
 ========================= */
 
 function escapeHtml(value){
 
-return String(value ?? "")
+return String(value??"")
+
 .replace(/&/g,"&amp;")
+
 .replace(/</g,"&lt;")
+
 .replace(/>/g,"&gt;")
+
 .replace(/"/g,"&quot;")
+
 .replace(/'/g,"&#039;");
 
 }
@@ -2443,15 +3378,17 @@ return String(value ?? "")
 
 function safeImage(url){
 
-if(!url) return "";
+if(!url)
+return "";
 
 try{
 
-const parsed =
-new URL(url);
+const parsed=new URL(url);
 
-if(parsed.protocol !== "http:" &&
-parsed.protocol !== "https:"){
+if(
+parsed.protocol!=="http:" &&
+parsed.protocol!=="https:"
+){
 
 return "";
 
@@ -2459,7 +3396,9 @@ return "";
 
 return parsed.href;
 
-}catch(e){
+}
+
+catch(e){
 
 return "";
 
@@ -2468,8 +3407,9 @@ return "";
 }
 
 
+
 /* =========================
-START WEBSITE
+START
 ========================= */
 
 async function startApp(){
