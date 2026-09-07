@@ -2,1182 +2,1184 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>K2 Pharmaceutical Sales & Promotion ET</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-/* =====================================================
-   K2 PHARMACEUTICAL — MODERN DESIGN
-===================================================== */
-
 :root{
-    --primary:#087f5b;
-    --primary-dark:#056044;
-    --secondary:#0b7285;
-    --accent:#12b886;
-    --dark:#17312e;
-    --gray:#647572;
-    --light:#f3f8f7;
-    --white:#ffffff;
-    --border:#dce8e5;
-    --danger:#d63031;
-    --warning:#f59f00;
-    --shadow:0 10px 30px rgba(0,0,0,.07);
+  --green:#087f5b;
+  --dark:#064d3b;
+  --teal:#0f766e;
+  --light:#eaf7f2;
+  --gold:#c89535;
+  --bg:#f6faf8;
+  --white:#fff;
+  --text:#10251e;
+  --muted:#65756f;
+  --border:#dce9e4;
+  --red:#c0392b;
+  --shadow:0 12px 35px rgba(0,0,0,.07);
 }
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background:
-        linear-gradient(
-            180deg,
-            #f9fcfb 0%,
-            #eef7f5 100%
-        );
-
-    color:var(--dark);
-    line-height:1.6;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
 }
 
+button,input,select,textarea{font:inherit}
 
-/* =====================================================
-   HEADER
-===================================================== */
+button{cursor:pointer}
+
+.wrap{
+  width:92%;
+  max-width:1200px;
+  margin:auto;
+}
 
 header{
-    position:sticky;
-    top:0;
-    z-index:9999;
-
-    background:rgba(255,255,255,.96);
-
-    backdrop-filter:blur(12px);
-
-    border-bottom:1px solid var(--border);
-
-    box-shadow:
-        0 4px 20px rgba(0,0,0,.05);
-
-    padding:13px 18px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.97);
+  border-bottom:1px solid var(--border);
 }
 
-.header-container{
-    max-width:1250px;
-    margin:auto;
+.nav{
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    gap:20px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--text);
+  text-decoration:none;
 }
 
 .logo{
-    color:var(--primary);
-
-    font-size:20px;
-    font-weight:800;
-
-    letter-spacing:-.5px;
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,var(--dark),var(--green));
+  color:white;
+  font-weight:900;
+  font-size:20px;
 }
 
-.logo span{
-    color:var(--secondary);
+.brand strong{
+  display:block;
+  font-size:15px;
 }
 
-nav{
-    display:flex;
-    gap:5px;
-    flex-wrap:wrap;
-    justify-content:center;
+.brand small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
 }
 
-nav button{
-    border:0;
-
-    background:transparent;
-
-    color:#36534f;
-
-    padding:9px 11px;
-
-    border-radius:8px;
-
-    font-size:13px;
-    font-weight:600;
-
-    transition:.25s ease;
-
-    cursor:pointer;
+.navlinks{
+  display:flex;
+  gap:3px;
+  align-items:center;
 }
 
-nav button:hover{
-    background:#e5f5f0;
-
-    color:var(--primary);
-
-    transform:translateY(-1px);
+.navlinks button{
+  border:0;
+  background:transparent;
+  color:#465952;
+  padding:10px;
+  border-radius:9px;
+  font-weight:600;
 }
 
-
-/* =====================================================
-   CONTAINER / SECTIONS
-===================================================== */
-
-.container{
-    max-width:1250px;
-
-    margin:auto;
-
-    padding:30px 20px;
+.navlinks button:hover{
+  background:var(--light);
+  color:var(--dark);
 }
 
-section{
-    display:none;
-
-    animation:
-        fadeIn .3s ease;
+.menu{
+  display:none;
+  border:0;
+  background:var(--light);
+  border-radius:9px;
+  padding:9px 12px;
+  font-size:20px;
 }
 
-section.active{
-    display:block;
+.mobilelinks{
+  display:none;
+  padding:10px 0 15px;
+  border-top:1px solid var(--border);
 }
 
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(8px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
+.mobilelinks button{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:11px;
+  border:0;
+  background:transparent;
 }
 
+.mobilelinks.open{display:block}
 
-/* =====================================================
-   HERO
-===================================================== */
+.page{display:none}
+.page.active{display:block}
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  border-radius:11px;
+  padding:12px 18px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+
+.btn-primary{
+  background:var(--green);
+  color:white;
+}
+
+.btn-primary:hover{background:var(--dark)}
+
+.btn-light{
+  background:white;
+  color:var(--dark);
+  border:1px solid var(--border);
+}
+
+.btn-gold{
+  background:var(--gold);
+  color:white;
+}
+
+.btn-danger{
+  background:#fff0ee;
+  color:var(--red);
+  border:1px solid #efc9c3;
+}
+
+.btn-sm{
+  padding:7px 10px;
+  font-size:12px;
+}
+
+/* HOME */
 
 .hero{
-    position:relative;
-
-    overflow:hidden;
-
-    min-height:500px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    padding:70px 25px;
-
-    border-radius:28px;
-
-    color:white;
-
-    background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(255,255,255,.20),
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(255,255,255,.15),
-            transparent 28%
-        ),
-
-        linear-gradient(
-            135deg,
-            #04543e,
-            #087f5b 50%,
-            #0b7285
-        );
-
-    box-shadow:
-        0 25px 60px
-        rgba(8,127,91,.22);
-
-    margin-bottom:45px;
+  padding:75px 0 45px;
+  background:
+    radial-gradient(circle at 85% 15%,#dff4eb,transparent 32%),
+    linear-gradient(#fff,#f5faf8);
 }
 
-.hero:before{
-    content:"";
-
-    position:absolute;
-
-    width:350px;
-    height:350px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.14);
-
-    top:-150px;
-    right:-80px;
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.08fr .92fr;
+  gap:45px;
+  align-items:center;
 }
 
-.hero:after{
-    content:"";
-
-    position:absolute;
-
-    width:240px;
-    height:240px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    bottom:-120px;
-    left:-70px;
-}
-
-.hero-content{
-    position:relative;
-
-    z-index:2;
-
-    max-width:850px;
-}
-
-.hero-badge{
-    display:inline-block;
-
-    padding:7px 15px;
-
-    border-radius:50px;
-
-    background:
-        rgba(255,255,255,.14);
-
-    border:
-        1px solid
-        rgba(255,255,255,.25);
-
-    margin-bottom:20px;
-
-    font-size:13px;
-    font-weight:700;
-
-    letter-spacing:.5px;
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  background:var(--light);
+  color:var(--dark);
+  border:1px solid #cbe9dc;
+  border-radius:50px;
+  font-size:12px;
+  font-weight:800;
 }
 
 .hero h1{
-    font-size:
-        clamp(
-            32px,
-            5vw,
-            58px
-        );
-
-    line-height:1.08;
-
-    letter-spacing:-2px;
-
-    margin-bottom:20px;
+  font-family:Georgia,serif;
+  font-size:clamp(43px,6vw,70px);
+  line-height:1.02;
+  margin:18px 0;
+  letter-spacing:-2px;
 }
+
+.hero h1 span{color:var(--green)}
 
 .hero p{
-    font-size:18px;
-
-    max-width:720px;
-
-    margin:0 auto 30px;
-
-    opacity:.94;
+  color:var(--muted);
+  font-size:18px;
+  max-width:650px;
 }
 
-.hero-buttons{
-    display:flex;
-
-    justify-content:center;
-
-    gap:12px;
-
-    flex-wrap:wrap;
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:25px;
 }
 
-.hero-button{
-    padding:13px 22px;
-
-    border-radius:10px;
-
-    border:0;
-
-    font-weight:700;
-
-    cursor:pointer;
+.hero-box{
+  background:linear-gradient(145deg,var(--dark),#07966a);
+  color:white;
+  padding:30px;
+  border-radius:28px;
+  box-shadow:var(--shadow);
 }
 
-.hero-button.white{
-    background:white;
-
-    color:var(--primary);
+.hero-box h2{
+  font-size:28px;
+  margin:15px 0 10px;
 }
 
-.hero-button.outline{
-    background:transparent;
-
-    color:white;
-
-    border:
-        1px solid
-        rgba(255,255,255,.6);
+.hero-box p{
+  color:rgba(255,255,255,.78);
+  font-size:14px;
 }
 
-
-/* =====================================================
-   SECTION TITLE
-===================================================== */
-
-.section-title{
-    text-align:center;
-
-    margin-bottom:30px;
+.hero-mini{
+  background:white;
+  color:var(--text);
+  border-radius:15px;
+  padding:16px;
+  margin-top:20px;
 }
 
-.section-title h2{
-    margin-bottom:7px;
-}
-
-.section-title p{
-    color:var(--gray);
-}
-
-
-/* =====================================================
-   HEADINGS
-===================================================== */
-
-h2{
-    font-size:31px;
-
-    line-height:1.2;
-
-    letter-spacing:-.8px;
-
-    margin-bottom:22px;
-}
-
-h3{
-    margin-bottom:8px;
-}
-
-
-/* =====================================================
-   CARDS
-===================================================== */
-
-.card-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px,1fr)
-        );
-
-    gap:20px;
-
-    margin-bottom:45px;
-}
-
-.card{
-    background:
-        rgba(255,255,255,.95);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:18px;
-
-    padding:25px;
-
-    box-shadow:var(--shadow);
-
-    transition:.25s ease;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-
-    box-shadow:
-        0 18px 40px
-        rgba(0,0,0,.10);
-}
-
-.card-icon{
-    width:48px;
-    height:48px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    background:#e7f6f1;
-
-    font-size:24px;
-
-    margin-bottom:15px;
-}
-
-
-/* =====================================================
-   PRODUCT GRID
-===================================================== */
-
-.product-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(235px,1fr)
-        );
-
-    gap:22px;
-}
-
-
-/* =====================================================
-   PRODUCT CARD
-===================================================== */
-
-.product-card{
-    overflow:hidden;
-
-    background:white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:18px;
-
-    padding:14px;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.06);
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.product-card:hover{
-    transform:translateY(-6px);
-
-    box-shadow:
-        0 18px 40px
-        rgba(0,0,0,.11);
-}
-
-.product-image{
-    width:100%;
-    height:200px;
-
-    object-fit:cover;
-
-    border-radius:13px;
-
-    background:#eef4f2;
-
-    margin-bottom:14px;
-}
-
-.no-image{
-    height:200px;
-
-    border-radius:13px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #edf6f3,
-            #e1efeb
-        );
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    color:var(--gray);
-
-    margin-bottom:14px;
-}
-
-.product-card h3{
-    font-size:18px;
-
-    color:var(--dark);
-}
-
-.product-card p{
-    color:var(--gray);
-
-    font-size:14px;
-
-    margin:4px 0;
-}
-
-.product-card .price{
-    color:var(--primary);
-
-    font-size:21px;
-
-    font-weight:800;
-
-    margin:12px 0;
-}
-
-.stock{
-    display:inline-block;
-
-    padding:4px 9px;
-
-    background:#e8f7ef;
-
-    color:#16834d;
-
-    border-radius:50px;
-
-    font-size:12px;
-
-    font-weight:700;
-
-    margin-bottom:12px;
-}
-
-
-/* =====================================================
-   FORMS
-===================================================== */
-
-form{
-    background:white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:18px;
-
-    padding:28px;
-
-    box-shadow:var(--shadow);
-
-    margin-bottom:25px;
-}
-
-.form-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px,1fr)
-        );
-
-    gap:17px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-
-    font-size:13px;
-
-    font-weight:700;
-
-    color:#4d625f;
-
-    margin-bottom:6px;
-}
-
-input,
-select,
-textarea{
-    width:100%;
-
-    padding:13px 14px;
-
-    border:
-        1px solid
-        #d6e2df;
-
-    border-radius:9px;
-
-    background:#fbfdfd;
-
-    color:var(--dark);
-
-    font-family:inherit;
-
-    font-size:15px;
-
-    outline:none;
-
-    transition:.2s ease;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-
-    border-color:
-        var(--primary);
-
-    background:white;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(8,127,91,.10);
-}
-
-textarea{
-    min-height:120px;
-
-    resize:vertical;
-}
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-button{
-    cursor:pointer;
-
-    font-family:inherit;
-}
-
-.primary,
-form button{
-    background:
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--secondary)
-        );
-
-    color:white;
-
-    border:0;
-
-    padding:12px 20px;
-
-    border-radius:9px;
-
-    font-weight:700;
-
-    box-shadow:
-        0 6px 15px
-        rgba(8,127,91,.16);
-
-    transition:.25s ease;
-}
-
-.primary:hover,
-form button:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 10px 22px
-        rgba(8,127,91,.25);
-}
-
-.danger{
-    background:#fff0f0;
-
-    color:var(--danger);
-
-    border:
-        1px solid
-        #ffd0d0;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    font-weight:700;
-}
-
-.danger:hover{
-    background:var(--danger);
-
-    color:white;
-}
-
-.success{
-    background:#e8f7ef;
-
-    color:#16834d;
-
-    border:
-        1px solid
-        #c9ecd9;
-
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    font-weight:700;
-}
-
-
-/* =====================================================
-   MESSAGES
-===================================================== */
-
-.message{
-    padding:13px 16px;
-
-    border-radius:9px;
-
-    margin:12px 0;
-
-    display:none;
-}
-
-.message.success{
-    display:block;
-
-    background:#eaf8f0;
-
-    color:#167347;
-
-    border:
-        1px solid
-        #ccebd9;
-}
-
-.message.error{
-    display:block;
-
-    background:#fff0f0;
-
-    color:#bd2929;
-
-    border:
-        1px solid
-        #ffd1d1;
-}
-
-
-/* =====================================================
-   TABLE
-===================================================== */
-
-.table-container{
-    width:100%;
-
-    overflow-x:auto;
-
-    border-radius:12px;
-}
-
-table{
-    width:100%;
-
-    min-width:700px;
-
-    border-collapse:collapse;
-
-    background:white;
-}
-
-th{
-    background:
-        linear-gradient(
-            135deg,
-            #056044,
-            #087f5b
-        );
-
-    color:white;
-
-    padding:14px;
-
-    text-align:left;
-
-    font-size:14px;
-}
-
-td{
-    padding:13px;
-
-    border-bottom:
-        1px solid
-        #edf1f0;
-
-    font-size:14px;
-}
-
-tr:hover td{
-    background:#f7fbfa;
-}
-
-
-/* =====================================================
-   STATISTICS
-===================================================== */
-
-.stat-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(160px,1fr)
-        );
-
-    gap:18px;
-
-    margin-bottom:30px;
+.hero-mini strong{display:block}
+
+.hero-mini small{color:var(--muted)}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  padding:0 0 45px;
 }
 
 .stat{
-    background:white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:16px;
-
-    padding:24px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow);
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+  text-align:center;
 }
 
-.stat h2{
-    color:var(--primary);
-
-    font-size:35px;
-
-    margin-bottom:3px;
+.stat b{
+  display:block;
+  color:var(--dark);
+  font-size:26px;
 }
 
-.stat p{
-    color:var(--gray);
+.stat span{
+  color:var(--muted);
+  font-size:12px;
 }
 
-
-/* =====================================================
-   DASHBOARD HEADER
-===================================================== */
-
-.dashboard-header{
-    background:
-        linear-gradient(
-            135deg,
-            #e8f7f2,
-            #e7f4f7
-        );
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:18px;
-
-    padding:25px;
-
-    margin-bottom:25px;
+.block{
+  padding:70px 0;
 }
 
+.white{background:white}
 
-/* =====================================================
-   FOOTER
-===================================================== */
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:20px;
+  margin-bottom:27px;
+}
+
+.section-head h2{
+  font-family:Georgia,serif;
+  font-size:38px;
+  margin:5px 0;
+}
+
+.section-head p{
+  color:var(--muted);
+  max-width:600px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 7px 22px rgba(0,0,0,.03);
+}
+
+.icon{
+  width:45px;
+  height:45px;
+  border-radius:13px;
+  display:grid;
+  place-items:center;
+  background:var(--light);
+  font-size:21px;
+  margin-bottom:14px;
+}
+
+.feature h3{margin:0 0 8px}
+
+.feature p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.product-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:0 7px 23px rgba(0,0,0,.035);
+}
+
+.product-image{
+  height:175px;
+  background:#edf7f3;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  font-size:45px;
+  overflow:hidden;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-body{padding:17px}
+
+.tag{
+  display:inline-block;
+  background:var(--light);
+  color:var(--dark);
+  border-radius:50px;
+  padding:5px 8px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.product-body h3{
+  font-size:16px;
+  margin:9px 0 5px;
+}
+
+.product-body p{
+  color:var(--muted);
+  font-size:12px;
+  min-height:35px;
+}
+
+.product-meta{
+  border-top:1px solid var(--border);
+  padding-top:10px;
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:var(--muted);
+}
+
+.stock{color:var(--green);font-weight:bold}
+
+.process{
+  background:var(--dark);
+  color:white;
+}
+
+.process .section-head p{color:rgba(255,255,255,.7)}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.step{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:18px;
+  padding:24px;
+}
+
+.step-number{
+  color:#a7dfcf;
+  font-weight:800;
+  font-size:12px;
+}
+
+.step p{
+  color:rgba(255,255,255,.7);
+  font-size:14px;
+}
+
+.cta{
+  background:linear-gradient(135deg,#e3f7ee,#fff);
+  border:1px solid #cce9dc;
+  border-radius:24px;
+  padding:35px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.cta h2{
+  font-family:Georgia,serif;
+  font-size:34px;
+  margin:0 0 7px;
+}
+
+.cta p{
+  color:var(--muted);
+}
+
+/* PAGE TITLE */
+
+.page-title{
+  padding:55px 0 25px;
+}
+
+.page-title h1{
+  font-family:Georgia,serif;
+  font-size:45px;
+  margin:8px 0;
+}
+
+.page-title p{
+  color:var(--muted);
+}
+
+/* FORMS */
+
+.form-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:25px;
+  box-shadow:var(--shadow);
+  max-width:850px;
+  margin:20px auto 60px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full{grid-column:1/-1}
+
+.field label{
+  font-size:12px;
+  font-weight:700;
+  color:#4d5d57;
+}
+
+.input,
+.select,
+.textarea{
+  width:100%;
+  padding:12px 13px;
+  border:1px solid var(--border);
+  border-radius:10px;
+  outline:none;
+  background:white;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus{
+  border-color:var(--green);
+}
+
+.search{
+  max-width:550px;
+}
+
+.auth-wrap{
+  min-height:72vh;
+  display:grid;
+  place-items:center;
+  padding:45px 0;
+}
+
+.auth-card{
+  width:min(520px,100%);
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:30px;
+  box-shadow:var(--shadow);
+}
+
+.auth-card h1{
+  font-family:Georgia,serif;
+  margin:10px 0;
+}
+
+.auth-card>p{color:var(--muted)}
+
+.notice{
+  padding:13px 15px;
+  border-radius:10px;
+  background:#fff8e7;
+  border:1px solid #eedda8;
+  color:#735816;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+.success{
+  background:#eaf8f1;
+  border-color:#c7e8d8;
+  color:#176447;
+}
+
+.error{
+  background:#fff0ee;
+  border-color:#efc9c3;
+  color:#8e2c22;
+}
+
+/* DASHBOARD */
+
+.dashboard-head{
+  padding:45px 0 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.dashboard-head h1{
+  font-family:Georgia,serif;
+}
+
+.dashboard{
+  padding-bottom:60px;
+}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.stat-card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:18px;
+}
+
+.stat-card span{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.stat-card b{
+  display:block;
+  font-size:27px;
+  color:var(--dark);
+  margin-top:5px;
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.panel h2{
+  margin-top:0;
+  font-size:21px;
+}
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  min-width:750px;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:11px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+  font-size:12px;
+}
+
+th{
+  background:#f3f9f6;
+}
+
+.status{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:50px;
+  font-size:10px;
+  font-weight:700;
+  background:#edf3f1;
+}
+
+.status.completed{
+  background:#e5f7ed;
+  color:#147448;
+}
+
+.status.pending{
+  background:#fff6dc;
+  color:#806317;
+}
+
+.status.cancelled{
+  background:#fff0ee;
+  color:#a33429;
+}
+
+/* FOOTER */
 
 footer{
-    margin-top:70px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #064c3c,
-            #075e54
-        );
-
-    color:white;
-
-    text-align:center;
-
-    padding:45px 20px;
+  background:#062f25;
+  color:white;
+  padding:45px 0 20px;
+  margin-top:50px;
 }
 
-footer h3{
-    font-size:22px;
-
-    margin-bottom:8px;
+.footer-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:35px;
 }
 
-footer p{
-    opacity:.85;
-
-    margin:5px;
+footer p,footer li{
+  color:rgba(255,255,255,.65);
+  font-size:13px;
 }
 
+footer ul{
+  padding:0;
+  list-style:none;
+}
 
-/* =====================================================
-   MOBILE
-===================================================== */
+footer li{margin:8px 0}
 
-@media(max-width:768px){
+.copyright{
+  border-top:1px solid rgba(255,255,255,.1);
+  margin-top:30px;
+  padding-top:18px;
+  color:rgba(255,255,255,.4);
+  font-size:11px;
+}
 
-    header{
-        padding:11px;
-    }
+/* RESPONSIVE */
 
-    .header-container{
-        flex-direction:column;
+@media(max-width:950px){
 
-        align-items:stretch;
-    }
+.navlinks{display:none}
 
-    .logo{
-        text-align:center;
+.menu{display:block}
 
-        font-size:18px;
-    }
+.hero-grid{
+  grid-template-columns:1fr;
+}
 
-    nav{
-        justify-content:center;
-    }
+.product-grid{
+  grid-template-columns:repeat(3,1fr);
+}
 
-    nav button{
-        font-size:11px;
-
-        padding:8px 8px;
-    }
-
-    .container{
-        padding:20px 12px;
-    }
-
-    .hero{
-        min-height:430px;
-
-        padding:50px 18px;
-
-        border-radius:20px;
-    }
-
-    .hero h1{
-        font-size:34px;
-
-        letter-spacing:-1px;
-    }
-
-    .hero p{
-        font-size:16px;
-    }
-
-    h2{
-        font-size:27px;
-    }
-
-    .product-grid{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-
-        gap:12px;
-    }
-
-    .product-card{
-        padding:10px;
-
-        border-radius:13px;
-    }
-
-    .product-image,
-    .no-image{
-        height:145px;
-
-        border-radius:9px;
-    }
-
-    .product-card h3{
-        font-size:15px;
-    }
-
-    .product-card p{
-        font-size:12px;
-    }
-
-    .product-card .price{
-        font-size:17px;
-    }
-
-    form{
-        padding:18px;
-    }
+.stats,
+.stat-grid{
+  grid-template-columns:repeat(2,1fr);
+}
 
 }
 
-@media(max-width:420px){
+@media(max-width:680px){
 
-    .product-grid{
-        grid-template-columns:1fr 1fr;
-    }
+.hero{
+  padding-top:45px;
+}
 
-    nav button{
-        min-width:68px;
-    }
+.hero h1{
+  font-size:44px;
+}
+
+.cards,
+.steps,
+.footer-grid{
+  grid-template-columns:1fr;
+}
+
+.product-grid{
+  grid-template-columns:repeat(2,1fr);
+}
+
+.form-grid{
+  grid-template-columns:1fr;
+}
+
+.field.full{
+  grid-column:auto;
+}
+
+.section-head,
+.cta{
+  display:block;
+}
+
+.cta .btn{
+  margin-top:15px;
+}
+
+.page-title h1{
+  font-size:37px;
+}
 
 }
 
+@media(max-width:430px){
+
+.product-grid{
+  grid-template-columns:1fr;
+}
+
+.stats,
+.stat-grid{
+  grid-template-columns:1fr;
+}
+
+.brand strong{
+  font-size:13px;
+}
+
+}
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-HEADER
-===================================================== -->
 
 <header>
 
-<div class="header-container">
+<div class="wrap">
 
-<div class="logo">
-K2 <span>Pharmaceutical</span>
-</div>
+<nav class="nav">
 
-<nav>
+<a href="#" class="brand" onclick="showSection('home');return false">
 
-<button onclick="showSection('home')">
-Home
-</button>
+<span class="logo">K2</span>
 
-<button onclick="showSection('products')">
-Products
-</button>
+<span>
+<strong>K2 Pharmaceutical Sales & Promotion ET</strong>
+<small>Connecting suppliers with buyers</small>
+</span>
 
-<button onclick="showSection('cosmetics')">
-Cosmetics
-</button>
+</a>
 
-<button onclick="showSection('order')">
-Place Order
-</button>
+<div class="navlinks">
 
-<button onclick="showSection('register')">
-Register
-</button>
+<button onclick="showSection('home')">Home</button>
+<button onclick="showSection('products')">Products</button>
+<button onclick="showSection('cosmetics')">Cosmetics</button>
+<button onclick="showSection('order')">Place Order</button>
+<button onclick="showSection('register')">Register</button>
+<button onclick="showSection('login')">Login</button>
+<button onclick="showSection('adminLogin')">Admin</button>
 
-<button onclick="showSection('login')">
-Login
-</button>
-
-<button onclick="showSection('adminLogin')">
-Admin
-</button>
-
-<button onclick="logout()">
+<button id="logoutBtn"
+style="display:none"
+onclick="logout()">
 Logout
 </button>
 
+</div>
+
+<button class="menu" onclick="toggleMenu()">☰</button>
+
 </nav>
+
+<div id="mobileLinks" class="mobilelinks">
+
+<button onclick="showSection('home');toggleMenu()">Home</button>
+<button onclick="showSection('products');toggleMenu()">Products</button>
+<button onclick="showSection('cosmetics');toggleMenu()">Cosmetics</button>
+<button onclick="showSection('order');toggleMenu()">Place Order</button>
+<button onclick="showSection('register');toggleMenu()">Register</button>
+<button onclick="showSection('login');toggleMenu()">Login</button>
+<button onclick="showSection('adminLogin');toggleMenu()">Admin</button>
+
+<button id="mobileLogout"
+style="display:none"
+onclick="logout()">
+Logout
+</button>
+
+</div>
 
 </div>
 
 </header>
 
 
-<div class="container">
+<main>
 
+<!-- HOME -->
 
-<!-- =====================================================
-HOME
-===================================================== -->
-
-<section id="home" class="active">
+<section id="home" class="page active">
 
 <div class="hero">
 
-<div class="hero-content">
+<div class="wrap hero-grid">
 
-<div class="hero-badge">
+<div>
+
+<span class="badge">
 🇪🇹 Pharmaceutical Marketplace in Ethiopia
-</div>
+</span>
 
 <h1>
-Connecting Pharmaceutical Suppliers With Buyers
+Your trusted bridge between
+<span>suppliers</span> and buyers.
 </h1>
 
 <p>
-A modern platform connecting pharmaceutical suppliers,
-pharmacies, drug stores and buyers across Ethiopia.
+K2 Pharmaceutical Sales & Promotion ET connects pharmaceutical suppliers,
+pharmacies and drug stores through one simple digital marketplace.
 </p>
 
-<div class="hero-buttons">
+<div class="actions">
 
 <button
-class="hero-button white"
+class="btn btn-primary"
 onclick="showSection('products')">
-
-💊 Browse Products
-
+Explore Products →
 </button>
 
 <button
-class="hero-button outline"
+class="btn btn-light"
 onclick="showSection('register')">
+Join K2
+</button>
 
-🏢 Join K2
+</div>
 
+</div>
+
+
+<div class="hero-box">
+
+<span class="badge"
+style="background:rgba(255,255,255,.12);color:#fff;border-color:transparent">
+● K2 Marketplace
+</span>
+
+<h2>
+Find products. Connect with suppliers. Grow your business.
+</h2>
+
+<p>
+A digital platform designed for pharmaceutical suppliers,
+pharmacies and drug stores across Ethiopia.
+</p>
+
+<div class="hero-mini">
+
+<strong>💊 Pharmaceutical Products</strong>
+
+<small>
+Discover products and supplier information.
+</small>
+
+</div>
+
+<div class="hero-mini">
+
+<strong>🏪 Buyers & Pharmacies</strong>
+
+<small>
+Built for pharmacies and drug stores.
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="wrap stats">
+
+<div class="stat">
+
+<b id="homeProductCount">0</b>
+
+<span>Products listed</span>
+
+</div>
+
+<div class="stat">
+
+<b id="homeSupplierCount">0</b>
+
+<span>Suppliers</span>
+
+</div>
+
+<div class="stat">
+
+<b>ET</b>
+
+<span>Focused on Ethiopia</span>
+
+</div>
+
+<div class="stat">
+
+<b>24/7</b>
+
+<span>Digital access</span>
+
+</div>
+
+</div>
+
+
+<div class="block">
+
+<div class="wrap">
+
+<div class="section-head">
+
+<div>
+
+<span class="badge">WHY K2</span>
+
+<h2>
+Built around pharmaceutical trade
+</h2>
+
+</div>
+
+<p>
+A focused marketplace helping suppliers become visible and helping buyers
+discover available pharmaceutical products.
+</p>
+
+</div>
+
+
+<div class="cards">
+
+<div class="feature">
+
+<div class="icon">🔎</div>
+
+<h3>Easy product discovery</h3>
+
+<p>
+Search products by name, generic name, category and supplier.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">🤝</div>
+
+<h3>Supplier–buyer connection</h3>
+
+<p>
+Create a digital bridge between pharmaceutical suppliers and buyers.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="icon">📦</div>
+
+<h3>Stock visibility</h3>
+
+<p>
+Suppliers can list their available products and manage stock information.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="block white">
+
+<div class="wrap">
+
+<div class="section-head">
+
+<div>
+
+<span class="badge">FEATURED PRODUCTS</span>
+
+<h2>Products on K2</h2>
+
+</div>
+
+<button
+class="btn btn-light"
+onclick="showSection('products')">
+View All Products →
+</button>
+
+</div>
+
+<div
+id="featuredProducts"
+class="product-grid">
+</div>
+
+</div>
+
+</div>
+
+
+<div class="block process">
+
+<div class="wrap">
+
+<div class="section-head">
+
+<div>
+
+<span class="badge"
+style="background:rgba(255,255,255,.1);color:#b7e6d6;border:0">
+HOW IT WORKS
+</span>
+
+<h2>One platform. Two sides of the trade.</h2>
+
+</div>
+
+<p>
+Simple steps for suppliers and buyers.
+</p>
+
+</div>
+
+
+<div class="steps">
+
+<div class="step">
+
+<div class="step-number">01 — SUPPLIER</div>
+
+<h3>Register & List</h3>
+
+<p>
+Create a supplier account and publish your pharmaceutical products.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">02 — BUYER</div>
+
+<h3>Search & Order</h3>
+
+<p>
+Pharmacies and drug stores discover products and place orders.
+</p>
+
+</div>
+
+
+<div class="step">
+
+<div class="step-number">03 — K2</div>
+
+<h3>Connect & Manage</h3>
+
+<p>
+Orders, suppliers, products and stock can be managed through the platform.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="block">
+
+<div class="wrap">
+
+<div class="cta">
+
+<div>
+
+<h2>Are you a pharmaceutical supplier?</h2>
+
+<p>
+Put your products in front of pharmacies and drug stores.
+</p>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="showSection('register');setRegisterRole('supplier')">
+Become a Supplier →
 </button>
 
 </div>
@@ -1186,824 +1188,630 @@ onclick="showSection('register')">
 
 </div>
 
+</section>
 
-<div class="section-title">
 
-<h2>
-Everything You Need in One Platform
-</h2>
+<!-- PRODUCTS -->
+
+<section id="products" class="page">
+
+<div class="wrap">
+
+<div class="page-title">
+
+<span class="badge">MARKETPLACE</span>
+
+<h1>Pharmaceutical Products</h1>
 
 <p>
-Simple, professional and convenient pharmaceutical trading.
+Browse products listed by suppliers on K2.
 </p>
 
 </div>
 
+<div style="margin-bottom:25px">
 
-<div class="card-grid">
-
-<div class="card">
-
-<div class="card-icon">
-💊
-</div>
-
-<h3>
-Pharmaceutical Products
-</h3>
-
-<p>
-Find pharmaceutical products from suppliers
-on one convenient platform.
-</p>
+<input
+id="productSearch"
+class="input search"
+placeholder="🔎 Search product, generic name, category or supplier..."
+oninput="loadPublicProducts()">
 
 </div>
 
-
-<div class="card">
-
-<div class="card-icon">
-🏪
+<div id="publicProducts" class="product-grid">
 </div>
-
-<h3>
-For Buyers
-</h3>
-
-<p>
-Pharmacies and drug stores can easily
-find and order products.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-icon">
-🏢
-</div>
-
-<h3>
-For Suppliers
-</h3>
-
-<p>
-Approved suppliers can publish and manage
-their pharmaceutical products.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-icon">
-📦
-</div>
-
-<h3>
-Stock Management
-</h3>
-
-<p>
-Orders and inventory are connected
-for better stock control.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h2>
-About K2
-</h2>
-
-<p>
-K2 Pharmaceutical Sales & Promotion ET is a digital
-platform designed to connect pharmaceutical suppliers
-with pharmacies, drug stores and buyers throughout Ethiopia.
-</p>
-
-<br>
-
-<p>
-Our goal is to make pharmaceutical product discovery,
-supplier connection and ordering easier and more efficient.
-</p>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-PRODUCTS
-===================================================== -->
+<!-- COSMETICS -->
 
-<section id="products">
+<section id="cosmetics" class="page">
 
-<div class="section-title">
+<div class="wrap">
 
-<h2>
-💊 Pharmaceutical Products
-</h2>
+<div class="page-title">
+
+<span class="badge">PERSONAL CARE</span>
+
+<h1>Cosmetics & Personal Care</h1>
 
 <p>
-Explore available pharmaceutical products.
+Explore cosmetics and personal-care products listed on K2.
 </p>
 
 </div>
 
-<div
-id="publicProducts"
-class="product-grid">
-
-Loading products...
+<div id="publicCosmetics" class="product-grid">
+</div>
 
 </div>
 
 </section>
 
 
-<!-- =====================================================
-COSMETICS
-===================================================== -->
+<!-- REGISTER -->
 
-<section id="cosmetics">
+<section id="register" class="page">
 
-<div class="section-title">
+<div class="wrap auth-wrap">
 
-<h2>
-✨ Cosmetics
-</h2>
+<div class="auth-card">
 
-<p>
-Explore available cosmetic products.
-</p>
+<span class="badge">JOIN K2</span>
 
-</div>
-
-<div
-id="publicCosmetics"
-class="product-grid">
-
-Loading cosmetics...
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-REGISTER
-===================================================== -->
-
-<section id="register">
-
-<div class="section-title">
-
-<h2>
-Create Your K2 Account
-</h2>
+<h1>Create your account</h1>
 
 <p>
-Join our pharmaceutical marketplace.
+Register as a buyer or pharmaceutical supplier.
 </p>
 
-</div>
+<div id="registerMsg"></div>
 
-
-<form id="registerForm">
+<form onsubmit="registerUser(event)">
 
 <div class="form-grid">
 
-<input
-id="registerName"
-placeholder="Full Name"
-required
->
+<div class="field">
+
+<label>Full name</label>
 
 <input
-id="registerEmail"
-type="email"
-placeholder="Email Address"
-required
->
-
-<input
-id="registerPhone"
-placeholder="Phone Number"
-required
->
-
-<input
-id="registerBusiness"
-placeholder="Business / Company Name"
->
-
-<select
-id="registerBusinessType">
-
-<option value="">
-Select Business Type
-</option>
-
-<option value="pharmacy">
-Pharmacy
-</option>
-
-<option value="drug_store">
-Drug Store
-</option>
-
-<option value="supplier">
-Pharmaceutical Supplier
-</option>
-
-<option value="other">
-Other
-</option>
-
-</select>
-
-<input
-id="registerAddress"
-placeholder="Address"
->
-
-<input
-id="registerLicense"
-placeholder="License Number"
->
-
-<input
-id="registerPassword"
-type="password"
-placeholder="Password"
-required
->
+id="regName"
+class="input"
+required>
 
 </div>
 
-<br>
 
-<button type="submit">
+<div class="field">
+
+<label>Email</label>
+
+<input
+id="regEmail"
+type="email"
+class="input"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Phone</label>
+
+<input
+id="regPhone"
+class="input"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Business name</label>
+
+<input
+id="regBusiness"
+class="input">
+
+</div>
+
+
+<div class="field">
+
+<label>Business type</label>
+
+<select
+id="regBusinessType"
+class="select">
+
+<option value="pharmacy">Pharmacy</option>
+<option value="drug_store">Drug Store</option>
+<option value="supplier">Pharmaceutical Supplier</option>
+<option value="other">Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Account type</label>
+
+<select
+id="regRole"
+class="select"
+onchange="toggleSupplierFields()">
+
+<option value="buyer">Buyer</option>
+<option value="supplier">Supplier</option>
+
+</select>
+
+</div>
+
+
+<div
+id="supplierExtra"
+class="field full"
+style="display:none">
+
+<label>Supplier License Number</label>
+
+<input
+id="regLicense"
+class="input">
+
+</div>
+
+
+<div class="field">
+
+<label>Password</label>
+
+<input
+id="regPassword"
+type="password"
+class="input"
+minlength="6"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Confirm Password</label>
+
+<input
+id="regPassword2"
+type="password"
+class="input"
+minlength="6"
+required>
+
+</div>
+
+</div>
+
+<button
+class="btn btn-primary"
+style="width:100%;margin-top:18px">
 Create Account
 </button>
 
 </form>
 
+<p style="text-align:center">
 
-<div
-id="registerMessage"
-class="message">
+Already registered?
+
+<button
+onclick="showSection('login')"
+style="border:0;background:none;color:var(--green);font-weight:bold">
+Login
+</button>
+
+</p>
+
+</div>
+
 </div>
 
 </section>
 
 
-<!-- =====================================================
-LOGIN
-===================================================== -->
+<!-- LOGIN -->
 
-<section id="login">
+<section id="login" class="page">
 
-<div class="section-title">
+<div class="wrap auth-wrap">
 
-<h2>
-Welcome Back
-</h2>
+<div class="auth-card">
+
+<span class="badge">WELCOME BACK</span>
+
+<h1>Login</h1>
 
 <p>
-Login to your K2 account.
+Access your K2 account.
 </p>
 
-</div>
+<div id="loginMsg"></div>
 
+<form onsubmit="loginUser(event)">
 
-<form id="loginForm">
+<div class="field">
+
+<label>Email</label>
 
 <input
 id="loginEmail"
 type="email"
-placeholder="Email Address"
-required
->
+class="input"
+required>
 
-<br><br>
+</div>
+
+<div class="field" style="margin-top:15px">
+
+<label>Password</label>
 
 <input
 id="loginPassword"
 type="password"
-placeholder="Password"
-required
->
+class="input"
+required>
 
-<br><br>
+</div>
 
-<button type="submit">
+<button
+class="btn btn-primary"
+style="width:100%;margin-top:18px">
 Login
 </button>
 
 </form>
 
+</div>
 
-<div
-id="loginMessage"
-class="message">
 </div>
 
 </section>
 
 
-<!-- =====================================================
-ORDER
-===================================================== -->
+<!-- ORDER -->
 
-<section id="order">
+<section id="order" class="page">
 
-<div class="section-title">
+<div class="wrap">
 
-<h2>
-📦 Place an Order
-</h2>
+<div class="page-title">
+
+<span class="badge">BUYER</span>
+
+<h1>Place an Order</h1>
 
 <p>
-Order pharmaceutical products directly through K2.
+Submit a product order through K2.
 </p>
 
 </div>
 
+<div id="orderMsg"></div>
 
-<form id="orderForm">
+<div class="form-card">
+
+<form onsubmit="placeOrder(event)">
 
 <div class="form-grid">
+
+<div class="field">
+
+<label>Customer Name</label>
 
 <input
 id="orderName"
-placeholder="Customer Name"
-required
->
+class="input"
+required>
 
-<input
-id="orderEmail"
-type="email"
-placeholder="Email Address"
-required
->
+</div>
+
+
+<div class="field">
+
+<label>Phone</label>
 
 <input
 id="orderPhone"
-placeholder="Phone Number"
-required
->
-
-<input
-id="orderAddress"
-placeholder="Delivery Address"
-required
->
+class="input"
+required>
 
 </div>
 
-<br>
 
+<div class="field full">
+
+<label>Delivery Address</label>
+
+<textarea
+id="orderAddress"
+class="textarea"
+rows="3"
+required></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label>Product</label>
 
 <select
 id="orderProduct"
+class="select"
 required>
-
-<option value="">
-Select Product
-</option>
-
 </select>
 
-<br><br>
+</div>
 
+
+<div class="field">
+
+<label>Quantity</label>
 
 <input
-id="orderQuantity"
+id="orderQty"
 type="number"
 min="1"
 value="1"
-placeholder="Quantity"
-required
->
+class="input"
+required>
 
-<br><br>
+</div>
 
+
+<div class="field full">
+
+<label>Notes</label>
 
 <textarea
 id="orderNotes"
-placeholder="Additional Notes">
-</textarea>
+class="textarea"
+rows="3"
+placeholder="Optional"></textarea>
 
-<br>
+</div>
 
-<button type="submit">
-Place Order
+</div>
+
+<button
+class="btn btn-primary"
+style="margin-top:18px">
+Submit Order
 </button>
 
 </form>
 
+</div>
 
-<div
-id="orderMessage"
-class="message">
 </div>
 
 </section>
 
 
-<!-- =====================================================
-SUPPLIER DASHBOARD
-===================================================== -->
+<!-- SUPPLIER DASHBOARD -->
 
-<section id="supplierDashboard">
+<section id="supplierDashboard" class="page">
 
-<div class="dashboard-header">
+<div class="wrap dashboard">
 
-<h2>
-🏢 Supplier Dashboard
-</h2>
+<div class="dashboard-head">
 
-<p>
-Manage your pharmaceutical products.
-</p>
+<div>
+
+<span class="badge">SUPPLIER</span>
+
+<h1>Supplier Dashboard</h1>
 
 </div>
 
-
-<div id="supplierInfo">
-</div>
-
-
-<div class="card">
-
-<h2>
-➕ Upload New Product
-</h2>
-
-<p>
-Add your pharmaceutical product to the K2 marketplace.
-</p>
-
-<br>
-
-
-<form id="supplierProductForm">
-
-<div class="form-grid">
-
-<input
-id="supplierProductName"
-placeholder="Product Name"
-required
->
-
-<input
-id="supplierGenericName"
-placeholder="Generic Name"
->
-
-<input
-id="supplierCategory"
-placeholder="Category"
-required
->
-
-<input
-id="supplierStrength"
-placeholder="Strength"
->
-
-<input
-id="supplierDosageForm"
-placeholder="Dosage Form"
->
-
-<input
-id="supplierManufacturer"
-placeholder="Manufacturer"
->
-
-<input
-id="supplierPrice"
-type="number"
-step="0.01"
-min="0"
-placeholder="Price (ETB)"
-required
->
-
-<input
-id="supplierStock"
-type="number"
-min="0"
-placeholder="Stock Quantity"
-required
->
-
-<input
-id="supplierImageUrl"
-type="url"
-placeholder="Product Image URL"
->
-
-</div>
-
-<br>
-
-<textarea
-id="supplierDescription"
-placeholder="Product Description">
-</textarea>
-
-<br>
-
-<button type="submit">
-Upload Product
+<button
+class="btn btn-light"
+onclick="logout()">
+Logout
 </button>
 
-</form>
-
-
-<div
-id="supplierProductMessage"
-class="message">
-</div>
-
 </div>
 
 
-<h2>
-My Products
-</h2>
+<div id="supplierMsg"></div>
 
-<div
-id="supplierProducts"
-class="product-grid">
-
-Loading...
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-BUYER DASHBOARD
-===================================================== -->
-
-<section id="buyerDashboard">
-
-<div class="dashboard-header">
-
-<h2>
-🛒 Buyer Dashboard
-</h2>
-
-<p>
-Manage your orders.
-</p>
-
-</div>
-
-
-<div id="buyerInfo">
-</div>
-
-
-<h2>
-My Orders
-</h2>
-
-<div id="buyerOrders">
-</div>
-
-</section>
-
-
-<!-- =====================================================
-ADMIN LOGIN
-===================================================== -->
-
-<section id="adminLogin">
-
-<div class="section-title">
-
-<h2>
-🔐 Administrator Login
-</h2>
-
-<p>
-Authorized administrators only.
-</p>
-
-</div>
-
-
-<form id="adminLoginForm">
-
-<input
-id="adminEmail"
-type="email"
-placeholder="Admin Email"
-required
->
-
-<br><br>
-
-<input
-id="adminPassword"
-type="password"
-placeholder="Password"
-required
->
-
-<br><br>
-
-<button type="submit">
-Admin Login
-</button>
-
-</form>
-
-
-<div
-id="adminLoginMessage"
-class="message">
-</div>
-
-</section>
-
-
-<!-- =====================================================
-ADMIN DASHBOARD
-===================================================== -->
-
-<section id="adminDashboard">
-
-<div class="dashboard-header">
-
-<h2>
-🛡️ Admin Dashboard
-</h2>
-
-<p>
-Control products, suppliers, users and orders.
-</p>
-
-</div>
-
-
-<!-- STATISTICS -->
 
 <div class="stat-grid">
 
-<div class="stat">
+<div class="stat-card">
 
-<h2 id="statUsers">
-0
-</h2>
+<span>My Products</span>
 
-<p>
-Users
-</p>
+<b id="supplierProductCount">0</b>
 
 </div>
 
+<div class="stat-card">
 
-<div class="stat">
+<span>Total Stock</span>
 
-<h2 id="statSuppliers">
-0
-</h2>
-
-<p>
-Suppliers
-</p>
+<b id="supplierStockCount">0</b>
 
 </div>
 
+<div class="stat-card">
 
-<div class="stat">
+<span>Orders</span>
 
-<h2 id="statProducts">
-0
-</h2>
-
-<p>
-Products
-</p>
+<b id="supplierOrderCount">0</b>
 
 </div>
 
+<div class="stat-card">
 
-<div class="stat">
+<span>Completed</span>
 
-<h2 id="statOrders">
-0
-</h2>
-
-<p>
-Orders
-</p>
+<b id="supplierCompletedCount">0</b>
 
 </div>
 
 </div>
 
 
-<!-- ADMIN ADD PRODUCT -->
+<div class="panel">
 
-<div class="card">
+<h2>Add Product</h2>
 
-<h2>
-➕ Add Product
-</h2>
-
-
-<form id="adminProductForm">
+<form onsubmit="addSupplierProduct(event)">
 
 <div class="form-grid">
 
-<input
-id="adminProductName"
-placeholder="Product Name"
-required
->
+<div class="field">
+
+<label>Product Name</label>
 
 <input
-id="adminGenericName"
-placeholder="Generic Name"
->
-
-<input
-id="adminCategory"
-placeholder="Category"
-required
->
-
-<input
-id="adminStrength"
-placeholder="Strength"
->
-
-<input
-id="adminDosageForm"
-placeholder="Dosage Form"
->
-
-<input
-id="adminManufacturer"
-placeholder="Manufacturer"
->
-
-<input
-id="adminSupplier"
-placeholder="Supplier"
->
-
-<input
-id="adminPrice"
-type="number"
-step="0.01"
-placeholder="Price"
-required
->
-
-<input
-id="adminStock"
-type="number"
-min="0"
-placeholder="Stock"
-required
->
-
-<input
-id="adminImageUrl"
-type="url"
-placeholder="Image URL"
->
+id="spName"
+class="input"
+required>
 
 </div>
 
-<br>
+
+<div class="field">
+
+<label>Generic Name</label>
+
+<input
+id="spGeneric"
+class="input">
+
+</div>
+
+
+<div class="field">
+
+<label>Category</label>
+
+<select
+id="spCategory"
+class="select">
+
+<option value="Pharmaceutical">Pharmaceutical</option>
+<option value="Cosmetics">Cosmetics</option>
+<option value="Medical Supplies">Medical Supplies</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>Strength</label>
+
+<input
+id="spStrength"
+class="input"
+placeholder="e.g. 500 mg">
+
+</div>
+
+
+<div class="field">
+
+<label>Dosage Form</label>
+
+<input
+id="spDosage"
+class="input"
+placeholder="Tablet, Capsule, Syrup...">
+
+</div>
+
+
+<div class="field">
+
+<label>Manufacturer</label>
+
+<input
+id="spManufacturer"
+class="input">
+
+</div>
+
+
+<div class="field">
+
+<label>Price</label>
+
+<input
+id="spPrice"
+type="number"
+step="0.01"
+min="0"
+class="input"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Stock</label>
+
+<input
+id="spStock"
+type="number"
+min="0"
+class="input"
+required>
+
+</div>
+
+
+<div class="field full">
+
+<label>Image URL</label>
+
+<input
+id="spImage"
+class="input"
+placeholder="https://...">
+
+</div>
+
+
+<div class="field full">
+
+<label>Description</label>
 
 <textarea
-id="adminDescription"
-placeholder="Description">
-</textarea>
+id="spDescription"
+class="textarea"
+rows="3"></textarea>
 
-<br>
+</div>
 
-<button type="submit">
+</div>
+
+<button
+class="btn btn-primary"
+style="margin-top:18px">
 Add Product
 </button>
 
@@ -2012,15 +1820,331 @@ Add Product
 </div>
 
 
+<div class="panel">
+
+<h2>My Products</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+<th>Category</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="supplierProductsTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>My Orders</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order</th>
+<th>Customer</th>
+<th>Product</th>
+<th>Qty</th>
+<th>Total</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="supplierOrdersTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BUYER DASHBOARD -->
+
+<section id="buyerDashboard" class="page">
+
+<div class="wrap dashboard">
+
+<div class="dashboard-head">
+
+<div>
+
+<span class="badge">BUYER</span>
+
+<h1>Buyer Dashboard</h1>
+
+</div>
+
+<button
+class="btn btn-primary"
+onclick="showSection('products')">
+Browse Products
+</button>
+
+</div>
+
+
+<div class="stat-grid">
+
+<div class="stat-card">
+
+<span>Total Orders</span>
+
+<b id="buyerOrderCount">0</b>
+
+</div>
+
+<div class="stat-card">
+
+<span>Pending</span>
+
+<b id="buyerPendingCount">0</b>
+
+</div>
+
+<div class="stat-card">
+
+<span>Completed</span>
+
+<b id="buyerCompletedCount">0</b>
+
+</div>
+
+<div class="stat-card">
+
+<span>Total Value</span>
+
+<b id="buyerTotalValue">0</b>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>My Orders</h2>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Order</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Total</th>
+<th>Status</th>
+<th>Date</th>
+
+</tr>
+
+</thead>
+
+<tbody id="buyerOrdersTable">
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN LOGIN -->
+
+<section id="adminLogin" class="page">
+
+<div class="wrap auth-wrap">
+
+<div class="auth-card">
+
+<span class="badge">ADMINISTRATION</span>
+
+<h1>Admin Login</h1>
+
+<p>
+Administrator access.
+</p>
+
+<div id="adminLoginMsg"></div>
+
+<form onsubmit="adminLogin(event)">
+
+<div class="field">
+
+<label>Email</label>
+
+<input
+id="adminEmail"
+type="email"
+class="input"
+required>
+
+</div>
+
+
+<div class="field" style="margin-top:15px">
+
+<label>Password</label>
+
+<input
+id="adminPassword"
+type="password"
+class="input"
+required>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%;margin-top:18px">
+Admin Login
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN DASHBOARD -->
+
+<section id="adminDashboard" class="page">
+
+<div class="wrap dashboard">
+
+<div class="dashboard-head">
+
+<div>
+
+<span class="badge">ADMIN</span>
+
+<h1>Administration Dashboard</h1>
+
+</div>
+
+<button
+class="btn btn-danger"
+onclick="logout()">
+Logout
+</button>
+
+</div>
+
+
+<div id="adminMsg"></div>
+
+
+<div class="stat-grid">
+
+<div class="stat-card">
+
+<span>Products</span>
+
+<b id="adminProductCount">0</b>
+
+</div>
+
+<div class="stat-card">
+
+<span>Users</span>
+
+<b id="adminUserCount">0</b>
+
+</div>
+
+<div class="stat-card">
+
+<span>Suppliers</span>
+
+<b id="adminSupplierCount">0</b>
+
+</div>
+
+<div class="stat-card">
+
+<span>Orders</span>
+
+<b id="adminOrderCount">0</b>
+
+</div>
+
+</div>
+
+
 <!-- ADMIN PRODUCTS -->
 
-<div class="card">
+<div class="panel">
 
-<h2>
-💊 All Products
-</h2>
+<h2>Products</h2>
 
-<div id="adminProducts">
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Product</th>
+<th>Supplier</th>
+<th>Price</th>
+<th>Stock</th>
+<th>Category</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminProductsTable">
+</tbody>
+
+</table>
+
 </div>
 
 </div>
@@ -2028,13 +2152,35 @@ Add Product
 
 <!-- SUPPLIERS -->
 
-<div class="card">
+<div class="panel">
 
-<h2>
-🏢 Supplier Approval
-</h2>
+<h2>Supplier Approvals</h2>
 
-<div id="adminSuppliers">
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Company</th>
+<th>Contact</th>
+<th>Email</th>
+<th>Phone</th>
+<th>License</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminSuppliersTable">
+</tbody>
+
+</table>
+
 </div>
 
 </div>
@@ -2042,13 +2188,34 @@ Add Product
 
 <!-- USERS -->
 
-<div class="card">
+<div class="panel">
 
-<h2>
-👥 Users
-</h2>
+<h2>Users</h2>
 
-<div id="adminUsers">
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Business</th>
+<th>Role</th>
+<th>Approved</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminUsersTable">
+</tbody>
+
+</table>
+
 </div>
 
 </div>
@@ -2056,3301 +2223,84 @@ Add Product
 
 <!-- ORDERS -->
 
-<div class="card">
+<div class="panel">
 
-<h2>
-📦 Orders
-</h2>
+<h2>Orders</h2>
 
-<div id="adminOrders">
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Customer</th>
+<th>Product</th>
+<th>Qty</th>
+<th>Total</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminOrdersTable">
+</tbody>
+
+</table>
+
+</div>
+
 </div>
 
 </div>
 
 </section>
 
-</div>
+</main>
 
-
-<!-- =====================================================
-FOOTER
-===================================================== -->
 
 <footer>
 
-<h3>
-K2 Pharmaceutical Sales & Promotion ET
-</h3>
+<div class="wrap">
+
+<div class="footer-grid">
+
+<div>
+
+<h3>K2 Pharmaceutical Sales & Promotion ET</h3>
 
 <p>
-Connecting pharmaceutical suppliers with buyers across Ethiopia.
+Connecting pharmaceutical suppliers with pharmacies, drug stores and buyers
+through a digital marketplace.
 </p>
 
-<p>
-© 2026 K2 Pharmaceutical Sales & Promotion ET
-</p>
+</div>
 
-</footer>
 
+<div>
 
-<script>
+<h3>Marketplace</h3>
 
-/* =====================================================
-SUPABASE
-===================================================== */
+<ul>
 
-const SUPABASE_URL =
-"https://wslresoojzwalyznskfi.supabase.co";
+<li>Products</li>
+<li>Cosmetics</li>
+<li>Place Order</li>
 
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_j0Zlwjb8NBHV6wuU1fObKA_j-z8WIpA";
+</ul>
 
-const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
+</div>
 
-let currentUser = null;
 
+<div>
 
-/* =====================================================
-ESCAPE HTML
-===================================================== */
+<h3>For Business</h3>
 
-function escapeHtml(value){
+<ul>
 
-    if(
-        value === null ||
-        value === undefined
-    ){
-        return "";
-    }
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-/* =====================================================
-SHOW SECTION
-===================================================== */
-
-function showSection(id){
-
-    document
-    .querySelectorAll("section")
-    .forEach(section => {
-
-        section.classList.remove("active");
-
-    });
-
-
-    const section =
-        document.getElementById(id);
-
-
-    if(section){
-
-        section.classList.add("active");
-
-    }
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-
-    if(id === "products"){
-        loadPublicProducts();
-    }
-
-    if(id === "cosmetics"){
-        loadPublicCosmetics();
-    }
-
-    if(id === "order"){
-        loadOrderProducts();
-    }
-
-    if(id === "supplierDashboard"){
-        loadSupplierDashboard();
-    }
-
-    if(id === "buyerDashboard"){
-        loadBuyerDashboard();
-    }
-
-    if(id === "adminDashboard"){
-        loadAdminDashboard();
-    }
-
-}
-
-
-/* =====================================================
-GET USER
-===================================================== */
-
-async function getCurrentUser(){
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .auth
-        .getUser();
-
-
-    if(error){
-
-        console.error(error);
-
-        return null;
-
-    }
-
-
-    currentUser =
-        data.user || null;
-
-
-    return currentUser;
-}
-
-
-/* =====================================================
-LOGOUT
-===================================================== */
-
-async function logout(){
-
-    const {
-        error
-    } =
-        await supabaseClient
-        .auth
-        .signOut();
-
-
-    if(error){
-
-        alert(
-            "Logout error: " +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    currentUser = null;
-
-    alert(
-        "Logged out successfully."
-    );
-
-    showSection("home");
-
-}
-
-
-/* =====================================================
-REGISTER
-===================================================== */
-
-document
-.getElementById("registerForm")
-.addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-
-    const message =
-        document.getElementById(
-            "registerMessage"
-        );
-
-
-    message.className =
-        "message";
-
-
-    try{
-
-        const fullName =
-            document
-            .getElementById(
-                "registerName"
-            )
-            .value.trim();
-
-
-        const email =
-            document
-            .getElementById(
-                "registerEmail"
-            )
-            .value.trim();
-
-
-        const phone =
-            document
-            .getElementById(
-                "registerPhone"
-            )
-            .value.trim();
-
-
-        const businessName =
-            document
-            .getElementById(
-                "registerBusiness"
-            )
-            .value.trim();
-
-
-        const businessType =
-            document
-            .getElementById(
-                "registerBusinessType"
-            )
-            .value;
-
-
-        const address =
-            document
-            .getElementById(
-                "registerAddress"
-            )
-            .value.trim();
-
-
-        const license =
-            document
-            .getElementById(
-                "registerLicense"
-            )
-            .value.trim();
-
-
-        const password =
-            document
-            .getElementById(
-                "registerPassword"
-            )
-            .value;
-
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-            .auth
-            .signUp({
-
-                email:email,
-
-                password:password,
-
-                options:{
-
-                    data:{
-
-                        full_name:
-                            fullName,
-
-                        phone:
-                            phone,
-
-                        business_name:
-                            businessName,
-
-                        business_type:
-                            businessType,
-
-                        address:
-                            address,
-
-                        license_number:
-                            license,
-
-                        role:
-                            businessType === "supplier"
-                            ? "supplier"
-                            : "buyer"
-
-                    }
-
-                }
-
-            });
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        message.className =
-            "message success";
-
-
-        message.textContent =
-            "Account created successfully. Please check your email if confirmation is required.";
-
-
-        document
-        .getElementById(
-            "registerForm"
-        )
-        .reset();
-
-    }
-
-    catch(error){
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            error.message;
-
-    }
-
-});
-
-
-/* =====================================================
-LOGIN
-===================================================== */
-
-document
-.getElementById("loginForm")
-.addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-
-    const message =
-        document.getElementById(
-            "loginMessage"
-        );
-
-
-    message.className =
-        "message";
-
-
-    try{
-
-        const email =
-            document
-            .getElementById(
-                "loginEmail"
-            )
-            .value.trim();
-
-
-        const password =
-            document
-            .getElementById(
-                "loginPassword"
-            )
-            .value;
-
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-            .auth
-            .signInWithPassword({
-
-                email:email,
-
-                password:password
-
-            });
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        currentUser =
-            data.user;
-
-
-        message.className =
-            "message success";
-
-
-        message.textContent =
-            "Login successful.";
-
-
-        await routeUser();
-
-    }
-
-    catch(error){
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            error.message;
-
-    }
-
-});
-
-
-/* =====================================================
-ROUTE USER
-===================================================== */
-
-async function routeUser(){
-
-    const user =
-        await getCurrentUser();
-
-
-    if(!user){
-
-        return;
-
-    }
-
-
-    const admin =
-        await checkAdmin(
-            user.id
-        );
-
-
-    if(admin){
-
-        showSection(
-            "adminDashboard"
-        );
-
-        return;
-
-    }
-
-
-    const {
-        data:supplier,
-        error
-    } =
-        await supabaseClient
-        .from("supplier_profiles")
-        .select("*")
-        .eq(
-            "user_id",
-            user.id
-        )
-        .maybeSingle();
-
-
-    if(error){
-
-        console.error(error);
-
-    }
-
-
-    if(supplier){
-
-        showSection(
-            "supplierDashboard"
-        );
-
-        return;
-
-    }
-
-
-    showSection(
-        "buyerDashboard"
-    );
-
-}
-
-
-/* =====================================================
-PUBLIC PRODUCTS
-===================================================== */
-
-async function loadPublicProducts(){
-
-    const container =
-        document.getElementById(
-            "publicProducts"
-        );
-
-
-    container.innerHTML =
-        "Loading products...";
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("products")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>No products available.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        data.map(product => `
-
-        <div class="product-card">
-
-            ${
-                product.image_url
-
-                ?
-
-                `
-                <img
-                    class="product-image"
-                    src="${escapeHtml(
-                        product.image_url
-                    )}"
-                    alt="${escapeHtml(
-                        product.name
-                    )}"
-                >
-                `
-
-                :
-
-                `
-                <div class="no-image">
-                    💊 No Image
-                </div>
-                `
-            }
-
-
-            <h3>
-                ${escapeHtml(
-                    product.name
-                )}
-            </h3>
-
-
-            <p>
-                ${escapeHtml(
-                    product.generic_name || ""
-                )}
-            </p>
-
-
-            <p>
-                ${escapeHtml(
-                    product.category || ""
-                )}
-            </p>
-
-
-            <p>
-                ${escapeHtml(
-                    product.strength || ""
-                )}
-
-                ${escapeHtml(
-                    product.dosage_form || ""
-                )}
-            </p>
-
-
-            <p>
-                Supplier:
-                ${escapeHtml(
-                    product.supplier || ""
-                )}
-            </p>
-
-
-            <p class="price">
-                ${Number(
-                    product.price || 0
-                ).toLocaleString()}
-                ETB
-            </p>
-
-
-            <span class="stock">
-                Stock:
-                ${product.stock || 0}
-            </span>
-
-
-            <br><br>
-
-
-            <button
-                class="primary"
-                onclick="
-                    selectProductForOrder(
-                        ${product.id}
-                    )
-                "
-            >
-                Order Product
-            </button>
-
-        </div>
-
-        `).join("");
-
-}
-
-
-/* =====================================================
-COSMETICS
-===================================================== */
-
-async function loadPublicCosmetics(){
-
-    const container =
-        document.getElementById(
-            "publicCosmetics"
-        );
-
-
-    container.innerHTML =
-        "Loading cosmetics...";
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("cosmetics")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>No cosmetics available.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        data.map(item => `
-
-        <div class="product-card">
-
-            ${
-                item.image_url
-
-                ?
-
-                `
-                <img
-                    class="product-image"
-                    src="${escapeHtml(
-                        item.image_url
-                    )}"
-                    alt="${escapeHtml(
-                        item.name
-                    )}"
-                >
-                `
-
-                :
-
-                `
-                <div class="no-image">
-                    ✨ No Image
-                </div>
-                `
-            }
-
-
-            <h3>
-                ${escapeHtml(
-                    item.name
-                )}
-            </h3>
-
-
-            <p>
-                ${escapeHtml(
-                    item.description || ""
-                )}
-            </p>
-
-
-            <p class="price">
-                ${Number(
-                    item.price || 0
-                ).toLocaleString()}
-                ETB
-            </p>
-
-        </div>
-
-        `).join("");
-
-}
-
-
-/* =====================================================
-ORDER PRODUCTS
-===================================================== */
-
-async function loadOrderProducts(){
-
-    const select =
-        document.getElementById(
-            "orderProduct"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("products")
-        .select(
-            "id,name,price,stock"
-        )
-        .order("name");
-
-
-    if(error){
-
-        select.innerHTML =
-            `<option>
-                ${escapeHtml(
-                    error.message
-                )}
-            </option>`;
-
-        return;
-
-    }
-
-
-    select.innerHTML =
-        `
-        <option value="">
-            Select Product
-        </option>
-        `;
-
-
-    (data || []).forEach(
-        product => {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                product.id;
-
-
-            option.textContent =
-                `${product.name} — ${product.price} ETB — Stock: ${product.stock}`;
-
-
-            select.appendChild(
-                option
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-SELECT PRODUCT
-===================================================== */
-
-function selectProductForOrder(id){
-
-    showSection("order");
-
-
-    setTimeout(
-        function(){
-
-            const select =
-                document.getElementById(
-                    "orderProduct"
-                );
-
-
-            select.value = id;
-
-        },
-        200
-    );
-
-}
-
-
-/* =====================================================
-PLACE ORDER
-===================================================== */
-
-document
-.getElementById("orderForm")
-.addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-
-    const message =
-        document.getElementById(
-            "orderMessage"
-        );
-
-
-    message.className =
-        "message";
-
-
-    try{
-
-        const productId =
-            document
-            .getElementById(
-                "orderProduct"
-            )
-            .value;
-
-
-        const quantity =
-            Number(
-                document
-                .getElementById(
-                    "orderQuantity"
-                )
-                .value
-            );
-
-
-        const {
-            data:product,
-            error:productError
-        } =
-            await supabaseClient
-            .from("products")
-            .select("*")
-            .eq(
-                "id",
-                productId
-            )
-            .single();
-
-
-        if(productError){
-
-            throw productError;
-
-        }
-
-
-        if(
-            product.stock <
-            quantity
-        ){
-
-            throw new Error(
-                `Not enough stock. Available: ${product.stock}`
-            );
-
-        }
-
-
-        const totalPrice =
-            Number(product.price) *
-            quantity;
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("orders")
-            .insert({
-
-                customer_name:
-                    document
-                    .getElementById(
-                        "orderName"
-                    )
-                    .value.trim(),
-
-                customer_email:
-                    document
-                    .getElementById(
-                        "orderEmail"
-                    )
-                    .value.trim(),
-
-                customer_phone:
-                    document
-                    .getElementById(
-                        "orderPhone"
-                    )
-                    .value.trim(),
-
-                customer_address:
-                    document
-                    .getElementById(
-                        "orderAddress"
-                    )
-                    .value.trim(),
-
-                product_id:
-                    product.id,
-
-                quantity:
-                    quantity,
-
-                unit_price:
-                    product.price,
-
-                total_price:
-                    totalPrice,
-
-                status:
-                    "pending",
-
-                notes:
-                    document
-                    .getElementById(
-                        "orderNotes"
-                    )
-                    .value.trim(),
-
-                buyer_user_id:
-                    currentUser
-                    ? currentUser.id
-                    : null
-
-            });
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        message.className =
-            "message success";
-
-
-        message.textContent =
-            "Order placed successfully.";
-
-
-        document
-        .getElementById(
-            "orderForm"
-        )
-        .reset();
-
-    }
-
-    catch(error){
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            error.message;
-
-    }
-
-});
-
-
-/* =====================================================
-SUPPLIER DASHBOARD
-===================================================== */
-
-async function loadSupplierDashboard(){
-
-    if(!currentUser){
-
-        await getCurrentUser();
-
-    }
-
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    const {
-        data:profile,
-        error
-    } =
-        await supabaseClient
-        .from("supplier_profiles")
-        .select("*")
-        .eq(
-            "user_id",
-            currentUser.id
-        )
-        .maybeSingle();
-
-
-    const info =
-        document.getElementById(
-            "supplierInfo"
-        );
-
-
-    if(error){
-
-        info.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(!profile){
-
-        info.innerHTML = `
-
-            <div class="card">
-
-                <h3>
-                    Supplier profile not found
-                </h3>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    if(!profile.approved){
-
-        info.innerHTML = `
-
-            <div class="card">
-
-                <h3>
-                    ⏳ Account Pending Approval
-                </h3>
-
-                <p>
-                    Your supplier account must be
-                    approved by the administrator
-                    before you can upload products.
-                </p>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    info.innerHTML = `
-
-        <div class="card">
-
-            <h3>
-                🏢
-                ${escapeHtml(
-                    profile.company_name
-                )}
-            </h3>
-
-            <p>
-                Contact:
-                ${escapeHtml(
-                    profile.contact_person || ""
-                )}
-            </p>
-
-            <p>
-                Phone:
-                ${escapeHtml(
-                    profile.phone || ""
-                )}
-            </p>
-
-            <p>
-                Email:
-                ${escapeHtml(
-                    profile.email || ""
-                )}
-            </p>
-
-            <p>
-                Status:
-                <strong>
-                    Approved ✓
-                </strong>
-            </p>
-
-        </div>
-
-    `;
-
-
-    await loadSupplierProducts(
-        profile.company_name
-    );
-
-}
-
-
-/* =====================================================
-SUPPLIER PRODUCTS
-===================================================== */
-
-async function loadSupplierProducts(
-    companyName
-){
-
-    const container =
-        document.getElementById(
-            "supplierProducts"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("products")
-        .select("*")
-        .eq(
-            "supplier",
-            companyName
-        )
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>You have not uploaded any products yet.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        data.map(product => `
-
-        <div class="product-card">
-
-            ${
-                product.image_url
-
-                ?
-
-                `
-                <img
-                    class="product-image"
-                    src="${escapeHtml(
-                        product.image_url
-                    )}"
-                    alt="${escapeHtml(
-                        product.name
-                    )}"
-                >
-                `
-
-                :
-
-                `
-                <div class="no-image">
-                    💊 No Image
-                </div>
-                `
-            }
-
-
-            <h3>
-                ${escapeHtml(
-                    product.name
-                )}
-            </h3>
-
-
-            <p>
-                Generic:
-                ${escapeHtml(
-                    product.generic_name || ""
-                )}
-            </p>
-
-
-            <p>
-                Category:
-                ${escapeHtml(
-                    product.category || ""
-                )}
-            </p>
-
-
-            <p>
-                Strength:
-                ${escapeHtml(
-                    product.strength || ""
-                )}
-            </p>
-
-
-            <p>
-                Dosage:
-                ${escapeHtml(
-                    product.dosage_form || ""
-                )}
-            </p>
-
-
-            <p>
-                Manufacturer:
-                ${escapeHtml(
-                    product.manufacturer || ""
-                )}
-            </p>
-
-
-            <p class="price">
-                ${Number(
-                    product.price || 0
-                ).toLocaleString()}
-                ETB
-            </p>
-
-
-            <span class="stock">
-                Stock:
-                ${product.stock || 0}
-            </span>
-
-        </div>
-
-        `).join("");
-
-}
-
-
-/* =====================================================
-SUPPLIER PRODUCT UPLOAD
-===================================================== */
-
-document
-.getElementById(
-    "supplierProductForm"
-)
-.addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-
-    const message =
-        document.getElementById(
-            "supplierProductMessage"
-        );
-
-
-    message.className =
-        "message";
-
-
-    try{
-
-        if(!currentUser){
-
-            await getCurrentUser();
-
-        }
-
-
-        if(!currentUser){
-
-            throw new Error(
-                "Please login first."
-            );
-
-        }
-
-
-        const {
-            data:profile,
-            error:profileError
-        } =
-            await supabaseClient
-            .from("supplier_profiles")
-            .select("*")
-            .eq(
-                "user_id",
-                currentUser.id
-            )
-            .maybeSingle();
-
-
-        if(profileError){
-
-            throw profileError;
-
-        }
-
-
-        if(!profile){
-
-            throw new Error(
-                "Supplier profile not found."
-            );
-
-        }
-
-
-        if(!profile.approved){
-
-            throw new Error(
-                "Your supplier account is not approved yet."
-            );
-
-        }
-
-
-        const product = {
-
-            name:
-                document
-                .getElementById(
-                    "supplierProductName"
-                )
-                .value.trim(),
-
-            generic_name:
-                document
-                .getElementById(
-                    "supplierGenericName"
-                )
-                .value.trim(),
-
-            category:
-                document
-                .getElementById(
-                    "supplierCategory"
-                )
-                .value.trim(),
-
-            strength:
-                document
-                .getElementById(
-                    "supplierStrength"
-                )
-                .value.trim(),
-
-            dosage_form:
-                document
-                .getElementById(
-                    "supplierDosageForm"
-                )
-                .value.trim(),
-
-            manufacturer:
-                document
-                .getElementById(
-                    "supplierManufacturer"
-                )
-                .value.trim(),
-
-            supplier:
-                profile.company_name,
-
-            price:
-                Number(
-                    document
-                    .getElementById(
-                        "supplierPrice"
-                    )
-                    .value
-                ),
-
-            stock:
-                Number(
-                    document
-                    .getElementById(
-                        "supplierStock"
-                    )
-                    .value
-                ),
-
-            image_url:
-                document
-                .getElementById(
-                    "supplierImageUrl"
-                )
-                .value.trim()
-                || null,
-
-            description:
-                document
-                .getElementById(
-                    "supplierDescription"
-                )
-                .value.trim()
-                || null
-
-        };
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("products")
-            .insert(product);
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        message.className =
-            "message success";
-
-
-        message.textContent =
-            "Product uploaded successfully!";
-
-
-        document
-        .getElementById(
-            "supplierProductForm"
-        )
-        .reset();
-
-
-        await loadSupplierProducts(
-            profile.company_name
-        );
-
-
-        await loadPublicProducts();
-
-    }
-
-    catch(error){
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            error.message;
-
-    }
-
-});
-
-
-/* =====================================================
-BUYER DASHBOARD
-===================================================== */
-
-async function loadBuyerDashboard(){
-
-    if(!currentUser){
-
-        await getCurrentUser();
-
-    }
-
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    document
-    .getElementById(
-        "buyerInfo"
-    )
-    .innerHTML = `
-
-        <div class="card">
-
-            <h3>
-                👋 Welcome
-            </h3>
-
-            <p>
-                ${escapeHtml(
-                    currentUser.email
-                )}
-            </p>
-
-        </div>
-
-    `;
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("orders")
-        .select(`
-            *,
-            products(name)
-        `)
-        .eq(
-            "buyer_user_id",
-            currentUser.id
-        )
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    const container =
-        document.getElementById(
-            "buyerOrders"
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>You have no orders yet.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML = `
-
-        <div class="table-container">
-
-        <table>
-
-        <thead>
-
-        <tr>
-
-            <th>
-                Product
-            </th>
-
-            <th>
-                Quantity
-            </th>
-
-            <th>
-                Total
-            </th>
-
-            <th>
-                Status
-            </th>
-
-            <th>
-                Date
-            </th>
-
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-        ${data.map(order => `
-
-            <tr>
-
-                <td>
-                    ${escapeHtml(
-                        order.products?.name || ""
-                    )}
-                </td>
-
-                <td>
-                    ${order.quantity}
-                </td>
-
-                <td>
-                    ${Number(
-                        order.total_price || 0
-                    ).toLocaleString()}
-                    ETB
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        order.status || ""
-                    )}
-                </td>
-
-                <td>
-                    ${new Date(
-                        order.created_at
-                    ).toLocaleString()}
-                </td>
-
-            </tr>
-
-        `).join("")}
-
-        </tbody>
-
-        </table>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-ADMIN LOGIN
-===================================================== */
-
-document
-.getElementById(
-    "adminLoginForm"
-)
-.addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-
-    const message =
-        document.getElementById(
-            "adminLoginMessage"
-        );
-
-
-    message.className =
-        "message";
-
-
-    try{
-
-        const email =
-            document
-            .getElementById(
-                "adminEmail"
-            )
-            .value.trim();
-
-
-        const password =
-            document
-            .getElementById(
-                "adminPassword"
-            )
-            .value;
-
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-            .auth
-            .signInWithPassword({
-
-                email:email,
-
-                password:password
-
-            });
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        currentUser =
-            data.user;
-
-
-        const admin =
-            await checkAdmin(
-                currentUser.id
-            );
-
-
-        if(!admin){
-
-            await supabaseClient
-            .auth
-            .signOut();
-
-
-            throw new Error(
-                "You are not an administrator."
-            );
-
-        }
-
-
-        message.className =
-            "message success";
-
-
-        message.textContent =
-            "Admin login successful.";
-
-
-        showSection(
-            "adminDashboard"
-        );
-
-    }
-
-    catch(error){
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            error.message;
-
-    }
-
-});
-
-
-/* =====================================================
-CHECK ADMIN
-===================================================== */
-
-async function checkAdmin(userId){
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("profiles")
-        .select("role")
-        .eq(
-            "id",
-            userId
-        )
-        .maybeSingle();
-
-
-    if(error){
-
-        console.error(error);
-
-        return false;
-
-    }
-
-
-    return (
-        data &&
-        (
-            data.role === "admin" ||
-            data.role === "super_admin"
-        )
-    );
-
-}
-
-
-/* =====================================================
-ADMIN DASHBOARD
-===================================================== */
-
-async function loadAdminDashboard(){
-
-    if(!currentUser){
-
-        await getCurrentUser();
-
-    }
-
-
-    if(!currentUser){
-
-        return;
-
-    }
-
-
-    const isAdmin =
-        await checkAdmin(
-            currentUser.id
-        );
-
-
-    if(!isAdmin){
-
-        alert(
-            "Administrator access required."
-        );
-
-        showSection("home");
-
-        return;
-
-    }
-
-
-    await loadAdminStats();
-
-    await loadAdminProducts();
-
-    await loadAdminSuppliers();
-
-    await loadAdminUsers();
-
-    await loadAdminOrders();
-
-}
-
-
-/* =====================================================
-ADMIN STATS
-===================================================== */
-
-async function loadAdminStats(){
-
-    const users =
-        await supabaseClient
-        .from("user_accounts")
-        .select(
-            "id",
-            {
-                count:"exact",
-                head:true
-            }
-        );
-
-
-    const suppliers =
-        await supabaseClient
-        .from("supplier_profiles")
-        .select(
-            "id",
-            {
-                count:"exact",
-                head:true
-            }
-        );
-
-
-    const products =
-        await supabaseClient
-        .from("products")
-        .select(
-            "id",
-            {
-                count:"exact",
-                head:true
-            }
-        );
-
-
-    const orders =
-        await supabaseClient
-        .from("orders")
-        .select(
-            "id",
-            {
-                count:"exact",
-                head:true
-            }
-        );
-
-
-    document
-    .getElementById(
-        "statUsers"
-    )
-    .textContent =
-        users.count || 0;
-
-
-    document
-    .getElementById(
-        "statSuppliers"
-    )
-    .textContent =
-        suppliers.count || 0;
-
-
-    document
-    .getElementById(
-        "statProducts"
-    )
-    .textContent =
-        products.count || 0;
-
-
-    document
-    .getElementById(
-        "statOrders"
-    )
-    .textContent =
-        orders.count || 0;
-
-}
-
-
-/* =====================================================
-ADMIN PRODUCTS
-===================================================== */
-
-async function loadAdminProducts(){
-
-    const container =
-        document.getElementById(
-            "adminProducts"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("products")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>No products.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML = `
-
-        <div class="table-container">
-
-        <table>
-
-        <thead>
-
-        <tr>
-
-            <th>
-                Name
-            </th>
-
-            <th>
-                Supplier
-            </th>
-
-            <th>
-                Price
-            </th>
-
-            <th>
-                Stock
-            </th>
-
-            <th>
-                Action
-            </th>
-
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-        ${data.map(product => `
-
-            <tr>
-
-                <td>
-                    ${escapeHtml(
-                        product.name
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        product.supplier || ""
-                    )}
-                </td>
-
-                <td>
-                    ${Number(
-                        product.price || 0
-                    ).toLocaleString()}
-                    ETB
-                </td>
-
-                <td>
-                    ${product.stock || 0}
-                </td>
-
-                <td>
-
-                    <button
-                        class="danger"
-                        onclick="
-                            deleteProduct(
-                                ${product.id}
-                            )
-                        "
-                    >
-                        🗑️ Delete
-                    </button>
-
-                </td>
-
-            </tr>
-
-        `).join("")}
-
-        </tbody>
-
-        </table>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-ADMIN ADD PRODUCT
-===================================================== */
-
-document
-.getElementById(
-    "adminProductForm"
-)
-.addEventListener(
-"submit",
-async function(e){
-
-    e.preventDefault();
-
-
-    try{
-
-        const product = {
-
-            name:
-                document
-                .getElementById(
-                    "adminProductName"
-                )
-                .value.trim(),
-
-            generic_name:
-                document
-                .getElementById(
-                    "adminGenericName"
-                )
-                .value.trim(),
-
-            category:
-                document
-                .getElementById(
-                    "adminCategory"
-                )
-                .value.trim(),
-
-            strength:
-                document
-                .getElementById(
-                    "adminStrength"
-                )
-                .value.trim(),
-
-            dosage_form:
-                document
-                .getElementById(
-                    "adminDosageForm"
-                )
-                .value.trim(),
-
-            manufacturer:
-                document
-                .getElementById(
-                    "adminManufacturer"
-                )
-                .value.trim(),
-
-            supplier:
-                document
-                .getElementById(
-                    "adminSupplier"
-                )
-                .value.trim(),
-
-            price:
-                Number(
-                    document
-                    .getElementById(
-                        "adminPrice"
-                    )
-                    .value
-                ),
-
-            stock:
-                Number(
-                    document
-                    .getElementById(
-                        "adminStock"
-                    )
-                    .value
-                ),
-
-            image_url:
-                document
-                .getElementById(
-                    "adminImageUrl"
-                )
-                .value.trim()
-                || null,
-
-            description:
-                document
-                .getElementById(
-                    "adminDescription"
-                )
-                .value.trim()
-                || null
-
-        };
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("products")
-            .insert(product);
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        alert(
-            "Product added successfully."
-        );
-
-
-        document
-        .getElementById(
-            "adminProductForm"
-        )
-        .reset();
-
-
-        await loadAdminDashboard();
-
-    }
-
-    catch(error){
-
-        alert(
-            "Error: " +
-            error.message
-        );
-
-    }
-
-});
-
-
-/* =====================================================
-DELETE PRODUCT
-ADMIN ONLY
-===================================================== */
-
-async function deleteProduct(id){
-
-    try{
-
-        if(!currentUser){
-
-            await getCurrentUser();
-
-        }
-
-
-        if(!currentUser){
-
-            throw new Error(
-                "You must be logged in."
-            );
-
-        }
-
-
-        const isAdmin =
-            await checkAdmin(
-                currentUser.id
-            );
-
-
-        if(!isAdmin){
-
-            throw new Error(
-                "Only administrators can delete products."
-            );
-
-        }
-
-
-        const confirmed =
-            confirm(
-                "Are you sure you want to delete this product?"
-            );
-
-
-        if(!confirmed){
-
-            return;
-
-        }
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("products")
-            .delete()
-            .eq(
-                "id",
-                id
-            );
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        alert(
-            "Product deleted successfully."
-        );
-
-
-        await loadAdminDashboard();
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Error: " +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-ADMIN SUPPLIERS
-===================================================== */
-
-async function loadAdminSuppliers(){
-
-    const container =
-        document.getElementById(
-            "adminSuppliers"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("supplier_profiles")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>No suppliers.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML = `
-
-        <div class="table-container">
-
-        <table>
-
-        <thead>
-
-        <tr>
-
-            <th>
-                Company
-            </th>
-
-            <th>
-                Contact
-            </th>
-
-            <th>
-                Phone
-            </th>
-
-            <th>
-                License
-            </th>
-
-            <th>
-                Status
-            </th>
-
-            <th>
-                Action
-            </th>
-
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-        ${data.map(supplier => `
-
-            <tr>
-
-                <td>
-                    ${escapeHtml(
-                        supplier.company_name || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        supplier.contact_person || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        supplier.phone || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        supplier.license_number || ""
-                    )}
-                </td>
-
-                <td>
-                    ${
-                        supplier.approved
-                        ? "Approved ✓"
-                        : "Pending"
-                    }
-                </td>
-
-                <td>
-
-                    ${
-                        !supplier.approved
-
-                        ?
-
-                        `
-                        <button
-                            class="success"
-                            onclick="
-                                approveSupplier(
-                                    '${supplier.id}'
-                                )
-                            "
-                        >
-                            Approve
-                        </button>
-                        `
-
-                        :
-
-                        "Approved"
-                    }
-
-                </td>
-
-            </tr>
-
-        `).join("")}
-
-        </tbody>
-
-        </table>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-APPROVE SUPPLIER
-===================================================== */
-
-async function approveSupplier(id){
-
-    const {
-        error
-    } =
-        await supabaseClient
-        .from("supplier_profiles")
-        .update({
-            approved:true
-        })
-        .eq(
-            "id",
-            id
-        );
-
-
-    if(error){
-
-        alert(
-            "Error: " +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    alert(
-        "Supplier approved successfully."
-    );
-
-
-    await loadAdminDashboard();
-
-}
-
-
-/* =====================================================
-ADMIN USERS
-===================================================== */
-
-async function loadAdminUsers(){
-
-    const container =
-        document.getElementById(
-            "adminUsers"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("user_accounts")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>No users.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML = `
-
-        <div class="table-container">
-
-        <table>
-
-        <thead>
-
-        <tr>
-
-            <th>
-                Name
-            </th>
-
-            <th>
-                Email
-            </th>
-
-            <th>
-                Phone
-            </th>
-
-            <th>
-                Business
-            </th>
-
-            <th>
-                Role
-            </th>
-
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-        ${data.map(user => `
-
-            <tr>
-
-                <td>
-                    ${escapeHtml(
-                        user.full_name || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        user.email || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        user.phone || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        user.business_name || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        user.role || ""
-                    )}
-                </td>
-
-            </tr>
-
-        `).join("")}
-
-        </tbody>
-
-        </table>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-ADMIN ORDERS
-===================================================== */
-
-async function loadAdminOrders(){
-
-    const container =
-        document.getElementById(
-            "adminOrders"
-        );
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-        .from("orders")
-        .select(`
-            *,
-            products(name)
-        `)
-        .order(
-            "created_at",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(error){
-
-        container.innerHTML =
-            `<p>
-                ${escapeHtml(
-                    error.message
-                )}
-            </p>`;
-
-        return;
-
-    }
-
-
-    if(
-        !data ||
-        data.length === 0
-    ){
-
-        container.innerHTML =
-            "<p>No orders.</p>";
-
-        return;
-
-    }
-
-
-    container.innerHTML = `
-
-        <div class="table-container">
-
-        <table>
-
-        <thead>
-
-        <tr>
-
-            <th>
-                Customer
-            </th>
-
-            <th>
-                Product
-            </th>
-
-            <th>
-                Quantity
-            </th>
-
-            <th>
-                Total
-            </th>
-
-            <th>
-                Status
-            </th>
-
-            <th>
-                Action
-            </th>
-
-        </tr>
-
-        </thead>
-
-        <tbody>
-
-        ${data.map(order => `
-
-            <tr>
-
-                <td>
-                    ${escapeHtml(
-                        order.customer_name || ""
-                    )}
-                </td>
-
-                <td>
-                    ${escapeHtml(
-                        order.products?.name || ""
-                    )}
-                </td>
-
-                <td>
-                    ${order.quantity}
-                </td>
-
-                <td>
-                    ${Number(
-                        order.total_price || 0
-                    ).toLocaleString()}
-                    ETB
-                </td>
-
-                <td>
-
-                    <select
-                        onchange="
-                            updateOrderStatus(
-                                ${order.id},
-                                this.value
-                            )
-                        "
-                    >
-
-                        <option
-                            value="pending"
-                            ${
-                                order.status ===
-                                "pending"
-                                ? "selected"
-                                : ""
-                            }
-                        >
-                            Pending
-                        </option>
-
-                        <option
-                            value="processing"
-                            ${
-                                order.status ===
-                                "processing"
-                                ? "selected"
-                                : ""
-                            }
-                        >
-                            Processing
-                        </option>
-
-                        <option
-                            value="completed"
-                            ${
-                                order.status ===
-                                "completed"
-                                ? "selected"
-                                : ""
-                            }
-                        >
-                            Completed
-                        </option>
-
-                        <option
-                            value="cancelled"
-                            ${
-                                order.status ===
-                                "cancelled"
-                                ? "selected"
-                                : ""
-                            }
-                        >
-                            Cancelled
-                        </option>
-
-                    </select>
-
-                </td>
-
-                <td>
-
-                    <button
-                        class="danger"
-                        onclick="
-                            deleteOrder(
-                                ${order.id}
-                            )
-                        "
-                    >
-                        🗑️ Delete
-                    </button>
-
-                </td>
-
-            </tr>
-
-        `).join("")}
-
-        </tbody>
-
-        </table>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-UPDATE ORDER STATUS
-===================================================== */
-
-async function updateOrderStatus(
-    id,
-    status
-){
-
-    try{
-
-        let result;
-
-
-        if(
-            status ===
-            "completed"
-        ){
-
-            result =
-                await supabaseClient
-                .rpc(
-                    "complete_order",
-                    {
-                        p_order_id:id
-                    }
-                );
-
-        }
-
-        else{
-
-            result =
-                await supabaseClient
-                .from("orders")
-                .update({
-                    status:status
-                })
-                .eq(
-                    "id",
-                    id
-                );
-
-        }
-
-
-        if(result.error){
-
-            throw result.error;
-
-        }
-
-
-        alert(
-
-            status ===
-            "completed"
-
-            ?
-
-            "Order completed successfully. Stock has been deducted."
-
-            :
-
-            "Order status updated successfully."
-
-        );
-
-
-        await loadAdminDashboard();
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Error: " +
-            error.message
-        );
-
-
-        await loadAdminDashboard();
-
-    }
-
-}
-
-
-/* =====================================================
-DELETE ORDER
-ADMIN ONLY
-===================================================== */
-
-async function deleteOrder(id){
-
-    try{
-
-        if(!currentUser){
-
-            await getCurrentUser();
-
-        }
-
-
-        if(!currentUser){
-
-            throw new Error(
-                "You must be logged in."
-            );
-
-        }
-
-
-        const isAdmin =
-            await checkAdmin(
-                currentUser.id
-            );
-
-
-        if(!isAdmin){
-
-            throw new Error(
-                "Only administrators can delete orders."
-            );
-
-        }
-
-
-        const confirmed =
-            confirm(
-                "Are you sure you want to permanently delete this order?"
-            );
-
-
-        if(!confirmed){
-
-            return;
-
-        }
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("orders")
-            .delete()
-            .eq(
-                "id",
-                id
-            );
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        alert(
-            "Order deleted successfully."
-        );
-
-
-        await loadAdminDashboard();
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Error: " +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-AUTH STATE
-===================================================== */
-
-supabaseClient
-.auth
-.onAuthStateChange(
-    function(
-        event,
-        session
-    ){
-
-        currentUser =
-            session?.user || null;
-
-    }
-);
-
-
-/* =====================================================
-START WEBSITE
-===================================================== */
-
-document.addEventListener(
-"DOMContentLoaded",
-async function(){
-
-    await getCurrentUser();
-
-    await loadPublicProducts();
-
-    await loadPublicCosmetics();
-
-    await loadOrderProducts();
-
-});
-</script>
-
-</body>
-</html>
+<li>Register as Buyer</li>
+<li>Become a Supplier</li>
