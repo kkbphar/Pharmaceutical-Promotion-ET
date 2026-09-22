@@ -1,826 +1,4846 @@
-<script>
-
-/* =====================================================
-ADMIN COSMETICS TABLE
-===================================================== */
-
-async function loadAdminCosmetics(){
-
-    const container =
-        document.getElementById(
-            "adminCosmeticsTable"
-        );
-
-    if(!container){
-
-        return;
-    }
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-            .from("cosmetics")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
-
-        if(error){
-
-            throw error;
-        }
-
-        if(!data ||
-           data.length === 0){
-
-            container.innerHTML = `
-                <div class="empty-state">
-
-                    <h3>
-                        No cosmetics
-                    </h3>
-
-                    <p>
-                        No cosmetics have been added yet.
-                    </p>
-
-                </div>
-            `;
-
-            return;
-        }
-
-
-        container.innerHTML = `
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Image
-                        </th>
-
-                        <th>
-                            Name
-                        </th>
-
-                        <th>
-                            Brand
-                        </th>
-
-                        <th>
-                            Category
-                        </th>
-
-                        <th>
-                            Price
-                        </th>
-
-                        <th>
-                            Action
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    ${
-                        data
-                        .map(
-                            cosmetic => `
-
-                                <tr>
-
-                                    <td>
-
-                                        ${
-                                            cosmetic.image_url
-                                            ? `
-                                                <img
-                                                    src="${escapeHtml(
-                                                        cosmetic.image_url
-                                                    )}"
-                                                    alt="${escapeHtml(
-                                                        cosmetic.name
-                                                    )}"
-                                                    style="
-                                                        width:55px;
-                                                        height:55px;
-                                                        object-fit:cover;
-                                                        border-radius:8px;
-                                                    "
-                                                >
-                                            `
-                                            : "No image"
-                                        }
-
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            cosmetic.name ||
-                                            ""
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            cosmetic.brand ||
-                                            ""
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            cosmetic.category ||
-                                            ""
-                                        )}
-                                    </td>
-
-                                    <td>
-
-                                        ${
-                                            cosmetic.price !==
-                                            null &&
-                                            cosmetic.price !==
-                                            undefined
-
-                                            ? Number(
-                                                cosmetic.price
-                                            ).toLocaleString() +
-                                            " ETB"
-
-                                            : "-"
-                                        }
-
-                                    </td>
-
-                                    <td>
-
-                                        <button
-                                            class="danger"
-                                            onclick="deleteCosmetic('${cosmetic.id}')"
-                                        >
-                                            Delete
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-
-                            `
-                        )
-                        .join("")
-                    }
-
-                </tbody>
-
-            </table>
-
-        `;
-
-    }
-    catch(error){
-
-        console.error(
-            "Admin cosmetics error:",
-            error
-        );
-
-        container.innerHTML = `
-            <div class="empty-state">
-
-                <h3>
-                    Unable to load cosmetics
-                </h3>
-
-                <p>
-                    ${escapeHtml(
-                        error.message ||
-                        "Please try again."
-                    )}
-                </p>
-
-            </div>
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-DELETE COSMETIC
-===================================================== */
-
-async function deleteCosmetic(
-    cosmeticId
-){
-
-    if(!cosmeticId){
-
-        return;
-    }
-
-
-    const confirmed =
-        confirm(
-            "Are you sure you want to delete this cosmetic?"
-        );
-
-
-    if(!confirmed){
-
-        return;
-    }
-
-
-    try{
-
-        const {
-            error
-        } =
-            await supabaseClient
-            .from("cosmetics")
-            .delete()
-            .eq(
-                "id",
-                cosmeticId
-            );
-
-
-        if(error){
-
-            throw error;
-        }
-
-
-        await loadAdminCosmetics();
-
-        await loadAdminStats();
-
-        await loadPublicCosmetics();
-
-    }
-    catch(error){
-
-        console.error(
-            "Delete cosmetic error:",
-            error
-        );
-
-        alert(
-            "Unable to delete cosmetic: " +
-            (
-                error.message ||
-                "Unknown error"
-            )
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-ADMIN ORDERS
-===================================================== */
-
-async function loadAdminOrders(){
-
-    const container =
-        document.getElementById(
-            "adminOrdersTable"
-        );
-
-    if(!container){
-
-        return;
-    }
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-            .from("orders")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
-
-
-        if(error){
-
-            throw error;
-        }
-
-
-        allOrders =
-            data || [];
-
-
-        if(!data ||
-           data.length === 0){
-
-            container.innerHTML = `
-                <div class="empty-state">
-
-                    <h3>
-                        No orders
-                    </h3>
-
-                    <p>
-                        Orders will appear here
-                        when customers place them.
-                    </p>
-
-                </div>
-            `;
-
-            return;
-        }
-
-
-        container.innerHTML = `
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Date
-                        </th>
-
-                        <th>
-                            Customer
-                        </th>
-
-                        <th>
-                            Contact
-                        </th>
-
-                        <th>
-                            Product
-                        </th>
-
-                        <th>
-                            Quantity
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    ${
-                        data
-                        .map(
-                            order => `
-
-                                <tr>
-
-                                    <td>
-                                        ${order.created_at
-                                            ? new Date(
-                                                order.created_at
-                                            ).toLocaleString()
-                                            : "-"
-                                        }
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            order.customer_name ||
-                                            order.name ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            order.phone ||
-                                            order.customer_phone ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            order.product_name ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            order.quantity ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-
-                                        <span class="order-status">
-
-                                            ${escapeHtml(
-                                                order.status ||
-                                                "Pending"
-                                            )}
-
-                                        </span>
-
-                                    </td>
-
-                                </tr>
-
-                            `
-                        )
-                        .join("")
-                    }
-
-                </tbody>
-
-            </table>
-
-        `;
-
-    }
-    catch(error){
-
-        console.error(
-            "Admin orders error:",
-            error
-        );
-
-        container.innerHTML = `
-            <div class="empty-state">
-
-                <h3>
-                    Unable to load orders
-                </h3>
-
-                <p>
-                    ${escapeHtml(
-                        error.message ||
-                        "Please try again."
-                    )}
-                </p>
-
-            </div>
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-ADMIN SUPPLIERS
-===================================================== */
-
-async function loadAdminSuppliers(){
-
-    const container =
-        document.getElementById(
-            "adminSuppliersTable"
-        );
-
-    if(!container){
-
-        return;
-    }
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-            .from("suppliers")
-            .select("*")
-            .order(
-                "created_at",
-                {
-                    ascending:false
-                }
-            );
-
-
-        if(error){
-
-            throw error;
-        }
-
-
-        if(!data ||
-           data.length === 0){
-
-            container.innerHTML = `
-                <div class="empty-state">
-
-                    <h3>
-                        No suppliers
-                    </h3>
-
-                    <p>
-                        Supplier records will
-                        appear here.
-                    </p>
-
-                </div>
-            `;
-
-            return;
-        }
-
-
-        container.innerHTML = `
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>
-                            Company
-                        </th>
-
-                        <th>
-                            Phone
-                        </th>
-
-                        <th>
-                            Email
-                        </th>
-
-                        <th>
-                            Description
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    ${
-                        data
-                        .map(
-                            supplier => `
-
-                                <tr>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            supplier.name ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            supplier.phone ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            supplier.email ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                    <td>
-                                        ${escapeHtml(
-                                            supplier.description ||
-                                            "-"
-                                        )}
-                                    </td>
-
-                                </tr>
-
-                            `
-                        )
-                        .join("")
-                    }
-
-                </tbody>
-
-            </table>
-
-        `;
-
-    }
-    catch(error){
-
-        console.error(
-            "Admin suppliers error:",
-            error
-        );
-
-        container.innerHTML = `
-            <div class="empty-state">
-
-                <h3>
-                    Unable to load suppliers
-                </h3>
-
-                <p>
-                    ${escapeHtml(
-                        error.message ||
-                        "Please try again."
-                    )}
-                </p>
-
-            </div>
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-AUTH STATE LISTENER
-===================================================== */
-
-supabaseClient
-.auth
-.onAuthStateChange(
-    async function(
-        event,
-        session
-    ){
-
-        currentUser =
-            session &&
-            session.user
-                ? session.user
-                : null;
-
-
-        await updateNavigation();
-
-
-        if(
-            event ===
-            "SIGNED_IN"
-        ){
-
-            const isAdmin =
-                currentUser
-                ? await checkAdmin(
-                    currentUser.id
-                )
-                : false;
-
-
-            if(isAdmin){
-
-                await loadAdminDashboard();
-
-            }
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-INITIALIZE APPLICATION
-===================================================== */
-
-async function initializeApp(){
-
-    try{
-
-        await getCurrentUser();
-
-        await updateNavigation();
-
-        await Promise.all([
-
-            loadPublicProducts(),
-
-            loadPublicCosmetics(),
-
-            loadSuppliers(),
-
-            loadOrderProducts()
-
-        ]);
-
-
-        /*
-         * If a logged-in administrator opens
-         * the website, prepare the dashboard.
-         */
-
-        if(currentUser){
-
-            const isAdmin =
-                await checkAdmin(
-                    currentUser.id
-                );
-
-
-            if(isAdmin){
-
-                await loadAdminDashboard();
-
-            }
-
-        }
-
-    }
-    catch(error){
-
-        console.error(
-            "Application initialization error:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-START APPLICATION
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        initializeApp();
-
-    }
-);
-
-
-/* =====================================================
-GLOBAL ERROR HANDLING
-===================================================== */
-
-window.addEventListener(
-    "error",
-    function(event){
-
-        console.error(
-            "Global JavaScript error:",
-            event.error ||
-            event.message
-        );
-
-    }
-);
-
-
-window.addEventListener(
-    "unhandledrejection",
-    function(event){
-
-        console.error(
-            "Unhandled promise rejection:",
-            event.reason
-        );
-
-    }
-);
-
-</script>
-
-</body>
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>K2 Pharmaceutical Sales & Promotion ET</title>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>  <style>  
+  
+/* =====================================================  
+   K2 PHARMACEUTICAL SALES AND PROMOTION ET — MODERN DESIGN  
+===================================================== */  
+  
+:root{  
+    --primary:#087f5b;  
+    --primary-dark:#056044;  
+    --secondary:#0b7285;  
+    --accent:#12b886;  
+    --dark:#17312e;  
+    --gray:#647572;  
+    --light:#f3f8f7;  
+    --white:#ffffff;  
+    --border:#dce8e5;  
+    --danger:#d63031;  
+    --warning:#f59f00;  
+    --shadow:0 10px 30px rgba(0,0,0,.07);  
+}  
+  
+*{  
+    box-sizing:border-box;  
+    margin:0;  
+    padding:0;  
+}  
+  
+html{  
+    scroll-behavior:smooth;  
+}  
+  
+body{  
+    font-family:  
+        -apple-system,  
+        BlinkMacSystemFont,  
+        "Segoe UI",  
+        Roboto,  
+        Arial,  
+        sans-serif;  
+  
+    background:  
+        linear-gradient(  
+            180deg,  
+            #f9fcfb 0%,  
+            #eef7f5 100%  
+        );  
+  
+    color:var(--dark);  
+    line-height:1.6;  
+}  
+  
+  
+/* =====================================================  
+   HEADER  
+===================================================== */  
+  
+header{  
+    position:sticky;  
+    top:0;  
+    z-index:9999;  
+  
+    background:rgba(255,255,255,.96);  
+  
+    backdrop-filter:blur(12px);  
+  
+    border-bottom:1px solid var(--border);  
+  
+    box-shadow:  
+        0 4px 20px rgba(0,0,0,.05);  
+  
+    padding:13px 18px;  
+}  
+  
+.header-container{  
+    max-width:1250px;  
+    margin:auto;  
+  
+    display:flex;  
+    align-items:center;  
+    justify-content:space-between;  
+  
+    gap:20px;  
+}  
+  
+.logo{  
+    color:var(--primary);  
+  
+    font-size:20px;  
+    font-weight:800;  
+  
+    letter-spacing:-.5px;  
+}  
+  
+.logo span{  
+    color:var(--secondary);  
+}  
+  
+nav{  
+    display:flex;  
+    gap:5px;  
+    flex-wrap:wrap;  
+    justify-content:center;  
+}  
+  
+nav button{  
+    border:0;  
+  
+    background:transparent;  
+  
+    color:#36534f;  
+  
+    padding:9px 11px;  
+  
+    border-radius:8px;  
+  
+    font-size:13px;  
+    font-weight:600;  
+  
+    transition:.25s ease;  
+  
+    cursor:pointer;  
+}  
+  
+nav button:hover{  
+    background:#e5f5f0;  
+  
+    color:var(--primary);  
+  
+    transform:translateY(-1px);  
+}  
+  
+  
+/* =====================================================  
+   CONTAINER / SECTIONS  
+===================================================== */  
+  
+.container{  
+    max-width:1250px;  
+  
+    margin:auto;  
+  
+    padding:30px 20px;  
+}  
+  
+section{  
+    display:none;  
+  
+    animation:  
+        fadeIn .3s ease;  
+}  
+  
+section.active{  
+    display:block;  
+}  
+  
+@keyframes fadeIn{  
+  
+    from{  
+        opacity:0;  
+        transform:translateY(8px);  
+    }  
+  
+    to{  
+        opacity:1;  
+        transform:translateY(0);  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+   HERO  
+===================================================== */  
+  
+.hero{  
+    position:relative;  
+  
+    overflow:hidden;  
+  
+    min-height:500px;  
+  
+    display:flex;  
+  
+    flex-direction:column;  
+  
+    justify-content:center;  
+  
+    align-items:center;  
+  
+    text-align:center;  
+  
+    padding:70px 25px;  
+  
+    border-radius:28px;  
+  
+    color:white;  
+  
+    background:  
+        radial-gradient(  
+            circle at 15% 20%,  
+            rgba(255,255,255,.20),  
+            transparent 25%  
+        ),  
+  
+        radial-gradient(  
+            circle at 85% 80%,  
+            rgba(255,255,255,.15),  
+            transparent 28%  
+        ),  
+  
+        linear-gradient(  
+            135deg,  
+            #04543e,  
+            #087f5b 50%,  
+            #0b7285  
+        );  
+  
+    box-shadow:  
+        0 25px 60px  
+        rgba(8,127,91,.22);  
+  
+    margin-bottom:45px;  
+}  
+  
+.hero:before{  
+    content:"";  
+  
+    position:absolute;  
+  
+    width:350px;  
+    height:350px;  
+  
+    border-radius:50%;  
+  
+    border:  
+        1px solid  
+        rgba(255,255,255,.14);  
+  
+    top:-150px;  
+    right:-80px;  
+}  
+  
+.hero:after{  
+    content:"";  
+  
+    position:absolute;  
+  
+    width:240px;  
+    height:240px;  
+  
+    border-radius:50%;  
+  
+    border:  
+        1px solid  
+        rgba(255,255,255,.12);  
+  
+    bottom:-120px;  
+    left:-70px;  
+}  
+  
+.hero-content{  
+    position:relative;  
+  
+    z-index:2;  
+  
+    max-width:850px;  
+}  
+  
+.hero-badge{  
+    display:inline-block;  
+  
+    padding:7px 15px;  
+  
+    border-radius:50px;  
+  
+    background:  
+        rgba(255,255,255,.14);  
+  
+    border:  
+        1px solid  
+        rgba(255,255,255,.25);  
+  
+    margin-bottom:20px;  
+  
+    font-size:13px;  
+    font-weight:700;  
+  
+    letter-spacing:.5px;  
+}  
+  
+.hero h1{  
+    font-size:  
+        clamp(  
+            32px,  
+            5vw,  
+            58px  
+        );  
+  
+    line-height:1.08;  
+  
+    letter-spacing:-2px;  
+  
+    margin-bottom:20px;  
+}  
+  
+.hero p{  
+    font-size:18px;  
+  
+    max-width:720px;  
+  
+    margin:0 auto 30px;  
+  
+    opacity:.94;  
+}  
+  
+.hero-buttons{  
+    display:flex;  
+  
+    justify-content:center;  
+  
+    gap:12px;  
+  
+    flex-wrap:wrap;  
+}  
+  
+.hero-button{  
+    padding:13px 22px;  
+  
+    border-radius:10px;  
+  
+    border:0;  
+  
+    font-weight:700;  
+  
+    cursor:pointer;  
+}  
+  
+.hero-button.white{  
+    background:white;  
+  
+    color:var(--primary);  
+}  
+  
+.hero-button.outline{  
+    background:transparent;  
+  
+    color:white;  
+  
+    border:  
+        1px solid  
+        rgba(255,255,255,.6);  
+}  
+  
+  
+/* =====================================================  
+   SECTION TITLE  
+===================================================== */  
+  
+.section-title{  
+    text-align:center;  
+  
+    margin-bottom:30px;  
+}  
+  
+.section-title h2{  
+    margin-bottom:7px;  
+}  
+  
+.section-title p{  
+    color:var(--gray);  
+}  
+  
+  
+/* =====================================================  
+   HEADINGS  
+===================================================== */  
+  
+h2{  
+    font-size:31px;  
+  
+    line-height:1.2;  
+  
+    letter-spacing:-.8px;  
+  
+    margin-bottom:22px;  
+}  
+  
+h3{  
+    margin-bottom:8px;  
+}  
+  
+  
+/* =====================================================  
+   CARDS  
+===================================================== */  
+  
+.card-grid{  
+    display:grid;  
+  
+    grid-template-columns:  
+        repeat(  
+            auto-fit,  
+            minmax(220px,1fr)  
+        );  
+  
+    gap:20px;  
+  
+    margin-bottom:45px;  
+}  
+  
+.card{  
+    background:  
+        rgba(255,255,255,.95);  
+  
+    border:  
+        1px solid  
+        var(--border);  
+  
+    border-radius:18px;  
+  
+    padding:25px;  
+  
+    box-shadow:var(--shadow);  
+  
+    transition:.25s ease;  
+}  
+  
+.card:hover{  
+    transform:translateY(-5px);  
+  
+    box-shadow:  
+        0 18px 40px  
+        rgba(0,0,0,.10);  
+}  
+  
+.card-icon{  
+    width:48px;  
+    height:48px;  
+  
+    display:flex;  
+  
+    align-items:center;  
+    justify-content:center;  
+  
+    border-radius:13px;  
+  
+    background:#e7f6f1;  
+  
+    font-size:24px;  
+  
+    margin-bottom:15px;  
+}  
+  
+  
+/* =====================================================  
+   PRODUCT GRID  
+===================================================== */  
+  
+.product-grid{  
+    display:grid;  
+  
+    grid-template-columns:  
+        repeat(  
+            auto-fill,  
+            minmax(235px,1fr)  
+        );  
+  
+    gap:22px;  
+}  
+  
+  
+/* =====================================================  
+   PRODUCT CARD  
+===================================================== */  
+  
+.product-card{  
+    overflow:hidden;  
+  
+    background:white;  
+  
+    border:  
+        1px solid  
+        var(--border);  
+  
+    border-radius:18px;  
+  
+    padding:14px;  
+  
+    box-shadow:  
+        0 8px 25px  
+        rgba(0,0,0,.06);  
+  
+    transition:  
+        transform .25s ease,  
+        box-shadow .25s ease;  
+}  
+  
+.product-card:hover{  
+    transform:translateY(-6px);  
+  
+    box-shadow:  
+        0 18px 40px  
+        rgba(0,0,0,.11);  
+}  
+  
+.product-image{  
+    width:100%;  
+    height:200px;  
+  
+    object-fit:cover;  
+  
+    border-radius:13px;  
+  
+    background:#eef4f2;  
+  
+    margin-bottom:14px;  
+}  
+  
+.no-image{  
+    height:200px;  
+  
+    border-radius:13px;  
+  
+    background:  
+        linear-gradient(  
+            135deg,  
+            #edf6f3,  
+            #e1efeb  
+        );  
+  
+    display:flex;  
+  
+    align-items:center;  
+    justify-content:center;  
+  
+    color:var(--gray);  
+  
+    margin-bottom:14px;  
+}  
+  
+.product-card h3{  
+    font-size:18px;  
+  
+    color:var(--dark);  
+}  
+  
+.product-card p{  
+    color:var(--gray);  
+  
+    font-size:14px;  
+  
+    margin:4px 0;  
+}  
+  
+.product-card .price{  
+    color:var(--primary);  
+  
+    font-size:21px;  
+  
+    font-weight:800;  
+  
+    margin:12px 0;  
+}  
+  
+.stock{  
+    display:inline-block;  
+  
+    padding:4px 9px;  
+  
+    background:#e8f7ef;  
+  
+    color:#16834d;  
+  
+    border-radius:50px;  
+  
+    font-size:12px;  
+  
+    font-weight:700;  
+  
+    margin-bottom:12px;  
+}  
+  
+  
+/* =====================================================  
+   FORMS  
+===================================================== */  
+  
+form{  
+    background:white;  
+  
+    border:  
+        1px solid  
+        var(--border);  
+  
+    border-radius:18px;  
+  
+    padding:28px;  
+  
+    box-shadow:var(--shadow);  
+  
+    margin-bottom:25px;  
+}  
+  
+.form-grid{  
+    display:grid;  
+  
+    grid-template-columns:  
+        repeat(  
+            auto-fit,  
+            minmax(220px,1fr)  
+        );  
+  
+    gap:17px;  
+}  
+  
+.form-group{  
+    margin-bottom:15px;  
+}  
+  
+.form-group label{  
+    display:block;  
+  
+    font-size:13px;  
+  
+    font-weight:700;  
+  
+    color:#4d625f;  
+  
+    margin-bottom:6px;  
+}  
+  
+input,  
+select,  
+textarea{  
+    width:100%;  
+  
+    padding:13px 14px;  
+  
+    border:  
+        1px solid  
+        #d6e2df;  
+  
+    border-radius:9px;  
+  
+    background:#fbfdfd;  
+  
+    color:var(--dark);  
+  
+    font-family:inherit;  
+  
+    font-size:15px;  
+  
+    outline:none;  
+  
+    transition:.2s ease;  
+}  
+  
+input:focus,  
+select:focus,  
+textarea:focus{  
+  
+    border-color:  
+        var(--primary);  
+  
+    background:white;  
+  
+    box-shadow:  
+        0 0 0 3px  
+        rgba(8,127,91,.10);  
+}  
+  
+textarea{  
+    min-height:120px;  
+  
+    resize:vertical;  
+}  
+  
+  
+/* =====================================================  
+   BUTTONS  
+===================================================== */  
+  
+button{  
+    cursor:pointer;  
+  
+    font-family:inherit;  
+}  
+  
+.primary,  
+form button{  
+    background:  
+        linear-gradient(  
+            135deg,  
+            var(--primary),  
+            var(--secondary)  
+        );  
+  
+    color:white;  
+  
+    border:0;  
+  
+    padding:12px 20px;  
+  
+    border-radius:9px;  
+  
+    font-weight:700;  
+  
+    box-shadow:  
+        0 6px 15px  
+        rgba(8,127,91,.16);  
+  
+    transition:.25s ease;  
+}  
+  
+.primary:hover,  
+form button:hover{  
+    transform:translateY(-2px);  
+  
+    box-shadow:  
+        0 10px 22px  
+        rgba(8,127,91,.25);  
+}  
+  
+.danger{  
+    background:#fff0f0;  
+  
+    color:var(--danger);  
+  
+    border:  
+        1px solid  
+        #ffd0d0;  
+  
+    padding:8px 12px;  
+  
+    border-radius:8px;  
+  
+    font-weight:700;  
+}  
+  
+.danger:hover{  
+    background:var(--danger);  
+  
+    color:white;  
+}  
+  
+.success{  
+    background:#e8f7ef;  
+  
+    color:#16834d;  
+  
+    border:  
+        1px solid  
+        #c9ecd9;  
+  
+    padding:8px 12px;  
+  
+    border-radius:8px;  
+  
+    font-weight:700;  
+}  
+  
+  
+/* =====================================================  
+   MESSAGES  
+===================================================== */  
+  
+.message{  
+    padding:13px 16px;  
+  
+    border-radius:9px;  
+  
+    margin:12px 0;  
+  
+    display:none;  
+}  
+  
+.message.success{  
+    display:block;  
+  
+    background:#eaf8f0;  
+  
+    color:#167347;  
+  
+    border:  
+        1px solid  
+        #ccebd9;  
+}  
+  
+.message.error{  
+    display:block;  
+  
+    background:#fff0f0;  
+  
+    color:#bd2929;  
+  
+    border:  
+        1px solid  
+        #ffd1d1;  
+}  
+  
+  
+/* =====================================================  
+   TABLE  
+===================================================== */  
+  
+.table-container{  
+    width:100%;  
+  
+    overflow-x:auto;  
+  
+    border-radius:12px;  
+}  
+  
+table{  
+    width:100%;  
+  
+    min-width:700px;  
+  
+    border-collapse:collapse;  
+  
+    background:white;  
+}  
+  
+th{  
+    background:  
+        linear-gradient(  
+            135deg,  
+            #056044,  
+            #087f5b  
+        );  
+  
+    color:white;  
+  
+    padding:14px;  
+  
+    text-align:left;  
+  
+    font-size:14px;  
+}  
+  
+td{  
+    padding:13px;  
+  
+    border-bottom:  
+        1px solid  
+        #edf1f0;  
+  
+    font-size:14px;  
+}  
+  
+tr:hover td{  
+    background:#f7fbfa;  
+}  
+  
+  
+/* =====================================================  
+   STATISTICS  
+===================================================== */  
+  
+.stat-grid{  
+    display:grid;  
+  
+    grid-template-columns:  
+        repeat(  
+            auto-fit,  
+            minmax(160px,1fr)  
+        );  
+  
+    gap:18px;  
+  
+    margin-bottom:30px;  
+}  
+  
+.stat{  
+    background:white;  
+  
+    border:  
+        1px solid  
+        var(--border);  
+  
+    border-radius:16px;  
+  
+    padding:24px;  
+  
+    text-align:center;  
+  
+    box-shadow:var(--shadow);  
+}  
+  
+.stat h2{  
+    color:var(--primary);  
+  
+    font-size:35px;  
+  
+    margin-bottom:3px;  
+}  
+  
+.stat p{  
+    color:var(--gray);  
+}  
+  
+  
+/* =====================================================  
+   DASHBOARD HEADER  
+===================================================== */  
+  
+.dashboard-header{  
+    background:  
+        linear-gradient(  
+            135deg,  
+            #e8f7f2,  
+            #e7f4f7  
+        );  
+  
+    border:  
+        1px solid  
+        var(--border);  
+  
+    border-radius:18px;  
+  
+    padding:25px;  
+  
+    margin-bottom:25px;  
+}  
+  
+  
+/* =====================================================  
+   FOOTER  
+===================================================== */  
+  
+footer{  
+    margin-top:70px;  
+  
+    background:  
+        linear-gradient(  
+            135deg,  
+            #064c3c,  
+            #075e54  
+        );  
+  
+    color:white;  
+  
+    text-align:center;  
+  
+    padding:45px 20px;  
+}  
+  
+footer h3{  
+    font-size:22px;  
+  
+    margin-bottom:8px;  
+}  
+  
+footer p{  
+    opacity:.85;  
+  
+    margin:5px;  
+}  
+  
+  
+/* =====================================================  
+   MOBILE  
+===================================================== */  
+  
+@media(max-width:768px){  
+  
+    header{  
+        padding:11px;  
+    }  
+  
+    .header-container{  
+        flex-direction:column;  
+  
+        align-items:stretch;  
+    }  
+  
+    .logo{  
+        text-align:center;  
+  
+        font-size:18px;  
+    }  
+  
+    nav{  
+        justify-content:center;  
+    }  
+  
+    nav button{  
+        font-size:11px;  
+  
+        padding:8px 8px;  
+    }  
+  
+    .container{  
+        padding:20px 12px;  
+    }  
+  
+    .hero{  
+        min-height:430px;  
+  
+        padding:50px 18px;  
+  
+        border-radius:20px;  
+    }  
+  
+    .hero h1{  
+        font-size:34px;  
+  
+        letter-spacing:-1px;  
+    }  
+  
+    .hero p{  
+        font-size:16px;  
+    }  
+  
+    h2{  
+        font-size:27px;  
+    }  
+  
+    .product-grid{  
+        grid-template-columns:  
+            repeat(2,minmax(0,1fr));  
+  
+        gap:12px;  
+    }  
+  
+    .product-card{  
+        padding:10px;  
+  
+        border-radius:13px;  
+    }  
+  
+    .product-image,  
+    .no-image{  
+        height:145px;  
+  
+        border-radius:9px;  
+    }  
+  
+    .product-card h3{  
+        font-size:15px;  
+    }  
+  
+    .product-card p{  
+        font-size:12px;  
+    }  
+  
+    .product-card .price{  
+        font-size:17px;  
+    }  
+  
+    form{  
+        padding:18px;  
+    }  
+  
+}  
+  
+@media(max-width:420px){  
+  
+    .product-grid{  
+        grid-template-columns:1fr 1fr;  
+    }  
+  
+    nav button{  
+        min-width:68px;  
+    }  
+  
+}  
+  
+</style>  </head>  <body>  <!-- =====================================================  
+HEADER  
+===================================================== -->  <header>  <div class="header-container">  <div class="logo">  
+K2 <span>Pharmaceutical</span>  
+</div>  <nav>  <button onclick="showSection('home')">  
+Home  
+</button>  <button onclick="showSection('products')">  
+Products  
+</button>  <button onclick="showSection('cosmetics')">  
+Cosmetics  
+</button>  <button onclick="showSection('order')">  
+Place Order  
+</button>  <button onclick="showSection('register')">  
+Register  
+</button>  <button onclick="showSection('login')">  
+Login  
+</button>  <button onclick="showSection('adminLogin')">  
+Admin  
+</button>  <button onclick="logout()">  
+Logout  
+</button>  </nav>  </div>  </header>  <div class="container">  <!-- =====================================================  
+HOME  
+===================================================== -->  <section id="home" class="active">  <div class="hero">  <div class="hero-content">  <div class="hero-badge">  
+🇪🇹 Pharmaceutical Marketplace in Ethiopia  
+</div>  <h1>  
+Connecting Pharmaceutical Suppliers With Buyers  
+</h1>  <p>  
+A modern platform connecting pharmaceutical suppliers,  
+pharmacies, drug stores and buyers across Ethiopia.  
+</p>  <div class="hero-buttons">  <button  
+class="hero-button white"  
+onclick="showSection('products')">
+
+💊 Browse Products
+
+</button>  <button  
+class="hero-button outline"  
+onclick="showSection('register')">
+
+🏢 Join K2
+
+</button>  </div>  </div>  </div>  <div class="section-title">  <h2>  
+Everything You Need in One Platform  
+</h2>  <p>  
+Simple, professional and convenient pharmaceutical trading.  
+</p>  </div>  <div class="card-grid">  <div class="card">  <div class="card-icon">  
+💊  
+</div>  <h3>  
+Pharmaceutical Products  
+</h3>  <p>  
+Find pharmaceutical products from suppliers  
+on one convenient platform.  
+</p>  </div>  <div class="card">  <div class="card-icon">  
+🏪  
+</div>  <h3>  
+For Buyers  
+</h3>  <p>  
+Pharmacies and drug stores can easily  
+find and order products.  
+</p>  </div>  <div class="card">  <div class="card-icon">  
+🏢  
+</div>  <h3>  
+For Suppliers  
+</h3>  <p>  
+Approved suppliers can publish and manage  
+their pharmaceutical products.  
+</p>  </div>  <div class="card">  <div class="card-icon">  
+📦  
+</div>  <h3>  
+Stock Management  
+</h3>  <p>  
+Orders and inventory are connected  
+for better stock control.  
+</p>  </div>  </div>  <div class="card">  <h2>  
+About K2  
+</h2>  <p>  
+K2 Pharmaceutical Sales & Promotion ET is a digital  
+platform designed to connect pharmaceutical suppliers  
+with pharmacies, drug stores and buyers throughout Ethiopia.  
+</p>  <br>  <p>  
+Our goal is to make pharmaceutical product discovery,  
+supplier connection and ordering easier and more efficient.  
+</p>  </div>  </section>  <!-- =====================================================  
+PRODUCTS  
+===================================================== -->  <section id="products">  <div class="section-title">  <h2>  
+💊 Pharmaceutical Products  
+</h2>  <p>  
+Explore available pharmaceutical products.  
+</p>  </div>  <div  
+id="publicProducts"  
+class="product-grid">  Loading products...
+
+</div>  </section>  <!-- =====================================================  
+COSMETICS  
+===================================================== -->  <section id="cosmetics">  <div class="section-title">  <h2>  
+✨ Cosmetics  
+</h2>  <p>  
+Explore available cosmetic products.  
+</p>  </div>  <div  
+id="publicCosmetics"  
+class="product-grid">  Loading cosmetics...
+
+</div>  </section>  <!-- =====================================================  
+REGISTER  
+===================================================== -->  <section id="register">  <div class="section-title">  <h2>  
+Create Your K2 Account  
+</h2>  <p>  
+Join our pharmaceutical marketplace.  
+</p>  </div>  <form id="registerForm">  <div class="form-grid">  <input
+id="registerName"
+placeholder="Full Name"
+required
+
+> 
+
+<input
+id="registerEmail"
+type="email"
+placeholder="Email Address"
+required
+
+> 
+
+<input
+id="registerPhone"
+placeholder="Phone Number"
+required
+
+> 
+
+<input
+id="registerBusiness"
+placeholder="Business / Company Name"
+
+> 
+
+<select  
+id="registerBusinessType">
+
+<option value="">  
+Select Business Type  
+</option>  <option value="pharmacy">  
+Pharmacy  
+</option>  <option value="drug_store">  
+Drug Store  
+</option>  <option value="supplier">  
+Pharmaceutical Supplier  
+</option>  <option value="other">  
+Other  
+</option>  </select>  <input
+id="registerAddress"
+placeholder="Address"
+
+> 
+
+<input
+id="registerLicense"
+placeholder="License Number"
+
+> 
+
+<input
+id="registerPassword"
+type="password"
+placeholder="Password"
+required
+
+> 
+
+</div>  <br>  <button type="submit">  
+Create Account  
+</button>  </form>  <div  
+id="registerMessage"  
+class="message">  
+</div>  </section>  <!-- =====================================================  
+LOGIN  
+===================================================== -->  <section id="login">  <div class="section-title">  <h2>  
+Welcome Back  
+</h2>  <p>  
+Login to your K2 account.  
+</p>  </div>  <form id="loginForm">  <input
+id="loginEmail"
+type="email"
+placeholder="Email Address"
+required
+
+> 
+
+<br><br>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+required
+
+> 
+
+<br><br>
+
+<button type="submit">  
+Login  
+</button>  </form>  <div  
+id="loginMessage"  
+class="message">  
+</div>  </section>  <!-- =====================================================  
+ORDER  
+===================================================== -->  <section id="order">  <div class="section-title">  <h2>  
+📦 Place an Order  
+</h2>  <p>  
+Order pharmaceutical products directly through K2.  
+</p>  </div>  <form id="orderForm">  <div class="form-grid">  <input
+id="orderName"
+placeholder="Customer Name"
+required
+
+> 
+
+<input
+id="orderEmail"
+type="email"
+placeholder="Email Address"
+required
+
+> 
+
+<input
+id="orderPhone"
+placeholder="Phone Number"
+required
+
+> 
+
+<input
+id="orderAddress"
+placeholder="Delivery Address"
+required
+
+> 
+
+</div>  <br>  <select  
+id="orderProduct"  
+required>
+
+<option value="">  
+Select Product  
+</option>  </select>  <br><br>
+
+<input
+id="orderQuantity"
+type="number"
+min="1"
+value="1"
+placeholder="Quantity"
+required
+
+> 
+
+<br><br>
+
+<textarea  
+id="orderNotes"  
+placeholder="Additional Notes">  
+</textarea>  <br>  <button type="submit">  
+Place Order  
+</button>  </form>  <div  
+id="orderMessage"  
+class="message">  
+</div>  </section>  <!-- =====================================================  
+SUPPLIER DASHBOARD  
+===================================================== -->  <section id="supplierDashboard">  <div class="dashboard-header">  <h2>  
+🏢 Supplier Dashboard  
+</h2>  <p>  
+Manage your pharmaceutical products.  
+</p>  </div>  <div id="supplierInfo">  
+</div>  <div class="card">  <h2>  
+➕ Upload New Product  
+</h2>  <p>  
+Add your pharmaceutical product to the K2 marketplace.  
+</p>  <br>  <form id="supplierProductForm">  <div class="form-grid">  <input
+id="supplierProductName"
+placeholder="Product Name"
+required
+
+> 
+
+<input
+id="supplierGenericName"
+placeholder="Generic Name"
+
+> 
+
+<input
+id="supplierCategory"
+placeholder="Category"
+required
+
+> 
+
+<input
+id="supplierStrength"
+placeholder="Strength"
+
+> 
+
+<input
+id="supplierDosageForm"
+placeholder="Dosage Form"
+
+> 
+
+<input
+id="supplierManufacturer"
+placeholder="Manufacturer"
+
+> 
+
+<input
+id="supplierPrice"
+type="number"
+step="0.01"
+min="0"
+placeholder="Price (ETB)"
+required
+
+> 
+
+<input
+id="supplierStock"
+type="number"
+min="0"
+placeholder="Stock Quantity"
+required
+
+> 
+
+<input
+id="supplierImageUrl"
+type="url"
+placeholder="Product Image URL"
+
+> 
+
+</div>  <br>  <textarea  
+id="supplierDescription"  
+placeholder="Product Description">  
+</textarea>  <br>  <button type="submit">  
+Upload Product  
+</button>  </form>  <div  
+id="supplierProductMessage"  
+class="message">  
+</div>  </div>  <h2>  
+My Products  
+</h2>  <div  
+id="supplierProducts"  
+class="product-grid">  Loading...
+
+</div>  </section>  <!-- =====================================================  
+BUYER DASHBOARD  
+===================================================== -->  <section id="buyerDashboard">  <div class="dashboard-header">  <h2>  
+🛒 Buyer Dashboard  
+</h2>  <p>  
+Manage your orders.  
+</p>  </div>  <div id="buyerInfo">  
+</div>  <h2>  
+My Orders  
+</h2>  <div id="buyerOrders">  
+</div>  </section>  <!-- =====================================================  
+ADMIN LOGIN  
+===================================================== -->  <section id="adminLogin">  <div class="section-title">  <h2>  
+🔐 Administrator Login  
+</h2>  <p>  
+Authorized administrators only.  
+</p>  </div>  <form id="adminLoginForm">  <input
+id="adminEmail"
+type="email"
+placeholder="Admin Email"
+required
+
+> 
+
+<br><br>
+
+<input
+id="adminPassword"
+type="password"
+placeholder="Password"
+required
+
+> 
+
+<br><br>
+
+<button type="submit">  
+Admin Login  
+</button>  </form>  <div  
+id="adminLoginMessage"  
+class="message">  
+</div>  </section>  <!-- =====================================================  
+ADMIN DASHBOARD  
+===================================================== -->  <section id="adminDashboard">  <div class="dashboard-header">  <h2>  
+🛡️ Admin Dashboard  
+</h2>  <p>  
+Control products, suppliers, users and orders.  
+</p>  </div>  <!-- STATISTICS -->  <div class="stat-grid">  <div class="stat">  <h2 id="statUsers">  
+0  
+</h2>  <p>  
+Users  
+</p>  </div>  <div class="stat">  <h2 id="statSuppliers">  
+0  
+</h2>  <p>  
+Suppliers  
+</p>  </div>  <div class="stat">  <h2 id="statProducts">  
+0  
+</h2>  <p>  
+Products  
+</p>  </div>  <div class="stat">  <h2 id="statOrders">  
+0  
+</h2>  <p>  
+Orders  
+</p>  </div>  </div>  <!-- ADMIN ADD PRODUCT -->  <div class="card">  <h2>  
+➕ Add Product  
+</h2>  <form id="adminProductForm">  <div class="form-grid">  <input
+id="adminProductName"
+placeholder="Product Name"
+required
+
+> 
+
+<input
+id="adminGenericName"
+placeholder="Generic Name"
+
+> 
+
+<input
+id="adminCategory"
+placeholder="Category"
+required
+
+> 
+
+<input
+id="adminStrength"
+placeholder="Strength"
+
+> 
+
+<input
+id="adminDosageForm"
+placeholder="Dosage Form"
+
+> 
+
+<input
+id="adminManufacturer"
+placeholder="Manufacturer"
+
+> 
+
+<input
+id="adminSupplier"
+placeholder="Supplier"
+
+> 
+
+<input
+id="adminPrice"
+type="number"
+step="0.01"
+placeholder="Price"
+required
+
+> 
+
+<input
+id="adminStock"
+type="number"
+min="0"
+placeholder="Stock"
+required
+
+> 
+
+<input
+    type="file"
+    id="productImage"
+    accept="image/*"
+>
+ 
+
+</div>  <br>  <textarea  
+id="adminDescription"  
+placeholder="Description">  
+</textarea>  <br>  <button type="submit">  
+Add Product  
+</button>  </form>  </div>  <!-- ADMIN PRODUCTS -->  <div class="card">  <h2>  
+💊 All Products  
+</h2>  <div id="adminProducts">  
+</div>  </div>  <!-- SUPPLIERS -->  <div class="card">  <h2>  
+🏢 Supplier Approval  
+</h2>  <div id="adminSuppliers">  
+</div>  </div>  <!-- USERS -->  <div class="card">  <h2>  
+👥 Users  
+</h2>  <div id="adminUsers">  
+</div>  </div>  <!-- ORDERS -->  <div class="card">  <h2>  
+📦 Orders  
+</h2>  <div id="adminOrders">  
+</div>  </div>  </section>  </div>  <!-- =====================================================  
+FOOTER  
+===================================================== -->  <footer>  <h3>  
+K2 Pharmaceutical Sales & Promotion ET  
+</h3>  <p>  
+Connecting pharmaceutical suppliers with buyers across Ethiopia.  
+</p>  <p>  
+© 2026 K2 Pharmaceutical Sales & Promotion ET  
+</p>  </footer>  <script>  
+  
+/* =====================================================  
+SUPABASE  
+===================================================== */  
+  
+const SUPABASE_URL =  
+"https://wslresoojzwalyznskfi.supabase.co";  
+  
+const SUPABASE_PUBLISHABLE_KEY =  
+"sb_publishable_j0Zlwjb8NBHV6wuU1fObKA_j-z8WIpA";  
+  
+const supabaseClient =  
+window.supabase.createClient(  
+    SUPABASE_URL,  
+    SUPABASE_PUBLISHABLE_KEY  
+);  
+  
+let currentUser = null;  
+  
+  
+/* =====================================================  
+ESCAPE HTML  
+===================================================== */  
+  
+function escapeHtml(value){  
+  
+    if(  
+        value === null ||  
+        value === undefined  
+    ){  
+        return "";  
+    }  
+  
+    return String(value)  
+        .replace(/&/g,"&amp;")  
+        .replace(/</g,"&lt;")  
+        .replace(/>/g,"&gt;")  
+        .replace(/"/g,"&quot;")  
+        .replace(/'/g,"&#039;");  
+}  
+  
+  
+/* =====================================================  
+SHOW SECTION  
+===================================================== */  
+  
+function showSection(id){  
+  
+    document  
+    .querySelectorAll("section")  
+    .forEach(section => {  
+  
+        section.classList.remove("active");  
+  
+    });  
+  
+  
+    const section =  
+        document.getElementById(id);  
+  
+  
+    if(section){  
+  
+        section.classList.add("active");  
+  
+    }  
+  
+  
+    window.scrollTo({  
+        top:0,  
+        behavior:"smooth"  
+    });  
+  
+  
+    if(id === "products"){  
+        loadPublicProducts();  
+    }  
+  
+    if(id === "cosmetics"){  
+        loadPublicCosmetics();  
+    }  
+  
+    if(id === "order"){  
+        loadOrderProducts();  
+    }  
+  
+    if(id === "supplierDashboard"){  
+        loadSupplierDashboard();  
+    }  
+  
+    if(id === "buyerDashboard"){  
+        loadBuyerDashboard();  
+    }  
+  
+    if(id === "adminDashboard"){  
+        loadAdminDashboard();  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+GET USER  
+===================================================== */  
+  
+async function getCurrentUser(){  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .auth  
+        .getUser();  
+  
+  
+    if(error){  
+  
+        console.error(error);  
+  
+        return null;  
+  
+    }  
+  
+  
+    currentUser =  
+        data.user || null;  
+  
+  
+    return currentUser;  
+}  
+  
+  
+/* =====================================================  
+LOGOUT  
+===================================================== */  
+  
+async function logout(){  
+  
+    const {  
+        error  
+    } =  
+        await supabaseClient  
+        .auth  
+        .signOut();  
+  
+  
+    if(error){  
+  
+        alert(  
+            "Logout error: " +  
+            error.message  
+        );  
+  
+        return;  
+  
+    }  
+  
+  
+    currentUser = null;  
+  
+    alert(  
+        "Logged out successfully."  
+    );  
+  
+    showSection("home");  
+  
+}  
+  
+  
+/* =====================================================  
+REGISTER  
+===================================================== */  
+  
+document  
+.getElementById("registerForm")  
+.addEventListener(  
+"submit",  
+async function(e){  
+  
+    e.preventDefault();  
+  
+  
+    const message =  
+        document.getElementById(  
+            "registerMessage"  
+        );  
+  
+  
+    message.className =  
+        "message";  
+  
+  
+    try{  
+  
+        const fullName =  
+            document  
+            .getElementById(  
+                "registerName"  
+            )  
+            .value.trim();  
+  
+  
+        const email =  
+            document  
+            .getElementById(  
+                "registerEmail"  
+            )  
+            .value.trim();  
+  
+  
+        const phone =  
+            document  
+            .getElementById(  
+                "registerPhone"  
+            )  
+            .value.trim();  
+  
+  
+        const businessName =  
+            document  
+            .getElementById(  
+                "registerBusiness"  
+            )  
+            .value.trim();  
+  
+  
+        const businessType =  
+            document  
+            .getElementById(  
+                "registerBusinessType"  
+            )  
+            .value;  
+  
+  
+        const address =  
+            document  
+            .getElementById(  
+                "registerAddress"  
+            )  
+            .value.trim();  
+  
+  
+        const license =  
+            document  
+            .getElementById(  
+                "registerLicense"  
+            )  
+            .value.trim();  
+  
+  
+        const password =  
+            document  
+            .getElementById(  
+                "registerPassword"  
+            )  
+            .value;  
+  
+  
+        const {  
+            data,  
+            error  
+        } =  
+            await supabaseClient  
+            .auth  
+            .signUp({  
+  
+                email:email,  
+  
+                password:password,  
+  
+                options:{  
+  
+                    data:{  
+  
+                        full_name:  
+                            fullName,  
+  
+                        phone:  
+                            phone,  
+  
+                        business_name:  
+                            businessName,  
+  
+                        business_type:  
+                            businessType,  
+  
+                        address:  
+                            address,  
+  
+                        license_number:  
+                            license,  
+  
+                        role:  
+                            businessType === "supplier"  
+                            ? "supplier"  
+                            : "buyer"  
+  
+                    }  
+  
+                }  
+  
+            });  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        message.className =  
+            "message success";  
+  
+  
+        message.textContent =  
+            "Account created successfully. Please check your email if confirmation is required.";  
+  
+  
+        document  
+        .getElementById(  
+            "registerForm"  
+        )  
+        .reset();  
+  
+    }  
+  
+    catch(error){  
+  
+        message.className =  
+            "message error";  
+  
+        message.textContent =  
+            error.message;  
+  
+    }  
+  
+});  
+  
+  
+/* =====================================================  
+LOGIN  
+===================================================== */  
+  
+document  
+.getElementById("loginForm")  
+.addEventListener(  
+"submit",  
+async function(e){  
+  
+    e.preventDefault();  
+  
+  
+    const message =  
+        document.getElementById(  
+            "loginMessage"  
+        );  
+  
+  
+    message.className =  
+        "message";  
+  
+  
+    try{  
+  
+        const email =  
+            document  
+            .getElementById(  
+                "loginEmail"  
+            )  
+            .value.trim();  
+  
+  
+        const password =  
+            document  
+            .getElementById(  
+                "loginPassword"  
+            )  
+            .value;  
+  
+  
+        const {  
+            data,  
+            error  
+        } =  
+            await supabaseClient  
+            .auth  
+            .signInWithPassword({  
+  
+                email:email,  
+  
+                password:password  
+  
+            });  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        currentUser =  
+            data.user;  
+  
+  
+        message.className =  
+            "message success";  
+  
+  
+        message.textContent =  
+            "Login successful.";  
+  
+  
+        await routeUser();  
+  
+    }  
+  
+    catch(error){  
+  
+        message.className =  
+            "message error";  
+  
+        message.textContent =  
+            error.message;  
+  
+    }  
+  
+});  
+  
+  
+/* =====================================================  
+ROUTE USER  
+===================================================== */  
+  
+async function routeUser(){  
+  
+    const user =  
+        await getCurrentUser();  
+  
+  
+    if(!user){  
+  
+        return;  
+  
+    }  
+  
+  
+    const admin =  
+        await checkAdmin(  
+            user.id  
+        );  
+  
+  
+    if(admin){  
+  
+        showSection(  
+            "adminDashboard"  
+        );  
+  
+        return;  
+  
+    }  
+  
+  
+    const {  
+        data:supplier,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("supplier_profiles")  
+        .select("*")  
+        .eq(  
+            "user_id",  
+            user.id  
+        )  
+        .maybeSingle();  
+  
+  
+    if(error){  
+  
+        console.error(error);  
+  
+    }  
+  
+  
+    if(supplier){  
+  
+        showSection(  
+            "supplierDashboard"  
+        );  
+  
+        return;  
+  
+    }  
+  
+  
+    showSection(  
+        "buyerDashboard"  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+PUBLIC PRODUCTS  
+===================================================== */  
+  
+async function loadPublicProducts(){  
+  
+    const container =  
+        document.getElementById(  
+            "publicProducts"  
+        );  
+  
+  
+    container.innerHTML =  
+        "Loading products...";  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("products")  
+        .select("*")  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>No products available.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML =  
+        data.map(product => `  
+  
+        <div class="product-card">  
+  
+            ${  
+                product.image_url  
+  
+                ?  
+  
+                `  
+                <img  
+                    class="product-image"  
+                    src="${escapeHtml(  
+                        product.image_url  
+                    )}"  
+                    alt="${escapeHtml(  
+                        product.name  
+                    )}"  
+                >  
+                `  
+  
+                :  
+  
+                `  
+                <div class="no-image">  
+                    💊 No Image  
+                </div>  
+                `  
+            }  
+  
+  
+            <h3>  
+                ${escapeHtml(  
+                    product.name  
+                )}  
+            </h3>  
+  
+  
+            <p>  
+                ${escapeHtml(  
+                    product.generic_name || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                ${escapeHtml(  
+                    product.category || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                ${escapeHtml(  
+                    product.strength || ""  
+                )}  
+  
+                ${escapeHtml(  
+                    product.dosage_form || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                Supplier:  
+                ${escapeHtml(  
+                    product.supplier || ""  
+                )}  
+            </p>  
+  
+  
+            <p class="price">  
+                ${Number(  
+                    product.price || 0  
+                ).toLocaleString()}  
+                ETB  
+            </p>  
+  
+  
+            <span class="stock">  
+                Stock:  
+                ${product.stock || 0}  
+            </span>  
+  
+  
+            <br><br>  
+  
+  
+            <button  
+                class="primary"  
+                onclick="  
+                    selectProductForOrder(  
+                        ${product.id}  
+                    )  
+                "  
+            >  
+                Order Product  
+            </button>  
+  
+        </div>  
+  
+        `).join("");  
+  
+}  
+  
+  
+/* =====================================================  
+COSMETICS  
+===================================================== */  
+  
+async function loadPublicCosmetics(){  
+  
+    const container =  
+        document.getElementById(  
+            "publicCosmetics"  
+        );  
+  
+  
+    container.innerHTML =  
+        "Loading cosmetics...";  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("cosmetics")  
+        .select("*")  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>No cosmetics available.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML =  
+        data.map(item => `  
+  
+        <div class="product-card">  
+  
+            ${  
+                item.image_url  
+  
+                ?  
+  
+                `  
+                <img  
+                    class="product-image"  
+                    src="${escapeHtml(  
+                        item.image_url  
+                    )}"  
+                    alt="${escapeHtml(  
+                        item.name  
+                    )}"  
+                >  
+                `  
+  
+                :  
+  
+                `  
+                <div class="no-image">  
+                    ✨ No Image  
+                </div>  
+                `  
+            }  
+  
+  
+            <h3>  
+                ${escapeHtml(  
+                    item.name  
+                )}  
+            </h3>  
+  
+  
+            <p>  
+                ${escapeHtml(  
+                    item.description || ""  
+                )}  
+            </p>  
+  
+  
+            <p class="price">  
+                ${Number(  
+                    item.price || 0  
+                ).toLocaleString()}  
+                ETB  
+            </p>  
+  
+        </div>  
+  
+        `).join("");  
+  
+}  
+  
+  
+/* =====================================================  
+ORDER PRODUCTS  
+===================================================== */  
+  
+async function loadOrderProducts(){  
+  
+    const select =  
+        document.getElementById(  
+            "orderProduct"  
+        );  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("products")  
+        .select(  
+            "id,name,price,stock"  
+        )  
+        .order("name");  
+  
+  
+    if(error){  
+  
+        select.innerHTML =  
+            `<option>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </option>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    select.innerHTML =  
+        `  
+        <option value="">  
+            Select Product  
+        </option>  
+        `;  
+  
+  
+    (data || []).forEach(  
+        product => {  
+  
+            const option =  
+                document.createElement(  
+                    "option"  
+                );  
+  
+  
+            option.value =  
+                product.id;  
+  
+  
+            option.textContent =  
+                `${product.name} — ${product.price} ETB — Stock: ${product.stock}`;  
+  
+  
+            select.appendChild(  
+                option  
+            );  
+  
+        }  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+SELECT PRODUCT  
+===================================================== */  
+  
+function selectProductForOrder(id){  
+  
+    showSection("order");  
+  
+  
+    setTimeout(  
+        function(){  
+  
+            const select =  
+                document.getElementById(  
+                    "orderProduct"  
+                );  
+  
+  
+            select.value = id;  
+  
+        },  
+        200  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+PLACE ORDER  
+===================================================== */  
+  
+document  
+.getElementById("orderForm")  
+.addEventListener(  
+"submit",  
+async function(e){  
+  
+    e.preventDefault();  
+  
+  
+    const message =  
+        document.getElementById(  
+            "orderMessage"  
+        );  
+  
+  
+    message.className =  
+        "message";  
+  
+  
+    try{  
+  
+        const productId =  
+            document  
+            .getElementById(  
+                "orderProduct"  
+            )  
+            .value;  
+  
+  
+        const quantity =  
+            Number(  
+                document  
+                .getElementById(  
+                    "orderQuantity"  
+                )  
+                .value  
+            );  
+  
+  
+        const {  
+            data:product,  
+            error:productError  
+        } =  
+            await supabaseClient  
+            .from("products")  
+            .select("*")  
+            .eq(  
+                "id",  
+                productId  
+            )  
+            .single();  
+  
+  
+        if(productError){  
+  
+            throw productError;  
+  
+        }  
+  
+  
+        if(  
+            product.stock <  
+            quantity  
+        ){  
+  
+            throw new Error(  
+                `Not enough stock. Available: ${product.stock}`  
+            );  
+  
+        }  
+  
+  
+        const totalPrice =  
+            Number(product.price) *  
+            quantity;  
+  
+  
+        const {  
+            error  
+        } =  
+            await supabaseClient  
+            .from("orders")  
+            .insert({  
+  
+                customer_name:  
+                    document  
+                    .getElementById(  
+                        "orderName"  
+                    )  
+                    .value.trim(),  
+  
+                customer_email:  
+                    document  
+                    .getElementById(  
+                        "orderEmail"  
+                    )  
+                    .value.trim(),  
+  
+                customer_phone:  
+                    document  
+                    .getElementById(  
+                        "orderPhone"  
+                    )  
+                    .value.trim(),  
+  
+                customer_address:  
+                    document  
+                    .getElementById(  
+                        "orderAddress"  
+                    )  
+                    .value.trim(),  
+  
+                product_id:  
+                    product.id,  
+  
+                quantity:  
+                    quantity,  
+  
+                unit_price:  
+                    product.price,  
+  
+                total_price:  
+                    totalPrice,  
+  
+                status:  
+                    "pending",  
+  
+                notes:  
+                    document  
+                    .getElementById(  
+                        "orderNotes"  
+                    )  
+                    .value.trim(),  
+  
+                buyer_user_id:  
+                    currentUser  
+                    ? currentUser.id  
+                    : null  
+  
+            });  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        message.className =  
+            "message success";  
+  
+  
+        message.textContent =  
+            "Order placed successfully.";  
+  
+  
+        document  
+        .getElementById(  
+            "orderForm"  
+        )  
+        .reset();  
+  
+    }  
+  
+    catch(error){  
+  
+        message.className =  
+            "message error";  
+  
+        message.textContent =  
+            error.message;  
+  
+    }  
+  
+});  
+  
+  
+/* =====================================================  
+SUPPLIER DASHBOARD  
+===================================================== */  
+  
+async function loadSupplierDashboard(){  
+  
+    if(!currentUser){  
+  
+        await getCurrentUser();  
+  
+    }  
+  
+  
+    if(!currentUser){  
+  
+        return;  
+  
+    }  
+  
+  
+    const {  
+        data:profile,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("supplier_profiles")  
+        .select("*")  
+        .eq(  
+            "user_id",  
+            currentUser.id  
+        )  
+        .maybeSingle();  
+  
+  
+    const info =  
+        document.getElementById(  
+            "supplierInfo"  
+        );  
+  
+  
+    if(error){  
+  
+        info.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(!profile){  
+  
+        info.innerHTML = `  
+  
+            <div class="card">  
+  
+                <h3>  
+                    Supplier profile not found  
+                </h3>  
+  
+            </div>  
+  
+        `;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(!profile.approved){  
+  
+        info.innerHTML = `  
+  
+            <div class="card">  
+  
+                <h3>  
+                    ⏳ Account Pending Approval  
+                </h3>  
+  
+                <p>  
+                    Your supplier account must be  
+                    approved by the administrator  
+                    before you can upload products.  
+                </p>  
+  
+            </div>  
+  
+        `;  
+  
+        return;  
+  
+    }  
+  
+  
+    info.innerHTML = `  
+  
+        <div class="card">  
+  
+            <h3>  
+                🏢  
+                ${escapeHtml(  
+                    profile.company_name  
+                )}  
+            </h3>  
+  
+            <p>  
+                Contact:  
+                ${escapeHtml(  
+                    profile.contact_person || ""  
+                )}  
+            </p>  
+  
+            <p>  
+                Phone:  
+                ${escapeHtml(  
+                    profile.phone || ""  
+                )}  
+            </p>  
+  
+            <p>  
+                Email:  
+                ${escapeHtml(  
+                    profile.email || ""  
+                )}  
+            </p>  
+  
+            <p>  
+                Status:  
+                <strong>  
+                    Approved ✓  
+                </strong>  
+            </p>  
+  
+        </div>  
+  
+    `;  
+  
+  
+    await loadSupplierProducts(  
+        profile.company_name  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+SUPPLIER PRODUCTS  
+===================================================== */  
+  
+async function loadSupplierProducts(  
+    companyName  
+){  
+  
+    const container =  
+        document.getElementById(  
+            "supplierProducts"  
+        );  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("products")  
+        .select("*")  
+        .eq(  
+            "supplier",  
+            companyName  
+        )  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>You have not uploaded any products yet.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML =  
+        data.map(product => `  
+  
+        <div class="product-card">  
+  
+            ${  
+                product.image_url  
+  
+                ?  
+  
+                `  
+                <img  
+                    class="product-image"  
+                    src="${escapeHtml(  
+                        product.image_url  
+                    )}"  
+                    alt="${escapeHtml(  
+                        product.name  
+                    )}"  
+                >  
+                `  
+  
+                :  
+  
+                `  
+                <div class="no-image">  
+                    💊 No Image  
+                </div>  
+                `  
+            }  
+  
+  
+            <h3>  
+                ${escapeHtml(  
+                    product.name  
+                )}  
+            </h3>  
+  
+  
+            <p>  
+                Generic:  
+                ${escapeHtml(  
+                    product.generic_name || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                Category:  
+                ${escapeHtml(  
+                    product.category || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                Strength:  
+                ${escapeHtml(  
+                    product.strength || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                Dosage:  
+                ${escapeHtml(  
+                    product.dosage_form || ""  
+                )}  
+            </p>  
+  
+  
+            <p>  
+                Manufacturer:  
+                ${escapeHtml(  
+                    product.manufacturer || ""  
+                )}  
+            </p>  
+  
+  
+            <p class="price">  
+                ${Number(  
+                    product.price || 0  
+                ).toLocaleString()}  
+                ETB  
+            </p>  
+  
+  
+            <span class="stock">  
+                Stock:  
+                ${product.stock || 0}  
+            </span>  
+  
+        </div>  
+  
+        `).join("");  
+  
+}  
+  
+  
+/* =====================================================  
+SUPPLIER PRODUCT UPLOAD  
+===================================================== */  
+  
+document  
+.getElementById(  
+    "supplierProductForm"  
+)  
+.addEventListener(  
+"submit",  
+async function(e){  
+  
+    e.preventDefault();  
+  
+  
+    const message =  
+        document.getElementById(  
+            "supplierProductMessage"  
+        );  
+  
+  
+    message.className =  
+        "message";  
+  
+  
+    try{  
+  
+        if(!currentUser){  
+  
+            await getCurrentUser();  
+  
+        }  
+  
+  
+        if(!currentUser){  
+  
+            throw new Error(  
+                "Please login first."  
+            );  
+  
+        }  
+  
+  
+        const {  
+            data:profile,  
+            error:profileError  
+        } =  
+            await supabaseClient  
+            .from("supplier_profiles")  
+            .select("*")  
+            .eq(  
+                "user_id",  
+                currentUser.id  
+            )  
+            .maybeSingle();  
+  
+  
+        if(profileError){  
+  
+            throw profileError;  
+  
+        }  
+  
+  
+        if(!profile){  
+  
+            throw new Error(  
+                "Supplier profile not found."  
+            );  
+  
+        }  
+  
+  
+        if(!profile.approved){  
+  
+            throw new Error(  
+                "Your supplier account is not approved yet."  
+            );  
+  
+        }  
+  
+  
+        const product = {  
+  
+            name:  
+                document  
+                .getElementById(  
+                    "supplierProductName"  
+                )  
+                .value.trim(),  
+  
+            generic_name:  
+                document  
+                .getElementById(  
+                    "supplierGenericName"  
+                )  
+                .value.trim(),  
+  
+            category:  
+                document  
+                .getElementById(  
+                    "supplierCategory"  
+                )  
+                .value.trim(),  
+  
+            strength:  
+                document  
+                .getElementById(  
+                    "supplierStrength"  
+                )  
+                .value.trim(),  
+  
+            dosage_form:  
+                document  
+                .getElementById(  
+                    "supplierDosageForm"  
+                )  
+                .value.trim(),  
+  
+            manufacturer:  
+                document  
+                .getElementById(  
+                    "supplierManufacturer"  
+                )  
+                .value.trim(),  
+  
+            supplier:  
+                profile.company_name,  
+  
+            price:  
+                Number(  
+                    document  
+                    .getElementById(  
+                        "supplierPrice"  
+                    )  
+                    .value  
+                ),  
+  
+            stock:  
+                Number(  
+                    document  
+                    .getElementById(  
+                        "supplierStock"  
+                    )  
+                    .value  
+                ),  
+  
+            image_url:  
+                document  
+                .getElementById(  
+                    "supplierImageUrl"  
+                )  
+                .value.trim()  
+                || null,  
+  
+            description:  
+                document  
+                .getElementById(  
+                    "supplierDescription"  
+                )  
+                .value.trim()  
+                || null  
+  
+        };  
+  
+  
+        const {  
+            error  
+        } =  
+            await supabaseClient  
+            .from("products")  
+            .insert(product);  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        message.className =  
+            "message success";  
+  
+  
+        message.textContent =  
+            "Product uploaded successfully!";  
+  
+  
+        document  
+        .getElementById(  
+            "supplierProductForm"  
+        )  
+        .reset();  
+  
+  
+        await loadSupplierProducts(  
+            profile.company_name  
+        );  
+  
+  
+        await loadPublicProducts();  
+  
+    }  
+  
+    catch(error){  
+  
+        message.className =  
+            "message error";  
+  
+        message.textContent =  
+            error.message;  
+  
+    }  
+  
+});  
+  
+  
+/* =====================================================  
+BUYER DASHBOARD  
+===================================================== */  
+  
+async function loadBuyerDashboard(){  
+  
+    if(!currentUser){  
+  
+        await getCurrentUser();  
+  
+    }  
+  
+  
+    if(!currentUser){  
+  
+        return;  
+  
+    }  
+  
+  
+    document  
+    .getElementById(  
+        "buyerInfo"  
+    )  
+    .innerHTML = `  
+  
+        <div class="card">  
+  
+            <h3>  
+                👋 Welcome  
+            </h3>  
+  
+            <p>  
+                ${escapeHtml(  
+                    currentUser.email  
+                )}  
+            </p>  
+  
+        </div>  
+  
+    `;  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("orders")  
+        .select(`  
+            *,  
+            products(name)  
+        `)  
+        .eq(  
+            "buyer_user_id",  
+            currentUser.id  
+        )  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    const container =  
+        document.getElementById(  
+            "buyerOrders"  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>You have no orders yet.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML = `  
+  
+        <div class="table-container">  
+  
+        <table>  
+  
+        <thead>  
+  
+        <tr>  
+  
+            <th>  
+                Product  
+            </th>  
+  
+            <th>  
+                Quantity  
+            </th>  
+  
+            <th>  
+                Total  
+            </th>  
+  
+            <th>  
+                Status  
+            </th>  
+  
+            <th>  
+                Date  
+            </th>  
+  
+        </tr>  
+  
+        </thead>  
+  
+        <tbody>  
+  
+        ${data.map(order => `  
+  
+            <tr>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        order.products?.name || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${order.quantity}  
+                </td>  
+  
+                <td>  
+                    ${Number(  
+                        order.total_price || 0  
+                    ).toLocaleString()}  
+                    ETB  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        order.status || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${new Date(  
+                        order.created_at  
+                    ).toLocaleString()}  
+                </td>  
+  
+            </tr>  
+  
+        `).join("")}  
+  
+        </tbody>  
+  
+        </table>  
+  
+        </div>  
+  
+    `;  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN LOGIN  
+===================================================== */  
+  
+document  
+.getElementById(  
+    "adminLoginForm"  
+)  
+.addEventListener(  
+"submit",  
+async function(e){  
+  
+    e.preventDefault();  
+  
+  
+    const message =  
+        document.getElementById(  
+            "adminLoginMessage"  
+        );  
+  
+  
+    message.className =  
+        "message";  
+  
+  
+    try{  
+  
+        const email =  
+            document  
+            .getElementById(  
+                "adminEmail"  
+            )  
+            .value.trim();  
+  
+  
+        const password =  
+            document  
+            .getElementById(  
+                "adminPassword"  
+            )  
+            .value;  
+  
+  
+        const {  
+            data,  
+            error  
+        } =  
+            await supabaseClient  
+            .auth  
+            .signInWithPassword({  
+  
+                email:email,  
+  
+                password:password  
+  
+            });  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        currentUser =  
+            data.user;  
+  
+  
+        const admin =  
+            await checkAdmin(  
+                currentUser.id  
+            );  
+  
+  
+        if(!admin){  
+  
+            await supabaseClient  
+            .auth  
+            .signOut();  
+  
+  
+            throw new Error(  
+                "You are not an administrator."  
+            );  
+  
+        }  
+  
+  
+        message.className =  
+            "message success";  
+  
+  
+        message.textContent =  
+            "Admin login successful.";  
+  
+  
+        showSection(  
+            "adminDashboard"  
+        );  
+  
+    }  
+  
+    catch(error){  
+  
+        message.className =  
+            "message error";  
+  
+        message.textContent =  
+            error.message;  
+  
+    }  
+  
+});  
+  
+  
+/* =====================================================  
+CHECK ADMIN  
+===================================================== */  
+  
+async function checkAdmin(userId){  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("profiles")  
+        .select("role")  
+        .eq(  
+            "id",  
+            userId  
+        )  
+        .maybeSingle();  
+  
+  
+    if(error){  
+  
+        console.error(error);  
+  
+        return false;  
+  
+    }  
+  
+  
+    return (  
+        data &&  
+        (  
+            data.role === "admin" ||  
+            data.role === "super_admin"  
+        )  
+    );  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN DASHBOARD  
+===================================================== */  
+  
+async function loadAdminDashboard(){  
+  
+    if(!currentUser){  
+  
+        await getCurrentUser();  
+  
+    }  
+  
+  
+    if(!currentUser){  
+  
+        return;  
+  
+    }  
+  
+  
+    const isAdmin =  
+        await checkAdmin(  
+            currentUser.id  
+        );  
+  
+  
+    if(!isAdmin){  
+  
+        alert(  
+            "Administrator access required."  
+        );  
+  
+        showSection("home");  
+  
+        return;  
+  
+    }  
+  
+  
+    await loadAdminStats();  
+  
+    await loadAdminProducts();  
+  
+    await loadAdminSuppliers();  
+  
+    await loadAdminUsers();  
+  
+    await loadAdminOrders();  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN STATS  
+===================================================== */  
+  
+async function loadAdminStats(){  
+  
+    const users =  
+        await supabaseClient  
+        .from("user_accounts")  
+        .select(  
+            "id",  
+            {  
+                count:"exact",  
+                head:true  
+            }  
+        );  
+  
+  
+    const suppliers =  
+        await supabaseClient  
+        .from("supplier_profiles")  
+        .select(  
+            "id",  
+            {  
+                count:"exact",  
+                head:true  
+            }  
+        );  
+  
+  
+    const products =  
+        await supabaseClient  
+        .from("products")  
+        .select(  
+            "id",  
+            {  
+                count:"exact",  
+                head:true  
+            }  
+        );  
+  
+  
+    const orders =  
+        await supabaseClient  
+        .from("orders")  
+        .select(  
+            "id",  
+            {  
+                count:"exact",  
+                head:true  
+            }  
+        );  
+  
+  
+    document  
+    .getElementById(  
+        "statUsers"  
+    )  
+    .textContent =  
+        users.count || 0;  
+  
+  
+    document  
+    .getElementById(  
+        "statSuppliers"  
+    )  
+    .textContent =  
+        suppliers.count || 0;  
+  
+  
+    document  
+    .getElementById(  
+        "statProducts"  
+    )  
+    .textContent =  
+        products.count || 0;  
+  
+  
+    document  
+    .getElementById(  
+        "statOrders"  
+    )  
+    .textContent =  
+        orders.count || 0;  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN PRODUCTS  
+===================================================== */  
+  
+async function loadAdminProducts(){  
+  
+    const container =  
+        document.getElementById(  
+            "adminProducts"  
+        );  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("products")  
+        .select("*")  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>No products.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML = `  
+  
+        <div class="table-container">  
+  
+        <table>  
+  
+        <thead>  
+  
+        <tr>  
+  
+            <th>  
+                Name  
+            </th>  
+  
+            <th>  
+                Supplier  
+            </th>  
+  
+            <th>  
+                Price  
+            </th>  
+  
+            <th>  
+                Stock  
+            </th>  
+  
+            <th>  
+                Action  
+            </th>  
+  
+        </tr>  
+  
+        </thead>  
+  
+        <tbody>  
+  
+        ${data.map(product => `  
+  
+            <tr>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        product.name  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        product.supplier || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${Number(  
+                        product.price || 0  
+                    ).toLocaleString()}  
+                    ETB  
+                </td>  
+  
+                <td>  
+                    ${product.stock || 0}  
+                </td>  
+  
+                <td>  
+  
+                    <button  
+                        class="danger"  
+                        onclick="  
+                            deleteProduct(  
+                                ${product.id}  
+                            )  
+                        "  
+                    >  
+                        🗑️ Delete  
+                    </button>  
+  
+                </td>  
+  
+            </tr>  
+  
+        `).join("")}  
+  
+        </tbody>  
+  
+        </table>  
+  
+        </div>  
+  
+    `;  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN ADD PRODUCT  
+===================================================== */  
+  
+document  
+.getElementById(  
+    "adminProductForm"  
+)  
+.addEventListener(  
+"submit",  
+async function(e){  
+  
+    e.preventDefault();  
+  
+  
+    try{  
+  
+        const product = {  
+  
+            name:  
+                document  
+                .getElementById(  
+                    "adminProductName"  
+                )  
+                .value.trim(),  
+  
+            generic_name:  
+                document  
+                .getElementById(  
+                    "adminGenericName"  
+                )  
+                .value.trim(),  
+  
+            category:  
+                document  
+                .getElementById(  
+                    "adminCategory"  
+                )  
+                .value.trim(),  
+  
+            strength:  
+                document  
+                .getElementById(  
+                    "adminStrength"  
+                )  
+                .value.trim(),  
+  
+            dosage_form:  
+                document  
+                .getElementById(  
+                    "adminDosageForm"  
+                )  
+                .value.trim(),  
+  
+            manufacturer:  
+                document  
+                .getElementById(  
+                    "adminManufacturer"  
+                )  
+                .value.trim(),  
+  
+            supplier:  
+                document  
+                .getElementById(  
+                    "adminSupplier"  
+                )  
+                .value.trim(),  
+  
+            price:  
+                Number(  
+                    document  
+                    .getElementById(  
+                        "adminPrice"  
+                    )  
+                    .value  
+                ),  
+  
+            stock:  
+                Number(  
+                    document  
+                    .getElementById(  
+                        "adminStock"  
+                    )  
+                    .value  
+                ),  
+  
+            image_url:  
+                document  
+                .getElementById(  
+                    "adminImageUrl"  
+                )  
+                .value.trim()  
+                || null,  
+  
+            description:  
+                document  
+                .getElementById(  
+                    "adminDescription"  
+                )  
+                .value.trim()  
+                || null  
+  
+        };  
+  
+  
+        const {  
+            error  
+        } =  
+            await supabaseClient  
+            .from("products")  
+            .insert(product);  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        alert(  
+            "Product added successfully."  
+        );  
+  
+  
+        document  
+        .getElementById(  
+            "adminProductForm"  
+        )  
+        .reset();  
+  
+  
+        await loadAdminDashboard();  
+  
+    }  
+  
+    catch(error){  
+  
+        alert(  
+            "Error: " +  
+            error.message  
+        );  
+  
+    }  
+  
+});  
+  
+  
+/* =====================================================  
+DELETE PRODUCT  
+ADMIN ONLY  
+===================================================== */  
+  
+async function deleteProduct(id){  
+  
+    try{  
+  
+        if(!currentUser){  
+  
+            await getCurrentUser();  
+  
+        }  
+  
+  
+        if(!currentUser){  
+  
+            throw new Error(  
+                "You must be logged in."  
+            );  
+  
+        }  
+  
+  
+        const isAdmin =  
+            await checkAdmin(  
+                currentUser.id  
+            );  
+  
+  
+        if(!isAdmin){  
+  
+            throw new Error(  
+                "Only administrators can delete products."  
+            );  
+  
+        }  
+  
+  
+        const confirmed =  
+            confirm(  
+                "Are you sure you want to delete this product?"  
+            );  
+  
+  
+        if(!confirmed){  
+  
+            return;  
+  
+        }  
+  
+  
+        const {  
+            error  
+        } =  
+            await supabaseClient  
+            .from("products")  
+            .delete()  
+            .eq(  
+                "id",  
+                id  
+            );  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        alert(  
+            "Product deleted successfully."  
+        );  
+  
+  
+        await loadAdminDashboard();  
+  
+    }  
+  
+    catch(error){  
+  
+        console.error(error);  
+  
+        alert(  
+            "Error: " +  
+            error.message  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN SUPPLIERS  
+===================================================== */  
+  
+async function loadAdminSuppliers(){  
+  
+    const container =  
+        document.getElementById(  
+            "adminSuppliers"  
+        );  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("supplier_profiles")  
+        .select("*")  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>No suppliers.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML = `  
+  
+        <div class="table-container">  
+  
+        <table>  
+  
+        <thead>  
+  
+        <tr>  
+  
+            <th>  
+                Company  
+            </th>  
+  
+            <th>  
+                Contact  
+            </th>  
+  
+            <th>  
+                Phone  
+            </th>  
+  
+            <th>  
+                License  
+            </th>  
+  
+            <th>  
+                Status  
+            </th>  
+  
+            <th>  
+                Action  
+            </th>  
+  
+        </tr>  
+  
+        </thead>  
+  
+        <tbody>  
+  
+        ${data.map(supplier => `  
+  
+            <tr>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        supplier.company_name || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        supplier.contact_person || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        supplier.phone || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        supplier.license_number || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${  
+                        supplier.approved  
+                        ? "Approved ✓"  
+                        : "Pending"  
+                    }  
+                </td>  
+  
+                <td>  
+  
+                    ${  
+                        !supplier.approved  
+  
+                        ?  
+  
+                        `  
+                        <button  
+                            class="success"  
+                            onclick="  
+                                approveSupplier(  
+                                    '${supplier.id}'  
+                                )  
+                            "  
+                        >  
+                            Approve  
+                        </button>  
+                        `  
+  
+                        :  
+  
+                        "Approved"  
+                    }  
+  
+                </td>  
+  
+            </tr>  
+  
+        `).join("")}  
+  
+        </tbody>  
+  
+        </table>  
+  
+        </div>  
+  
+    `;  
+  
+}  
+  
+  
+/* =====================================================  
+APPROVE SUPPLIER  
+===================================================== */  
+  
+async function approveSupplier(id){  
+  
+    const {  
+        error  
+    } =  
+        await supabaseClient  
+        .from("supplier_profiles")  
+        .update({  
+            approved:true  
+        })  
+        .eq(  
+            "id",  
+            id  
+        );  
+  
+  
+    if(error){  
+  
+        alert(  
+            "Error: " +  
+            error.message  
+        );  
+  
+        return;  
+  
+    }  
+  
+  
+    alert(  
+        "Supplier approved successfully."  
+    );  
+  
+  
+    await loadAdminDashboard();  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN USERS  
+===================================================== */  
+  
+async function loadAdminUsers(){  
+  
+    const container =  
+        document.getElementById(  
+            "adminUsers"  
+        );  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("user_accounts")  
+        .select("*")  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>No users.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML = `  
+  
+        <div class="table-container">  
+  
+        <table>  
+  
+        <thead>  
+  
+        <tr>  
+  
+            <th>  
+                Name  
+            </th>  
+  
+            <th>  
+                Email  
+            </th>  
+  
+            <th>  
+                Phone  
+            </th>  
+  
+            <th>  
+                Business  
+            </th>  
+  
+            <th>  
+                Role  
+            </th>  
+  
+        </tr>  
+  
+        </thead>  
+  
+        <tbody>  
+  
+        ${data.map(user => `  
+  
+            <tr>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        user.full_name || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        user.email || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        user.phone || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        user.business_name || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        user.role || ""  
+                    )}  
+                </td>  
+  
+            </tr>  
+  
+        `).join("")}  
+  
+        </tbody>  
+  
+        </table>  
+  
+        </div>  
+  
+    `;  
+  
+}  
+  
+  
+/* =====================================================  
+ADMIN ORDERS  
+===================================================== */  
+  
+async function loadAdminOrders(){  
+  
+    const container =  
+        document.getElementById(  
+            "adminOrders"  
+        );  
+  
+  
+    const {  
+        data,  
+        error  
+    } =  
+        await supabaseClient  
+        .from("orders")  
+        .select(`  
+            *,  
+            products(name)  
+        `)  
+        .order(  
+            "created_at",  
+            {  
+                ascending:false  
+            }  
+        );  
+  
+  
+    if(error){  
+  
+        container.innerHTML =  
+            `<p>  
+                ${escapeHtml(  
+                    error.message  
+                )}  
+            </p>`;  
+  
+        return;  
+  
+    }  
+  
+  
+    if(  
+        !data ||  
+        data.length === 0  
+    ){  
+  
+        container.innerHTML =  
+            "<p>No orders.</p>";  
+  
+        return;  
+  
+    }  
+  
+  
+    container.innerHTML = `  
+  
+        <div class="table-container">  
+  
+        <table>  
+  
+        <thead>  
+  
+        <tr>  
+  
+            <th>  
+                Customer  
+            </th>  
+  
+            <th>  
+                Product  
+            </th>  
+  
+            <th>  
+                Quantity  
+            </th>  
+  
+            <th>  
+                Total  
+            </th>  
+  
+            <th>  
+                Status  
+            </th>  
+  
+            <th>  
+                Action  
+            </th>  
+  
+        </tr>  
+  
+        </thead>  
+  
+        <tbody>  
+  
+        ${data.map(order => `  
+  
+            <tr>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        order.customer_name || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${escapeHtml(  
+                        order.products?.name || ""  
+                    )}  
+                </td>  
+  
+                <td>  
+                    ${order.quantity}  
+                </td>  
+  
+                <td>  
+                    ${Number(  
+                        order.total_price || 0  
+                    ).toLocaleString()}  
+                    ETB  
+                </td>  
+  
+                <td>  
+  
+                    <select  
+                        onchange="  
+                            updateOrderStatus(  
+                                ${order.id},  
+                                this.value  
+                            )  
+                        "  
+                    >  
+  
+                        <option  
+                            value="pending"  
+                            ${  
+                                order.status ===  
+                                "pending"  
+                                ? "selected"  
+                                : ""  
+                            }  
+                        >  
+                            Pending  
+                        </option>  
+  
+                        <option  
+                            value="processing"  
+                            ${  
+                                order.status ===  
+                                "processing"  
+                                ? "selected"  
+                                : ""  
+                            }  
+                        >  
+                            Processing  
+                        </option>  
+  
+                        <option  
+                            value="completed"  
+                            ${  
+                                order.status ===  
+                                "completed"  
+                                ? "selected"  
+                                : ""  
+                            }  
+                        >  
+                            Completed  
+                        </option>  
+  
+                        <option  
+                            value="cancelled"  
+                            ${  
+                                order.status ===  
+                                "cancelled"  
+                                ? "selected"  
+                                : ""  
+                            }  
+                        >  
+                            Cancelled  
+                        </option>  
+  
+                    </select>  
+  
+                </td>  
+  
+                <td>  
+  
+                    <button  
+                        class="danger"  
+                        onclick="  
+                            deleteOrder(  
+                                ${order.id}  
+                            )  
+                        "  
+                    >  
+                        🗑️ Delete  
+                    </button>  
+  
+                </td>  
+  
+            </tr>  
+  
+        `).join("")}  
+  
+        </tbody>  
+  
+        </table>  
+  
+        </div>  
+  
+    `;  
+  
+}  
+  
+  
+/* =====================================================  
+UPDATE ORDER STATUS  
+===================================================== */  
+  
+async function updateOrderStatus(  
+    id,  
+    status  
+){  
+  
+    try{  
+  
+        let result;  
+  
+  
+        if(  
+            status ===  
+            "completed"  
+        ){  
+  
+            result =  
+                await supabaseClient  
+                .rpc(  
+                    "complete_order",  
+                    {  
+                        p_order_id:id  
+                    }  
+                );  
+  
+        }  
+  
+        else{  
+  
+            result =  
+                await supabaseClient  
+                .from("orders")  
+                .update({  
+                    status:status  
+                })  
+                .eq(  
+                    "id",  
+                    id  
+                );  
+  
+        }  
+  
+  
+        if(result.error){  
+  
+            throw result.error;  
+  
+        }  
+  
+  
+        alert(  
+  
+            status ===  
+            "completed"  
+  
+            ?  
+  
+            "Order completed successfully. Stock has been deducted."  
+  
+            :  
+  
+            "Order status updated successfully."  
+  
+        );  
+  
+  
+        await loadAdminDashboard();  
+  
+    }  
+  
+    catch(error){  
+  
+        console.error(error);  
+  
+        alert(  
+            "Error: " +  
+            error.message  
+        );  
+  
+  
+        await loadAdminDashboard();  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+DELETE ORDER  
+ADMIN ONLY  
+===================================================== */  
+  
+async function deleteOrder(id){  
+  
+    try{  
+  
+        if(!currentUser){  
+  
+            await getCurrentUser();  
+  
+        }  
+  
+  
+        if(!currentUser){  
+  
+            throw new Error(  
+                "You must be logged in."  
+            );  
+  
+        }  
+  
+  
+        const isAdmin =  
+            await checkAdmin(  
+                currentUser.id  
+            );  
+  
+  
+        if(!isAdmin){  
+  
+            throw new Error(  
+                "Only administrators can delete orders."  
+            );  
+  
+        }  
+  
+  
+        const confirmed =  
+            confirm(  
+                "Are you sure you want to permanently delete this order?"  
+            );  
+  
+  
+        if(!confirmed){  
+  
+            return;  
+  
+        }  
+  
+  
+        const {  
+            error  
+        } =  
+            await supabaseClient  
+            .from("orders")  
+            .delete()  
+            .eq(  
+                "id",  
+                id  
+            );  
+  
+  
+        if(error){  
+  
+            throw error;  
+  
+        }  
+  
+  
+        alert(  
+            "Order deleted successfully."  
+        );  
+  
+  
+        await loadAdminDashboard();  
+  
+    }  
+  
+    catch(error){  
+  
+        console.error(error);  
+  
+        alert(  
+            "Error: " +  
+            error.message  
+        );  
+  
+    }  
+  
+}  
+  
+  
+/* =====================================================  
+AUTH STATE  
+===================================================== */  
+  
+supabaseClient  
+.auth  
+.onAuthStateChange(  
+    function(  
+        event,  
+        session  
+    ){  
+  
+        currentUser =  
+            session?.user || null;  
+  
+    }  
+);  
+  
+  
+/* =====================================================  
+START WEBSITE  
+===================================================== */  
+  
+document.addEventListener(  
+"DOMContentLoaded",  
+async function(){  
+  
+    await getCurrentUser();  
+  
+    await loadPublicProducts();  
+  
+    await loadPublicCosmetics();  
+  
+    await loadOrderProducts();  
+  
+});  
+</script>  </body>  
 </html>
